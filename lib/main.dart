@@ -20,7 +20,6 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'firebase_options.dart';
 import 'notificationservice/local_notification_service.dart';
-import 'widgets/loader.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

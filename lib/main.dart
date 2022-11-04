@@ -1,115 +1,146 @@
+import '../home.dart';
+import '../order/order_ui.dart';
+import '../provider/user_details_viewmodel.dart';
+import '../screens/cart/cartScreen.dart';
+import '../screens/food_stalls/repo/model/hive_model/hive_menu_entry.dart';
+import '../screens/food_stalls/view/food_stall_screen.dart';
+import '../screens/login/view/login_screen.dart';
+import '../screens/matches/view/matches_screen.dart';
+import '../screens/overload/overload_page.dart';
+import '../screens/quiz/view/leaderboard/leaderboard.dart';
+import '../screens/quiz/view_model/storage.dart';
+import '../screens/wallet_screen/view/wallet_screen.dart';
+import 'package:chucker_flutter/chucker_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'firebase_options.dart';
+import 'notificationservice/local_notification_service.dart';
+import 'widgets/loader.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp],
+  );
+  ChuckerFlutter.showOnRelease = false;
+  await Hive.initFlutter();
+  Hive.registerAdapter(HiveMenuEntryAdapter());
+  await Hive.openBox('subscribeBox');
+  await Hive.openBox('cartBox');
+  SecureStorage secureStorage = SecureStorage();
+  var box = Hive.box('cartBox');
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseMessaging.instance.subscribeToTopic('all');
+   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  FirebaseMessaging.onMessage.listen(
+    (message) {
+      print(message.data.toString() + "             lol");
+      if (message.data != null) {
+        print(message.data['title']);
+        print(message.data['body']);
+
+        LocalNotificationService.createanddisplaynotification(message);
+      }
+      if (message.notification != null) {
+        print(message.notification!.title);
+        print(message.notification!.body);
+        // print("message.data22 ${message.data['_id']}");
+        LocalNotificationService.createanddisplaynotification(message);
+      }
+    },
+  );
+  runApp(RestartWidget(child: BosmFestApp()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class RestartWidget extends StatefulWidget {
+  RestartWidget({required this.child});
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+  final Widget child;
+
+  static void restartApp(BuildContext context) {
+    context.findAncestorStateOfType<_RestartWidgetState>()?.restartApp();
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _RestartWidgetState createState() => _RestartWidgetState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _RestartWidgetState extends State<RestartWidget> {
+  Key key = UniqueKey();
 
-  void _incrementCounter() {
+  void restartApp() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      key = UniqueKey();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+    return KeyedSubtree(
+      key: key,
+      child: widget.child,
+    );
+  }
+}
+
+class BosmFestApp extends StatefulWidget {
+  const BosmFestApp({Key? key}) : super(key: key);
+
+  @override
+  State<BosmFestApp> createState() => _BosmFestAppState();
+}
+
+class _BosmFestAppState extends State<BosmFestApp> {
+  UserDetailsViewModel userDetailsViewModel = UserDetailsViewModel();
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFFAFAFF)),
+      navigatorObservers: [ChuckerFlutter.navigatorObserver],
+      routes: {
+        'food_stalls': (context) => FoodStallScreen(),
+        'login': (context) => LoginScreen(),
+        'wallet': (context) => WalletScreen(),
+        'matches': (context) => MatchesScreen(),
+        'home': (context) => HomeScreen(),
+        'cart': (context) => CartScreen(),
+        'order': (context) => OrderScreen(),
+        'leaderboard': (context) => Leaderboard(),
+      },
+      home: FutureBuilder(
+        future: userDetailsViewModel.userCheck(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final data = snapshot.data;
+            if (data == true) {
+              Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (builder) => HomeScreen()),
+                    (route) => false,
+                  ));
+            } else if (data == false) {
+              Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (builder) => const OverloadPage()),
+                    (route) => false,
+                  ));
+            }
+          }
+          return Container(
+            height: double.infinity,
+            width: double.infinity,
+            alignment: Alignment.center,
+            color: Colors.white,
+            child: Image.asset('assets/images/Splashscreen.png'),
+          );
+        },
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

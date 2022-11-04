@@ -1,0 +1,65 @@
+import '../order/repo/model/get_orders_model.dart';
+import '../order/repo/model/make_otp_seen_model.dart';
+import '../order/repo/model/order_card_model.dart';
+import '../order/repo/retrofit/get_orders_retrofit.dart';
+import '../order/repo/retrofit/make_otp_seen_retrofit.dart';
+import '../provider/user_details_viewmodel.dart';
+import 'package:dio/dio.dart';
+
+class OrderScreenViewModel {
+  Future<void> makeOtpSeen(int orderid) async {
+    MakeOtpSeenData makeOtpSeenData = MakeOtpSeenData(order_id: orderid);
+    final dio = Dio();
+    final client = OtpRestClient(dio);
+    String jwt = "JWT ${UserDetailsViewModel.userDetails.JWT}";
+    await client.makeOtpSeen(jwt, makeOtpSeenData);
+    return;
+  }
+
+  Future<List<GetOrderResult>> getOrders() async {
+    final dio = Dio();
+    String auth = "JWT ${UserDetailsViewModel.userDetails.JWT}";
+    final client = OrdersRestClient(dio);
+    List<GetOrderResult> listOfOrderResult = await client.getOrders(auth);
+
+    return listOfOrderResult;
+  }
+
+  List<OrderCardModel> changeDataModel(List<GetOrderResult> listOfOrderResult) {
+    List<OrderCardModel> orderCardModelList = [];
+
+    for (GetOrderResult i in listOfOrderResult) {
+      int id = i.id!;
+      String timeStamp = i.timestamp!;
+      List<Order> list = i.orders!;
+      for (Order j in list) {
+        int otp = j.otp!;
+        String foodStallName = j.vendor!.name!;
+        double subTotal = j.price!;
+        int status = j.status!;
+        int? orderId = j.order_id;
+
+        List<MenuItemInOrdersScreen> tempItemList = [];
+        List<Items> itemList = j.items!;
+        for (Items k in itemList) {
+          String name = k.name!;
+          int price = k.unit_price!;
+          int quantity = k.quantity!;
+          tempItemList.add(MenuItemInOrdersScreen(
+              quantity: quantity, price: price, name: name));
+        }
+        orderCardModelList.add(OrderCardModel(
+            foodStallName: foodStallName,
+            id: id,
+            itemCount: itemList.length,
+            menuItemInOrdersScreenList: tempItemList,
+            orderId: orderId,
+            otp: otp,
+            status: status,
+            subtotal: subTotal,
+            timeStamp: timeStamp));
+      }
+    }
+    return orderCardModelList;
+  }
+}

@@ -7,7 +7,7 @@ class LocalNotificationService {
 
   static void initialize() async {
     // initializationSettings  for Android
-    var iOSSettings = IOSInitializationSettings(
+    var iOSSettings = const IOSInitializationSettings(
       requestSoundPermission: false,
       requestBadgePermission: false,
       requestAlertPermission: false,

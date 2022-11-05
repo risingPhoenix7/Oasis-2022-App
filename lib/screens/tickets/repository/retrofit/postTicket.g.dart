@@ -13,7 +13,7 @@ class _PostTicketRestClient implements PostTicketRestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://bitsbosm.org/2022';
+    baseUrl ??= 'https://bits-oasis.org/2022/main';
   }
 
   final Dio _dio;

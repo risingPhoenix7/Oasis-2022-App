@@ -1,7 +1,6 @@
 import '/screens/wallet_screen/Repo/model/balance_model.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-
 import '/../../../utils/urls.dart';
 
 part 'balance_retrofit.g.dart';

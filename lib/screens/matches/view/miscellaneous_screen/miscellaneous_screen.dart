@@ -110,7 +110,7 @@ class _MiscellaneousScreenState extends State<MiscellaneousScreen> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: BosmColors.backgroundColorWhite,
+        backgroundColor: OasisColors.backgroundColorWhite,
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(kToolbarHeight),
             child: CustomAppBar(
@@ -133,7 +133,7 @@ class _MiscellaneousScreenState extends State<MiscellaneousScreen> {
                             UIUtills().getProportionalHeight(height: 23)),
                         child: Container(
                           decoration: BoxDecoration(
-                              color: BosmColors.textWhite,
+                              color: OasisColors.textWhite,
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(

@@ -37,11 +37,11 @@ class _DayTabState extends State<DayTab> {
         height: UIUtills().getProportionalHeight(height: 82),
         decoration: isSelected
             ? BoxDecoration(
-                gradient: BosmColors.verticalBlackgradient,
+                gradient: OasisColors.verticalBlackgradient,
                 borderRadius: BorderRadius.circular(
                     UIUtills().getProportionalWidth(width: 10)),
               )
-            : const BoxDecoration(color: BosmColors.textWhite),
+            : const BoxDecoration(color: OasisColors.textWhite),
         child: Column(
           children: <Widget>[
             Padding(
@@ -53,7 +53,7 @@ class _DayTabState extends State<DayTab> {
                 height: 4,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: BosmColors.textWhite,
+                  color: OasisColors.textWhite,
                 ),
               ),
             ),
@@ -62,7 +62,7 @@ class _DayTabState extends State<DayTab> {
               style: BosmTextStyles.poppinsRegular.copyWith(
                   fontWeight: FontWeight.w500,
                   color: isSelected
-                      ? BosmColors.textWhite
+                      ? OasisColors.textWhite
                       : const Color(0xFF575757)),
             ),
             Text(
@@ -70,7 +70,7 @@ class _DayTabState extends State<DayTab> {
               style: BosmTextStyles.poppinsRegular.copyWith(
                   fontWeight: FontWeight.w600,
                   color: isSelected
-                      ? BosmColors.textWhite
+                      ? OasisColors.textWhite
                       : const Color(0xFF575757),
                   fontSize: UIUtills().getProportionalWidth(width: 16)),
             ),

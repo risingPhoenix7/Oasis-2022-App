@@ -70,7 +70,7 @@ class _GenderIndividualTabState extends State<GenderIndividualTab> {
               child: Text(widget.tabName,
                   textAlign: TextAlign.left,
                   style: BosmTextStyles.poppinsRegular.copyWith(
-                      color: isClicked ? BosmColors.textWhite : Colors.black,
+                      color: isClicked ? OasisColors.textWhite : Colors.black,
                       fontWeight: FontWeight.w500)),
             ),
           ])),

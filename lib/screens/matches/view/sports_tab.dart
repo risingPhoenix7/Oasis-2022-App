@@ -74,7 +74,7 @@ class _SportsTabState extends State<SportsTab> {
                       overflow: TextOverflow.fade,
                       style: BosmTextStyles.robotoExtraBold.copyWith(
                           fontWeight: FontWeight.w700,
-                          color: BosmColors.blackButtonColor,
+                          color: OasisColors.blackButtonColor,
                           fontSize: UIUtills().getProportionalWidth(width: 24)),
                     ),
                   ),

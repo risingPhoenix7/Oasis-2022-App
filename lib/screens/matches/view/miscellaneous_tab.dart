@@ -29,7 +29,7 @@ class MiscellaneousTab extends StatelessWidget {
                 offset: Offset(0, 2.1572327613830566),
                 blurRadius: 8.628931045532227)
           ],
-          gradient: BosmColors.darkBlackgradient,
+          gradient: OasisColors.darkBlackgradient,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,7 +53,7 @@ class MiscellaneousTab extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: BosmTextStyles.robotoExtraBold.copyWith(
                         fontWeight: FontWeight.w700,
-                        color: BosmColors.textWhite,
+                        color: OasisColors.textWhite,
                         fontSize: UIUtills().getProportionalWidth(width: 24)),
                   ),
                 ),
@@ -65,7 +65,7 @@ class MiscellaneousTab extends StatelessWidget {
                   left: UIUtills().getProportionalWidth(width: 15.84)),
               child: SvgPicture.asset(
                 ImageAssets.rightIcon,
-                color: BosmColors.textWhite,
+                color: OasisColors.textWhite,
               ),
             ),
           ],

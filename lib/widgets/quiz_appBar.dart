@@ -30,7 +30,7 @@ class _QuizAppBarState extends State<QuizAppBar> {
             fontWeight: FontWeight.w700, fontSize: 24, color: Colors.black),
       ),
       centerTitle: true,
-      shadowColor: BosmColors.shadowColorAppBar,
+      shadowColor: OasisColors.shadowColorAppBar,
       backgroundColor: Colors.white,
       foregroundColor: Colors.black,
       iconTheme: const IconThemeData(color: Colors.black),

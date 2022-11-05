@@ -47,19 +47,19 @@ class UpcomingEventsTab extends StatelessWidget {
                   sport_name,
                   style: BosmTextStyles.robotoExtraBold.copyWith(
                       fontSize: UIUtills().getProportionalWidth(width: 28),
-                      color: BosmColors.textWhite),
+                      color: OasisColors.textWhite),
                 ),
                 Text('${team1_college_name} vs ${team2_college_name}',
                     style: BosmTextStyles.poppinsRegular.copyWith(
                         fontSize: UIUtills().getProportionalWidth(width: 11),
-                        color: BosmColors.textWhite)),
+                        color: OasisColors.textWhite)),
                 Text(
                     CommonFunctions.getCorrectTimeString(dateTime) +
                         ' ' +
                         venue_name,
                     style: BosmTextStyles.poppinsRegular.copyWith(
                         fontSize: UIUtills().getProportionalWidth(width: 11),
-                        color: BosmColors.textWhite))
+                        color: OasisColors.textWhite))
               ],
             ),
           )

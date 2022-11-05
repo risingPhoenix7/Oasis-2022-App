@@ -1,4 +1,4 @@
-import '/appDrawer/appDrawer.dart';
+  import '/appDrawer/appDrawer.dart';
 import '/resources/resources.dart';
 import '/screens/matches/repository/model/matchesResult.dart';
 import '/screens/matches/view/miscellaneous_tab.dart';
@@ -94,7 +94,7 @@ class _MatchesScreenState extends State<MatchesScreen> {
     return SafeArea(
       child: Scaffold(
         drawer: const AppDrawerMenu(),
-        backgroundColor: BosmColors.backgroundColorWhite,
+        backgroundColor: OasisColors.backgroundColorWhite,
         resizeToAvoidBottomInset: false,
         body: Builder(builder: (BuildContext context) {
           return !isLoading

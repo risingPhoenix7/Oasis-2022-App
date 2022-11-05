@@ -1,9 +1,10 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class BosmColors {
-  static const Color backgroundColorWhite = Color(0xFFFAFAFF);
+class OasisColors {
+  static const Color backgroundColorWhite = Colors.black;
+  static const Color primaryYellow = Colors.yellow;
   static const Color shadowColorAppBar = Color.fromRGBO(0, 42, 104, 0.1);
   static const Color blackButtonColor = Color(0XFF292929);
   static const Color textWhite = Color(0xFFFFFFFF);

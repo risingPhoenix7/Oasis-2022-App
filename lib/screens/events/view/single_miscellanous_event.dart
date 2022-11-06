@@ -59,11 +59,14 @@ class SingleMiscellaneousEvent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SvgPicture.asset(ImageAssets.locationIcon,color: Colors.white),
+                  SizedBox(width: 8.23.w),
                   Text(eventLocation ?? 'TBA',
                       style: OasisTextStyles.openSans300
                           .copyWith(fontSize: 12.sp,color: Colors.white)),
-                  SvgPicture.asset(ImageAssets.timeicon,color: Colors.white,),
                   SizedBox(width: 90.w),
+                  SvgPicture.asset(ImageAssets.timeicon,color: Colors.white),
+                  SizedBox(width: 8.23.w),
+
                   Text(time ?? 'TBA',
                       style: OasisTextStyles.openSans300
                           .copyWith(fontSize: 12.sp,color: Colors.white)),

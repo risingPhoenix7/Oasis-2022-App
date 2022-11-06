@@ -55,7 +55,7 @@ print('fewjf');
     for (int i = 0; i < miscEventList!.length; i++) {
       var a = miscEventList![i].date_time;
       if (a == null || a.isEmpty) {
-        a = '22T';
+        a = '19T';
       }
       print(a.indexOf('T'));
       if (a.indexOf('T') == 3) {
@@ -63,7 +63,7 @@ print('fewjf');
           assortedMiscEventList.add(miscEventList![i]);
         }
       } else {
-        if (day_no == 22) assortedMiscEventList.add(miscEventList![i]);
+        if (day_no == 19) assortedMiscEventList.add(miscEventList![i]);
       }
     }
 print(assortedMiscEventList.length);

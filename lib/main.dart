@@ -119,36 +119,35 @@ class _BosmFestAppState extends State<BosmFestApp> {
               'order': (context) => OrderScreen(),
               'leaderboard': (context) => Leaderboard(),
             },
-            home:EventsScreen()
-            // home: FutureBuilder(
-            //   future: userDetailsViewModel.userCheck(),
-            //   builder: (context, snapshot) {
-            //     if (snapshot.hasData) {
-            //       final data = snapshot.data;
-            //       if (data == true) {
-            //         Future.microtask(() =>
-            //             Navigator.of(context).pushAndRemoveUntil(
-            //               MaterialPageRoute(builder: (builder) => HomeScreen()),
-            //               (route) => false,
-            //             ));
-            //       } else if (data == false) {
-            //         Future.microtask(
-            //             () => Navigator.of(context).pushAndRemoveUntil(
-            //                   MaterialPageRoute(
-            //                       builder: (builder) => const OverloadPage()),
-            //                   (route) => false,
-            //                 ));
-            //       }
-            //     }
-            //     return Container(
-            //       height: double.infinity,
-            //       width: double.infinity,
-            //       alignment: Alignment.center,
-            //       color: Colors.white,
-            //       child: Image.asset('assets/images/Splashscreen.png'),
-            //     );
-            //   },
-            // ),
+            home: FutureBuilder(
+              future: userDetailsViewModel.userCheck(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final data = snapshot.data;
+                  if (data == true) {
+                    Future.microtask(() =>
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (builder) => HomeScreen()),
+                          (route) => false,
+                        ));
+                  } else if (data == false) {
+                    Future.microtask(
+                        () => Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (builder) => const LoginScreen()),
+                              (route) => false,
+                            ));
+                  }
+                }
+                return Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  color: Colors.white,
+                  child: Image.asset('assets/images/Splashscreen.png'),
+                );
+              },
+            ),
           );
         });
   }

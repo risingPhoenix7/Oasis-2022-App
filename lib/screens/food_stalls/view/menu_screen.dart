@@ -9,11 +9,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import '../view_model/menu_screen_viewmodel.dart';
-import 'food_stall_screen2.dart';
+import 'food_stall_screen.dart';
 import 'menu_add_buttons.dart';
 
-class MenuScreen2 extends StatefulWidget {
-  MenuScreen2(
+class MenuScreen extends StatefulWidget {
+  MenuScreen(
       {Key? key,
       required this.menuItemList,
       required this.foodStallName,
@@ -26,10 +26,10 @@ class MenuScreen2 extends StatefulWidget {
   int foodStallId;
 
   @override
-  State<MenuScreen2> createState() => _MenuScreen2State();
+  State<MenuScreen> createState() => _MenuScreenState();
 }
 
-class _MenuScreen2State extends State<MenuScreen2> {
+class _MenuScreenState extends State<MenuScreen> {
   List<menu.MenuItem> menuItemsFiltered = [];
   List<menu.MenuItem> menuItemsOriginal = [];
   bool isNotEmpty = true;
@@ -60,7 +60,6 @@ class _MenuScreen2State extends State<MenuScreen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: Stack(children: [
         Column(
           mainAxisSize: MainAxisSize.max,
@@ -140,7 +139,7 @@ class _MenuScreen2State extends State<MenuScreen2> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const FoodStallScreen2()));
+                                builder: (context) => const FoodStallScreen()));
                       },
                       child: Padding(
                         padding: EdgeInsets.only(
@@ -252,124 +251,121 @@ class _MenuScreen2State extends State<MenuScreen2> {
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: ValueListenableBuilder(
-                  valueListenable: Hive.box('cartBox').listenable(),
-                  builder: (context, Box box, child) {
-                    menuItemsAmount = MenuScreenViewModel()
-                        .populateListFromHive(menuItemsFiltered);
-                    return ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: menuItemsFiltered.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: EdgeInsets.only(
-                              bottom:
-                                  UIUtills().getProportionalHeight(height: 8)),
-                          child: Column(
-                            children: [
-                              (index != 0)
-                                  ? Divider(
-                                      color: const Color.fromRGBO(
-                                          255, 255, 255, 1),
-                                      indent: UIUtills()
-                                          .getProportionalWidth(width: 47),
-                                      endIndent: UIUtills()
-                                          .getProportionalWidth(width: 47),
-                                    )
-                                  : Container(),
-                              Container(
-                                height: 80,
-                                decoration: const BoxDecoration(boxShadow: [
-                                  BoxShadow(
-                                      color: Color.fromRGBO(157, 141, 255, 0.1),
-                                      offset: Offset(0, 2),
-                                      blurRadius: 8)
-                                ], color: Colors.black),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                37, 0, 20.1, 0),
-                                            child: Center(
-                                                child: SvgPicture.asset(
-                                              "assets/images/Non-Veg.svg",
-                                              color: widget.menuItemList[index]
-                                                      .is_veg
-                                                  ? Colors.green
-                                                  : Colors.red,
-                                            )),
+              child: ValueListenableBuilder(
+                valueListenable: Hive.box('cartBox').listenable(),
+                builder: (context, Box box, child) {
+                  menuItemsAmount = MenuScreenViewModel()
+                      .populateListFromHive(menuItemsFiltered);
+                  return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: menuItemsFiltered.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                            bottom:
+                                UIUtills().getProportionalHeight(height: 8)),
+                        child: Column(
+                          children: [
+                            (index != 0)
+                                ? Divider(
+                                    color: const Color.fromRGBO(
+                                        255, 255, 255, 1),
+                                    indent: UIUtills()
+                                        .getProportionalWidth(width: 47),
+                                    endIndent: UIUtills()
+                                        .getProportionalWidth(width: 47),
+                                  )
+                                : Container(),
+                            Container(
+                              height: 80,
+                              decoration: const BoxDecoration(boxShadow: [
+                                BoxShadow(
+                                    color: Color.fromRGBO(157, 141, 255, 0.1),
+                                    offset: Offset(0, 2),
+                                    blurRadius: 8)
+                              ], color: Colors.black),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              37, 0, 20.1, 0),
+                                          child: Center(
+                                              child: SvgPicture.asset(
+                                            "assets/images/Non-Veg.svg",
+                                            color: widget.menuItemList[index]
+                                                    .is_veg
+                                                ? Colors.green
+                                                : Colors.red,
+                                          )),
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                menuItemsFiltered[index].name,
+                                                style: GoogleFonts.openSans(
+                                                    color: Colors.white,
+                                                    fontSize: UIUtills()
+                                                        .getProportionalHeight(
+                                                            height: 18),
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                              Text(
+                                                "₹${menuItemsFiltered[index].price}",
+                                                style: GoogleFonts.openSans(
+                                                    fontSize: UIUtills()
+                                                        .getProportionalHeight(
+                                                            height: 16),
+                                                    fontWeight:
+                                                        FontWeight.w600,
+                                                    color:
+                                                        const Color.fromRGBO(
+                                                            100,
+                                                            100,
+                                                            100,
+                                                            1)),
+                                              )
+                                            ],
                                           ),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  menuItemsFiltered[index].name,
-                                                  style: GoogleFonts.openSans(
-                                                      color: Colors.white,
-                                                      fontSize: UIUtills()
-                                                          .getProportionalHeight(
-                                                              height: 18),
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                                Text(
-                                                  "₹${menuItemsFiltered[index].price}",
-                                                  style: GoogleFonts.openSans(
-                                                      fontSize: UIUtills()
-                                                          .getProportionalHeight(
-                                                              height: 16),
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color:
-                                                          const Color.fromRGBO(
-                                                              100,
-                                                              100,
-                                                              100,
-                                                              1)),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          right: UIUtills()
-                                              .getProportionalWidth(width: 37)),
-                                      child: AddButton(
-                                        menuItemName:
-                                            menuItemsFiltered[index].name,
-                                        amount: menuItemsAmount[
-                                            menuItemsFiltered[index].id]!,
-                                        foodStallId: widget.foodStallId,
-                                        price: menuItemsFiltered[index].price,
-                                        menuItemId: menuItemsFiltered[index].id,
-                                        foodStallName: widget.foodStallName,
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        right: UIUtills()
+                                            .getProportionalWidth(width: 37)),
+                                    child: AddButton(
+                                      menuItemName:
+                                          menuItemsFiltered[index].name,
+                                      amount: menuItemsAmount[
+                                          menuItemsFiltered[index].id]!,
+                                      foodStallId: widget.foodStallId,
+                                      price: menuItemsFiltered[index].price,
+                                      menuItemId: menuItemsFiltered[index].id,
+                                      foodStallName: widget.foodStallName,
+                                    ),
+                                  )
+                                ],
                               ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
             ),
           ],

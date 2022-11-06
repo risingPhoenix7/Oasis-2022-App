@@ -1,4 +1,4 @@
-import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen2.dart';
+import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
 
 import '../home.dart';
 import '../order/order_ui.dart';
@@ -104,7 +104,7 @@ class _BosmFestAppState extends State<BosmFestApp> {
       theme: ThemeData(scaffoldBackgroundColor: Colors.black),
       navigatorObservers: [ChuckerFlutter.navigatorObserver],
       routes: {
-        'food_stalls': (context) => FoodStallScreen2(),
+        'food_stalls': (context) => FoodStallScreen(),
         'login': (context) => LoginScreen(),
         'wallet': (context) => WalletScreen(),
         'matches': (context) => MatchesScreen(),

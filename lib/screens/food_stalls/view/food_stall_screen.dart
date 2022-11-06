@@ -4,19 +4,18 @@ import '/utils/ui_utils.dart';
 import '/widgets/error_dialogue.dart';
 import '/widgets/loader.dart';
 import 'package:flutter/material.dart';
-
 import '../view_model/food_stalls_viewmodel.dart';
 import 'food_stall_tile.dart';
-import 'menu_screen2.dart';
+import 'menu_screen.dart';
 
-class FoodStallScreen2 extends StatefulWidget {
-  const FoodStallScreen2({Key? key}) : super(key: key);
+class FoodStallScreen extends StatefulWidget {
+  const FoodStallScreen({Key? key}) : super(key: key);
 
   @override
-  State<FoodStallScreen2> createState() => _FoodStallScreen2State();
+  State<FoodStallScreen> createState() => _FoodStallScreenState();
 }
 
-class _FoodStallScreen2State extends State<FoodStallScreen2> {
+class _FoodStallScreenState extends State<FoodStallScreen> {
   List<FoodStall> foodStall = [];
   late ValueNotifier<bool> isLoading = ValueNotifier(true);
 
@@ -126,7 +125,7 @@ class _FoodStallScreen2State extends State<FoodStallScreen2> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    MenuScreen2(
+                                                    MenuScreen(
                                                       menuItemList:
                                                           foodStall[index].menu,
                                                       foodStallName:

@@ -1,4 +1,4 @@
-import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen2.dart';
+import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
 
 import '../provider/user_details_viewmodel.dart';
 import '../screens/matches/view/matches_screen.dart';
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> _buildScreens() {
     return [
-      const FoodStallScreen2(),
+      const FoodStallScreen(),
       const RoundScreen(),
       const MatchesScreen(),
       const TicketsScreen(),
@@ -58,33 +58,28 @@ class _HomeScreenState extends State<HomeScreen> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: const Icon(NavBarIcons.food_stall),
-        activeColorPrimary: const Color(0xFF747EF1),
-        inactiveColorPrimary: const Color(0xFF696A71),
+        icon: SvgPicture.asset("assets/images/navbar_icons/stalls_active.svg"),
+        inactiveIcon: SvgPicture.asset("assets/images/navbar_icons/stall_inactive.svg"),
         iconSize: 25,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(NavBarIcons.quiz),
-        activeColorPrimary: const Color(0xFF747EF1),
-        inactiveColorPrimary: const Color(0xFF696A71),
+        icon: SvgPicture.asset("assets/images/navbar_icons/more_active.svg"),
+        inactiveIcon: SvgPicture.asset("assets/images/navbar_icons/more_inactive.svg"),
         iconSize: 25,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(NavBarIcons.matches),
-        activeColorPrimary: const Color(0xFF747EF1),
-        inactiveColorPrimary: const Color(0xFF696A71),
+        icon: SvgPicture.asset("assets/images/navbar_icons/events_active.svg"),
+        inactiveIcon: SvgPicture.asset("assets/images/navbar_icons/events_inactive.svg"),
         iconSize: 25,
       ),
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset('assets/images/bluetickets.svg'),
-        inactiveIcon: SvgPicture.asset('assets/images/tickets.svg'),
+        icon: SvgPicture.asset("assets/images/navbar_icons/shows_active.svg"),
+        inactiveIcon: SvgPicture.asset("assets/images/navbar_icons/shows_inactive.svg"),
         iconSize: 25,
       ),
       PersistentBottomNavBarItem(
-        onSelectedTabPressWhenNoScreensPushed: () {},
-        icon: const Icon(NavBarIcons.profile),
-        activeColorPrimary: const Color(0xFF747EF1),
-        inactiveColorPrimary: const Color(0xFF696A71),
+        icon: SvgPicture.asset("assets/images/navbar_icons/wallet_active.svg"),
+        inactiveIcon: SvgPicture.asset("assets/images/navbar_icons/wallet_inactive.svg"),
         iconSize: 25,
       ),
     ];
@@ -103,16 +98,11 @@ class _HomeScreenState extends State<HomeScreen> {
             screens: _buildScreens(),
             items: _navBarsItems(),
             confineInSafeArea: true,
-            backgroundColor: const Color(0xFFFAFAFF),
+            backgroundColor: Colors.black,
             stateManagement: true,
             handleAndroidBackButtonPress: true,
             resizeToAvoidBottomInset: true,
             hideNavigationBarWhenKeyboardShows: true,
-            // decoration: NavBarDecoration(
-            //   borderRadius: BorderRadius.circular(10.0),
-            //   colorBehindNavBar: navBarColor,
-            // ),
-            //popAllScreensOnTapOfSelectedTab: true,
             popActionScreens: PopActionScreensType.all,
             itemAnimationProperties: const ItemAnimationProperties(
               duration: Duration(milliseconds: 200),

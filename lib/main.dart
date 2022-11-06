@@ -1,11 +1,13 @@
 import 'package:oasis_2022/screens/quiz/view/Quiz_ui.dart';
 
+import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
+
+
 import '../home.dart';
 import '../order/order_ui.dart';
 import '../provider/user_details_viewmodel.dart';
 import '../screens/cart/cartScreen.dart';
 import '../screens/food_stalls/repo/model/hive_model/hive_menu_entry.dart';
-import '../screens/food_stalls/view/food_stall_screen.dart';
 import '../screens/login/view/login_screen.dart';
 import '../screens/matches/view/matches_screen.dart';
 import '../screens/overload/overload_page.dart';
@@ -34,7 +36,6 @@ Future<void> main() async {
   await Hive.openBox('subscribeBox');
   await Hive.openBox('cartBox');
   SecureStorage secureStorage = SecureStorage();
-  var box = Hive.box('cartBox');
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.subscribeToTopic('all');
@@ -103,9 +104,8 @@ class _BosmFestAppState extends State<BosmFestApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFFAFAFF)),
+      theme: ThemeData(scaffoldBackgroundColor: Colors.black),
       navigatorObservers: [ChuckerFlutter.navigatorObserver],
-
       routes: {
         'food_stalls': (context) => FoodStallScreen(),
         'login': (context) => LoginScreen(),
@@ -114,7 +114,7 @@ class _BosmFestAppState extends State<BosmFestApp> {
         'home': (context) => HomeScreen(),
         'cart': (context) => CartScreen(),
         'order': (context) => OrderScreen(),
-        'leaderboard': (context) => quizUIScreen(),
+        'leaderboard': (context) => Leaderboard(),
       },
       home: FutureBuilder(
         future: userDetailsViewModel.userCheck(),

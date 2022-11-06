@@ -55,7 +55,7 @@ class _QRCodeDialogBoxState extends State<QRCodeDialogBox> {
               'Scan this QR code to make payments',
               // textAlign: TextAlign.center,
               style: GoogleFonts.roboto(
-                  color: const Color(0xFF818181),
+                  color: Colors.black,
                   fontSize: UIUtills().getProportionalWidth(width: 16.00),
                   fontWeight: FontWeight.w500,
                   letterSpacing: UIUtills().getProportionalWidth(width: -0.41)),

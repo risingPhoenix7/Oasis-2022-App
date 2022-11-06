@@ -18,7 +18,7 @@ class RefreshQrPostModel {
 
 @JsonSerializable()
 class RefreshQrResponseModel {
-  String message;
+  String? message;
   String qr_code;
 
   RefreshQrResponseModel({required this.message, required this.qr_code});

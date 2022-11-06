@@ -1,4 +1,4 @@
-const String kBaseUrl = "https://bits-oasis.org/2022/main";
+const String kBaseUrl = "https://test.bits-oasis.org/2022/main";
 const String kRoundsPath = "/boco_portal/rounds";
 const String kMiscEventPath = "/boco_portal/events";
 const String kSportsPath = "/boco_portal/sports";

@@ -1,5 +1,6 @@
+import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen2.dart';
+
 import '../provider/user_details_viewmodel.dart';
-import '../screens/food_stalls/view/food_stall_screen.dart';
 import '../screens/matches/view/matches_screen.dart';
 import '../screens/quiz/view/round.dart';
 import '../screens/tickets/view/tickets_screen.dart';
@@ -46,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> _buildScreens() {
     return [
-      const FoodStallScreen(),
+      const FoodStallScreen2(),
       const RoundScreen(),
       const MatchesScreen(),
       const TicketsScreen(),

@@ -1,10 +1,8 @@
+import 'package:oasis_2022/resources/resources.dart';
 import 'package:oasis_2022/utils/oasis_text_styles.dart';
-
-import '/resources/resources.dart';
-
 import 'package:flutter/material.dart';
 
-import '/../utils/ui_utils.dart';
+import '../../utils/ui_utils.dart';
 
 class OverloadThree extends StatelessWidget {
   const OverloadThree({Key? key}) : super(key: key);

@@ -7,7 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:oasis_2022/screens/events/view/miscellaneous_screen.dart';
+import 'package:oasis_2022/screens/overload/overload_page.dart';
+
 import '../home.dart';
 import '../order/order_ui.dart';
 import '../provider/user_details_viewmodel.dart';
@@ -15,7 +16,6 @@ import '../screens/cart/cartScreen.dart';
 import '../screens/food_stalls/repo/model/hive_model/hive_menu_entry.dart';
 import '../screens/food_stalls/view/food_stall_screen.dart';
 import '../screens/login/view/login_screen.dart';
-import '../screens/overload/overload_page.dart';
 import '../screens/quiz/view/leaderboard/leaderboard.dart';
 import '../screens/quiz/view_model/storage.dart';
 import '../screens/wallet_screen/view/wallet_screen.dart';
@@ -118,36 +118,35 @@ class _BosmFestAppState extends State<BosmFestApp> {
               'order': (context) => OrderScreen(),
               'leaderboard': (context) => Leaderboard(),
             },
-            home:EventsScreen()
-            // home: FutureBuilder(
-            //   future: userDetailsViewModel.userCheck(),
-            //   builder: (context, snapshot) {
-            //     if (snapshot.hasData) {
-            //       final data = snapshot.data;
-            //       if (data == true) {
-            //         Future.microtask(() =>
-            //             Navigator.of(context).pushAndRemoveUntil(
-            //               MaterialPageRoute(builder: (builder) => HomeScreen()),
-            //               (route) => false,
-            //             ));
-            //       } else if (data == false) {
-            //         Future.microtask(
-            //             () => Navigator.of(context).pushAndRemoveUntil(
-            //                   MaterialPageRoute(
-            //                       builder: (builder) => const OverloadPage()),
-            //                   (route) => false,
-            //                 ));
-            //       }
-            //     }
-            //     return Container(
-            //       height: double.infinity,
-            //       width: double.infinity,
-            //       alignment: Alignment.center,
-            //       color: Colors.white,
-            //       child: Image.asset('assets/images/Splashscreen.png'),
-            //     );
-            //   },
-            // ),
+            home: FutureBuilder(
+              future: userDetailsViewModel.userCheck(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final data = snapshot.data;
+                  if (data == true) {
+                    Future.microtask(() =>
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (builder) => HomeScreen()),
+                          (route) => false,
+                        ));
+                  } else if (data == false) {
+                    Future.microtask(
+                        () => Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (builder) => const OverloadPage()),
+                              (route) => false,
+                            ));
+                  }
+                }
+                return Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  color: Colors.white,
+                  child: Image.asset('assets/images/Splashscreen.png'),
+                );
+              },
+            ),
           );
         });
   }

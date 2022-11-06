@@ -1,12 +1,8 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
+import 'package:oasis_2022/resources/resources.dart';
 import 'package:oasis_2022/utils/oasis_text_styles.dart';
 
-import '/resources/resources.dart';
-
-import 'package:flutter/material.dart';
-
-import '/../utils/ui_utils.dart';
+import '../../utils/ui_utils.dart';
 
 class OverloadTwo extends StatelessWidget {
   const OverloadTwo({Key? key}) : super(key: key);
@@ -32,7 +28,8 @@ class OverloadTwo extends StatelessWidget {
           height: UIUtills().getProportionalHeight(height: 30),
         ),
         Text("ORDER FOOD",
-            textAlign: TextAlign.center, style: OasisTextStyles.robotoExtraBold),
+            textAlign: TextAlign.center,
+            style: OasisTextStyles.robotoExtraBold),
         SizedBox(
           height: UIUtills().getProportionalHeight(height: 12),
         ),

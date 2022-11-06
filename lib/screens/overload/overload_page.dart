@@ -1,9 +1,8 @@
-
-import 'package:oasis_2022/utils/oasis_text_styles.dart';
-
-import '/utils/scroll_remover.dart';
 import 'package:flutter/material.dart';
-import '/../utils/ui_utils.dart';
+import 'package:oasis_2022/utils/oasis_text_styles.dart';
+import 'package:oasis_2022/utils/scroll_remover.dart';
+
+import '../../utils/ui_utils.dart';
 import '../login/view/login_screen.dart';
 import 'overload_one.dart';
 import 'overload_three.dart';
@@ -16,7 +15,11 @@ class OverloadPage extends StatefulWidget {
   State<OverloadPage> createState() => _OverloadPageState();
 }
 
-class _OverloadPageState extends State<OverloadPage> {
+class _OverloadPageState extends State<OverloadPage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  bool isGoingBackWards = false;
+  bool isLoader = false;
   PageController _controller = PageController(initialPage: 0, keepPage: false);
   List<Widget> overloadPages = const [
     OverloadOne(),
@@ -29,7 +32,27 @@ class _OverloadPageState extends State<OverloadPage> {
 
   @override
   void initState() {
+    _animationController = AnimationController(
+        value: 1.0,
+        duration: const Duration(milliseconds: 180),
+        reverseDuration: const Duration(milliseconds: 80),
+        vsync: this);
+    _animationController.addListener(() => setState(() {
+          print('start');
+          print(currentIndexPage);
+          print(isGoingBackWards);
+          print(currentIndexPage / 3 +
+              (isGoingBackWards == false ? -1 : 1) *
+                  (1 / 3 * _animationController.value));
+        }));
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animationController.removeListener(() => setState(() {}));
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -107,8 +130,19 @@ class _OverloadPageState extends State<OverloadPage> {
                   },
                   itemCount: overloadPages.length,
                   onPageChanged: (index) {
+                    print(index);
+                    print('index');
                     setState(() {
+                      _animationController.value = 1;
+                      _animationController.animateTo(0.0, curve: Curves.ease);
+
+                      if (currentIndexPage < index.toDouble()) {
+                        isGoingBackWards = false;
+                      } else {
+                        isGoingBackWards = true;
+                      }
                       currentIndexPage = index.toDouble();
+
                       if (currentIndexPage == 2) {
                         onLastPage = true;
                       } else {
@@ -121,7 +155,17 @@ class _OverloadPageState extends State<OverloadPage> {
             ),
             GestureDetector(
               onTap: () async {
-                if (currentIndexPage == 2)
+                if (currentIndexPage == 2) {
+                  currentIndexPage = 3;
+                  _animationController.value = 1;
+                  _animationController.animateTo(0.0, curve: Curves.ease);
+                  await Future.delayed(const Duration(milliseconds: 180));
+
+                  setState(() {
+                    isLoader = true;
+                  });
+                  await Future.delayed(const Duration(milliseconds: 500));
+
                   Future.microtask(() {
                     Navigator.pushAndRemoveUntil(
                         context,
@@ -129,7 +173,7 @@ class _OverloadPageState extends State<OverloadPage> {
                             builder: (builder) => const LoginScreen()),
                         (route) => false);
                   });
-                else {
+                } else {
                   _controller.nextPage(
                       curve: Curves.ease,
                       duration: Duration(milliseconds: 600));
@@ -142,7 +186,11 @@ class _OverloadPageState extends State<OverloadPage> {
                   children: [
                     SizedBox(
                       child: CircularProgressIndicator(
-                          value: (currentIndexPage + 1) / 3,
+                          value: isLoader
+                              ? null
+                              : currentIndexPage / 3 +
+                                  (isGoingBackWards == false ? -1 : 1) *
+                                      (1 / 3 * _animationController.value),
                           strokeWidth: 2,
                           backgroundColor: Color(0xFFC0C0C0),
                           color: Color(0xFF585858)),

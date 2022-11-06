@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 
 import '../../../utils/ui_utils.dart';
@@ -28,75 +30,36 @@ class CartAddButton extends StatefulWidget {
 class _CartAddButtonState extends State<CartAddButton> {
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 9.69, vertical: 3.00),
-        width: UIUtills().getProportionalWidth(width: 95.00),
-        height: UIUtills().getProportionalHeight(height: 30.00),
-        decoration: BoxDecoration(
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.25),
-              offset: Offset(0, 2.36),
-              blurRadius: 4.73,
-            )
-          ],
-          borderRadius: BorderRadius.circular(10),
-          gradient: const LinearGradient(
-            colors: [
-              Color.fromRGBO(22, 22, 22, 1),
-              Color.fromRGBO(45, 45, 45, 1)
-            ],
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  var box = Hive.box('cartBox');
-                  if (widget.amount > 0) {
-                    widget.amount--;
-                    if (widget.amount == 0) {
-                      box.delete(widget.menuItemId);
-                    } else {
-                      box.put(
-                          widget.menuItemId,
-                          HiveMenuEntry(
-                              menuItemName: widget.menuItemName,
-                              price: widget.price,
-                              FoodStall: widget.foodStallName,
-                              quantity: widget.amount,
-                              FoodStallId: widget.foodStallId));
-                    }
-                  }
-                });
-              },
-              child: const Icon(
-                Icons.remove,
-                color: Colors.white,
-                size: 16,
-              ),
+    return Container(
+      height: 34.h,
+      width: 90.w,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        gradient: const LinearGradient(colors: [
+          Color.fromRGBO(209, 154, 8, 1),
+          Color.fromRGBO(254, 212, 102, 1),
+          Color.fromRGBO(227, 186, 79, 1),
+          Color.fromRGBO(209, 154, 8, 1),
+          Color.fromRGBO(209, 154, 8, 1),
+        ]),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          InkWell(
+            child: const Icon(
+              Icons.remove,
+              color: Colors.black,
+              size: 18,
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 0),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12.00, vertical: 3),
-              // decoration: BoxDecoration(
-              //   borderRadius: BorderRadius.circular(3),
-              //   //color: Colors.white,
-              // ),
-              child: Text(
-                '${widget.amount}',
-                style: const TextStyle(color: Colors.white, fontSize: 12),
-              ),
-            ),
-            InkWell(
-              onTap: () {
+            onTap: () {
+              setState(() {
                 var box = Hive.box('cartBox');
-                widget.amount++;
-                setState(() {
+                widget.amount--;
+                if (widget.amount == 0) {
+                  box.delete(widget.menuItemId);
+                } else {
                   box.put(
                       widget.menuItemId,
                       HiveMenuEntry(
@@ -105,20 +68,56 @@ class _CartAddButtonState extends State<CartAddButton> {
                           FoodStall: widget.foodStallName,
                           quantity: widget.amount,
                           FoodStallId: widget.foodStallId));
-                });
-              },
-              child: const Icon(
-                Icons.add,
-                color: Colors.white,
-                size: 16,
+                }
+              });
+            },
+          ),
+          Container(
+            height: 32.h,
+            width: 38.w,
+            color: Colors.black,
+            child: Center(
+              child: ShaderMask(
+                blendMode: BlendMode.srcIn,
+                shaderCallback: (bounds) => const LinearGradient(colors: [
+                  Color.fromRGBO(209, 154, 8, 1),
+                  Color.fromRGBO(254, 212, 102, 1),
+                  Color.fromRGBO(227, 186, 79, 1),
+                  Color.fromRGBO(209, 154, 8, 1),
+                  Color.fromRGBO(209, 154, 8, 1),
+                ]).createShader(
+                    Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                child: Text(
+                  "${widget.amount}",
+                  style:
+                      GoogleFonts.roboto(color: Colors.white, fontSize: 16.sp),
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+          InkWell(
+            child: const Icon(
+              Icons.add,
+              size: 16,
+              color: Colors.black,
+            ),
+            onTap: () {
+              setState(() {
+                widget.amount++;
+                var box = Hive.box('cartBox');
+                box.put(
+                    widget.menuItemId,
+                    HiveMenuEntry(
+                        menuItemName: widget.menuItemName,
+                        price: widget.price,
+                        FoodStall: widget.foodStallName,
+                        quantity: widget.amount,
+                        FoodStallId: widget.foodStallId));
+              });
+            },
+          ),
+        ],
       ),
-      SizedBox(
-        width: UIUtills().getProportionalWidth(width: 30.00),
-      ),
-    ]);
+    );
   }
 }

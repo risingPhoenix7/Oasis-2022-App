@@ -169,11 +169,7 @@ class _AddButtonState extends State<AddButton> {
                   ),
                 ),
                 InkWell(
-                  child: Text(
-                    "+",
-                    style: GoogleFonts.roboto(
-                        color: Colors.black, fontSize: 18),
-                  ),
+                  child: const Icon(Icons.add, size: 16,color: Colors.black,),
                   onTap: () {
                     setState(() {
                       widget.amount++;

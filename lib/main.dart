@@ -109,7 +109,7 @@ class _BosmFestAppState extends State<BosmFestApp> {
         // splitScreenMode: true,
         builder: (context, child) {
           return MaterialApp(
-            theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFFAFAFF)),
+            theme: ThemeData(scaffoldBackgroundColor: Colors.black),
             navigatorObservers: [ChuckerFlutter.navigatorObserver],
             routes: {
               'food_stalls': (context) => FoodStallScreen(),

@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/screens/cart/cartScreen.dart';
 import '/screens/food_stalls/repo/model/food_stall_model.dart' as menu;
@@ -96,18 +97,16 @@ class _MenuScreenState extends State<MenuScreen> {
                                       bottomLeft: Radius.circular(20)),
                                 ),
                                 width:
-                                    UIUtills().getProportionalWidth(width: 388),
-                                height: UIUtills()
-                                    .getProportionalHeight(height: 97),
+                                    388.w,
+                                height: 97.h,
                               ),
                             ),
                           ),
                           Padding(
                             padding: EdgeInsets.only(
-                                top: UIUtills()
-                                    .getProportionalHeight(height: 16),
+                                top: 16.h,
                                 left:
-                                    UIUtills().getProportionalWidth(width: 20)),
+                                    20.w),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -116,14 +115,14 @@ class _MenuScreenState extends State<MenuScreen> {
                                   TextSpan(
                                       text: widget.foodStallName,
                                       style: GoogleFonts.openSans(
-                                          fontSize: 28,
+                                          fontSize: 28.sp,
                                           color: Colors.white,
                                           fontWeight: FontWeight.w600)),
                                   TextSpan(
                                     text:
                                         "\nChoose from ${widget.menuItemList.length} different dishes",
                                     style: GoogleFonts.openSans(
-                                        fontSize: 14,
+                                        fontSize: 14.sp,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400),
                                   )
@@ -143,14 +142,14 @@ class _MenuScreenState extends State<MenuScreen> {
                       },
                       child: Padding(
                         padding: EdgeInsets.only(
-                            left: UIUtills().getProportionalWidth(width: 20),
-                            top: UIUtills().getProportionalHeight(height: 20)),
+                            left: 20.w,
+                            top: 20.h),
                         child: Container(
                           decoration: BoxDecoration(
                               color: const Color.fromRGBO(44, 47, 53, 1),
                               borderRadius: BorderRadius.circular(5)),
-                          height: UIUtills().getProportionalHeight(height: 36),
-                          width: UIUtills().getProportionalWidth(width: 36),
+                          height: 36.h,
+                          width: 36.w,
                           child: const Icon(
                             Icons.arrow_back,
                             color: Colors.white,
@@ -164,12 +163,12 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                  top: UIUtills().getProportionalHeight(height: 24),
-                  left: UIUtills().getProportionalWidth(width: 20),
-                  right: UIUtills().getProportionalWidth(width: 20)),
+                  top: 24.h,
+                  left: 20.w,
+                  right: 20.w),
               child: Container(
-                height: UIUtills().getProportionalHeight(height: 47),
-                width: UIUtills().getProportionalWidth(width: 388),
+                height: 47.h,
+                width: 388.w,
                 decoration: BoxDecoration(
                     border: Border.all(
                         color: const Color.fromRGBO(248, 216, 72, 0.45)),
@@ -194,9 +193,9 @@ class _MenuScreenState extends State<MenuScreen> {
                     children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(
-                            UIUtills().getProportionalWidth(width: 17.22),
+                            17.22.w,
                             0,
-                            UIUtills().getProportionalWidth(width: 16.41),
+                            16.41.w,
                             0),
                         child: const Center(
                             child: Icon(
@@ -217,8 +216,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               controller: searchController,
                               style: GoogleFonts.poppins(
                                   color: Colors.white,
-                                  fontSize: UIUtills()
-                                      .getProportionalWidth(width: 14)),
+                                  fontSize: 14.sp),
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
@@ -226,7 +224,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                     GoogleFonts.openSans(color: Colors.white),
                                 hintText: "Search",
                                 hintStyle: GoogleFonts.openSans(
-                                    color: Colors.white, fontSize: 16),
+                                    color: Colors.white, fontSize: 16.sp),
                                 suffixIcon: IconButton(
                                     splashColor: Colors.transparent,
                                     onPressed: () {
@@ -239,7 +237,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                       });
                                     },
                                     icon: const Icon(Icons.close,
-                                        color: Colors.grey, size: 15)),
+                                        color: Colors.grey, size: 16)),
                               ),
                             ),
                           ),
@@ -263,27 +261,19 @@ class _MenuScreenState extends State<MenuScreen> {
                       return Padding(
                         padding: EdgeInsets.only(
                             bottom:
-                                UIUtills().getProportionalHeight(height: 8)),
+                                16.h),
                         child: Column(
                           children: [
                             (index != 0)
                                 ? Divider(
                                     color: const Color.fromRGBO(
                                         255, 255, 255, 1),
-                                    indent: UIUtills()
-                                        .getProportionalWidth(width: 47),
-                                    endIndent: UIUtills()
-                                        .getProportionalWidth(width: 47),
+                                    indent: 47.w,
+                                    endIndent: 47.w,
                                   )
                                 : Container(),
-                            Container(
-                              height: 80,
-                              decoration: const BoxDecoration(boxShadow: [
-                                BoxShadow(
-                                    color: Color.fromRGBO(157, 141, 255, 0.1),
-                                    offset: Offset(0, 2),
-                                    blurRadius: 8)
-                              ], color: Colors.black),
+                            Padding(
+                              padding: EdgeInsets.only(top: 8.h),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -315,18 +305,14 @@ class _MenuScreenState extends State<MenuScreen> {
                                                 menuItemsFiltered[index].name,
                                                 style: GoogleFonts.openSans(
                                                     color: Colors.white,
-                                                    fontSize: UIUtills()
-                                                        .getProportionalHeight(
-                                                            height: 18),
+                                                    fontSize: 18.h,
                                                     fontWeight:
                                                         FontWeight.w500),
                                               ),
                                               Text(
                                                 "₹${menuItemsFiltered[index].price}",
                                                 style: GoogleFonts.openSans(
-                                                    fontSize: UIUtills()
-                                                        .getProportionalHeight(
-                                                            height: 16),
+                                                    fontSize: 16.h,
                                                     fontWeight:
                                                         FontWeight.w600,
                                                     color:
@@ -344,8 +330,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(
-                                        right: UIUtills()
-                                            .getProportionalWidth(width: 37)),
+                                        right: 37.w),
                                     child: AddButton(
                                       menuItemName:
                                           menuItemsFiltered[index].name,
@@ -389,7 +374,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   child: Container(
                     // alignment: Alignment.bottomCenter,
                     width: MediaQuery.of(context).size.width,
-                    height: UIUtills().getProportionalHeight(height: 56.00),
+                    height: 56.h,
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(colors: [
                         Color.fromRGBO(209, 154, 8, 1),
@@ -406,14 +391,14 @@ class _MenuScreenState extends State<MenuScreen> {
                         ),
                       ],
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(UIUtills().getProportionalWidth(width: 15.00)),
-                        topRight: Radius.circular(UIUtills().getProportionalWidth(width: 15))
+                        topLeft: Radius.circular(15.r),
+                        topRight: Radius.circular(15.r)
                       ),
                     ),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal:
-                              UIUtills().getProportionalWidth(width: 40.00)),
+                              40.w),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -424,8 +409,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w800,
                                   color: Colors.black,
-                                  fontSize: UIUtills()
-                                      .getProportionalWidth(width: 20.00),
+                                  fontSize: 20.w,
                                 ),
                               ),
                             ],
@@ -437,8 +421,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w700,
                                   color: Colors.black,
-                                  fontSize: UIUtills()
-                                      .getProportionalWidth(width: 19.00),
+                                  fontSize: 19.w,
                                 ),
                               ),
                             ],

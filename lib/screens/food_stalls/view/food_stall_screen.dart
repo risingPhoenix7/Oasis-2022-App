@@ -84,7 +84,7 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
                                     Text(
                                       "Stalls",
                                       style: GoogleFonts.openSans(
-                                          fontSize: 28, color: Colors.white),
+                                          fontSize: 28, color: Colors.white, fontWeight: FontWeight.w600),
                                     ),
                                     Row(
                                       children: const [

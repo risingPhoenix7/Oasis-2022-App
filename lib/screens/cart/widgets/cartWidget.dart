@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '/screens/cart/viewmodel/cart_viewmodel.dart';
 import '/screens/cart/widgets/cartItemWidget.dart';
 import '/utils/ui_utils.dart';
@@ -40,79 +42,61 @@ class _cartWidgetState extends State<cartWidget> {
           return Column(
             children: [
               Container(
-                decoration: BoxDecoration(
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color.fromRGBO(157, 141, 255, 0.15),
-                      offset: Offset(0, 2),
-                      blurRadius: 8.00,
-                    ),
-                  ],
-                  color: Color.fromRGBO(255, 255, 255, 1),
-                  border: Border.all(
-                    width: 1.0,
-                    color: Color.fromRGBO(218, 218, 218, 0.5),
-                  ),
-                  borderRadius: BorderRadius.circular(
-                    UIUtills().getProportionalWidth(width: 10.00),
-                  ),
-                ),
+                color: Colors.black,
                 child: Column(
                   children: [
                     SizedBox(
-                      height: UIUtills().getProportionalHeight(height: 28.00),
+                      height: 28.w,
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          // height: UIUtills().getProportionalHeight(height: 28.00),
-                          width: UIUtills().getProportionalWidth(width: 28.00),
+                          width: 28.w,
                         ),
                         Text(
                           widget.foodStallName,
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
-                            fontSize: 24.00,
-                            color: Color.fromRGBO(31, 31, 31, 1),
+                            fontSize: 24.00.sp,
+                            color: const Color.fromRGBO(194, 194, 194, 1),
                           ),
                         ),
                         SizedBox(
-                          width: UIUtills().getProportionalWidth(width: 6.00),
-                          // height: UIUtills().getProportionalHeight(height: 28.00),
+                          width: 6.w,
                         ),
                         Text(
                           '(${widget.menuList.length} items)',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize:
-                                UIUtills().getProportionalWidth(width: 11.00),
-                            color: Color.fromRGBO(0, 0, 0, 0.75),
+                            fontSize: 11.sp,
+                            color: const Color.fromRGBO(194, 194, 194, 1),
                           ),
                         )
                       ],
                     ),
-                    Container(
-                      child: ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return CartItemWidget(
-                              menuItemId: widget.menuList[index].menuItemId,
-                              foodStallName: widget.foodStallName,
-                              foodStallId: widget.foodStallId,
-                              menuItemName: widget.menuList[index].menuItemName,
-                              isVeg: true,
-                              price: widget.menuList[index].menuItemPrice,
-                              quantity:
-                                  widget.menuList[index].menuItemQuantity);
-                        },
-                        itemCount: widget.menuList.length,
-                      ),
+                    ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return CartItemWidget(
+                            menuItemId: widget.menuList[index].menuItemId,
+                            foodStallName: widget.foodStallName,
+                            foodStallId: widget.foodStallId,
+                            menuItemName: widget.menuList[index].menuItemName,
+                            isVeg: true,
+                            price: widget.menuList[index].menuItemPrice,
+                            quantity: widget.menuList[index].menuItemQuantity);
+                      },
+                      itemCount: widget.menuList.length,
                     ),
-                    SizedBox(
-                      width: double.infinity,
-                      height: UIUtills().getProportionalHeight(height: 25.29),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 18.h),
+                      child: Divider(
+                        color: const Color.fromRGBO(255, 255, 255, 0.85),
+                        endIndent: 30.w,
+                        indent: 30.w,
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -120,16 +104,14 @@ class _cartWidgetState extends State<cartWidget> {
                         Row(
                           children: [
                             SizedBox(
-                              width:
-                                  UIUtills().getProportionalWidth(width: 36.00),
+                              width: 36.w,
                             ),
                             Text(
                               'SubTotal',
                               style: TextStyle(
-                                fontSize: UIUtills()
-                                    .getProportionalWidth(width: 20.00),
+                                fontSize: 20.sp,
                                 fontWeight: FontWeight.w700,
-                                color: Color.fromRGBO(0, 0, 0, 1),
+                                color: const Color.fromRGBO(194, 194, 194, 1),
                               ),
                             ),
                           ],
@@ -137,30 +119,28 @@ class _cartWidgetState extends State<cartWidget> {
                         Row(
                           children: [
                             Text(
-                              '₹ ${subTotal}',
+                              '₹ $subTotal',
                               style: TextStyle(
-                                fontSize: UIUtills()
-                                    .getProportionalWidth(width: 20.00),
+                                fontSize: 20.sp,
                                 fontWeight: FontWeight.w800,
-                                color: Color.fromRGBO(0, 0, 0, 1),
+                                color: const Color.fromRGBO(194, 194, 194, 1),
                               ),
                             ),
                             SizedBox(
-                              width:
-                                  UIUtills().getProportionalWidth(width: 36.00),
+                              width: 36.w,
                             )
                           ],
                         ),
                       ],
                     ),
                     SizedBox(
-                      height: UIUtills().getProportionalHeight(height: 31.00),
+                      height: 31.h,
                     )
                   ],
                 ),
               ),
               SizedBox(
-                height: UIUtills().getProportionalHeight(height: 16.00),
+                height: 16.h,
               ),
             ],
           );

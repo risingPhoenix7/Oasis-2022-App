@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '/screens/cart/widgets/cart_add_button.dart';
 import '/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
@@ -38,83 +40,60 @@ class CartItemWidgetState extends State<CartItemWidget> {
           return Column(
             children: [
               SizedBox(
-                height: UIUtills().getProportionalHeight(height: 23.29),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: UIUtills().getProportionalWidth(width: 28.33),
-                      ),
-                      widget.isVeg
-                          ? SvgPicture.asset(
-                              'assets/images/veg.svg',
-                              // width: 13.67,
-                              // height: 13.3,
-                            )
-                          : SvgPicture.asset(
-                              'assets/images/Non-Veg.svg',
-                              // width: 13.67,
-                              // height: 13.3,
+                width: 354.h,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/images/Non-Veg.svg',
+                          color: widget.isVeg ? Colors.green : Colors.red,
+                        ),
+                        SizedBox(
+                          width: 20.w,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.menuItemName,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16.sp,
+                                color: const Color.fromRGBO(194, 194, 194, 1),
+                              ),
                             ),
-                      SizedBox(
-                        width: UIUtills().getProportionalWidth(width: 20.00),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${widget.menuItemName}',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16.00,
-                              color: Color.fromRGBO(26, 26, 26, 0.9),
+                            SizedBox(
+                              height: 3.86.h,
                             ),
-                          ),
-                          SizedBox(
-                            height:
-                                UIUtills().getProportionalHeight(height: 3.86),
-                          ),
-                          Text(
-                            '₹ ${widget.price}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize:
-                                  UIUtills().getProportionalWidth(width: 14.00),
-                              color: Color.fromRGBO(83, 83, 83, 1),
+                            Text(
+                              '₹ ${widget.price}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                                color: const Color.fromRGBO(194, 194, 194, 1),
+                              ),
+                              textAlign: TextAlign.left,
                             ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  // SizedBox(
-                  //   width: UIUtills().getProportionalWidth(width: 108.00),
-                  // ),
-                  CartAddButton(
-                    foodStallId: widget.foodStallId,
-                    foodStallName: widget.foodStallName,
-                    menuItemId: widget.menuItemId,
-                    menuItemName: widget.menuItemName,
-                    price: widget.price,
-                    amount: widget.quantity,
-                  )
-                ],
+                          ],
+                        ),
+                      ],
+                    ),
+                    CartAddButton(
+                      foodStallId: widget.foodStallId,
+                      foodStallName: widget.foodStallName,
+                      menuItemId: widget.menuItemId,
+                      menuItemName: widget.menuItemName,
+                      price: widget.price,
+                      amount: widget.quantity,
+                    )
+                  ],
+                ),
               ),
               SizedBox(
                 width: double.infinity,
-                height: UIUtills().getProportionalHeight(height: 17.86),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 36.00),
-                child: Divider(
-                  height: 0,
-                  thickness: UIUtills().getProportionalHeight(height: 1.00),
-                  color: Color.fromRGBO(218, 218, 218, 1),
-                ),
+                height: 24.h,
               ),
             ],
           );

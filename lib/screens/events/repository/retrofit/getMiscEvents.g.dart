@@ -13,7 +13,7 @@ class _MiscEventRestClient implements MiscEventRestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://test.bits-oasis.org/2022/main';
+    baseUrl ??= 'https://bits-oasis.org/2022/main';
   }
 
   final Dio _dio;
@@ -21,27 +21,27 @@ class _MiscEventRestClient implements MiscEventRestClient {
   String? baseUrl;
 
   @override
-  Future<List<MiscEventData>> getAllMiscEvents(JWT) async {
+  Future<List<MiscEventCategory>> getAllMiscEvents() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': JWT};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<MiscEventData>>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<MiscEventCategory>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/boco_portal/events',
+              '/registrations/events_details',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) => MiscEventData.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) =>
+            MiscEventCategory.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }

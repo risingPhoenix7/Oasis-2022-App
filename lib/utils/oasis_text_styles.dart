@@ -27,6 +27,10 @@ class OasisTextStyles {
     textStyle: TextStyle(
         color: Colors.black, fontSize: 17.47.sp, fontWeight: FontWeight.w300),
   );
+  static TextStyle openSansSubHeading = GoogleFonts.openSans(
+    textStyle: TextStyle(
+        color: Colors.black, fontSize: 20.sp, fontWeight: FontWeight.w700),
+  );
 
   static TextStyle poppinsRegular = GoogleFonts.poppins(
     textStyle: TextStyle(

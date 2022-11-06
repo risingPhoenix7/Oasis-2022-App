@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:oasis_2022/screens/events/view/miscellaneous_screen.dart';
 import 'package:oasis_2022/screens/overload/overload_page.dart';
 
 import '../home.dart';
@@ -118,35 +119,36 @@ class _BosmFestAppState extends State<BosmFestApp> {
               'order': (context) => OrderScreen(),
               'leaderboard': (context) => Leaderboard(),
             },
-            home: FutureBuilder(
-              future: userDetailsViewModel.userCheck(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final data = snapshot.data;
-                  if (data == true) {
-                    Future.microtask(() =>
-                        Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (builder) => HomeScreen()),
-                          (route) => false,
-                        ));
-                  } else if (data == false) {
-                    Future.microtask(
-                        () => Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (builder) => const OverloadPage()),
-                              (route) => false,
-                            ));
-                  }
-                }
-                return Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  color: Colors.white,
-                  child: Image.asset('assets/images/Splashscreen.png'),
-                );
-              },
-            ),
+            home:EventsScreen()
+            // home: FutureBuilder(
+            //   future: userDetailsViewModel.userCheck(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.hasData) {
+            //       final data = snapshot.data;
+            //       if (data == true) {
+            //         Future.microtask(() =>
+            //             Navigator.of(context).pushAndRemoveUntil(
+            //               MaterialPageRoute(builder: (builder) => HomeScreen()),
+            //               (route) => false,
+            //             ));
+            //       } else if (data == false) {
+            //         Future.microtask(
+            //             () => Navigator.of(context).pushAndRemoveUntil(
+            //                   MaterialPageRoute(
+            //                       builder: (builder) => const OverloadPage()),
+            //                   (route) => false,
+            //                 ));
+            //       }
+            //     }
+            //     return Container(
+            //       height: double.infinity,
+            //       width: double.infinity,
+            //       alignment: Alignment.center,
+            //       color: Colors.white,
+            //       child: Image.asset('assets/images/Splashscreen.png'),
+            //     );
+            //   },
+            // ),
           );
         });
   }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class OasisColors {
   static const Color backgroundColorWhite = Colors.black;
-  static const Color primaryYellow = Colors.yellow;
+  static const Color primaryYellow = Color(0XFFF8D848);
   static const Color shadowColorAppBar = Color.fromRGBO(0, 42, 104, 0.1);
   static const Color blackButtonColor = Color(0XFF292929);
   static const Color textWhite = Color(0xFFFFFFFF);

@@ -57,10 +57,13 @@ class _EventsScreenState extends State<EventsScreen> {
     currentDayMiscEventList = miscEventsViewModel
         .retrieveDayMiscEventData(MiscScreenController.selectedTab.value);
   }
+  void updateMiscEventList() async {
+    await miscEventsViewModel.retrieveMiscEventResult();
+  }
 
   @override
   void initState() {
-    updateCurrentDayMiscEventList();
+    updateMiscEventList();
     if (MiscEventsViewModel.error != null) {
       setState(() {
         isLoading = false;
@@ -117,7 +120,7 @@ class _EventsScreenState extends State<EventsScreen> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: OasisColors.backgroundColorWhite,
+        backgroundColor: Colors.black,
         body: !isLoading
             ? GestureDetector(
                 onTap: () => FocusScope.of(context).unfocus(),
@@ -219,8 +222,8 @@ class _EventsScreenState extends State<EventsScreen> {
                       ),
                       ScrollConfiguration(
                         behavior: CustomScrollBehavior(),
-                        child: SizedBox(
-                          height: 468.h,
+                        child: Container(
+                          height: 450.h,
                           child: ListView(
                             children: <Widget>[
                               Column(
@@ -230,19 +233,15 @@ class _EventsScreenState extends State<EventsScreen> {
                                         currentDayMiscEventList.length,
                                         (index) {
                                         return SingleMiscellaneousEvent(
-                                          timeStamp: currentDayMiscEventList[
-                                                          index]
-                                                      .timestamp ==
-                                                  null
-                                              ? null
-                                              : currentDayMiscEventList[index]
-                                                  .timestamp!,
+                                          time: currentDayMiscEventList[index]
+                                                  .time ??
+                                              'TBA',
                                           eventName:
                                               currentDayMiscEventList[index]
                                                   .name,
                                           eventDescription:
                                               currentDayMiscEventList[index]
-                                                  .description,
+                                                  .about,
                                           eventConductor:
                                               currentDayMiscEventList[index]
                                                   .organiser,

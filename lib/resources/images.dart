@@ -3,8 +3,11 @@ part of 'resources.dart';
 class ImageAssets {
   static const String searchIcon = 'assets/icons/search_icon.svg';
   static const String crossIcon = 'assets/icons/cross_icon.svg';
-
-
+  static const String locationIcon = 'assets/icons/location_icon.svg';
+  static const String timeicon = 'assets/icons/time_icon.svg';
+  static const String bookMarkIcon = 'assets/icons/bookmark_icon.svg';
+  static const String eventCardBg = 'assets/images/event_card_bg.png';
+  static const String eventBg = 'assets/images/events_bg.png';
 
   //TODO:remove old ones
   static const String pizza = "assets/images/pizza.png";
@@ -29,9 +32,6 @@ class ImageAssets {
   static const String noUpcomingEventsImage =
       'assets/images/no_events_image.png';
   static const String noEventsImage = 'assets/images/no_events.png';
-
-
-
 
 // static Color getBgColorFromSportId(int id){
 //   switch(id){

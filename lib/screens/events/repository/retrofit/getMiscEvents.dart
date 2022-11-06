@@ -12,6 +12,5 @@ abstract class MiscEventRestClient {
   factory MiscEventRestClient(Dio dio, {String baseUrl}) = _MiscEventRestClient;
 
   @GET(kMiscEventPath)
-  Future<List<MiscEventData>> getAllMiscEvents(
-      @Header("Authorization") String JWT);
+  Future<List<MiscEventCategory>> getAllMiscEvents();
 }

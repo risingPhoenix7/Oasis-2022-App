@@ -1,6 +1,5 @@
 import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
-import 'package:oasis_2022/provider/user_details_viewmodel.dart';
 
 import '../../../utils/error_messages.dart';
 import '../repository/model/miscEventResult.dart';
@@ -8,16 +7,18 @@ import '../repository/retrofit/getMiscEvents.dart';
 
 class MiscEventsViewModel {
   static String? error;
-  static List<MiscEventData>? miscEventList;
+  static List<MiscEventData>? miscEventList = <MiscEventData>[];
 
   Future<void> retrieveMiscEventResult() async {
+    List<MiscEventCategory>? miscEventCategoryList;
     final dio = Dio();
     error = null;
-    String? jwt = UserDetailsViewModel.userDetails.JWT;
     dio.interceptors.add(ChuckerDioInterceptor());
     final client = MiscEventRestClient(dio);
 
-    miscEventList = await client.getAllMiscEvents("JWT " + jwt!).then((it) {
+    miscEventCategoryList = await client.getAllMiscEvents().then((it) {
+print('fewjf');
+      print(it.length);
       return it;
     }).catchError((Object obj) {
       print('non-200 error goes here.');
@@ -35,22 +36,38 @@ class MiscEventsViewModel {
       } catch (e) {
         error = ErrorMessages.unknownError;
       }
-      return miscEventList ?? <MiscEventData>[];
+      return miscEventCategoryList ?? <MiscEventCategory>[];
     });
+
+    for (MiscEventCategory miscEventCategory in miscEventCategoryList) {
+      if (miscEventCategory.events != null) {
+        miscEventList!.addAll(miscEventCategory.events!);
+      }
+       // miscEventList.sort((a,b)=>{
+       //   if(a.time=='')
+       // });
+    }
+    print(miscEventList?.length);
   }
 
   List<MiscEventData> retrieveDayMiscEventData(int day_no) {
-    List<MiscEventData> miscEventList = [];
-    if (miscEventList == null) {
-      return <MiscEventData>[];
-    } else {
-      for (int i = 0; i < miscEventList.length; i++) {
-        if (miscEventList[i].day == day_no) {
-          miscEventList.add(miscEventList[i]);
+    List<MiscEventData> assortedMiscEventList = [];
+    for (int i = 0; i < miscEventList!.length; i++) {
+      var a = miscEventList![i].date_time;
+      if (a == null || a.isEmpty) {
+        a = '22T';
+      }
+      print(a.indexOf('T'));
+      if (a.indexOf('T') == 3) {
+        if (a.substring(0, 3) == day_no.toString()) {
+          assortedMiscEventList.add(miscEventList![i]);
         }
+      } else {
+        if (day_no == 22) assortedMiscEventList.add(miscEventList![i]);
       }
     }
-    return miscEventList;
+print(assortedMiscEventList.length);
+    return assortedMiscEventList;
   }
 
   static String matchesErrorResponse(int? responseCode, String? statusMessage) {

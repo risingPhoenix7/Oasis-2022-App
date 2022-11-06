@@ -6,24 +6,25 @@ part of 'miscEventResult.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+MiscEventCategory _$MiscEventCategoryFromJson(Map<String, dynamic> json) =>
+    MiscEventCategory(
+      category_name: json['category_name'] as String?,
+      events: (json['events'] as List<dynamic>?)
+          ?.map((e) => MiscEventData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+
+
 MiscEventData _$MiscEventDataFromJson(Map<String, dynamic> json) =>
     MiscEventData(
       id: json['id'] as int?,
-      day: json['day'] as int?,
-      description: json['description'] as String?,
       name: json['name'] as String?,
+      about: json['about'] as String?,
       organiser: json['organiser'] as String?,
-      timestamp: json['timestamp'] as String?,
+      time: json['time'] as String?,
+      date_time: json['date_time'] as String?,
       venue_name: json['venue_name'] as String?,
     );
 
-Map<String, dynamic> _$MiscEventDataToJson(MiscEventData instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'day': instance.day,
-      'description': instance.description,
-      'name': instance.name,
-      'organiser': instance.organiser,
-      'timestamp': instance.timestamp,
-      'venue_name': instance.venue_name,
-    };
+

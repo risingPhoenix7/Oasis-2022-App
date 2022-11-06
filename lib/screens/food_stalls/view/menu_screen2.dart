@@ -1,14 +1,15 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '/screens/cart/cartScreen.dart';
 import '/screens/food_stalls/repo/model/food_stall_model.dart' as menu;
-import '/screens/food_stalls/view/food_stall_screen.dart';
 import '/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import '../view_model/menu_screen_viewmodel.dart';
+import 'food_stall_screen2.dart';
 import 'menu_add_buttons.dart';
 
 class MenuScreen2 extends StatefulWidget {
@@ -74,8 +75,8 @@ class _MenuScreen2State extends State<MenuScreen2> {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.network(
-                        "https://picsum.photos/388/259",
+                      child: CachedNetworkImage(
+                        imageUrl: 'https://picsum.photos/388/259',
                       ),
                     ),
                     Positioned(
@@ -112,23 +113,22 @@ class _MenuScreen2State extends State<MenuScreen2> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 RichText(
-                                    text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: widget.foodStallName,
-                                          style: GoogleFonts.openSans(
-                                              fontSize: 28,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w600)
-                                      ),
-                                      TextSpan(
-                                        text: "\nChoose from ${widget.menuItemList.length} different dishes",
-                                        style: GoogleFonts.openSans(
-                                            fontSize: 14,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w400),
-                                      )
-                                    ])),
+                                    text: TextSpan(children: [
+                                  TextSpan(
+                                      text: widget.foodStallName,
+                                      style: GoogleFonts.openSans(
+                                          fontSize: 28,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600)),
+                                  TextSpan(
+                                    text:
+                                        "\nChoose from ${widget.menuItemList.length} different dishes",
+                                    style: GoogleFonts.openSans(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400),
+                                  )
+                                ])),
                               ],
                             ),
                           )
@@ -140,7 +140,7 @@ class _MenuScreen2State extends State<MenuScreen2> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const FoodStallScreen()));
+                                builder: (context) => const FoodStallScreen2()));
                       },
                       child: Padding(
                         padding: EdgeInsets.only(
@@ -380,7 +380,7 @@ class _MenuScreen2State extends State<MenuScreen2> {
             int total = MenuScreenViewModel().getTotalValue();
             if (total != 0) {
               return Positioned(
-                bottom: 20.00,
+                bottom: 0,
                 left: 0,
                 right: 0,
                 child: InkWell(
@@ -393,18 +393,15 @@ class _MenuScreen2State extends State<MenuScreen2> {
                   child: Container(
                     // alignment: Alignment.bottomCenter,
                     width: MediaQuery.of(context).size.width,
-                    height: UIUtills().getProportionalHeight(height: 72.00),
-                    margin: EdgeInsets.symmetric(
-                      horizontal: UIUtills().getProportionalWidth(width: 20.00),
-                      vertical: UIUtills().getProportionalHeight(height: 20),
-                    ),
+                    height: UIUtills().getProportionalHeight(height: 56.00),
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color.fromRGBO(45, 45, 45, 1),
-                          Color.fromRGBO(0, 0, 0, 1)
-                        ],
-                      ),
+                      gradient: const LinearGradient(colors: [
+                        Color.fromRGBO(209, 154, 8, 1),
+                        Color.fromRGBO(254, 212, 102, 1),
+                        Color.fromRGBO(227, 186, 79, 1),
+                        Color.fromRGBO(209, 154, 8, 1),
+                        Color.fromRGBO(209, 154, 8, 1),
+                      ]),
                       boxShadow: const [
                         BoxShadow(
                           color: Color.fromRGBO(0, 0, 0, 0.25),
@@ -412,8 +409,9 @@ class _MenuScreen2State extends State<MenuScreen2> {
                           offset: Offset(0, 4.38),
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(
-                        UIUtills().getProportionalWidth(width: 15.00),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(UIUtills().getProportionalWidth(width: 15.00)),
+                        topRight: Radius.circular(UIUtills().getProportionalWidth(width: 15))
                       ),
                     ),
                     child: Padding(
@@ -429,17 +427,9 @@ class _MenuScreen2State extends State<MenuScreen2> {
                                 'View Cart',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w800,
-                                  color: const Color.fromRGBO(255, 255, 255, 1),
+                                  color: Colors.black,
                                   fontSize: UIUtills()
                                       .getProportionalWidth(width: 20.00),
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 8.0, top: 3),
-                                child: Icon(
-                                  Icons.shopping_cart,
-                                  size: 20,
-                                  color: Color.fromRGBO(255, 255, 255, 1),
                                 ),
                               ),
                             ],
@@ -450,7 +440,7 @@ class _MenuScreen2State extends State<MenuScreen2> {
                                 '₹ $total',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  color: const Color.fromRGBO(255, 255, 255, 1),
+                                  color: Colors.black,
                                   fontSize: UIUtills()
                                       .getProportionalWidth(width: 19.00),
                                 ),

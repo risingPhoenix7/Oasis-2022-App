@@ -1,5 +1,6 @@
 import '/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FoodStallTile extends StatelessWidget {
@@ -10,47 +11,61 @@ class FoodStallTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(boxShadow: [
-        BoxShadow(
-            color: Color.fromRGBO(116, 126, 241, 0.15),
-            blurRadius: 8,
-            offset: Offset(0, 4))
-      ]),
-      child: Stack(
-        children: [
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.network(
-                image,
-                height: UIUtills().getProportionalHeight(height: 180),
-              )),
-          Container(
-            width: UIUtills().getProportionalWidth(width: 184),
-            height: UIUtills().getProportionalHeight(height: 180),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                gradient: const LinearGradient(colors: <Color>[
-                  Color.fromRGBO(26, 25, 25, 0.675),
-                  Color.fromRGBO(33, 33, 33, 0)
-                ], begin: Alignment.bottomCenter, end: Alignment.topCenter)),
+    return Stack(
+      children: [
+        ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: CachedNetworkImage(imageUrl: image,)),
+        Padding(
+          padding: EdgeInsets.only(
+              top: UIUtills().getProportionalHeight(height: 10),
+              left: UIUtills().getProportionalWidth(width: 125)),
+          child: Container(
+            height: UIUtills().getProportionalHeight(height: 19),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Color.fromRGBO(18, 18, 18, 1),
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 104, 16, 19),
-            child: Container(
-              alignment: Alignment.bottomLeft,
-              child: Text(
+        ),
+        Container(
+          width: UIUtills().getProportionalWidth(width: 184),
+          height: UIUtills().getProportionalHeight(height: 230),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              gradient: const LinearGradient(colors: <Color>[
+                Color.fromRGBO(0, 0, 0, 0),
+                Color.fromRGBO(27, 27, 26, 0.84),
+              ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+        ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(
+              UIUtills().getProportionalWidth(width: 16),
+              UIUtills().getProportionalHeight(height: 160),
+              UIUtills().getProportionalWidth(width: 16),
+              UIUtills().getProportionalHeight(height: 0)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
                 foodStallName,
                 overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.openSans(
                     fontSize: 24,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                     color: Colors.white),
               ),
-            ),
-          )
-        ],
-      ),
+              Text(
+                "S Lawns",
+                style: GoogleFonts.openSans(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white),
+              )
+            ],
+          ),
+        )
+      ],
     );
   }
 }

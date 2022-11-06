@@ -5,9 +5,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:oasis_2022/screens/events/view/miscellaneous_screen.dart';
+import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
 import 'package:oasis_2022/screens/overload/overload_page.dart';
 
 import '../home.dart';
@@ -34,7 +36,6 @@ Future<void> main() async {
   await Hive.openBox('subscribeBox');
   await Hive.openBox('cartBox');
   SecureStorage secureStorage = SecureStorage();
-  var box = Hive.box('cartBox');
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.subscribeToTopic('all');
@@ -143,8 +144,8 @@ class _BosmFestAppState extends State<BosmFestApp> {
                   height: double.infinity,
                   width: double.infinity,
                   alignment: Alignment.center,
-                  color: Colors.white,
-                  child: Image.asset('assets/images/Splashscreen.png'),
+                  color: Colors.black,
+                  child: SvgPicture.asset('assets/images/oasis_logo.svg'),
                 );
               },
             ),

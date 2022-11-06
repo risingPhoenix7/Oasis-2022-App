@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../view_model/food_stalls_viewmodel.dart';
 import 'food_stall_tile.dart';
+import 'menu_screen2.dart';
 
 class FoodStallScreen extends StatefulWidget {
   const FoodStallScreen({Key? key}) : super(key: key);
@@ -89,7 +90,7 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MenuScreen(
+                                  builder: (context) => MenuScreen2(
                                         menuItemList: foodStall[index].menu,
                                         foodStallName: foodStall[index].name,
                                         image: foodStall[index].image_url,

@@ -32,7 +32,6 @@ Future<void> main() async {
   await Hive.openBox('subscribeBox');
   await Hive.openBox('cartBox');
   SecureStorage secureStorage = SecureStorage();
-  var box = Hive.box('cartBox');
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.subscribeToTopic('all');
@@ -101,7 +100,7 @@ class _BosmFestAppState extends State<BosmFestApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFFAFAFF)),
+      theme: ThemeData(scaffoldBackgroundColor: Colors.black),
       navigatorObservers: [ChuckerFlutter.navigatorObserver],
       routes: {
         'food_stalls': (context) => FoodStallScreen(),

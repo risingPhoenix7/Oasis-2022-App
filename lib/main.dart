@@ -1,24 +1,27 @@
+import 'package:chucker_flutter/chucker_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:oasis_2022/screens/events/view/miscellaneous_screen.dart';
 import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
+import 'package:oasis_2022/screens/overload/overload_page.dart';
 
 import '../home.dart';
 import '../order/order_ui.dart';
 import '../provider/user_details_viewmodel.dart';
 import '../screens/cart/cartScreen.dart';
 import '../screens/food_stalls/repo/model/hive_model/hive_menu_entry.dart';
+import '../screens/food_stalls/view/food_stall_screen.dart';
 import '../screens/login/view/login_screen.dart';
-import '../screens/matches/view/matches_screen.dart';
-import '../screens/overload/overload_page.dart';
 import '../screens/quiz/view/leaderboard/leaderboard.dart';
 import '../screens/quiz/view_model/storage.dart';
 import '../screens/wallet_screen/view/wallet_screen.dart';
-import 'package:chucker_flutter/chucker_flutter.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'firebase_options.dart';
 import 'notificationservice/local_notification_service.dart';
 
@@ -36,7 +39,7 @@ Future<void> main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.subscribeToTopic('all');
-   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   FirebaseMessaging.onMessage.listen(
     (message) {
       print(message.data.toString() + "             lol");
@@ -100,46 +103,53 @@ class _BosmFestAppState extends State<BosmFestApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(scaffoldBackgroundColor: Colors.black),
-      navigatorObservers: [ChuckerFlutter.navigatorObserver],
-      routes: {
-        'food_stalls': (context) => FoodStallScreen(),
-        'login': (context) => LoginScreen(),
-        'wallet': (context) => WalletScreen(),
-        'matches': (context) => MatchesScreen(),
-        'home': (context) => HomeScreen(),
-        'cart': (context) => CartScreen(),
-        'order': (context) => OrderScreen(),
-        'leaderboard': (context) => Leaderboard(),
-      },
-      home: FutureBuilder(
-        future: userDetailsViewModel.userCheck(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final data = snapshot.data;
-            if (data == true) {
-              Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (builder) => HomeScreen()),
-                    (route) => false,
-                  ));
-            } else if (data == false) {
-              Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (builder) => const OverloadPage()),
-                    (route) => false,
-                  ));
-            }
-          }
-          return Container(
-            height: double.infinity,
-            width: double.infinity,
-            alignment: Alignment.center,
-            color: Colors.white,
-            child: Image.asset('assets/images/Splashscreen.png'),
+    return ScreenUtilInit(
+        designSize: const Size(428, 926),
+        //minTextAdapt: true,
+        // splitScreenMode: true,
+        builder: (context, child) {
+          return MaterialApp(
+            theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFFAFAFF)),
+            navigatorObservers: [ChuckerFlutter.navigatorObserver],
+            routes: {
+              'food_stalls': (context) => FoodStallScreen(),
+              'login': (context) => LoginScreen(),
+              'wallet': (context) => WalletScreen(),
+              'home': (context) => HomeScreen(),
+              'cart': (context) => CartScreen(),
+              'order': (context) => OrderScreen(),
+              'leaderboard': (context) => Leaderboard(),
+            },
+            home: FutureBuilder(
+              future: userDetailsViewModel.userCheck(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final data = snapshot.data;
+                  if (data == true) {
+                    Future.microtask(() =>
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (builder) => HomeScreen()),
+                          (route) => false,
+                        ));
+                  } else if (data == false) {
+                    Future.microtask(
+                        () => Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (builder) => const LoginScreen()),
+                              (route) => false,
+                            ));
+                  }
+                }
+                return Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  color: Colors.black,
+                  child: SvgPicture.asset('assets/images/oasis_logo.svg'),
+                );
+              },
+            ),
           );
-        },
-      ),
-    );
+        });
   }
 }

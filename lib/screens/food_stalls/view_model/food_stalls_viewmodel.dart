@@ -1,6 +1,5 @@
 import '/screens/food_stalls/repo/model/food_stall_model.dart';
 import '/screens/food_stalls/repo/retrofit/get_food_stalls.dart';
-import '/screens/matches/repository/model/matchesResult.dart';
 import '/utils/error_messages.dart';
 import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
@@ -26,7 +25,7 @@ class FoodStallViewModel {
           error = ErrorMessages.unknownError;
         }
       } catch (e) {
-        MatchesResult.error = ErrorMessages.unknownError;
+        error = ErrorMessages.unknownError;
       }
       return foodStalls;
     });

@@ -1,6 +1,7 @@
+import 'package:oasis_2022/screens/events/view/miscellaneous_screen.dart';
+
 import '../provider/user_details_viewmodel.dart';
 import '../screens/food_stalls/view/food_stall_screen.dart';
-import '../screens/matches/view/matches_screen.dart';
 import '../screens/quiz/view/round.dart';
 import '../screens/tickets/view/tickets_screen.dart';
 import '../screens/wallet_screen/view/wallet_screen.dart';
@@ -48,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return [
       const FoodStallScreen(),
       const RoundScreen(),
-      const MatchesScreen(),
+      const EventsScreen(),
       const TicketsScreen(),
       const WalletScreen(),
     ];

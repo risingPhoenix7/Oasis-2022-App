@@ -1,4 +1,6 @@
-import '/utils/bosm_text_styles.dart';
+
+import 'package:oasis_2022/utils/oasis_text_styles.dart';
+
 import '/utils/scroll_remover.dart';
 import 'package:flutter/material.dart';
 import '/../utils/ui_utils.dart';
@@ -88,7 +90,7 @@ class _OverloadPageState extends State<OverloadPage> {
                       },
                       child: Text(
                         currentIndexPage == 2 ? 'Login' : 'Skip',
-                        style: BosmTextStyles.robotoExtraBold.copyWith(
+                        style: OasisTextStyles.robotoExtraBold.copyWith(
                             fontSize:
                                 UIUtills().getProportionalWidth(width: 20)),
                       ))

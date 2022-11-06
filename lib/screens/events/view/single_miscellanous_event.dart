@@ -1,4 +1,4 @@
-import '/utils/bosm_text_styles.dart';
+import '/utils/oasis_text_styles.dart';
 import '/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +67,7 @@ class SingleMiscellaneousEvent extends StatelessWidget {
                   child: date == null
                       ? Text(
                           'NA',
-                          style: BosmTextStyles.robotoExtraBold.copyWith(
+                          style: OasisTextStyles.robotoExtraBold.copyWith(
                             fontSize:
                                 UIUtills().getProportionalWidth(width: 20),
                             color: Color.fromRGBO(104, 110, 131, 1),
@@ -78,7 +78,7 @@ class SingleMiscellaneousEvent extends StatelessWidget {
                           children: [
                             Text(
                               '${(date!.hour) > 12 ? date!.hour % 12 : (date!.hour > 9 ? date!.hour : '0' + date!.hour.toString())}:${(date!.minute > 9 ? date!.minute : '0' + date!.minute.toString())}',
-                              style: BosmTextStyles.robotoExtraBold.copyWith(
+                              style: OasisTextStyles.robotoExtraBold.copyWith(
                                 fontSize:
                                     UIUtills().getProportionalWidth(width: 20),
                                 color: Color.fromRGBO(104, 110, 131, 1),
@@ -90,7 +90,7 @@ class SingleMiscellaneousEvent extends StatelessWidget {
                             ),
                             Text(
                               '${date!.hour >= 12 ? 'PM' : 'AM'}',
-                              style: BosmTextStyles.poppinsRegular.copyWith(
+                              style: OasisTextStyles.poppinsRegular.copyWith(
                                 color: Color.fromRGBO(104, 110, 131, 1),
                               ),
                             )
@@ -115,7 +115,7 @@ class SingleMiscellaneousEvent extends StatelessWidget {
                           children: [
                             Text(
                               eventName!,
-                              style: BosmTextStyles.robotoExtraBold.copyWith(
+                              style: OasisTextStyles.robotoExtraBold.copyWith(
                                   fontSize: UIUtills()
                                       .getProportionalWidth(width: 20)),
                             ),
@@ -129,7 +129,7 @@ class SingleMiscellaneousEvent extends StatelessWidget {
                             width: UIUtills().getProportionalWidth(width: 280),
                             child: Text(
                               eventDescription!,
-                              style: BosmTextStyles.poppinsRegular.copyWith(
+                              style: OasisTextStyles.poppinsRegular.copyWith(
                                   fontSize: UIUtills()
                                       .getProportionalWidth(width: 10),
                                   fontWeight: FontWeight.w500,
@@ -144,7 +144,7 @@ class SingleMiscellaneousEvent extends StatelessWidget {
                       children: [
                         Text(
                           eventConductor!.toUpperCase(),
-                          style: BosmTextStyles.poppinsRegular.copyWith(
+                          style: OasisTextStyles.poppinsRegular.copyWith(
                               fontWeight: FontWeight.w600,
                               fontSize:
                                   UIUtills().getProportionalWidth(width: 16),
@@ -160,7 +160,7 @@ class SingleMiscellaneousEvent extends StatelessWidget {
                             ),
                             Text(
                               eventLocation!,
-                              style: BosmTextStyles.poppinsRegular.copyWith(
+                              style: OasisTextStyles.poppinsRegular.copyWith(
                                   fontSize: UIUtills()
                                       .getProportionalWidth(width: 11),
                                   fontWeight: FontWeight.w500,

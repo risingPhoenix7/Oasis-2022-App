@@ -1,5 +1,7 @@
+import 'package:oasis_2022/utils/oasis_text_styles.dart';
+
 import '/resources/resources.dart';
-import '/utils/bosm_text_styles.dart';
+
 import '/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -66,7 +68,7 @@ class _SingleTicketState extends State<SingleTicket> {
                 child: Stack(
                   children: [
                     Text(getTimeString(),
-                        style: BosmTextStyles.poppinsRegular.copyWith(
+                        style: OasisTextStyles.poppinsRegular.copyWith(
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
                               ..strokeWidth = 2
@@ -80,7 +82,7 @@ class _SingleTicketState extends State<SingleTicket> {
                                 0 /*percentages not used in flutter. defaulting to zero*/,
                             height: 1.5)),
                     Text(getTimeString(),
-                        style: BosmTextStyles.poppinsRegular.copyWith(
+                        style: OasisTextStyles.poppinsRegular.copyWith(
                             color: widget.id == 1 ? Colors.white : Colors.black,
                             fontWeight: FontWeight.w600,
                             fontSize:
@@ -98,7 +100,7 @@ class _SingleTicketState extends State<SingleTicket> {
                 child: RotatedBox(
                     quarterTurns: 3,
                     child: Text('Tickets Left: ${widget.unusedCount}',
-                        style: BosmTextStyles.robotoExtraBold.copyWith(
+                        style: OasisTextStyles.robotoExtraBold.copyWith(
                             fontSize:
                                 UIUtills().getProportionalHeight(height: 13),
                             //color: Color(0XFF3D2F86),

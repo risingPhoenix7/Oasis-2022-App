@@ -1,7 +1,9 @@
 import 'dart:ui';
 
+import 'package:oasis_2022/utils/oasis_text_styles.dart';
+
 import '/resources/resources.dart';
-import '/utils/bosm_text_styles.dart';
+
 import 'package:flutter/material.dart';
 
 import '/../utils/ui_utils.dart';
@@ -30,7 +32,7 @@ class OverloadTwo extends StatelessWidget {
           height: UIUtills().getProportionalHeight(height: 30),
         ),
         Text("ORDER FOOD",
-            textAlign: TextAlign.center, style: BosmTextStyles.robotoExtraBold),
+            textAlign: TextAlign.center, style: OasisTextStyles.robotoExtraBold),
         SizedBox(
           height: UIUtills().getProportionalHeight(height: 12),
         ),
@@ -38,7 +40,7 @@ class OverloadTwo extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Text(text,
               textAlign: TextAlign.center,
-              style: BosmTextStyles.poppinsRegular.copyWith(
+              style: OasisTextStyles.poppinsRegular.copyWith(
                   fontSize: UIUtills().getProportionalWidth(width: 16),
                   fontWeight: FontWeight.w600)),
         ),

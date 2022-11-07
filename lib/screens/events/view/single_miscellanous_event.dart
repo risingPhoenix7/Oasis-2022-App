@@ -112,6 +112,7 @@ class _SingleMiscellaneousEventState extends State<SingleMiscellaneousEvent> {
                                       padding: EdgeInsets.only(right: 15.w),
                                       height: 240.h,
                                       child: ListView(
+                                        physics: const BouncingScrollPhysics(),
                                         controller: _controllerOne,
                                         children: [
                                           Text(

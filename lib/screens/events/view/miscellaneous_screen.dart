@@ -217,7 +217,8 @@ class _EventsScreenState extends State<EventsScreen> {
                         ScrollConfiguration(
                           behavior: CustomScrollBehavior(),
                           child: Container(
-                            height: 444.h,
+                            //color: Colors.white,
+                            height: 475.h,
                             child: ListView(
                               children: <Widget>[
                                 Column(
@@ -258,10 +259,6 @@ class _EventsScreenState extends State<EventsScreen> {
                                   // children: getMiscEventsList(
                                   //     MiscScreenController.selectedTab.value),
                                 ),
-                                SizedBox(
-                                  height: UIUtills()
-                                      .getProportionalHeight(height: 50),
-                                )
                               ],
                             ),
                           ),

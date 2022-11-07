@@ -505,7 +505,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                                   .getProportionalWidth(
                                                       width: 20)),
                                           child: SvgPicture.asset(
-                                            'assets/images/add_money.svg',
+                                            'assets/images/addMoney.svg',
                                             height: 22,
                                             width: 26,
                                           )),

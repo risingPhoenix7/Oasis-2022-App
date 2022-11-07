@@ -1,6 +1,7 @@
 import 'package:oasis_2022/screens/quiz/view/Quiz_ui.dart';
 
 import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
+import 'package:oasis_2022/screens/wallet_screen/view/send_money_screens/send_money.dart';
 
 
 import '../home.dart';
@@ -106,6 +107,7 @@ class _BosmFestAppState extends State<BosmFestApp> {
     return MaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: Colors.black),
       navigatorObservers: [ChuckerFlutter.navigatorObserver],
+
       routes: {
         'food_stalls': (context) => FoodStallScreen(),
         'login': (context) => LoginScreen(),
@@ -114,7 +116,7 @@ class _BosmFestAppState extends State<BosmFestApp> {
         'home': (context) => HomeScreen(),
         'cart': (context) => CartScreen(),
         'order': (context) => OrderScreen(),
-        'leaderboard': (context) => Leaderboard(),
+        'leaderboard': (context) => SendMoneyScreen1(userId: "4"),
       },
       home: FutureBuilder(
         future: userDetailsViewModel.userCheck(),

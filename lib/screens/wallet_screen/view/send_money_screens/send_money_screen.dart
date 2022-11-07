@@ -329,6 +329,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                               LengthLimitingTextInputFormatter(4)
                             ],
                             keyboardType: TextInputType.number,
+
                             style: GoogleFonts.roboto(
                                 color: const Color(0xFF171717),
                                 fontSize: UIUtills()

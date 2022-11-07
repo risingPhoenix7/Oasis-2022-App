@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:oasis_2022/screens/wallet_screen/view/send_money_screens/send_money.dart';
+
 import '/screens/wallet_screen/view/send_money_screens/send_money_screen.dart';
 import '/screens/wallet_screen/view_model/wallet_viewmodel.dart';
 import '/utils/ui_utils.dart';
@@ -159,7 +161,7 @@ class _ScanningViewState extends State<ScanningView> {
                           controller?.dispose();
                           Navigator.pop(context);
                           PersistentNavBarNavigator.pushNewScreen(context,
-                              screen: SendMoneyScreen(
+                              screen: SendMoneyScreen1(
                                 userId: userId,
                               ),
                               withNavBar: false);

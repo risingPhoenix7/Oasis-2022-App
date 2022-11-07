@@ -12,19 +12,22 @@ import 'package:local_auth/local_auth.dart';
 
 import '/../../../utils/ui_utils.dart';
 import '/../../../widgets/app_bar.dart';
-import 'addMoneyDialogWidget.dart';
+import 'send_money_dialog_widget.dart';
 
-class AddMoneyScreen extends StatefulWidget {
-  const AddMoneyScreen({super.key});
+class SendMoneyScreen1 extends StatefulWidget {
+  SendMoneyScreen1({super.key, required this.userId});
+
+  String userId;
 
   @override
-  State<AddMoneyScreen> createState() => _AddMoneyScreenState();
+  State<SendMoneyScreen1> createState() => _SendMoneyScreen1State();
 }
 
-class _AddMoneyScreenState extends State<AddMoneyScreen> {
-  int amountToAdd = 0;
-  late int balance = 0;
+class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
+
+  int amountToSend = 0;
   bool isLoading = false;
+  late int balance = 0;
   final LocalAuthentication auth = LocalAuthentication();
   bool? _canCheckBiometrics;
   List<BiometricType>? _availableBiometrics;
@@ -44,7 +47,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
     WalletScreenController.returnToWalletScreen.addListener(() {
       Navigator.of(context).pop();
     });
-    getFirstLetterOfName(UserDetailsViewModel.userDetails.username ?? "T");
+    getFirstLetterOfName(UserDetailsViewModel.userDetails.username ?? "N/A");
     super.initState();
   }
 
@@ -56,7 +59,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
         _authorized = 'Authenticating';
       });
       authenticated = await auth.authenticate(
-        localizedReason: 'Please authenticate to add money',
+        localizedReason: 'Please authenticate to view QR',
         options: const AuthenticationOptions(
           stickyAuth: true,
         ),
@@ -79,7 +82,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
     }
 
     setState(
-        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+            () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
   }
 
   @override
@@ -95,139 +98,121 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
             left: 20,
             child: isLoading
                 ? SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: const Center(
-                      child: LinearProgressIndicator(
-                        color: Colors.black,
-                        backgroundColor: Colors.transparent,
-                      ),
-                    ),
-                  )
+              width: MediaQuery.of(context).size.width,
+              child: const Center(
+                child: LinearProgressIndicator(
+                  color: Colors.black,
+                  backgroundColor: Colors.transparent,
+                ),
+              ),
+            )
                 : InkWell(
-                    onTap: () async {
-                      if (textEditingController.text == "") {
-                        var snackBar = const SnackBar(
-                          duration: Duration(seconds: 2),
-                          content: SizedBox(
-                              height: 25,
-                              child: Center(child: Text("Enter a Value"))),
-                        );
-                        if (!mounted) {}
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                      if (int.parse(textEditingController.text) == 0 ||
-                          int.parse(textEditingController.text) < 0) {
-                        var snackBar = const SnackBar(
-                          duration: Duration(seconds: 2),
-                          content: SizedBox(
-                              height: 25,
-                              child: Center(
-                                  child:
-                                      Text("Enter a non zero postive value"))),
-                        );
-                        if (!mounted) {}
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      } else {
-                        amountToAdd = int.parse(textEditingController.text);
-                        if (await auth.isDeviceSupported()) {
-                          await _authenticate();
-                        }
-                        if (authenticated) {
-                          setState(() {
-                            isLoading = true;
-                          });
-                          bool isSuccess = false;
-                          try {
-                            print('tried');
-                            await WalletViewModel().addMoney(amountToAdd);
-                            isSuccess = true;
-                          } catch (e) {
-                            print('doesnt come');
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: AddMoneyDialogBox(
-                                      isSuccessful: isSuccess,
-                                      amount: amountToAdd,
-                                    ),
-                                  );
-                                });
-                          }
-                          if (kDebugMode) {
-                            print(isSuccess);
-                          }
-                          if (isSuccess) {
-                            WalletScreenController.isSuccess.value = true;
-                          }
-                          print('error kehefbkjewfb');
-                          print(isSuccess);
-                          if (!mounted) {}
-                          showDialog(
-                              barrierDismissible: false,
-                              context: context,
-                              builder: (context) {
-                                return Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: AddMoneyDialogBox(
-                                    isSuccessful: isSuccess,
-                                    amount: amountToAdd,
-                                  ),
-                                );
-                              });
-                        }
-                      }
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      // alignment: Alignment.bottomCenter,
-                      width: UIUtills().getProportionalWidth(width: 388),
-                      height: UIUtills().getProportionalHeight(height: 72.00),
-                      // margin: EdgeInsets.symmetric(
-                      //     horizontal:
-                      //     UIUtills().getProportionalWidth(width: 20.00)),
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color.fromRGBO(209, 154, 8, 1),
-                            Color.fromRGBO(254, 212, 102, 1),
-                            Color.fromRGBO(227, 186, 79, 1),
-                            Color.fromRGBO(209, 154, 8, 1),
-                            Color.fromRGBO(209, 154, 8, 1),
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(
-                          UIUtills().getProportionalWidth(width: 15.00),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Add Money',
-                            style: GoogleFonts.openSans(
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black,
-                              fontSize:
-                                  UIUtills().getProportionalWidth(width: 18.00),
+              onTap: () async {
+                if (textEditingController.text == "") {
+                  var snackBar = const SnackBar(
+                    duration: Duration(seconds: 2),
+                    content: SizedBox(
+                        height: 25,
+                        child: Center(child: Text("Enter a Value"))),
+                  );
+                  if (!mounted) {}
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+                if (int.parse(textEditingController.text) == 0 ||
+                    int.parse(textEditingController.text) < 0) {
+                  var snackBar = const SnackBar(
+                    duration: Duration(seconds: 2),
+                    content: SizedBox(
+                        height: 25,
+                        child: Center(
+                            child:
+                            Text("Enter a non zero postive value"))),
+                  );
+                  if (!mounted) {}
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                } else {
+                  amountToSend = int.parse(textEditingController.text);
+                  if (await auth.isDeviceSupported()) {
+                    await _authenticate();
+                  }
+                  if (authenticated) {
+                    bool isSuccess;
+                    int id = int.parse(widget.userId);
+                    try {
+                      await WalletViewModel()
+                          .sendMoney(id, amountToSend);
+                      isSuccess = true;
+                    } catch (e) {
+                      isSuccess = false;
+                    }
+                    if (isSuccess) {
+                      WalletScreenController.isSuccess.value = true;
+                    }
+                    if (!mounted) {}
+                    showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (context) {
+                          return Align(
+                            alignment: Alignment.bottomCenter,
+                            child: SendMoneyDialogBox(
+                              isSuccessful: isSuccess,
+                              amount: amountToSend,
                             ),
-                          ),
-                        ],
+                          );
+                        });
+                  }
+                }
+              },
+              child: Container(
+                alignment: Alignment.center,
+                // alignment: Alignment.bottomCenter,
+                width: UIUtills().getProportionalWidth(width: 388),
+                height: UIUtills().getProportionalHeight(height: 72.00),
+                // margin: EdgeInsets.symmetric(
+                //     horizontal:
+                //     UIUtills().getProportionalWidth(width: 20.00)),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color.fromRGBO(209, 154, 8, 1),
+                      Color.fromRGBO(254, 212, 102, 1),
+                      Color.fromRGBO(227, 186, 79, 1),
+                      Color.fromRGBO(209, 154, 8, 1),
+                      Color.fromRGBO(209, 154, 8, 1),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    UIUtills().getProportionalWidth(width: 15.00),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Send Money',
+                      style: GoogleFonts.openSans(
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                        fontSize:
+                        UIUtills().getProportionalWidth(width: 18.00),
                       ),
                     ),
-                  ),
+                  ],
+                ),
+              ),
+            ),
           ),
           Positioned(
               left: UIUtills().getProportionalWidth(width: 24),
               top: UIUtills().getProportionalHeight(height: 72),
               child: Text(
-                'Add Money',
+                'Send Money',
                 style: GoogleFonts.openSans(fontSize: 32, color: Colors.white),
               )),
           Positioned(top: UIUtills().getProportionalHeight(height: 75),right: UIUtills().getProportionalWidth(width: 30),
-          child: GestureDetector(onTap: (){Navigator.pop(context);},
-              child: SvgPicture.asset('assets/images/exit_button.svg'),)),
+              child: GestureDetector(onTap: (){Navigator.pop(context);},
+                child: SvgPicture.asset('assets/images/exit_button.svg'),)),
 
           Positioned(
             top: UIUtills().getProportionalHeight(height: 190),
@@ -263,40 +248,32 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
 
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
                         height:
-                            UIUtills().getProportionalHeight(height: 21.00)),
+                        UIUtills().getProportionalHeight(height: 21.00)),
 
                     SizedBox(
                         height:
-                            UIUtills().getProportionalHeight(height: 14.00)),
-                    Text(
-                      'User : ${UserDetailsViewModel.userDetails.userID}',
-                      style: GoogleFonts.openSans(
-                          color: Colors.white,
-                          fontSize:
-                              UIUtills().getProportionalWidth(width: 16.00),
-                          fontWeight: FontWeight.w600,
-                          letterSpacing:
-                              UIUtills().getProportionalWidth(width: -0.41)),
-                    ),
+                        UIUtills().getProportionalHeight(height: 14.00)),
+
                     SizedBox(
                         height:
-                            UIUtills().getProportionalHeight(height: 12.00)),
+                        UIUtills().getProportionalHeight(height: 12.00)),
                     Text(
                       '${UserDetailsViewModel.userDetails.username}',
                       style: GoogleFonts.openSans(
                           color: Colors.white,
                           fontSize:
-                              UIUtills().getProportionalWidth(width: 16.00),
+                          UIUtills().getProportionalWidth(width: 16.00),
                           fontWeight: FontWeight.w600,
                           letterSpacing:
-                              UIUtills().getProportionalWidth(width: -0.41)),
+                          UIUtills().getProportionalWidth(width: -0.41)),
                     ),
                     SizedBox(
                         height:
-                            UIUtills().getProportionalHeight(height: 32.00)),
+                        UIUtills().getProportionalHeight(height: 32.00)),
                     Container(
                       alignment: Alignment.center,
                       width: UIUtills().getProportionalWidth(width: 82),
@@ -321,10 +298,9 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                               cursorColor: Colors.white,
                               textAlign: TextAlign.right,
                               inputFormatters: [
-
                                 LengthLimitingTextInputFormatter(4)
                               ],
-                                keyboardType: const TextInputType.numberWithOptions(decimal: false),
+                              keyboardType: const TextInputType.numberWithOptions(decimal: false,signed: false),
                               style: GoogleFonts.openSans(
                                   color: Colors.white,
                                   fontSize: UIUtills()
@@ -334,7 +310,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                                       .getProportionalWidth(width: -0.41)),
                               decoration: const InputDecoration(
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
+                                  borderSide: BorderSide(color: Colors.black),
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
@@ -350,7 +326,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
 
                     SizedBox(
                         height:
-                            UIUtills().getProportionalHeight(height: 30.00)),
+                        UIUtills().getProportionalHeight(height: 30.00)),
 
 
                   ],
@@ -359,7 +335,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
             ),
           ),
           Positioned(
-            top: UIUtills().getProportionalHeight(height: 162),left: UIUtills().getProportionalWidth(width: 179),
+            top: UIUtills().getProportionalHeight(height: 162),left: UIUtills().getProportionalWidth(width: 183),
             child: Stack(
               alignment: Alignment.center,
               children: [

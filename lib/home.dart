@@ -1,3 +1,4 @@
+import 'package:oasis_2022/morescreen/screens/more_info.dart';
 import 'package:oasis_2022/screens/events/view/miscellaneous_screen.dart';
 
 import '../provider/user_details_viewmodel.dart';
@@ -48,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _buildScreens() {
     return [
       const FoodStallScreen(),
-      const RoundScreen(),
+      const MoreInfoScreen(),
       const EventsScreen(),
       const TicketsScreen(),
       const WalletScreen(),

@@ -13,12 +13,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
+import 'package:oasis_2022/screens/food_stalls/repo/model/food_stall_model.dart'
+    as menu;
 import 'package:hive_flutter/adapters.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({super.key});
-
+  CartScreen({super.key, required this.list});
+  List<menu.MenuItem> list;
   @override
   State<CartScreen> createState() => CartScreenState();
 }
@@ -115,7 +117,7 @@ class CartScreenState extends State<CartScreen> {
               );
             } else {
               return SizedBox(
-                height: 1.sh-170.h,
+                height: 1.sh - 170.h,
                 child: Stack(
                   children: [
                     CustomScrollView(
@@ -133,7 +135,7 @@ class CartScreenState extends State<CartScreen> {
                                     .menuList,
                                 foodStallName: foodStallWithDetailsMap[
                                         foodStallIdList[index]]!
-                                    .foodStall,
+                                    .foodStall, menuItemList: widget.list,
                               );
                             }, childCount: foodStallWithDetailsMap.length),
                           ),

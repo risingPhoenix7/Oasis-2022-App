@@ -116,7 +116,6 @@ class _BosmFestAppState extends State<BosmFestApp> {
               'login': (context) => LoginScreen(),
               'wallet': (context) => WalletScreen(),
               'home': (context) => HomeScreen(),
-              'cart': (context) => CartScreen(),
               'order': (context) => OrderScreen(),
               'leaderboard': (context) => Leaderboard(),
             },

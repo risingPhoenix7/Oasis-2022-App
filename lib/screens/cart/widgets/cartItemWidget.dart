@@ -1,7 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:oasis_2022/screens/food_stalls/repo/model/food_stall_model.dart'
+    as menu;
 import '/screens/cart/widgets/cart_add_button.dart';
-import '/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,7 +11,7 @@ import 'package:hive_flutter/adapters.dart';
 class CartItemWidget extends StatefulWidget {
   CartItemWidget(
       {required this.menuItemName,
-      required this.isVeg,
+      required this.menuItemList,
       required this.menuItemId,
       required this.foodStallName,
       required this.foodStallId,
@@ -20,8 +20,8 @@ class CartItemWidget extends StatefulWidget {
       super.key});
 
   String menuItemName;
+  List<menu.MenuItem> menuItemList;
   String foodStallName;
-  bool isVeg;
   int foodStallId;
   int price;
   int menuItemId;
@@ -32,6 +32,17 @@ class CartItemWidget extends StatefulWidget {
 }
 
 class CartItemWidgetState extends State<CartItemWidget> {
+  bool isVeg = false;
+
+  bool isVegFunction(int id) {
+    for (menu.MenuItem i in widget.menuItemList) {
+      if (i.id == id) {
+        isVeg = i.is_veg;
+      }
+    }
+    return isVeg;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -48,7 +59,7 @@ class CartItemWidgetState extends State<CartItemWidget> {
                       children: [
                         SvgPicture.asset(
                           'assets/images/Non-Veg.svg',
-                          color: widget.isVeg ? Colors.green : Colors.red,
+                          color: isVegFunction(widget.menuItemId) ? Colors.green : Colors.red,
                         ),
                         SizedBox(
                           width: 20.w,

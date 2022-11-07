@@ -7,7 +7,7 @@ import '../../../../utils/urls.dart';
 
 part 'getMiscEvents.g.dart';
 
-@RestApi(baseUrl: kBaseUrl)
+@RestApi(baseUrl: kTestBaseUrl)
 abstract class MiscEventRestClient {
   factory MiscEventRestClient(Dio dio, {String baseUrl}) = _MiscEventRestClient;
 

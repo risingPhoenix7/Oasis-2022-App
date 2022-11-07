@@ -104,188 +104,175 @@ class _EventsScreenState extends State<EventsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.black,
-        body: !isLoading
-            ? GestureDetector(
-                onTap: () => FocusScope.of(context).unfocus(),
-                child: RefreshIndicator(
-                  onRefresh: updateMiscEventsResult,
-                  child: Stack(
-                    clipBehavior: Clip.hardEdge,
-                    children: [
-                      Positioned(
-                        child: Image.asset(ImageAssets.eventBg),
-                        right: 0,
-                        top: -45,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 34.h, left: 28.w),
-                            child: Text(
-                              'Events',
-                              style: OasisTextStyles.inter500,
-                            ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.black,
+      body: !isLoading
+          ? GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: RefreshIndicator(
+                onRefresh: updateMiscEventsResult,
+                child: Stack(
+                  children: [
+                    SvgPicture.asset(ImageAssets.eventBg),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(top: 90.h, left: 28.w),
+                          child: Text(
+                            'Events',
+                            style: OasisTextStyles.inter500,
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: 52.h,
-                                bottom: 27.5,
-                                left: 36.w,
-                                right: 36.w),
-                            child: Container(
-                              height: 50.h,
-                              // width: UIUtills()
-                              //     .getProportionalWidth(width: 388),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.r),
-                                border: Border.all(
-                                    color: Color.fromRGBO(248, 216, 72, 0.45),
-                                    width: 0.5),
-                                gradient: LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: [
-                                      Color.fromRGBO(164, 108, 0, 0.15),
-                                      Color.fromRGBO(209, 154, 8, 0.15)
-                                    ]),
-                              ),
-                              child: Center(
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 15.0.w, right: 15.w),
-                                      child: Center(
-                                          child: SvgPicture.asset(
-                                              ImageAssets.searchIcon)),
-                                    ),
-                                    Expanded(
-                                      child: Center(
-                                        child: TextField(
-                                          onChanged: updateSearchList,
-                                          focusNode: focusNode,
-                                          controller: searchController,
-                                          //textAlignVertical: TextAlignVertical.center,
-                                          style: OasisTextStyles.openSans300
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: 52.h, bottom: 27.5, left: 36.w, right: 36.w),
+                          child: Container(
+                            height: 50.h,
+                            // width: UIUtills()
+                            //     .getProportionalWidth(width: 388),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r),
+                              border: Border.all(
+                                  color: Color.fromRGBO(248, 216, 72, 0.45),
+                                  width: 0.5),
+                              gradient: LinearGradient(
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  colors: [
+                                    Color.fromRGBO(164, 108, 0, 0.15),
+                                    Color.fromRGBO(209, 154, 8, 0.15)
+                                  ]),
+                            ),
+                            child: Center(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 15.0.w, right: 15.w),
+                                    child: Center(
+                                        child: SvgPicture.asset(
+                                            ImageAssets.searchIcon)),
+                                  ),
+                                  Expanded(
+                                    child: Center(
+                                      child: TextField(
+                                        onChanged: updateSearchList,
+                                        focusNode: focusNode,
+                                        controller: searchController,
+                                        //textAlignVertical: TextAlignVertical.center,
+                                        style: OasisTextStyles.openSans300
+                                            .copyWith(
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.white,
+                                                fontSize: 16.sp),
+                                        cursorColor: Colors.white,
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 14.8.h),
+                                          border: InputBorder.none,
+                                          // labelStyle:
+                                          // OasisTextStyles.openSans300.copyWith(fontWeight: FontWeight.w400,color: Color(0xFFC0C0C0),fontSize: 16.sp),
+                                          hintText: "Search for events...",
+                                          hintStyle: OasisTextStyles.openSans300
                                               .copyWith(
                                                   fontWeight: FontWeight.w400,
-                                                  color: Colors.white,
+                                                  color: Color(0xFFC0C0C0),
                                                   fontSize: 16.sp),
-                                          cursorColor: Colors.white,
-                                          decoration: InputDecoration(
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
-                                                    vertical: 14.8.h),
-                                            border: InputBorder.none,
-                                            // labelStyle:
-                                            // OasisTextStyles.openSans300.copyWith(fontWeight: FontWeight.w400,color: Color(0xFFC0C0C0),fontSize: 16.sp),
-                                            hintText: "Search for events...",
-                                            hintStyle: OasisTextStyles
-                                                .openSans300
-                                                .copyWith(
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Color(0xFFC0C0C0),
-                                                    fontSize: 16.sp),
-                                            suffixIcon: IconButton(
-                                                onPressed: () {
-                                                  searchController.clear();
+                                          suffixIcon: IconButton(
+                                              onPressed: () {
+                                                searchController.clear();
 
-                                                  focusNode.unfocus();
-                                                  setState(() {});
-                                                },
-                                                icon: SvgPicture.asset(
-                                                    ImageAssets.crossIcon)),
-                                          ),
+                                                focusNode.unfocus();
+                                                setState(() {});
+                                              },
+                                              icon: SvgPicture.asset(
+                                                  ImageAssets.crossIcon)),
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: Padding(
-                              padding:
-                                  EdgeInsets.fromLTRB(36.w, 27.h, 36.w, 34.h),
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: List.generate(
-                                      5,
-                                      (index) => DayTab(
-                                            dayNumber: index + 19,
-                                          ))),
-                            ),
-                          ),
-                          ScrollConfiguration(
-                            behavior: CustomScrollBehavior(),
-                            child: Container(
-                              height: 450.h,
-                              child: ListView(
-                                children: <Widget>[
-                                  Column(
-                                    children: emptyListHandler()
-                                        ? [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 58.0),
-                                              child: Text(
-                                                'No events of this day',
-                                                style: OasisTextStyles
-                                                    .openSans300
-                                                    .copyWith(
-                                                        color: Colors.white),
-                                              ),
-                                            )
-                                          ]
-                                        : List.generate(
-                                            requiredListHandler().length,
-                                            (index) {
-                                            return SingleMiscellaneousEvent(
-                                              time: requiredListHandler()[index]
-                                                      .time ??
-                                                  'TBA',
-                                              eventName:
-                                                  requiredListHandler()[index]
-                                                      .name,
-                                              eventDescription:
-                                                  requiredListHandler()[index]
-                                                      .about,
-                                              eventConductor:
-                                                  requiredListHandler()[index]
-                                                      .organiser,
-                                              eventLocation:
-                                                  requiredListHandler()[index]
-                                                      .venue_name,
-                                            );
-                                          }),
-                                    // children: getMiscEventsList(
-                                    //     MiscScreenController.selectedTab.value),
                                   ),
-                                  SizedBox(
-                                    height: UIUtills()
-                                        .getProportionalHeight(height: 50),
-                                  )
                                 ],
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                        Container(
+                          child: Padding(
+                            padding:
+                                EdgeInsets.fromLTRB(36.w, 27.h, 36.w, 0.h),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: List.generate(
+                                    5,
+                                    (index) => DayTab(
+                                          dayNumber: index + 19,
+                                        ))),
+                          ),
+                        ),
+                        ScrollConfiguration(
+                          behavior: CustomScrollBehavior(),
+                          child: Container(
+                            height: 444.h,
+                            child: ListView(
+                              children: <Widget>[
+                                Column(
+                                  children: emptyListHandler()
+                                      ? [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 58.0),
+                                            child: Text(
+                                              'No events of this day',
+                                              style: OasisTextStyles.openSans300
+                                                  .copyWith(
+                                                      color: Colors.white),
+                                            ),
+                                          )
+                                        ]
+                                      : List.generate(
+                                          requiredListHandler().length,
+                                          (index) {
+                                          return SingleMiscellaneousEvent(
+                                            time: requiredListHandler()[index]
+                                                    .time ??
+                                                'TBA',
+                                            eventName:
+                                                requiredListHandler()[index]
+                                                    .name,
+                                            eventDescription:
+                                                requiredListHandler()[index]
+                                                    .about,
+                                            eventConductor:
+                                                requiredListHandler()[index]
+                                                    .organiser,
+                                            eventLocation:
+                                                requiredListHandler()[index]
+                                                    .venue_name,
+                                          );
+                                        }),
+                                  // children: getMiscEventsList(
+                                  //     MiscScreenController.selectedTab.value),
+                                ),
+                                SizedBox(
+                                  height: UIUtills()
+                                      .getProportionalHeight(height: 50),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              )
-            : const Loader(),
-      ),
+              ),
+            )
+          : const Loader(),
     );
   }
 }

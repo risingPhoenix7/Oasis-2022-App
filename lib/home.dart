@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset("assets/images/navbar_icons/stalls_active.svg"),
+        icon: Image.asset("assets/images/navbar_icons/stalls_active.png"),
         inactiveIcon: SvgPicture.asset("assets/images/navbar_icons/stall_inactive.svg"),
         iconSize: 25,
       ),

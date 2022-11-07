@@ -13,7 +13,7 @@ class _MiscEventRestClient implements MiscEventRestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://test.bits-oasis.org/2022/main';
+    baseUrl ??= 'https://bits-oasis.org/2022/main';
   }
 
   final Dio _dio;

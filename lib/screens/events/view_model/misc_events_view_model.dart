@@ -69,6 +69,29 @@ class MiscEventsViewModel {
     }
   }
 
+  List<MiscEventData> retrieveSearchMiscEventData(int day_no, String text) {
+    List<MiscEventData> searchedMiscEventList = [];
+    text = text.toLowerCase();
+    if (miscEventSortedMap.containsKey(day_no)) {
+      for (int element in miscEventSortedMap[day_no] ?? []) {
+        if (((miscEventList[element].name == null)
+                ? false
+                : miscEventList[element].name!.toLowerCase().contains(text)) ||
+            ((miscEventList[element].organiser == null)
+                ? false
+                : miscEventList[element]
+                    .organiser!
+                    .toLowerCase()
+                    .contains(text)) ||
+            ((miscEventList[element].about == null)
+                ? false
+                : miscEventList[element].about!.toLowerCase().contains(text)))
+          searchedMiscEventList.add(miscEventList[element]);
+      }
+    }
+    return searchedMiscEventList;
+  }
+
   List<MiscEventData> retrieveDayMiscEventData(int day_no) {
     List<MiscEventData> assortedMiscEventList = [];
     if (miscEventSortedMap.containsKey(day_no)) {

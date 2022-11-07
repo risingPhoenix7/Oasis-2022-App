@@ -25,16 +25,19 @@ class _EventsScreenState extends State<EventsScreen> {
   MiscEventsViewModel miscEventsViewModel = MiscEventsViewModel();
   bool isLoading = true;
   List<MiscEventData> currentDayMiscEventList = [];
+  List<MiscEventData> searchMiscEventList = [];
   FocusNode focusNode = FocusNode();
   TextEditingController searchController = TextEditingController();
 
   Future<void> updateMiscEventsResult() async {
     await miscEventsViewModel.retrieveMiscEventResult();
     if (MiscEventsViewModel.error == null) {
-      if(mounted)setState(() {
-        updateCurrentDayMiscEventList();
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          updateCurrentDayMiscEventList();
+          isLoading = false;
+        });
+      }
     } else {
       //return MiscEventResult.error;
       setState(() {
@@ -57,13 +60,44 @@ class _EventsScreenState extends State<EventsScreen> {
         .retrieveDayMiscEventData(MiscScreenController.selectedTab.value);
   }
 
+  void updateSearchList(String? a) {
+    print('comes here');
+    print(a);
+    if (a != null) {
+      searchMiscEventList = miscEventsViewModel.retrieveSearchMiscEventData(
+          MiscScreenController.selectedTab.value, a);
+      print(searchMiscEventList);
+    }
+    setState(() {});
+  }
+
+  bool emptyListHandler() {
+    if (searchController.text.isEmpty) {
+      return currentDayMiscEventList.isEmpty;
+    } else {
+      return searchMiscEventList.isEmpty;
+    }
+  }
+
+  List<MiscEventData> requiredListHandler() {
+    if (searchController.text.isEmpty) {
+      return currentDayMiscEventList;
+    } else {
+      return searchMiscEventList;
+    }
+  }
+
   @override
   void initState() {
     updateMiscEventsResult();
     MiscScreenController.selectedTab.addListener(() {
-      if (mounted)setState(() {
-         updateCurrentDayMiscEventList();
-      });
+      if (mounted) {
+        setState(() {
+          searchController.text.isEmpty
+              ? updateCurrentDayMiscEventList()
+              : updateSearchList(searchController.text);
+        });
+      }
     });
     super.initState();
   }
@@ -135,6 +169,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                     Expanded(
                                       child: Center(
                                         child: TextField(
+                                          onChanged: updateSearchList,
                                           focusNode: focusNode,
                                           controller: searchController,
                                           //textAlignVertical: TextAlignVertical.center,
@@ -161,7 +196,9 @@ class _EventsScreenState extends State<EventsScreen> {
                                             suffixIcon: IconButton(
                                                 onPressed: () {
                                                   searchController.clear();
+
                                                   focusNode.unfocus();
+                                                  setState(() {});
                                                 },
                                                 icon: SvgPicture.asset(
                                                     ImageAssets.crossIcon)),
@@ -195,8 +232,7 @@ class _EventsScreenState extends State<EventsScreen> {
                               child: ListView(
                                 children: <Widget>[
                                   Column(
-                                    children: currentDayMiscEventList.length ==
-                                            0
+                                    children: emptyListHandler()
                                         ? [
                                             Padding(
                                               padding: const EdgeInsets.only(
@@ -211,24 +247,23 @@ class _EventsScreenState extends State<EventsScreen> {
                                             )
                                           ]
                                         : List.generate(
-                                            currentDayMiscEventList.length,
+                                            requiredListHandler().length,
                                             (index) {
                                             return SingleMiscellaneousEvent(
-                                              time:
-                                                  currentDayMiscEventList[index]
-                                                          .time ??
-                                                      'TBA',
+                                              time: requiredListHandler()[index]
+                                                      .time ??
+                                                  'TBA',
                                               eventName:
-                                                  currentDayMiscEventList[index]
+                                                  requiredListHandler()[index]
                                                       .name,
                                               eventDescription:
-                                                  currentDayMiscEventList[index]
+                                                  requiredListHandler()[index]
                                                       .about,
                                               eventConductor:
-                                                  currentDayMiscEventList[index]
+                                                  requiredListHandler()[index]
                                                       .organiser,
                                               eventLocation:
-                                                  currentDayMiscEventList[index]
+                                                  requiredListHandler()[index]
                                                       .venue_name,
                                             );
                                           }),

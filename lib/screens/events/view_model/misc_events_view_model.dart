@@ -17,21 +17,20 @@ class MiscEventsViewModel {
     final client = MiscEventRestClient(dio);
 
     miscEventCategoryList = await client.getAllMiscEvents().then((it) {
-print('fewjf');
-      print(it.length);
+
+
       return it;
     }).catchError((Object obj) {
-      print('non-200 error goes here.');
       try {
-        print('hi');
+
         final res = (obj as DioError).response;
         error = res?.statusCode.toString();
         if (res?.statusCode == null || res == null) {
           error = ErrorMessages.noInternet;
         } else {
-          print('goes here error in misc result');
+
           error = matchesErrorResponse(res.statusCode, res.statusMessage);
-          print(error);
+
         }
       } catch (e) {
         error = ErrorMessages.unknownError;
@@ -43,30 +42,27 @@ print('fewjf');
       if (miscEventCategory.events != null) {
         miscEventList!.addAll(miscEventCategory.events!);
       }
-       // miscEventList.sort((a,b)=>{
-       //   if(a.time=='')
-       // });
+      // miscEventList.sort((a,b)=>{
+      //   if(a.time=='')
+      // });
     }
-    print(miscEventList?.length);
+
   }
 
   List<MiscEventData> retrieveDayMiscEventData(int day_no) {
     List<MiscEventData> assortedMiscEventList = [];
     for (int i = 0; i < miscEventList!.length; i++) {
-      var a = miscEventList![i].date_time;
-      if (a == null || a.isEmpty) {
-        a = '19T';
-      }
-      print(a.indexOf('T'));
-      if (a.indexOf('T') == 3) {
-        if (a.substring(0, 3) == day_no.toString()) {
+      String a = miscEventList![i].date_time ?? '2022-11-23T19:42:24z';
+
+      try {
+        DateTime.parse(a);
+        if (day_no == DateTime.parse(a).day) {
           assortedMiscEventList.add(miscEventList![i]);
         }
-      } else {
+      } catch (e) {
         if (day_no == 19) assortedMiscEventList.add(miscEventList![i]);
       }
     }
-print(assortedMiscEventList.length);
     return assortedMiscEventList;
   }
 

@@ -31,7 +31,7 @@ class _EventsScreenState extends State<EventsScreen> {
   Future<void> updateMiscEventsResult() async {
     await miscEventsViewModel.retrieveMiscEventResult();
     if (MiscEventsViewModel.error == null) {
-      setState(() {
+      if(mounted)setState(() {
         updateCurrentDayMiscEventList();
         isLoading = false;
       });
@@ -52,39 +52,17 @@ class _EventsScreenState extends State<EventsScreen> {
     }
   }
 
-  void updateCurrentDayMiscEventList() async {
+  void updateCurrentDayMiscEventList() {
     currentDayMiscEventList = miscEventsViewModel
         .retrieveDayMiscEventData(MiscScreenController.selectedTab.value);
   }
 
-  void updateMiscEventList() async {
-    await miscEventsViewModel.retrieveMiscEventResult();
-  }
-
   @override
   void initState() {
-    updateMiscEventList();
-    if (MiscEventsViewModel.error != null) {
-      setState(() {
-        isLoading = false;
-        print('it goeds here');
-        showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (context) {
-              return Align(
-                alignment: Alignment.bottomCenter,
-                child: ErrorDialog(errorMessage: MiscEventsViewModel.error!),
-              );
-            });
-      });
-    } else {
-      updateCurrentDayMiscEventList();
-      isLoading = false;
-    }
+    updateMiscEventsResult();
     MiscScreenController.selectedTab.addListener(() {
-      setState(() {
-        if (mounted) updateCurrentDayMiscEventList();
+      if (mounted)setState(() {
+         updateCurrentDayMiscEventList();
       });
     });
     super.initState();
@@ -92,31 +70,6 @@ class _EventsScreenState extends State<EventsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Future<void> updateMiscEventsResult() async {
-      print('function called');
-      await miscEventsViewModel.retrieveMiscEventResult();
-      if (MiscEventsViewModel.error == null) {
-        print('went here');
-        setState(() {
-          updateCurrentDayMiscEventList();
-          isLoading = false;
-        });
-      } else {
-        setState(() {
-          isLoading = false;
-        });
-        showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (context) {
-              return Align(
-                alignment: Alignment.bottomCenter,
-                child: ErrorDialog(errorMessage: MiscEventsViewModel.error!),
-              );
-            });
-      }
-    }
-
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -244,10 +197,19 @@ class _EventsScreenState extends State<EventsScreen> {
                                   Column(
                                     children: currentDayMiscEventList.length ==
                                             0
-                                        ? [ Padding(
-                                          padding: const EdgeInsets.only(top:58.0),
-                                          child: Text('No events of this day',style: OasisTextStyles.openSans300.copyWith(color: Colors.white),),
-                                        )]
+                                        ? [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 58.0),
+                                              child: Text(
+                                                'No events of this day',
+                                                style: OasisTextStyles
+                                                    .openSans300
+                                                    .copyWith(
+                                                        color: Colors.white),
+                                              ),
+                                            )
+                                          ]
                                         : List.generate(
                                             currentDayMiscEventList.length,
                                             (index) {

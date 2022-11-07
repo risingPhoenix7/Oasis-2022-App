@@ -16,12 +16,15 @@ class OasisTextStyles {
           color: Colors.black,
           fontSize: 23.31.sp,
           fontWeight: FontWeight.w600));
+  static TextStyle openSans400 = GoogleFonts.openSans(
+      textStyle: TextStyle(
+          color: const Color(0xFF9A9A9A),
+          fontSize: 18.sp,
+          fontWeight: FontWeight.w400));
 
   static TextStyle inter500 = GoogleFonts.openSans(
       textStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 28.sp,
-          fontWeight: FontWeight.w500));
+          color: Colors.white, fontSize: 28.sp, fontWeight: FontWeight.w500));
 
   static TextStyle openSans300 = GoogleFonts.openSans(
     textStyle: TextStyle(

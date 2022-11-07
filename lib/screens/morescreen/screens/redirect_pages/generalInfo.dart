@@ -1,18 +1,18 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:oasis_2022/widgets/app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../widgets/app_bar.dart';
 
-class HpcBlog extends StatefulWidget {
-  const HpcBlog({Key? key}) : super(key: key);
+class GeneralInformation extends StatefulWidget {
+  const GeneralInformation({Key? key}) : super(key: key);
 
   @override
-  State<HpcBlog> createState() => _HpcBlogState();
+  State<GeneralInformation> createState() => _GeneralInformationState();
 }
 
-class _HpcBlogState extends State<HpcBlog> {
+class _GeneralInformationState extends State<GeneralInformation> {
   @override
   void initState() {
     if (Platform.isAndroid) {
@@ -27,13 +27,14 @@ class _HpcBlogState extends State<HpcBlog> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: CustomAppBar(
-            title: "HPC BLOG",
+            title: "General Information",
             isactionButtonRequired: false,
             isBackButtonRequired: true),
       ),
       body: const WebView(
-        initialUrl: "https://hindipressclub.wordpress.com",
-        javascriptMode: JavascriptMode.unrestricted,
+        initialUrl:
+            "https://docs.google.com/document/d/1RV4sBOxF8A6pzsrWLROONuivftLUjOYbWy5cZjJe5lo/edit?usp=sharing",
+        javascriptMode: JavascriptMode.disabled,
       ),
     );
   }

@@ -104,8 +104,8 @@ class _EventsScreenState extends State<EventsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return
+       Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
         body: !isLoading
@@ -125,7 +125,7 @@ class _EventsScreenState extends State<EventsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: 34.h, left: 28.w),
+                            padding: EdgeInsets.only(top: 72.h, left: 28.w),
                             child: Text(
                               'Events',
                               style: OasisTextStyles.inter500,
@@ -146,7 +146,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                 border: Border.all(
                                     color: Color.fromRGBO(248, 216, 72, 0.45),
                                     width: 0.5),
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                     begin: Alignment.centerLeft,
                                     end: Alignment.centerRight,
                                     colors: [
@@ -285,7 +285,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 ),
               )
             : const Loader(),
-      ),
-    );
+      );
+
   }
 }

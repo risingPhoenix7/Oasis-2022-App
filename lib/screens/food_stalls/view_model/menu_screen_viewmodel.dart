@@ -1,5 +1,4 @@
-import '/screens/food_stalls/repo/model/food_stall_model.dart'
-    as menu;
+import '/screens/food_stalls/repo/model/food_stall_model.dart' as menu;
 import 'package:hive/hive.dart';
 
 import '../../cart/repo/model/cart_screen_model.dart';
@@ -58,11 +57,12 @@ class MenuScreenViewModel {
         int tempFoodStallId = temp.FoodStallId;
         String tempFoodStallName = temp.FoodStall;
         MenuItemInCartScreen menuItemInCartScreen = MenuItemInCartScreen(
-            menuItemId: i,
-            menuItemName: temp.menuItemName,
-            menuItemPrice: temp.price,
-            foodStallName: temp.FoodStall,
-            menuItemQuantity: temp.quantity);
+          menuItemId: i,
+          menuItemName: temp.menuItemName,
+          menuItemPrice: temp.price,
+          foodStallName: temp.FoodStall,
+          menuItemQuantity: temp.quantity,
+        );
         if (copyFoodStallId == tempFoodStallId) {
           menuList.add(menuItemInCartScreen);
           foodStallWithDetailsMap[tempFoodStallId] = FoodStallInCartScreen(

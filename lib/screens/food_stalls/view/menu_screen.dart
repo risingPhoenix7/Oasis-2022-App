@@ -38,16 +38,17 @@ class _MenuScreenState extends State<MenuScreen> {
   Map<int, int> menuItemsAmount = {};
   TextEditingController searchController = TextEditingController();
 
-  createSearchFilteredList(String? query) {
+  void createSearchFilteredList(String? query) {
     menuItemsFiltered =
         MenuScreenViewModel().searchList(query ?? "", widget.menuItemList);
   }
 
-  makeMenuList() {
+  void makeMenuList() {
     menuItemsFiltered = widget.menuItemList;
     menuItemsAmount =
         MenuScreenViewModel().populateListFromHive(menuItemsFiltered);
   }
+
 
   //TODO: add a foodstall banner image in backend
   @override
@@ -88,7 +89,8 @@ class _MenuScreenState extends State<MenuScreen> {
                                   bottomLeft: Radius.circular(20),
                                   bottomRight: Radius.circular(20)),
                               child: BackdropFilter(
-                                filter: ImageFilter.blur(sigmaY: 25, sigmaX: 25),
+                                filter:
+                                    ImageFilter.blur(sigmaY: 25, sigmaX: 25),
                                 child: Container(
                                   decoration: const BoxDecoration(
                                     color: Colors.transparent,
@@ -96,17 +98,13 @@ class _MenuScreenState extends State<MenuScreen> {
                                         bottomRight: Radius.circular(20),
                                         bottomLeft: Radius.circular(20)),
                                   ),
-                                  width:
-                                      388.w,
+                                  width: 388.w,
                                   height: 97.h,
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(
-                                  top: 16.h,
-                                  left:
-                                      20.w),
+                              padding: EdgeInsets.only(top: 16.h, left: 20.w),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -138,12 +136,11 @@ class _MenuScreenState extends State<MenuScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const FoodStallScreen()));
+                                  builder: (context) =>
+                                      const FoodStallScreen()));
                         },
                         child: Padding(
-                          padding: EdgeInsets.only(
-                              left: 20.w,
-                              top: 20.h),
+                          padding: EdgeInsets.only(left: 20.w, top: 20.h),
                           child: Container(
                             decoration: BoxDecoration(
                                 color: const Color.fromRGBO(44, 47, 53, 1),
@@ -162,10 +159,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(
-                    top: 24.h,
-                    left: 20.w,
-                    right: 20.w),
+                padding: EdgeInsets.only(top: 24.h, left: 20.w, right: 20.w),
                 child: Container(
                   height: 47.h,
                   width: 388.w,
@@ -192,11 +186,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.fromLTRB(
-                              17.22.w,
-                              0,
-                              16.41.w,
-                              0),
+                          padding: EdgeInsets.fromLTRB(17.22.w, 0, 16.41.w, 0),
                           child: const Center(
                               child: Icon(
                             Icons.search,
@@ -215,8 +205,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                 },
                                 controller: searchController,
                                 style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 14.sp),
+                                    color: Colors.white, fontSize: 14.sp),
                                 cursorColor: Colors.white,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
@@ -259,9 +248,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       itemCount: menuItemsFiltered.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
-                          padding: EdgeInsets.only(
-                              bottom:
-                                  16.h),
+                          padding: EdgeInsets.only(bottom: 16.h),
                           child: Column(
                             children: [
                               (index != 0)
@@ -288,7 +275,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                             child: Center(
                                                 child: SvgPicture.asset(
                                               "assets/images/Non-Veg.svg",
-                                              color: widget.menuItemList[index]
+                                              color: menuItemsFiltered[index]
                                                       .is_veg
                                                   ? Colors.green
                                                   : Colors.red,
@@ -329,8 +316,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(
-                                          right: 37.w),
+                                      padding: EdgeInsets.only(right: 37.w),
                                       child: AddButton(
                                         menuItemName:
                                             menuItemsFiltered[index].name,
@@ -369,7 +355,9 @@ class _MenuScreenState extends State<MenuScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CartScreen(list: widget.menuItemList,)));
+                              builder: (context) => CartScreen(
+                                    list: widget.menuItemList,
+                                  )));
                     },
                     child: Container(
                       // alignment: Alignment.bottomCenter,
@@ -391,14 +379,11 @@ class _MenuScreenState extends State<MenuScreen> {
                           ),
                         ],
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15.r),
-                          topRight: Radius.circular(15.r)
-                        ),
+                            topLeft: Radius.circular(15.r),
+                            topRight: Radius.circular(15.r)),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal:
-                                40.w),
+                        padding: EdgeInsets.symmetric(horizontal: 40.w),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

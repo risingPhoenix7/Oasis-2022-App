@@ -15,8 +15,10 @@ class _BannerDetailsState extends State<BannerDetails> {
   @override
   void initState() {
     super.initState();
-    StoreController().itemNumber.addListener(() {
-      setState(() {});
+    StoreController.itemNumber.addListener(() {
+      setState(() {
+        print("here");
+      });
     });
   }
 
@@ -34,7 +36,7 @@ class _BannerDetailsState extends State<BannerDetails> {
               Color.fromRGBO(174, 186, 102, 1),
             ], transform: GradientRotation(161.5)).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
             child: Text(
-              StoreController().itemName[StoreController().itemNumber.value],
+              StoreController().itemName[StoreController.itemNumber.value],
               style: GoogleFonts.openSans(
                   fontSize: 36.sp, fontWeight: FontWeight.bold, height: 1.1.h),
             ),

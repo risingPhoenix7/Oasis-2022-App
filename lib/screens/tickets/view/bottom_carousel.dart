@@ -15,7 +15,7 @@ class _BottomCarouselState extends State<BottomCarousel> {
 
   @override
   void initState() {
-    StoreController().addListener(() {
+    StoreController.itemNumber.addListener(() {
       setState(() {});
     });
     super.initState();
@@ -54,7 +54,9 @@ class _BottomCarouselState extends State<BottomCarousel> {
                         padding: EdgeInsets.only(left: 16.w),
                         child: GestureDetector(
                           onTap: (){
-                            StoreController().setValue(index);
+                            print("ok");
+                            StoreController.itemNumber.value = index;
+                            StoreController.itemNumber.notifyListeners();
                           },
                           child: Image.asset(
                               "assets/images/${StoreController().imageNamesCarousel[index]}.png"),

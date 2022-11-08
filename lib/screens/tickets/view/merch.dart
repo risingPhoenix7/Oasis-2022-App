@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oasis_2022/screens/tickets/store_controller.dart';
 
 class Merch extends StatefulWidget {
   const Merch({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class Merch extends StatefulWidget {
 
 class _MerchState extends State<Merch> {
   ScrollController scrollController = ScrollController();
-  double postion = 0;
+  double position = 0;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -27,19 +28,19 @@ class _MerchState extends State<Merch> {
         ),
         GestureDetector(
           onPanUpdate: (details) {
-            int sens = 5;
+            int sens = 0;
             if (details.delta.dx < -sens) {
-              scrollController.position.animateTo(postion + 428.w,
+              scrollController.position.animateTo(position + 428.w,
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.linear);
-              postion = postion + 428.w;
+              position = position + 428.w;
             }
             if (details.delta.dx > sens) {
-              if (postion > 0) {
-                scrollController.position.animateTo(postion - 428.w,
+              if (position > 0) {
+                scrollController.position.animateTo(position - 428.w,
                     duration: const Duration(milliseconds: 500),
                     curve: Curves.linear);
-                postion = postion - 428.w;
+                position = position - 428.w;
               }
             }
           },
@@ -83,7 +84,7 @@ class _MerchState extends State<Merch> {
                                     width: 170.w,
                                     child: Stack(children: [
                                       Image.asset(
-                                          "assets/images/test_merch.png"),
+                                          "assets/images/${StoreController().merchImage[index]}.png"),
                                       Padding(
                                         padding: EdgeInsets.only(
                                             top: 160.h, left: 27.73.w),
@@ -134,7 +135,7 @@ class _MerchState extends State<Merch> {
                       ),
                     ),
                   );
-                }, childCount: 4))
+                }, childCount: StoreController().merchImage.length))
               ],
             ),
           ),

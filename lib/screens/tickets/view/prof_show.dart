@@ -13,6 +13,14 @@ class ProfShow extends StatefulWidget {
 
 class _ProfShowState extends State<ProfShow> {
   @override
+  void initState() {
+    StoreController.itemNumber.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
@@ -20,7 +28,7 @@ class _ProfShowState extends State<ProfShow> {
           padding: EdgeInsets.only(top: 43.h, left: 8.w),
           child: Container(
             child: Image.asset(
-                "assets/images/${StoreController().imageNames[StoreController().itemNumber.value]}.png"),
+                "assets/images/${StoreController().imageNames[StoreController.itemNumber.value]}.png"),
           ),
         ),
         Padding(

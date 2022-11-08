@@ -1,13 +1,9 @@
 import 'package:flutter/foundation.dart';
 
-class StoreController extends ChangeNotifier {
-  ValueNotifier<int> itemNumber = ValueNotifier(2);
+class StoreController {
+  static ValueNotifier<int> itemNumber = ValueNotifier(1);
 
-  void setValue(int newValue) {
-    itemNumber.value = newValue;
-    print(itemNumber.value);
-    notifyListeners();
-  }
+  List<String> merchImage = ["test_merch", "test_merch", "test_merch"];
 
   List<String> imageNames = [
     "amit_trivedi",

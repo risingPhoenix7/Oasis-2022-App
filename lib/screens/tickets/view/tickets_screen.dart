@@ -17,8 +17,7 @@ class TicketsScreen extends StatefulWidget {
 class _TicketsScreenState extends State<TicketsScreen> {
   @override
   void initState() {
-    StoreController().addListener(() {
-      print('object');
+    StoreController.itemNumber.addListener(() {
       setState(() {});
     });
     super.initState();
@@ -30,12 +29,14 @@ class _TicketsScreenState extends State<TicketsScreen> {
       body: SizedBox(
         height: 1.sh,
         child: Stack(children: [
-          const Merch(),
+          (StoreController.itemNumber.value == 4)
+              ? const Merch()
+              : const ProfShow(),
           Padding(
             padding: EdgeInsets.only(
               top: 600.h,
             ),
-            child: BottomCarousel(),
+            child: const BottomCarousel(),
           )
         ]),
       ),

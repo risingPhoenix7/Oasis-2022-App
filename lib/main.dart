@@ -10,6 +10,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:oasis_2022/screens/events/view/miscellaneous_screen.dart';
 import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
+import 'package:oasis_2022/screens/kindstore/view/kind_store_view.dart';
 import 'package:oasis_2022/screens/overload/overload_page.dart';
 
 import '../home.dart';
@@ -131,12 +132,12 @@ class _BosmFestAppState extends State<BosmFestApp> {
                           (route) => false,
                         ));
                   } else if (data == false) {
-                    Future.microtask(
-                        () => Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (builder) => const LoginScreen()),
-                              (route) => false,
-                            ));
+                    Future.microtask(() =>
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (builder) => const KindStoreCatalog()),
+                          (route) => false,
+                        ));
                   }
                 }
                 return Container(

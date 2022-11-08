@@ -1,10 +1,14 @@
-import '/morescreen/repo/models/contact_model.dart';
-import '/utils/scroll_remover.dart';
-import '/utils/ui_utils.dart';
-import '/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oasis_2022/resources/resources.dart';
+import 'package:oasis_2022/screens/morescreen/repo/models/contact_model.dart';
+import 'package:oasis_2022/utils/colors.dart';
+import 'package:oasis_2022/utils/oasis_text_styles.dart';
+import 'package:oasis_2022/utils/scroll_remover.dart';
+import 'package:oasis_2022/utils/ui_utils.dart';
+import 'package:oasis_2022/widgets/app_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactScreen extends StatefulWidget {
@@ -256,6 +260,7 @@ class _ContactScreenState extends State<ContactScreen> {
           child: ScrollConfiguration(
             behavior: CustomScrollBehavior(),
             child: GridView.builder(
+              physics: BouncingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisSpacing:
                         UIUtills().getProportionalWidth(width: 16),
@@ -266,14 +271,10 @@ class _ContactScreenState extends State<ContactScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     decoration: BoxDecoration(
-                        boxShadow: const [
-                          BoxShadow(
-                              color: Color.fromRGBO(116, 126, 241, 0.15),
-                              blurRadius: 8,
-                              offset: Offset(0, 4))
-                        ],
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white),
+                        image: DecorationImage(
+                            image: AssetImage(ImageAssets.eventCardBg),
+                            fit: BoxFit.fill),
+                        borderRadius: BorderRadius.circular(20.r)),
                     width: UIUtills().getProportionalWidth(width: 170),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
@@ -302,12 +303,8 @@ class _ContactScreenState extends State<ContactScreen> {
                                 child: Text(
                                   contactList[index].name,
                                   textAlign: TextAlign.center,
-                                  style: GoogleFonts.poppins(
-                                      textStyle: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: UIUtills()
-                                        .getProportionalWidth(width: 16),
-                                  )),
+                                  style: OasisTextStyles.openSansSubHeading
+                                      .copyWith(color: Colors.white, fontSize: 16.sp),
                                 ),
                               ),
                             ),
@@ -328,10 +325,11 @@ class _ContactScreenState extends State<ContactScreen> {
                                   contactList[index].desc,
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.poppins(
-                                      textStyle: TextStyle(
-                                          fontSize: UIUtills()
-                                              .getProportionalWidth(width: 11),
-                                          fontWeight: FontWeight.w500)),
+                                      textStyle: OasisTextStyles.openSansSubHeading.copyWith(
+                                        fontSize: 11.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: OasisColors.primaryYellow,
+                                      )),
                                 ),
                               ),
                             ),

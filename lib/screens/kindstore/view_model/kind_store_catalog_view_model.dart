@@ -7,7 +7,7 @@ import '../repository/retrofit/kind_store_catalog_retrofit.dart';
 
 class KindStoreViewModel {
   static String? error;
-  static KindStoreResult kindItemsList = KindStoreResult(items_details: []);
+  static KindStoreResult kindItemsResult = KindStoreResult(items_details: []);
   Future<void> getKindStoreCatalogItems() async {
     error = null;
     final dio = Dio();
@@ -15,7 +15,7 @@ class KindStoreViewModel {
     final client = KindStoreCatalogRestClient(dio);
     // KindStoreResult? kindstorecatalog;
 
-    kindItemsList = await client.getKindStoreItems().catchError(
+    kindItemsResult = await client.getKindStoreItems().catchError(
       (Object obj) {
         try {
           final res = (obj as DioError).response;
@@ -30,7 +30,7 @@ class KindStoreViewModel {
         } catch (e) {
           error = ErrorMessages.unknownError;
         }
-        return kindItemsList;
+        return kindItemsResult;
       },
     );
     // return kindstorecatalog;

@@ -15,7 +15,9 @@ class FoodStallTile extends StatelessWidget {
       children: [
         ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: CachedNetworkImage(imageUrl: image,)),
+            child: CachedNetworkImage(
+              imageUrl: image,
+            )),
         Padding(
           padding: EdgeInsets.only(
               top: UIUtills().getProportionalHeight(height: 10),

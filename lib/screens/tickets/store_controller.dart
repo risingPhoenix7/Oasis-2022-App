@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class StoreController extends ChangeNotifier {
-  ValueNotifier<int> itemNumber = ValueNotifier(0);
+  ValueNotifier<int> itemNumber = ValueNotifier(2);
 
   void setValue(int newValue) {
     itemNumber.value = newValue;

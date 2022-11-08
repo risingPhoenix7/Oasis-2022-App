@@ -18,8 +18,10 @@ class _ProfShowState extends State<ProfShow> {
       children: [
         Padding(
           padding: EdgeInsets.only(top: 43.h, left: 8.w),
-          child: Image.asset(
-              "assets/images/${StoreController().imageNames[StoreController().itemNumber.value]}.png"),
+          child: Container(
+            child: Image.asset(
+                "assets/images/${StoreController().imageNames[StoreController().itemNumber.value]}.png"),
+          ),
         ),
         Padding(
           padding: EdgeInsets.only(top: 180.h),

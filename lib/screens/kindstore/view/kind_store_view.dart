@@ -6,6 +6,7 @@ import 'package:oasis_2022/screens/kindstore/view_model/kind_store_catalog_view_
 import '/utils/ui_utils.dart';
 import '../../../widgets/error_dialogue.dart';
 import '/widgets/loader.dart';
+import 'package:gradient_borders/gradient_borders.dart';
 
 class KindStoreCatalog extends StatefulWidget {
   const KindStoreCatalog({super.key});
@@ -81,7 +82,7 @@ class _KindStoreCatalogState extends State<KindStoreCatalog> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Stalls",
+                                    "Kind Store",
                                     textScaleFactor: 1.00,
                                     style: GoogleFonts.openSans(
                                         fontSize: 28,
@@ -106,12 +107,14 @@ class _KindStoreCatalogState extends State<KindStoreCatalog> {
                             ),
                             Expanded(
                               child: GridView.builder(
+                                padding: EdgeInsets.only(
+                                    left: 23.00.w, right: 23.00.w, top: 41.h),
                                 itemCount: KindStoreViewModel
                                     .kindItemsResult.items_details!.length,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
-                                  childAspectRatio: 0.81777,
+                                  childAspectRatio: 0.65,
                                   crossAxisSpacing: UIUtills()
                                       .getProportionalWidth(width: 20),
                                   mainAxisSpacing: UIUtills()
@@ -119,27 +122,45 @@ class _KindStoreCatalogState extends State<KindStoreCatalog> {
                                 ),
                                 itemBuilder: (BuildContext context, int index) {
                                   return Container(
-                                    width: 180.w,
-                                    height: 271.h,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.r),
-                                      gradient: const LinearGradient(
-                                        colors: [
-                                          Color.fromRGBO(209, 154, 8, 1),
-                                          Color.fromRGBO(254, 212, 102, 1),
-                                          Color.fromRGBO(227, 186, 79, 1),
-                                          Color.fromRGBO(209, 154, 8, 1),
-                                          Color.fromRGBO(209, 154, 8, 1),
-                                        ],
-                                      ),
-                                    ),
+                                    // width: 180.w,
+                                    // height: 271.h,
+                                    // decoration: BoxDecoration(
+                                    //   borderRadius: BorderRadius.circular(20.r),
+                                    //   gradient: const LinearGradient(
+                                    //     colors: [
+                                    //       Color.fromRGBO(209, 154, 8, 1),
+                                    //       Color.fromRGBO(254, 212, 102, 1),
+                                    //       Color.fromRGBO(227, 186, 79, 1),
+                                    //       Color.fromRGBO(209, 154, 8, 1),
+                                    //       Color.fromRGBO(209, 154, 8, 1),
+                                    //     ],
+                                    //   ),
+                                    // ),
                                     child: Container(
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.only(
+                                          left: 13.00.w,
+                                          right: 13.00.w,
+                                          top: 9.00.h),
                                       decoration: BoxDecoration(
+                                          border: GradientBoxBorder(
+                                            width: 0.15.w,
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                Color.fromRGBO(209, 154, 8, 1),
+                                                Color.fromRGBO(
+                                                    254, 212, 102, 1),
+                                                Color.fromRGBO(227, 186, 79, 1),
+                                                Color.fromRGBO(209, 154, 8, 1),
+                                                Color.fromRGBO(209, 154, 8, 1),
+                                              ],
+                                            ),
+                                          ),
                                           color: Colors.black,
                                           borderRadius:
                                               BorderRadius.circular(20.r)),
-                                      width: 179.w,
-                                      height: 270.h,
+                                      // width: 179.w,
+                                      // height: 270.h,
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -147,24 +168,34 @@ class _KindStoreCatalogState extends State<KindStoreCatalog> {
                                           Container(
                                             height: 9.h,
                                           ),
-                                          Container(
-                                            child: Stack(
-                                              children: [
-                                                SvgPicture.asset(
+                                          Stack(
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        10.74.r),
+                                                child: Image.asset(
+                                                    fit: BoxFit.fill,
                                                     height: 183.h,
                                                     width: 152.h,
-                                                    'assets/icons/OASISLogoGold.svg'),
-                                                // Image(
-                                                //   height: 183.h,
-                                                //   width: 152.h,
-                                                //   image: NetworkImage(
-                                                //       KindStoreViewModel
-                                                //           .kindItemsResult
-                                                //           .items_details![index]
-                                                //           .image!),
-                                                // ),
-                                              ],
-                                            ),
+                                                    'assets/images/OASISLogoGoldPNG.png'),
+                                              ),
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        10.74.r),
+                                                child: Image(
+                                                  fit: BoxFit.fill,
+                                                  height: 183.h,
+                                                  width: 152.h,
+                                                  image: NetworkImage(
+                                                      KindStoreViewModel
+                                                          .kindItemsResult
+                                                          .items_details![index]
+                                                          .image!),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           SizedBox(height: 15.h),
                                           Text(

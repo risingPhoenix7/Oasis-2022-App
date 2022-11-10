@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oasis_2022/resources/resources.dart';
 import 'package:oasis_2022/utils/oasis_text_styles.dart';
 
+import '../../morescreen/screens/more_info.dart';
 import '/utils/scroll_remover.dart';
 import '/widgets/error_dialogue.dart';
 import '/widgets/loader.dart';
@@ -21,7 +22,6 @@ class EventsScreen extends StatefulWidget {
 }
 
 class _EventsScreenState extends State<EventsScreen> {
-
   MiscEventsViewModel miscEventsViewModel = MiscEventsViewModel();
   bool isLoading = true;
   List<MiscEventData> currentDayMiscEventList = [];
@@ -119,10 +119,26 @@ class _EventsScreenState extends State<EventsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(top: 90.h, left: 28.w),
-                          child: Text(
-                            'Events',
-                            style: OasisTextStyles.inter500,
+                          padding: EdgeInsets.only(
+                              top: 90.h, right: 24.w, left: 28.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Events',
+                                style: OasisTextStyles.inter500,
+                              ),
+                              GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const MoreInfoScreen()));
+                                  },
+                                  child: const Icon(Icons.more_vert,
+                                      color: Colors.white))
+                            ],
                           ),
                         ),
                         Padding(
@@ -277,4 +293,3 @@ class _EventsScreenState extends State<EventsScreen> {
     );
   }
 }
-

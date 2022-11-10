@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:oasis_2022/order/order_ui.dart';
 import 'package:oasis_2022/screens/events/view/miscellaneous_screen.dart';
 import 'package:oasis_2022/screens/morescreen/screens/more_info.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -45,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _buildScreens() {
     return [
       const FoodStallScreen(),
-      const MoreInfoScreen(),
+      OrderScreen(),
       const EventsScreen(),
       const StoreScreen(),
       const WalletScreen(),
@@ -61,9 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
         iconSize: 25,
       ),
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset("assets/images/navbar_icons/more_active.svg"),
+        icon: SvgPicture.asset("assets/images/navbar_icons/order_active.svg"),
         inactiveIcon:
-            SvgPicture.asset("assets/images/navbar_icons/more_inactive.svg"),
+            SvgPicture.asset("assets/images/navbar_icons/order_inactive.svg"),
         iconSize: 25,
       ),
       PersistentBottomNavBarItem(

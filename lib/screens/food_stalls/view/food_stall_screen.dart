@@ -1,4 +1,5 @@
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 import '/screens/food_stalls/repo/model/food_stall_model.dart';
 import '/utils/ui_utils.dart';
 import '/widgets/error_dialogue.dart';
@@ -84,13 +85,23 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
                                     Text(
                                       "Stalls",
                                       style: GoogleFonts.openSans(
-                                          fontSize: 28, color: Colors.white, fontWeight: FontWeight.w600),
+                                          fontSize: 28,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                     Row(
-                                      children: const [
-                                        Icon(
-                                          Icons.shopping_cart,
-                                          color: Colors.white,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            SnackBar snackBar = CustomSnackBar()
+                                                .oasisSnackBar(null);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
+                                          },
+                                          child: const Icon(
+                                            Icons.shopping_cart,
+                                            color: Colors.white,
+                                          ),
                                         )
                                       ],
                                     )

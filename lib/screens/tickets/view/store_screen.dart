@@ -47,23 +47,23 @@ class _StoreScreenState extends State<StoreScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StoreController.carouselItems.isEmpty
-          ? Center(
-              child: Text(
-                "Store is empty right now",
-                style:
-                    GoogleFonts.openSans(color: Colors.white, fontSize: 25.sp),
-              ),
-            )
-          : ValueListenableBuilder(
-              valueListenable: isLoading,
-              builder: (BuildContext context, bool value, Widget? child) {
-                if (value) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  return SizedBox(
+      body: ValueListenableBuilder(
+        valueListenable: isLoading,
+        builder: (BuildContext context, bool value, Widget? child) {
+          if (value) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return StoreController.carouselItems.isEmpty
+                ? Center(
+                    child: Text(
+                      "Store is empty right now",
+                      style: GoogleFonts.openSans(
+                          color: Colors.white, fontSize: 25.sp),
+                    ),
+                  )
+                : SizedBox(
                     height: 1.sh,
                     child: Stack(children: [
                       FadeTransition(
@@ -84,9 +84,9 @@ class _StoreScreenState extends State<StoreScreen>
                       )
                     ]),
                   );
-                }
-              },
-            ),
+          }
+        },
+      ),
     );
   }
 }

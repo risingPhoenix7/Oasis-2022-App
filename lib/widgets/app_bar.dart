@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oasis_2022/order/order_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
-import '../order/order_ui.dart';
 import '../utils/colors.dart';
 
 class CustomAppBar extends StatefulWidget {
@@ -53,7 +52,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
                     context,
                     settings: const RouteSettings(name: 'order'),
-                    screen: OrderScreen(),
+                    screen: OrdersScreen(),
                     withNavBar: true,
                     pageTransitionAnimation: PageTransitionAnimation.cupertino,
                   );

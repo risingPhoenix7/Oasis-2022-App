@@ -1,7 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../order/order_screen.dart';
 import '/order/controller/cart_and_order_controller.dart';
-import '/order/order_ui.dart';
 import '/screens/cart/repo/model/cart_screen_model.dart';
 import '/screens/cart/repo/model/post_order_response_model.dart';
 import '/screens/cart/viewmodel/cart_viewmodel.dart';

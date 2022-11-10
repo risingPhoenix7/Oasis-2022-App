@@ -10,9 +10,10 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:oasis_2022/screens/events/repository/model/miscEventResult.dart';
 import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
+import 'package:oasis_2022/screens/kindstore/view/kind_store_view.dart';
+import 'package:oasis_2022/screens/overload/overload_page.dart';
 
 import '../home.dart';
-import '../order/order_ui.dart';
 import '../provider/user_details_viewmodel.dart';
 import '../screens/food_stalls/repo/model/hive_model/hive_menu_entry.dart';
 import '../screens/login/view/login_screen.dart';
@@ -125,7 +126,6 @@ class _BosmFestAppState extends State<BosmFestApp> {
               'login': (context) => LoginScreen(),
               'wallet': (context) => WalletScreen(),
               'home': (context) => HomeScreen(),
-              'order': (context) => OrderScreen(),
               'leaderboard': (context) => Leaderboard(),
             },
             home: FutureBuilder(
@@ -140,12 +140,12 @@ class _BosmFestAppState extends State<BosmFestApp> {
                           (route) => false,
                         ));
                   } else if (data == false) {
-                    Future.microtask(
-                        () => Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (builder) => const LoginScreen()),
-                              (route) => false,
-                            ));
+                    Future.microtask(() =>
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (builder) => const KindStoreCatalog()),
+                          (route) => false,
+                        ));
                   }
                 }
                 return Container(

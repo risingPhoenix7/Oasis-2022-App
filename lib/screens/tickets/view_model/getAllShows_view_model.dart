@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:oasis_2022/screens/tickets/store_controller.dart';
+import 'package:oasis_2022/screens/tickets/controller/store_controller.dart';
 
 import '/provider/user_details_viewmodel.dart';
 import '/utils/error_messages.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
 import 'package:oasis_2022/screens/tickets/repository/model/signedTicketsData.dart';
-import 'package:oasis_2022/screens/tickets/store_controller.dart';
+import 'package:oasis_2022/screens/tickets/controller/store_controller.dart';
 import 'package:oasis_2022/screens/tickets/view/buy_ticket.dart';
 import 'package:oasis_2022/screens/tickets/view_model/get_signedtickets_view_model.dart';
 

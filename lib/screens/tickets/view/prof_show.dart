@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
 
-import '../store_controller.dart';
+import '../controller/store_controller.dart';
 import 'banner_details.dart';
 
 class ProfShow extends StatefulWidget {

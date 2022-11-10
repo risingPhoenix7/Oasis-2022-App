@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "617111091762",
+    "project_id": "oasis-2022",
+    "storage_bucket": "oasis-2022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617111091762:android:c462ae2054339bc2e15a2b",
+        "android_client_info": {
+          "package_name": "com.dvm.oasis2k22"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617111091762-qnobj1t50fob2e9lh8qn2kor7ip4p6mc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dvm.oasis2k22",
+            "certificate_hash": "06e8a5601e6e96c37bd10161873e8d72dd78c525"
+          }
+        },
+        {
+          "client_id": "617111091762-vbgq32pbsq3jimctcplcchtuhqk0suus.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTX-JOWiXoQGBrzqcGus4y5K9tt7tdnX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617111091762-vbgq32pbsq3jimctcplcchtuhqk0suus.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "617111091762-i5g99feu9ilb9u72s37ik00krq3723kl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dvm.oasis2k22"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617111091762:android:5d1bedac0b548b91e15a2b",
+        "android_client_info": {
+          "package_name": "com.example.vendorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617111091762-vbgq32pbsq3jimctcplcchtuhqk0suus.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTX-JOWiXoQGBrzqcGus4y5K9tt7tdnX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617111091762-vbgq32pbsq3jimctcplcchtuhqk0suus.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "617111091762-i5g99feu9ilb9u72s37ik00krq3723kl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dvm.oasis2k22"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

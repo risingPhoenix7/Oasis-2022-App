@@ -19,6 +19,7 @@ import '../screens/quiz/view_model/storage.dart';
 import '../screens/wallet_screen/view/wallet_screen.dart';
 import 'firebase_options.dart';
 import 'notificationservice/local_notification_service.dart';
+import 'order/order_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +33,8 @@ Future<void> main() async {
   await Hive.openBox('cartBox');
   SecureStorage secureStorage = SecureStorage();
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp( name: 'com.dvm.oasis2k22',
+      options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.subscribeToTopic('all');
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   FirebaseMessaging.onMessage.listen(
@@ -106,12 +108,13 @@ class _BosmFestAppState extends State<BosmFestApp> {
           return MaterialApp(
             theme: ThemeData(scaffoldBackgroundColor: Colors.black),
             navigatorObservers: [ChuckerFlutter.navigatorObserver],
+            //initialRoute: 'order',
             routes: {
               'food_stalls': (context) => FoodStallScreen(),
               'login': (context) => LoginScreen(),
               'wallet': (context) => WalletScreen(),
               'home': (context) => HomeScreen(),
-              'order': (context) => OrderScreen(),
+              'order': (context) => OrdersScreen(),
               'leaderboard': (context) => Leaderboard(),
             },
             home: FutureBuilder(

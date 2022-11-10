@@ -10,8 +10,9 @@ class quizUIScreen extends StatefulWidget {
 }
 
 class _quizUIScreenState extends State<quizUIScreen> {
-  @override
   var optionArray = [0, 0, 0, 0];
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(

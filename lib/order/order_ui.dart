@@ -1,3 +1,5 @@
+import 'package:oasis_2022/order/order_status.dart';
+
 import '../order/controller/cart_and_order_controller.dart';
 import '../order/order_card.dart';
 import '../order/order_screen_viewmodel.dart';
@@ -11,6 +13,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/error_dialogue.dart';
+import 'order_widget.dart';
 
 class OrderScreen extends StatefulWidget {
   OrderScreen({Key? key}) : super(key: key);
@@ -116,21 +119,26 @@ class _OrderScreenState extends State<OrderScreen> {
                               )
                             ],
                           ))
-                        : CustomScrollView(
-                            shrinkWrap: true,
-                            slivers: <Widget>[
-                              SliverPadding(
-                                padding: const EdgeInsets.all(10),
-                                sliver: SliverList(
-                                    delegate: SliverChildBuilderDelegate(
-                                        (BuildContext context, int index) {
-                                  return Order_card(
-                                    orderCardModel: orderCardList[index],
-                                  );
-                                }, childCount: orderCardList.length)),
-                              )
-                            ],
-                          )),
+                        : SizedBox(
+                      height: 500,
+                          child: CustomScrollView(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              slivers: <Widget>[
+                                SliverPadding(
+                                  padding: const EdgeInsets.all(10),
+                                  sliver: SliverList(
+                                      delegate: SliverChildBuilderDelegate(
+                                          (BuildContext context, int index) {
+                                    return OrderWidget(
+                                      orderCardModel: orderCardList[index],
+                                    );
+                                  }, childCount: orderCardList.length)),
+                                )
+                              ],
+                            ),
+                        )
+                ),
               );
             }
           },

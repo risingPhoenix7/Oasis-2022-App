@@ -55,12 +55,13 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
         _isAuthenticating = true;
         _authorized = 'Authenticating';
       });
-      authenticated = await auth.authenticate(
+        authenticated = await auth.authenticate(
         localizedReason: 'Please authenticate to add money',
         options: const AuthenticationOptions(
           stickyAuth: true,
         ),
       );
+        print("${authenticated} lol 123");
       setState(() {
         _isAuthenticating = false;
       });
@@ -79,6 +80,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
     }
 
     setState(
+
         () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
   }
 
@@ -156,13 +158,13 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                                 });
                           }
                           if (kDebugMode) {
-                            print(isSuccess);
+                            print('${isSuccess} lolol');
                           }
                           if (isSuccess) {
                             WalletScreenController.isSuccess.value = true;
                           }
                           print('error kehefbkjewfb');
-                          print(isSuccess);
+                          print('${isSuccess} lolol');
                           if (!mounted) {}
                           showDialog(
                               barrierDismissible: false,
@@ -227,7 +229,8 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
               )),
           Positioned(top: UIUtills().getProportionalHeight(height: 75),right: UIUtills().getProportionalWidth(width: 30),
           child: GestureDetector(onTap: (){Navigator.pop(context);},
-              child: SvgPicture.asset('assets/images/exit_button.svg'),)),
+              child: SvgPicture.asset('assets/images/exit_button.svg'),)
+          ),
 
           Positioned(
             top: UIUtills().getProportionalHeight(height: 190),
@@ -237,7 +240,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                 width: UIUtills().getProportionalWidth(width: 388.00),
                 height: UIUtills().getProportionalHeight(height: 220.00),
                 decoration: BoxDecoration(
-                  image: DecorationImage(
+                  image: const DecorationImage(
                       image: AssetImage(ImageAssets.sendMoneyBack),
                       fit: BoxFit.fill),
                   //color: const Color(0xFFFFFFFF),

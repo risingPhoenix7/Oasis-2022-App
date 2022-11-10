@@ -12,6 +12,7 @@ import '../view_model/misc_events_view_model.dart';
 import 'day_tab.dart';
 import 'misc_screen_controller.dart';
 import 'single_miscellanous_event.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class EventsScreen extends StatefulWidget {
   const EventsScreen({Key? key}) : super(key: key);
@@ -28,6 +29,7 @@ class _EventsScreenState extends State<EventsScreen> {
   List<MiscEventData> searchMiscEventList = [];
   FocusNode focusNode = FocusNode();
   TextEditingController searchController = TextEditingController();
+
 
   Future<void> updateMiscEventsResult() async {
     await miscEventsViewModel.retrieveMiscEventResult();
@@ -86,7 +88,11 @@ class _EventsScreenState extends State<EventsScreen> {
       return searchMiscEventList;
     }
   }
+  void getToken() async {
+    final FirebaseMessaging fcm = FirebaseMessaging.instance;
+    final token = await  fcm.getToken().toString();
 
+  }
   @override
   void initState() {
     updateMiscEventsResult();

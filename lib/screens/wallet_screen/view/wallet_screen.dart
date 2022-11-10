@@ -282,9 +282,10 @@ class _WalletScreenState extends State<WalletScreen> {
                                             print('clicked');
                                             if (await auth
                                                 .isDeviceSupported()) {
-                                              print(authenticated);
+                                              print('$authenticated lol1');
                                               await _authenticate();
-                                              print(authenticated);
+                                              print('$authenticated lol2');
+
                                             }
                                             print('authenticated');
                                             if (authenticated) {

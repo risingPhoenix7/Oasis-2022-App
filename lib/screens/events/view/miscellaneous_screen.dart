@@ -5,7 +5,6 @@ import 'package:oasis_2022/resources/resources.dart';
 import 'package:oasis_2022/utils/oasis_text_styles.dart';
 
 import '/utils/scroll_remover.dart';
-import '/utils/ui_utils.dart';
 import '/widgets/error_dialogue.dart';
 import '/widgets/loader.dart';
 import '../repository/model/miscEventResult.dart';
@@ -22,6 +21,7 @@ class EventsScreen extends StatefulWidget {
 }
 
 class _EventsScreenState extends State<EventsScreen> {
+
   MiscEventsViewModel miscEventsViewModel = MiscEventsViewModel();
   bool isLoading = true;
   List<MiscEventData> currentDayMiscEventList = [];
@@ -104,39 +104,32 @@ class _EventsScreenState extends State<EventsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.black,
-        body: !isLoading
-            ? GestureDetector(
-                onTap: () => FocusScope.of(context).unfocus(),
-                child: RefreshIndicator(
-                  onRefresh: updateMiscEventsResult,
-                  child: Stack(
-                    clipBehavior: Clip.hardEdge,
-                    children: [
-                      Positioned(
-                        child: Image.asset(ImageAssets.eventBg),
-                        right: 0,
-                        top: -45,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 34.h, left: 28.w),
-                            child: Text(
-                              'Events',
-                              style: OasisTextStyles.inter500,
-                            ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.black,
+      body: !isLoading
+          ? GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: RefreshIndicator(
+                onRefresh: updateMiscEventsResult,
+                child: Stack(
+                  children: [
+                    SvgPicture.asset(ImageAssets.eventBg),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(top: 90.h, left: 28.w),
+                          child: Text(
+                            'Events',
+                            style: OasisTextStyles.inter500,
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: 52.h,
-                                bottom: 27.5,
-                                left: 36.w,
-                                right: 36.w),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: 52.h, bottom: 27.5, left: 36.w, right: 36.w),
+                          child: Container(
+                            color: Colors.black,
                             child: Container(
                               height: 50.h,
                               // width: UIUtills()
@@ -211,81 +204,77 @@ class _EventsScreenState extends State<EventsScreen> {
                               ),
                             ),
                           ),
-                          Container(
-                            child: Padding(
-                              padding:
-                                  EdgeInsets.fromLTRB(36.w, 27.h, 36.w, 34.h),
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: List.generate(
-                                      5,
-                                      (index) => DayTab(
-                                            dayNumber: index + 19,
-                                          ))),
+                        ),
+                        Container(
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(36.w, 27.h, 36.w, 0.h),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: List.generate(
+                                    5,
+                                    (index) => DayTab(
+                                          dayNumber: index + 19,
+                                        ))),
+                          ),
+                        ),
+                        ScrollConfiguration(
+                          behavior: CustomScrollBehavior(),
+                          child: Container(
+                            //color: Colors.white,
+                            height: 475.h,
+                            child: ListView(
+                              children: <Widget>[
+                                Column(
+                                  children: emptyListHandler()
+                                      ? [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 58.0),
+                                            child: Text(
+                                              'No events of this day',
+                                              style: OasisTextStyles.openSans300
+                                                  .copyWith(
+                                                      color: Colors.white),
+                                            ),
+                                          )
+                                        ]
+                                      : List.generate(
+                                          requiredListHandler().length,
+                                          (index) {
+                                          return SingleMiscellaneousEvent(
+                                            time: requiredListHandler()[index]
+                                                    .time ??
+                                                'TBA',
+                                            eventName:
+                                                requiredListHandler()[index]
+                                                    .name,
+                                            eventDescription:
+                                                requiredListHandler()[index]
+                                                    .about,
+                                            eventConductor:
+                                                requiredListHandler()[index]
+                                                    .organiser,
+                                            eventLocation:
+                                                requiredListHandler()[index]
+                                                    .venue_name,
+                                          );
+                                        }),
+                                  // children: getMiscEventsList(
+                                  //     MiscScreenController.selectedTab.value),
+                                ),
+                              ],
                             ),
                           ),
-                          ScrollConfiguration(
-                            behavior: CustomScrollBehavior(),
-                            child: Container(
-                              height: 450.h,
-                              child: ListView(
-                                children: <Widget>[
-                                  Column(
-                                    children: emptyListHandler()
-                                        ? [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 58.0),
-                                              child: Text(
-                                                'No events of this day',
-                                                style: OasisTextStyles
-                                                    .openSans300
-                                                    .copyWith(
-                                                        color: Colors.white),
-                                              ),
-                                            )
-                                          ]
-                                        : List.generate(
-                                            requiredListHandler().length,
-                                            (index) {
-                                            return SingleMiscellaneousEvent(
-                                              time: requiredListHandler()[index]
-                                                      .time ??
-                                                  'TBA',
-                                              eventName:
-                                                  requiredListHandler()[index]
-                                                      .name,
-                                              eventDescription:
-                                                  requiredListHandler()[index]
-                                                      .about,
-                                              eventConductor:
-                                                  requiredListHandler()[index]
-                                                      .organiser,
-                                              eventLocation:
-                                                  requiredListHandler()[index]
-                                                      .venue_name,
-                                            );
-                                          }),
-                                    // children: getMiscEventsList(
-                                    //     MiscScreenController.selectedTab.value),
-                                  ),
-                                  SizedBox(
-                                    height: UIUtills()
-                                        .getProportionalHeight(height: 50),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              )
-            : const Loader(),
-      ),
+              ),
+            )
+          : const Loader(),
     );
   }
 }
+

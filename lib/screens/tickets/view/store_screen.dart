@@ -19,7 +19,6 @@ class StoreScreen extends StatefulWidget {
 class _StoreScreenState extends State<StoreScreen>
     with TickerProviderStateMixin {
   ValueNotifier<bool> isLoading = ValueNotifier(true);
-  AllShowsData allShowsData = AllShowsData([], []);
   bool fadeAnimationGoingDark = true;
 
   late final AnimationController fadeController = AnimationController(
@@ -28,7 +27,6 @@ class _StoreScreenState extends State<StoreScreen>
   );
   late final Animation<double> _fadeAnimation =
       Tween<double>(begin: 1.0, end: 0.0).animate(fadeController);
-
 
   Future<void> controllerInitialize() async {
     await StoreController().initialCall();
@@ -39,6 +37,11 @@ class _StoreScreenState extends State<StoreScreen>
   void initState() {
     controllerInitialize();
     StoreController.itemNumber.addListener(() {
+      if(!mounted){}
+      setState(() {});
+    });
+    StoreController.itemBought.addListener(() {
+      if(!mounted){}
       setState(() {});
     });
     super.initState();

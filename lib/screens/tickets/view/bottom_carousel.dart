@@ -20,6 +20,10 @@ class _BottomCarouselState extends State<BottomCarousel> {
       if (!mounted) {}
       setState(() {});
     });
+    StoreController.itemBought.addListener(() {
+      if (!mounted) {}
+      setState(() {});
+    });
     super.initState();
   }
 

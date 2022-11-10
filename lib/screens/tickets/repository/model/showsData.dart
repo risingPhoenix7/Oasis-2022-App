@@ -16,7 +16,7 @@ class AllShowsData {
 @JsonSerializable()
 class StoreItemData {
   int? id;
-  double? price;
+  int? price;
   String? name;
   String? venue;
   List<String> image_url;
@@ -43,7 +43,7 @@ class StoreItemData {
 @JsonSerializable()
 class CombosData {
   int? id;
-  double? price;
+  int? price;
   String? name;
   bool? allow_bitsians, allow_participants;
   List<Shows>? shows;

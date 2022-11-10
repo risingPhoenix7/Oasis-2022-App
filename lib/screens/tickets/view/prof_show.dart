@@ -17,6 +17,11 @@ class _ProfShowState extends State<ProfShow> {
   @override
   void initState() {
     StoreController.itemNumber.addListener(() {
+      if(!mounted){}
+      setState(() {});
+    });
+    StoreController.itemBought.addListener(() {
+      if(!mounted){}
       setState(() {});
     });
     super.initState();

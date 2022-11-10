@@ -1,9 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
+import 'package:oasis_2022/screens/tickets/repository/model/signedTicketsData.dart';
 import 'package:oasis_2022/screens/tickets/view_model/getAllShows_view_model.dart';
+
+import '../view_model/get_signedtickets_view_model.dart';
 
 class StoreController {
   static ValueNotifier<int> itemNumber = ValueNotifier(0);
+  static ValueNotifier<bool> itemBought = ValueNotifier(true);
+
+  static SignedTickets signedTickets = SignedTickets();
 
   static List<StoreItemData> storeItem = [];
 
@@ -14,9 +20,9 @@ class StoreController {
   static List<dynamic> carouselItems = [];
 
   Future<void> initialCall() async {
-    AllShowsData allShowsData;
-    allShowsData = await GetShowsViewModel().retrieveAllShowData();
+    AllShowsData allShowsData = await GetShowsViewModel().retrieveAllShowData();
     GetShowsViewModel().fillController(allShowsData);
+    signedTickets = await GetSignedTicketsViewModel().retrieveSignedShows();
   }
 
   int getId(int? merchIndex) {

@@ -35,6 +35,7 @@ class GetShowsViewModel {
 
   void fillController(AllShowsData allShowsData) {
     // filling carouselItem
+    StoreController.carouselItems.clear();
     MerchCarouselItem merchCarouselItem = MerchCarouselItem(
         imageAsset: "assets/images/merch_small.png", merch: []);
     List<StoreItemData> merchItems = [];
@@ -52,7 +53,6 @@ class GetShowsViewModel {
       StoreController.carouselItems.add(merchCarouselItem);
     }
     //filling carousel image
-    print(StoreController.carouselItems);
     for (StoreItemData i in allShowsData.shows ?? []) {
       if (!i.is_merch!) {
         StoreController.carouselImage2.add(i.image_url[0]);
@@ -65,7 +65,6 @@ class GetShowsViewModel {
         StoreController.carouselImage2.add("assets/images/merch_small.png");
       }
     }
-    print(StoreController.carouselImage2);
   }
 
   String getShowsErrorResponse(int? responseCode, String? statusMessage) {

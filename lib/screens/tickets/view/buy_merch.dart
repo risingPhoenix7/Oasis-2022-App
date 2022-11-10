@@ -1,21 +1,31 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:oasis_2022/screens/tickets/controller/store_controller.dart';
 import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
-import 'package:oasis_2022/screens/tickets/repository/model/ticketPostBody.dart';
-import 'package:oasis_2022/screens/tickets/view_model/tickets_post_view_model.dart';
 
-class BuyTicket extends StatefulWidget {
-  const BuyTicket({Key? key}) : super(key: key);
+import '../repository/model/ticketPostBody.dart';
+import '../view_model/tickets_post_view_model.dart';
 
+class BuyMerch extends StatefulWidget {
+  const BuyMerch(
+      {Key? key,
+      required this.id,
+      required this.price,
+      required this.imageUrl,
+      required this.amountPurchased})
+      : super(key: key);
+  final int id;
+  final int price;
+  final String imageUrl;
+  final int amountPurchased;
   @override
-  State<BuyTicket> createState() => _BuyTicketState();
+  State<BuyMerch> createState() => _BuyMerchState();
 }
 
-class _BuyTicketState extends State<BuyTicket> {
+class _BuyMerchState extends State<BuyMerch> {
   int selectedIndex = 0;
 
   @override
@@ -50,15 +60,15 @@ class _BuyTicketState extends State<BuyTicket> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 27.h, left: 70.w),
+                    padding: EdgeInsets.only(top: 27.h, left: 75.w),
                     child: Text(
-                      "Select Number of Tickets",
+                      "Number of Hoodies",
                       style: GoogleFonts.openSans(
-                          fontSize: 20.sp, color: Colors.white),
+                          fontSize: 24.sp, color: Colors.white),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 27.h, left: 30.w),
+                    padding: EdgeInsets.only(top: 27.h, left: 35.w),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
@@ -73,11 +83,15 @@ class _BuyTicketState extends State<BuyTicket> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(top: 87.h),
-                child: SvgPicture.asset("assets/images/ticket.svg"),
+                padding: EdgeInsets.only(top: 30.h),
+                child: CachedNetworkImage(
+                  imageUrl: widget.imageUrl,
+                  height: 286.h,
+                  width: 290.w,
+                ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 51.74.h),
+                padding: EdgeInsets.only(top: 23.h),
                 child: SizedBox(
                   height: 28.h,
                   child: Center(
@@ -130,37 +144,25 @@ class _BuyTicketState extends State<BuyTicket> {
                       },
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
-                      itemCount: 10,
+                      itemCount: 5,
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 33.2.h),
-                child: Text(
-                  "₹ ${(selectedIndex + 1) * (StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).price!}",
-                  style: GoogleFonts.openSans(
-                      color: const Color(0xFFE6E6E6),
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 30.h),
+                padding: EdgeInsets.only(top: 32.h),
                 child: GestureDetector(
                   onTap: () async {
                     TicketPostBody ticketPostBody =
                         TicketPostBody(individual: {}, combos: {});
-                    ticketPostBody.individual![
-                            "${(StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).id}"] =
+                    ticketPostBody.individual![widget.id.toString()] =
                         (selectedIndex + 1);
-                    try {
+                    try{
                       await TicketPostViewModel().postOrders(ticketPostBody);
-                      StoreController.itemBought.value =
-                          !StoreController.itemBought.value;
-                      if (!mounted) {}
+                      StoreController.itemBought.value = !StoreController.itemBought.value;
+                      if(!mounted){}
                       Navigator.pop(context);
-                    } catch (e) {
+                    } catch (e){
                       print(e);
                     }
                   },
@@ -186,6 +188,14 @@ class _BuyTicketState extends State<BuyTicket> {
                       ),
                     ),
                   ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10.h),
+                child: Text(
+                  "Already Purchased - ${widget.amountPurchased}",
+                  style: GoogleFonts.openSans(
+                      color: const Color(0xFFACACAC), fontSize: 12.sp),
                 ),
               )
             ],

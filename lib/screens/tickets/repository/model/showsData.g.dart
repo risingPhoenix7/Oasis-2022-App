@@ -24,7 +24,7 @@ Map<String, dynamic> _$AllShowsDataToJson(AllShowsData instance) =>
 StoreItemData _$StoreItemDataFromJson(Map<String, dynamic> json) =>
     StoreItemData(
       id: json['id'] as int?,
-      price: (json['price'] as num?)?.toDouble(),
+      price: json['price'] as int?,
       venue: json['venue'] as String?,
       timestamp: json['timestamp'] as String?,
       name: json['name'] as String?,
@@ -52,7 +52,7 @@ Map<String, dynamic> _$StoreItemDataToJson(StoreItemData instance) =>
 
 CombosData _$CombosDataFromJson(Map<String, dynamic> json) => CombosData(
       id: json['id'] as int?,
-      price: (json['price'] as num?)?.toDouble(),
+      price: json['price'] as int?,
       name: json['name'] as String?,
       allow_participants: json['allow_participants'] as bool?,
       allow_bitsians: json['allow_bitsians'] as bool?,

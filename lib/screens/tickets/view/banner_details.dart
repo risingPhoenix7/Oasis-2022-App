@@ -66,114 +66,121 @@ class _BannerDetailsState extends State<BannerDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: isLoading,
-      builder: (context, bool value, child) {
-        if (value) {
-          return const CircularProgressIndicator(color: Colors.black);
-        } else {
-          return SizedBox(
-            width: 387.w,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ShaderMask(
-                  blendMode: BlendMode.srcIn,
-                  shaderCallback: (bounds) => const LinearGradient(colors: [
-                    Color.fromRGBO(207, 150, 0, 1),
-                    Color.fromRGBO(174, 186, 102, 1),
-                  ], transform: GradientRotation(161.5))
-                      .createShader(
-                          Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
-                  child: Text(
-                    (StoreController
-                                .carouselItems[StoreController.itemNumber.value]
-                            as StoreItemData)
-                        .name!,
-                    style: GoogleFonts.openSans(
-                        fontSize: 36.sp,
-                        fontWeight: FontWeight.bold,
-                        height: 1.1.h),
+    return RefreshIndicator(
+      color: Colors.amber,
+      backgroundColor: Colors.black,
+      onRefresh: () async {
+        await StoreController().initialCall();
+        setState(() {});
+      },
+      child: ValueListenableBuilder(
+        valueListenable: isLoading,
+        builder: (context, bool value, child) {
+          if (value) {
+            return const CircularProgressIndicator(color: Colors.black);
+          } else {
+            return SizedBox(
+              width: 387.w,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ShaderMask(
+                    blendMode: BlendMode.srcIn,
+                    shaderCallback: (bounds) => const LinearGradient(colors: [
+                      Color.fromRGBO(207, 150, 0, 1),
+                      Color.fromRGBO(174, 186, 102, 1),
+                    ], transform: GradientRotation(161.5))
+                        .createShader(
+                            Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                    child: Text(
+                      (StoreController.carouselItems[StoreController
+                              .itemNumber.value] as StoreItemData)
+                          .name!,
+                      style: GoogleFonts.openSans(
+                          fontSize: 36.sp,
+                          fontWeight: FontWeight.bold,
+                          height: 1.1.h),
+                    ),
                   ),
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(padding: EdgeInsets.only(top: 5.h)),
-                        Text(
-                          "${Time((StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).timestamp!)} | ${(StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).venue}\n${Date((StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).timestamp!)} Nov",
-                          textScaleFactor: 1.0,
-                          style: GoogleFonts.openSans(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18.sp,
-                              color: Colors.white),
-                        ),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Tickets Used ${GetSignedTicketsViewModel().getUsedTickets(StoreController().getId(null), signedTickets)}",
-                              textScaleFactor: 1.0,
-                              textAlign: TextAlign.start,
-                              style: GoogleFonts.openSans(
-                                  fontSize: 15.sp,
-                                  color: const Color(0xFFD3D3D3)),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 21.w),
-                              child: Text(
-                                "Tickets Left ${GetSignedTicketsViewModel().getUnusedTickets(StoreController().getId(null), signedTickets)}",
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(padding: EdgeInsets.only(top: 5.h)),
+                          Text(
+                            "${Time((StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).timestamp!)} | ${(StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).venue}\n${Date((StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).timestamp!)} Nov",
+                            textScaleFactor: 1.0,
+                            style: GoogleFonts.openSans(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18.sp,
+                                color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Tickets Used ${GetSignedTicketsViewModel().getUsedTickets(StoreController().getId(null), signedTickets)}",
                                 textScaleFactor: 1.0,
                                 textAlign: TextAlign.start,
                                 style: GoogleFonts.openSans(
                                     fontSize: 15.sp,
                                     color: const Color(0xFFD3D3D3)),
                               ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    GestureDetector(
-                      onTap: (){
-                        // showDialog(context: context, builder: (context)=>BuyTicket());
-                      },
-                      child: Container(
-                        height: 46.h,
-                        width: 132.w,
-                        decoration: BoxDecoration(
-                            gradient: const LinearGradient(colors: [
-                              Color.fromRGBO(209, 154, 8, 1),
-                              Color.fromRGBO(254, 212, 102, 1),
-                              Color.fromRGBO(227, 186, 79, 1),
-                              Color.fromRGBO(209, 154, 8, 1),
-                              Color.fromRGBO(209, 154, 8, 1),
-                            ]),
-                            borderRadius: BorderRadius.circular(10.r)),
-                        child: Center(
-                          child: Text(
-                            "Buy Tickets",
-                            style: GoogleFonts.openSans(
-                                color: Colors.black,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold),
+                              Padding(
+                                padding: EdgeInsets.only(left: 21.w),
+                                child: Text(
+                                  "Tickets Left ${GetSignedTicketsViewModel().getUnusedTickets(StoreController().getId(null), signedTickets)}",
+                                  textScaleFactor: 1.0,
+                                  textAlign: TextAlign.start,
+                                  style: GoogleFonts.openSans(
+                                      fontSize: 15.sp,
+                                      color: const Color(0xFFD3D3D3)),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // showDialog(context: context, builder: (context)=>BuyTicket());
+                        },
+                        child: Container(
+                          height: 46.h,
+                          width: 132.w,
+                          decoration: BoxDecoration(
+                              gradient: const LinearGradient(colors: [
+                                Color.fromRGBO(209, 154, 8, 1),
+                                Color.fromRGBO(254, 212, 102, 1),
+                                Color.fromRGBO(227, 186, 79, 1),
+                                Color.fromRGBO(209, 154, 8, 1),
+                                Color.fromRGBO(209, 154, 8, 1),
+                              ]),
+                              borderRadius: BorderRadius.circular(10.r)),
+                          child: Center(
+                            child: Text(
+                              "Buy Tickets",
+                              style: GoogleFonts.openSans(
+                                  color: Colors.black,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
-          );
-        }
-      },
+                      )
+                    ],
+                  )
+                ],
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }

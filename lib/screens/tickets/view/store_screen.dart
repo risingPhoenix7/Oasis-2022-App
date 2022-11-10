@@ -29,15 +29,15 @@ class _StoreScreenState extends State<StoreScreen>
   late final Animation<double> _fadeAnimation =
       Tween<double>(begin: 1.0, end: 0.0).animate(fadeController);
 
-  Future<void> initialCall() async {
-    allShowsData = await GetShowsViewModel().retrieveAllShowData();
-    GetShowsViewModel().fillController(allShowsData);
+
+  Future<void> controllerInitialize() async {
+    await StoreController().initialCall();
     isLoading.value = false;
   }
 
   @override
   void initState() {
-    initialCall();
+    controllerInitialize();
     StoreController.itemNumber.addListener(() {
       setState(() {});
     });
@@ -47,45 +47,56 @@ class _StoreScreenState extends State<StoreScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ValueListenableBuilder(
-        valueListenable: isLoading,
-        builder: (BuildContext context, bool value, Widget? child) {
-          if (value) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return StoreController.carouselItems.isEmpty
-                ? Center(
-                    child: Text(
-                      "Store is empty right now",
-                      style: GoogleFonts.openSans(
-                          color: Colors.white, fontSize: 25.sp),
-                    ),
-                  )
-                : SizedBox(
-                    height: 1.sh,
-                    child: Stack(children: [
-                      FadeTransition(
-                        opacity: _fadeAnimation,
-                        child: (StoreController
-                                    .carouselItems[
-                                        StoreController.itemNumber.value]
-                                    .runtimeType ==
-                                MerchCarouselItem)
-                            ? const Merch()
-                            : const ProfShow(),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: 600.h,
-                        ),
-                        child: const BottomCarousel(),
-                      )
-                    ]),
-                  );
-          }
+      body: RefreshIndicator(
+        color: Colors.amber,
+        backgroundColor: Colors.black,
+        onRefresh: () async {
+          await StoreController().initialCall();
+          isLoading.value = false;
+          StoreController.itemNumber.addListener(() {
+            setState(() {});
+          });
         },
+        child: ValueListenableBuilder(
+          valueListenable: isLoading,
+          builder: (BuildContext context, bool value, Widget? child) {
+            if (value) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              return StoreController.carouselItems.isEmpty
+                  ? Center(
+                      child: Text(
+                        "Store is empty right now",
+                        style: GoogleFonts.openSans(
+                            color: Colors.white, fontSize: 25.sp),
+                      ),
+                    )
+                  : SizedBox(
+                      height: 1.sh,
+                      child: Stack(children: [
+                        FadeTransition(
+                          opacity: _fadeAnimation,
+                          child: (StoreController
+                                      .carouselItems[
+                                          StoreController.itemNumber.value]
+                                      .runtimeType ==
+                                  MerchCarouselItem)
+                              ? const Merch()
+                              : const ProfShow(),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: 600.h,
+                          ),
+                          child: const BottomCarousel(),
+                        )
+                      ]),
+                    );
+            }
+          },
+        ),
       ),
     );
   }

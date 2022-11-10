@@ -14,59 +14,57 @@ class ProfShow extends StatefulWidget {
 }
 
 class _ProfShowState extends State<ProfShow> {
-  ValueNotifier<bool> isLoading = ValueNotifier(true);
   @override
   void initState() {
     StoreController.itemNumber.addListener(() {
       setState(() {});
     });
-    isLoading.value = false;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-        valueListenable: isLoading,
-        builder: (context, bool value, widget) {
-          if (value) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return Stack(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 43.h, left: 8.w),
-                  child: CachedNetworkImage(
-                    imageUrl: (StoreController
-                                .carouselItems[StoreController.itemNumber.value]
-                            as StoreItemData)
-                        .image_url[1],
-                    placeholder: (context, url) =>
-                        const CircularProgressIndicator(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 180.h),
-                  child: Container(
-                    height: 356.h,
-                    decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [Colors.black, Colors.transparent],
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter)),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 438.h, left: 20.w),
-                  child: const BannerDetails(),
-                ),
-              ],
-            );
-          }
+    return RefreshIndicator(
+      color: Colors.amber,
+      backgroundColor: Colors.black,
+      onRefresh: () async {
+        await StoreController().initialCall();
+        setState(() {});
+        StoreController.itemNumber.addListener(() {
+          setState(() {});
         });
+      },
+      child: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 43.h, left: 8.w),
+            child: CachedNetworkImage(
+              imageUrl: (StoreController
+                          .carouselItems[StoreController.itemNumber.value]
+                      as StoreItemData)
+                  .image_url[1],
+              placeholder: (context, url) => const CircularProgressIndicator(
+                color: Colors.black,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 180.h),
+            child: Container(
+              height: 356.h,
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [Colors.black, Colors.transparent],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter)),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 438.h, left: 20.w),
+            child: const BannerDetails(),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:oasis_2022/screens/wallet_screen/view/send_money_screens/updatedSendMoneyDialog.dart';
 import 'dart:ui';
 import '../../../../resources/resources.dart';
 import '../../view_model/wallet_viewmodel.dart';
@@ -24,7 +25,6 @@ class SendMoneyScreen1 extends StatefulWidget {
 }
 
 class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
-
   int amountToSend = 0;
   bool isLoading = false;
   late int balance = 0;
@@ -82,7 +82,7 @@ class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
     }
 
     setState(
-            () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
   }
 
   @override
@@ -98,110 +98,108 @@ class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
             left: 20,
             child: isLoading
                 ? SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: const Center(
-                child: LinearProgressIndicator(
-                  color: Colors.black,
-                  backgroundColor: Colors.transparent,
-                ),
-              ),
-            )
-                : InkWell(
-              onTap: () async {
-                if (textEditingController.text == "") {
-                  var snackBar = const SnackBar(
-                    duration: Duration(seconds: 2),
-                    content: SizedBox(
-                        height: 25,
-                        child: Center(child: Text("Enter a Value"))),
-                  );
-                  if (!mounted) {}
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
-                if (int.parse(textEditingController.text) == 0 ||
-                    int.parse(textEditingController.text) < 0) {
-                  var snackBar = const SnackBar(
-                    duration: Duration(seconds: 2),
-                    content: SizedBox(
-                        height: 25,
-                        child: Center(
-                            child:
-                            Text("Enter a non zero postive value"))),
-                  );
-                  if (!mounted) {}
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                } else {
-                  amountToSend = int.parse(textEditingController.text);
-                  if (await auth.isDeviceSupported()) {
-                    await _authenticate();
-                  }
-                  if (authenticated) {
-                    bool isSuccess;
-                    int id = int.parse(widget.userId);
-                    try {
-                      await WalletViewModel()
-                          .sendMoney(id, amountToSend);
-                      isSuccess = true;
-                    } catch (e) {
-                      isSuccess = false;
-                    }
-                    if (isSuccess) {
-                      WalletScreenController.isSuccess.value = true;
-                    }
-                    if (!mounted) {}
-                    showDialog(
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (context) {
-                          return Align(
-                            alignment: Alignment.bottomCenter,
-                            child: SendMoneyDialogBox(
-                              isSuccessful: isSuccess,
-                              amount: amountToSend,
-                            ),
-                          );
-                        });
-                  }
-                }
-              },
-              child: Container(
-                alignment: Alignment.center,
-                // alignment: Alignment.bottomCenter,
-                width: UIUtills().getProportionalWidth(width: 388),
-                height: UIUtills().getProportionalHeight(height: 72.00),
-                // margin: EdgeInsets.symmetric(
-                //     horizontal:
-                //     UIUtills().getProportionalWidth(width: 20.00)),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color.fromRGBO(209, 154, 8, 1),
-                      Color.fromRGBO(254, 212, 102, 1),
-                      Color.fromRGBO(227, 186, 79, 1),
-                      Color.fromRGBO(209, 154, 8, 1),
-                      Color.fromRGBO(209, 154, 8, 1),
-                    ],
-                  ),
-                  borderRadius: BorderRadius.circular(
-                    UIUtills().getProportionalWidth(width: 15.00),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Send Money',
-                      style: GoogleFonts.openSans(
-                        fontWeight: FontWeight.w700,
+                    width: MediaQuery.of(context).size.width,
+                    child: const Center(
+                      child: LinearProgressIndicator(
                         color: Colors.black,
-                        fontSize:
-                        UIUtills().getProportionalWidth(width: 18.00),
+                        backgroundColor: Colors.transparent,
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
+                  )
+                : InkWell(
+                    onTap: () async {
+                      if (textEditingController.text == "") {
+                        var snackBar = const SnackBar(
+                          duration: Duration(seconds: 2),
+                          content: SizedBox(
+                              height: 25,
+                              child: Center(child: Text("Enter a Value"))),
+                        );
+                        if (!mounted) {}
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                      if (int.parse(textEditingController.text) == 0 ||
+                          int.parse(textEditingController.text) < 0) {
+                        var snackBar = const SnackBar(
+                          duration: Duration(seconds: 2),
+                          content: SizedBox(
+                              height: 25,
+                              child: Center(
+                                  child:
+                                      Text("Enter a non zero postive value"))),
+                        );
+                        if (!mounted) {}
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      } else {
+                        amountToSend = int.parse(textEditingController.text);
+                        if (await auth.isDeviceSupported()) {
+                          await _authenticate();
+                        }
+                        if (authenticated) {
+                          bool isSuccess;
+                          int id = int.parse(widget.userId);
+                          try {
+                            await WalletViewModel().sendMoney(id, amountToSend);
+                            isSuccess = true;
+                          } catch (e) {
+                            isSuccess = false;
+                          }
+                          if (isSuccess) {
+                            WalletScreenController.isSuccess.value = true;
+                          }
+                          if (!mounted) {}
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (context) {
+                                return Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: UpdatedSendMoneyDialogBox(
+                                    isSuccessful: isSuccess,
+                                  ),
+                                );
+                              });
+                        }
+                      }
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      // alignment: Alignment.bottomCenter,
+                      width: UIUtills().getProportionalWidth(width: 388),
+                      height: UIUtills().getProportionalHeight(height: 72.00),
+                      // margin: EdgeInsets.symmetric(
+                      //     horizontal:
+                      //     UIUtills().getProportionalWidth(width: 20.00)),
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromRGBO(209, 154, 8, 1),
+                            Color.fromRGBO(254, 212, 102, 1),
+                            Color.fromRGBO(227, 186, 79, 1),
+                            Color.fromRGBO(209, 154, 8, 1),
+                            Color.fromRGBO(209, 154, 8, 1),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          UIUtills().getProportionalWidth(width: 15.00),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Send Money',
+                            style: GoogleFonts.openSans(
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black,
+                              fontSize:
+                                  UIUtills().getProportionalWidth(width: 18.00),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
           ),
           Positioned(
               left: UIUtills().getProportionalWidth(width: 24),
@@ -210,10 +208,15 @@ class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
                 'Send Money',
                 style: GoogleFonts.openSans(fontSize: 32, color: Colors.white),
               )),
-          Positioned(top: UIUtills().getProportionalHeight(height: 75),right: UIUtills().getProportionalWidth(width: 30),
-              child: GestureDetector(onTap: (){Navigator.pop(context);},
-                child: SvgPicture.asset('assets/images/exit_button.svg'),)),
-
+          Positioned(
+              top: UIUtills().getProportionalHeight(height: 75),
+              right: UIUtills().getProportionalWidth(width: 30),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: SvgPicture.asset('assets/images/exit_button.svg'),
+              )),
           Positioned(
             top: UIUtills().getProportionalHeight(height: 190),
             child: Padding(
@@ -252,28 +255,26 @@ class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
                   children: [
                     SizedBox(
                         height:
-                        UIUtills().getProportionalHeight(height: 21.00)),
-
+                            UIUtills().getProportionalHeight(height: 21.00)),
                     SizedBox(
                         height:
-                        UIUtills().getProportionalHeight(height: 14.00)),
-
+                            UIUtills().getProportionalHeight(height: 14.00)),
                     SizedBox(
                         height:
-                        UIUtills().getProportionalHeight(height: 12.00)),
+                            UIUtills().getProportionalHeight(height: 12.00)),
                     Text(
                       '${UserDetailsViewModel.userDetails.username}',
                       style: GoogleFonts.openSans(
                           color: Colors.white,
                           fontSize:
-                          UIUtills().getProportionalWidth(width: 16.00),
+                              UIUtills().getProportionalWidth(width: 16.00),
                           fontWeight: FontWeight.w600,
                           letterSpacing:
-                          UIUtills().getProportionalWidth(width: -0.41)),
+                              UIUtills().getProportionalWidth(width: -0.41)),
                     ),
                     SizedBox(
                         height:
-                        UIUtills().getProportionalHeight(height: 32.00)),
+                            UIUtills().getProportionalHeight(height: 32.00)),
                     Container(
                       alignment: Alignment.center,
                       width: UIUtills().getProportionalWidth(width: 82),
@@ -300,7 +301,9 @@ class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(4)
                               ],
-                              keyboardType: const TextInputType.numberWithOptions(decimal: false,signed: false),
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      decimal: false, signed: false),
                               style: GoogleFonts.openSans(
                                   color: Colors.white,
                                   fontSize: UIUtills()
@@ -323,19 +326,17 @@ class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
                         ],
                       ),
                     ),
-
                     SizedBox(
                         height:
-                        UIUtills().getProportionalHeight(height: 30.00)),
-
-
+                            UIUtills().getProportionalHeight(height: 30.00)),
                   ],
                 ),
               ),
             ),
           ),
           Positioned(
-            top: UIUtills().getProportionalHeight(height: 162),left: UIUtills().getProportionalWidth(width: 183),
+            top: UIUtills().getProportionalHeight(height: 162),
+            left: UIUtills().getProportionalWidth(width: 183),
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -356,11 +357,10 @@ class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
                   letter,
                   style: GoogleFonts.openSans(
                       color: Colors.black,
-                      fontSize: UIUtills()
-                          .getProportionalWidth(width: 32.00),
+                      fontSize: UIUtills().getProportionalWidth(width: 32.00),
                       fontWeight: FontWeight.w600,
-                      letterSpacing: UIUtills()
-                          .getProportionalWidth(width: -0.41)),
+                      letterSpacing:
+                          UIUtills().getProportionalWidth(width: -0.41)),
                 ),
               ],
             ),

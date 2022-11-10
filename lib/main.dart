@@ -43,7 +43,8 @@ Future<void> main() async {
   await Hive.openBox<FoodStallList>('foodStallBox');
   SecureStorage secureStorage = SecureStorage();
 
-  await Firebase.initializeApp( name: 'com.dvm.oasis2k22',
+  await Firebase.initializeApp(
+      name: 'com.dvm.oasis2k22',
       options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.subscribeToTopic('all');
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;

@@ -74,4 +74,5 @@ dependencies {
     implementation 'com.android.support:multidex:2.0.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-analytics'
+    implementation "androidx.activity:activity:1.6.0-alpha05"
 }

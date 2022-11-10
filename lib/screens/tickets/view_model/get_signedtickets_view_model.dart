@@ -1,3 +1,6 @@
+import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
+
+import '../controller/store_controller.dart';
 import '/provider/user_details_viewmodel.dart';
 import '/utils/error_messages.dart';
 import 'package:chucker_flutter/chucker_flutter.dart';
@@ -7,30 +10,47 @@ import '../repository/model/signedTicketsData.dart';
 import '../repository/retrofit/getSignedTickets.dart';
 
 class GetSignedTicketsViewModel {
-  Future<void> retrieveSignedShows() async {
-    SignedTicketResult.error = null;
+  Future<SignedTickets> retrieveSignedShows() async {
     String? jwt = UserDetailsViewModel.userDetails.JWT;
-    final dio = Dio(); // Provide a dio instance
-    dio.interceptors.add(ChuckerDioInterceptor()); //to remove later
+    String auth = "JWT $jwt";
+    final dio = Dio();
     final client = SignedTicketsRestClient(dio);
-    SignedTicketResult.signedTickets =
-        await client.getCurrentTickets("JWT " + jwt!).then((it) {
-      return it;
-    }).catchError((Object obj) {
-      try {
-        final res = (obj as DioError).response;
-        SignedTicketResult.error = res?.statusCode.toString();
-        if (res?.statusCode == null || res == null) {
-          SignedTicketResult.error = ErrorMessages.noInternet;
-        } else {
-          SignedTicketResult.error =
-              getSignedTicketsErrorResponse(res.statusCode, res.statusMessage);
+    SignedTickets signedTickets = SignedTickets();
+    try {
+      signedTickets = await client.getCurrentTickets(auth);
+    } catch (e) {
+      if (e.runtimeType == DioError) {
+        var code = (e as DioError).response?.statusCode;
+        var message = (e).response?.statusMessage;
+        if (e.response!.statusCode == 412) {
+          throw Exception("Tickets not available");
         }
-      } catch (e) {
-        SignedTicketResult.error = ErrorMessages.unknownError;
+        throw Exception(message);
+      } else {
+        throw Exception(e);
       }
-      return SignedTicketResult.signedTickets ?? SignedTickets();
-    });
+    }
+    return signedTickets;
+  }
+
+  int getUsedTickets(int id) {
+    int usedTickets = 0;
+    for (SignedShow i in StoreController.signedTickets.shows!) {
+      if (i.id == id) {
+        usedTickets = i.used_count!;
+      }
+    }
+    return usedTickets;
+  }
+
+  int getUnusedTickets(int id) {
+    int unusedTickets = 0;
+    for (SignedShow i in StoreController.signedTickets.shows!) {
+      if (i.id == id) {
+        unusedTickets = i.unused_count!;
+      }
+    }
+    return unusedTickets;
   }
 
   String getSignedTicketsErrorResponse(

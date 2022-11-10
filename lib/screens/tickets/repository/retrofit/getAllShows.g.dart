@@ -35,7 +35,7 @@ class _AllShowsRestClient implements AllShowsRestClient {
     )
             .compose(
               _dio.options,
-              '/tickets-manager/shows/manager',
+              '/tickets-manager/shows',
               queryParameters: queryParameters,
               data: _data,
             )

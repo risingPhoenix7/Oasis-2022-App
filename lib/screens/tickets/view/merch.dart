@@ -30,9 +30,9 @@ class _MerchState extends State<Merch> {
           Padding(
             padding: EdgeInsets.only(top: 61.h),
             child: SvgPicture.asset(
-              "assets/images/merch_bg.svg",
-              height: 662.h,
-              width: 428.w,
+              "assets/images/merch_heading.svg",
+              height: 85.h,
+              width: 367.w,
             ),
           ),
           SizedBox(

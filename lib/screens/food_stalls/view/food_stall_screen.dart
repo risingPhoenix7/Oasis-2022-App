@@ -64,7 +64,7 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
       print('klisadygfdef');
       print(CachedFoodStallsViewModel.statusInt);
       if (CachedFoodStallsViewModel.statusInt == 2) {
-        isStallsClosed=false;
+        isStallsClosed = false;
         print('should refresh now after reading from network call');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -75,7 +75,7 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
         }
         checkFoodStallResult();
       } else if (CachedFoodStallsViewModel.statusInt == 1) {
-        isStallsClosed=false;
+        isStallsClosed = false;
         print('should refresh now after reading from local db');
         setState(() {
           foodStall = CachedFoodStallsViewModel.listFoodStalls;
@@ -108,8 +108,7 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
                         Center(
                           child: ErrorDialog(
                               isFatalError: true,
-                              errorMessage:
-                              FoodStallViewModel.error),
+                              errorMessage: FoodStallViewModel.error),
                         )
                       ],
                     )

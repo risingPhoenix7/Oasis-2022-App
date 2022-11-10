@@ -77,7 +77,7 @@ class _SingleMiscellaneousEventState extends State<SingleMiscellaneousEvent> {
                   ? Padding(
                       padding: EdgeInsets.only(right: 25.w),
                       child: Text(
-                        widget.eventDescription ?? 'NA',
+                        widget.eventDescription ?? 'More details will be added later',
                         style: OasisTextStyles.openSans300
                             .copyWith(fontSize: 14.sp, color: Colors.white),
                       ),

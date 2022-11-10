@@ -68,8 +68,7 @@ class _ErrorDialogState extends State<ErrorDialog> {
                   right: UIUtills().getProportionalWidth(width: 50),
                   top: UIUtills().getProportionalHeight(height: 10)),
               child: Text(
-                widget.errorMessage ??
-                    "An error occured, please check your network connection or try again after some time, if the problem persists please contact a DVM Official",
+                widget.errorMessage ?? 'Loading...',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.roboto(
                     fontWeight: FontWeight.w700,

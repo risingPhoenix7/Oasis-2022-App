@@ -8,7 +8,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:oasis_2022/screens/events/repository/model/miscEventResult.dart';
 import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
+
 import '../home.dart';
 import '../order/order_ui.dart';
 import '../provider/user_details_viewmodel.dart';
@@ -20,6 +22,7 @@ import '../screens/wallet_screen/view/wallet_screen.dart';
 import 'firebase_options.dart';
 import 'notificationservice/local_notification_service.dart';
 import 'order/order_screen.dart';
+import 'screens/food_stalls/repo/model/food_stall_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +32,15 @@ Future<void> main() async {
   ChuckerFlutter.showOnRelease = false;
   await Hive.initFlutter();
   Hive.registerAdapter(HiveMenuEntryAdapter());
+  Hive.registerAdapter(MiscEventListAdapter());
+  Hive.registerAdapter(MiscEventDataAdapter());
+  Hive.registerAdapter(FoodStallAdapter());
+  Hive.registerAdapter(MenuItemAdapter());
+  Hive.registerAdapter(FoodStallListAdapter());
+  await Hive.openBox<MiscEventList>('miscEventListBox');
   await Hive.openBox('subscribeBox');
   await Hive.openBox('cartBox');
+  await Hive.openBox<FoodStallList>('foodStallBox');
   SecureStorage secureStorage = SecureStorage();
 
   await Firebase.initializeApp( name: 'com.dvm.oasis2k22',
@@ -109,13 +119,12 @@ class _BosmFestAppState extends State<BosmFestApp> {
           return MaterialApp(
             theme: ThemeData(scaffoldBackgroundColor: Colors.black),
             navigatorObservers: [ChuckerFlutter.navigatorObserver],
-            //initialRoute: 'order',
             routes: {
               'food_stalls': (context) => FoodStallScreen(),
               'login': (context) => LoginScreen(),
               'wallet': (context) => WalletScreen(),
               'home': (context) => HomeScreen(),
-              'order': (context) => OrdersScreen(),
+              'order': (context) => OrderScreen(),
               'leaderboard': (context) => Leaderboard(),
             },
             home: FutureBuilder(

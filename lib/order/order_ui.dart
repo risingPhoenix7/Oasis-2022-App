@@ -1,5 +1,7 @@
 import 'package:oasis_2022/order/order_status.dart';
 
+import 'package:oasis_2022/utils/error_messages.dart';
+
 import '../order/controller/cart_and_order_controller.dart';
 import '../order/order_card.dart';
 import '../order/order_screen_viewmodel.dart';
@@ -119,26 +121,21 @@ class _OrderScreenState extends State<OrderScreen> {
                               )
                             ],
                           ))
-                        : SizedBox(
-                      height: 500,
-                          child: CustomScrollView(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              slivers: <Widget>[
-                                SliverPadding(
-                                  padding: const EdgeInsets.all(10),
-                                  sliver: SliverList(
-                                      delegate: SliverChildBuilderDelegate(
-                                          (BuildContext context, int index) {
-                                    return OrderWidget(
-                                      orderCardModel: orderCardList[index],
-                                    );
-                                  }, childCount: orderCardList.length)),
-                                )
-                              ],
-                            ),
-                        )
-                ),
+                        : CustomScrollView(
+                            shrinkWrap: true,
+                            slivers: <Widget>[
+                              SliverPadding(
+                                padding: const EdgeInsets.all(10),
+                                sliver: SliverList(
+                                    delegate: SliverChildBuilderDelegate(
+                                        (BuildContext context, int index) {
+                                  return Order_card(
+                                    orderCardModel: orderCardList[index],
+                                  );
+                                }, childCount: orderCardList.length)),
+                              )
+                            ],
+                          )),
               );
             }
           },

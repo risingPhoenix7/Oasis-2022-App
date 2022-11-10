@@ -1,3 +1,5 @@
+import 'package:oasis_2022/screens/wallet_screen/view/send_money_screens/updatedSendMoneyDialog.dart';
+
 import '/provider/user_details_viewmodel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -165,9 +167,8 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                                 builder: (context) {
                                   return Align(
                                     alignment: Alignment.bottomCenter,
-                                    child: SendMoneyDialogBox(
+                                    child: UpdatedSendMoneyDialogBox(
                                       isSuccessful: isSuccess,
-                                      amount: amountToSend,
                                     ),
                                   );
                                 });
@@ -329,7 +330,6 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                               LengthLimitingTextInputFormatter(4)
                             ],
                             keyboardType: TextInputType.number,
-
                             style: GoogleFonts.roboto(
                                 color: const Color(0xFF171717),
                                 fontSize: UIUtills()

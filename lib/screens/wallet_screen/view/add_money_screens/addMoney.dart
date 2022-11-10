@@ -1,4 +1,5 @@
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:oasis_2022/screens/wallet_screen/view/add_money_screens/updatedAddMoneyDialog.dart';
 import 'dart:ui';
 import '../../../../resources/resources.dart';
 import '../../view_model/wallet_viewmodel.dart';
@@ -55,13 +56,13 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
         _isAuthenticating = true;
         _authorized = 'Authenticating';
       });
-        authenticated = await auth.authenticate(
+      authenticated = await auth.authenticate(
         localizedReason: 'Please authenticate to add money',
         options: const AuthenticationOptions(
           stickyAuth: true,
         ),
       );
-        print("${authenticated} lol 123");
+      print("${authenticated} lol 123");
       setState(() {
         _isAuthenticating = false;
       });
@@ -80,13 +81,13 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
     }
 
     setState(
-
         () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
@@ -150,9 +151,8 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                                 builder: (context) {
                                   return Align(
                                     alignment: Alignment.bottomCenter,
-                                    child: AddMoneyDialogBox(
+                                    child: UpdatedAddMoneyDialogBox(
                                       isSuccessful: isSuccess,
-                                      amount: amountToAdd,
                                     ),
                                   );
                                 });
@@ -172,9 +172,8 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                               builder: (context) {
                                 return Align(
                                   alignment: Alignment.bottomCenter,
-                                  child: AddMoneyDialogBox(
+                                  child: UpdatedAddMoneyDialogBox(
                                     isSuccessful: isSuccess,
-                                    amount: amountToAdd,
                                   ),
                                 );
                               });
@@ -227,11 +226,15 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                 'Add Money',
                 style: GoogleFonts.openSans(fontSize: 32, color: Colors.white),
               )),
-          Positioned(top: UIUtills().getProportionalHeight(height: 75),right: UIUtills().getProportionalWidth(width: 30),
-          child: GestureDetector(onTap: (){Navigator.pop(context);},
-              child: SvgPicture.asset('assets/images/exit_button.svg'),)
-          ),
-
+          Positioned(
+              top: UIUtills().getProportionalHeight(height: 75),
+              right: UIUtills().getProportionalWidth(width: 30),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: SvgPicture.asset('assets/images/exit_button.svg'),
+              )),
           Positioned(
             top: UIUtills().getProportionalHeight(height: 190),
             child: Padding(
@@ -270,7 +273,6 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                     SizedBox(
                         height:
                             UIUtills().getProportionalHeight(height: 21.00)),
-
                     SizedBox(
                         height:
                             UIUtills().getProportionalHeight(height: 14.00)),
@@ -324,10 +326,11 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                               cursorColor: Colors.white,
                               textAlign: TextAlign.right,
                               inputFormatters: [
-
                                 LengthLimitingTextInputFormatter(4)
                               ],
-                                keyboardType: const TextInputType.numberWithOptions(decimal: false),
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      decimal: false),
                               style: GoogleFonts.openSans(
                                   color: Colors.white,
                                   fontSize: UIUtills()
@@ -350,19 +353,17 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                         ],
                       ),
                     ),
-
                     SizedBox(
                         height:
                             UIUtills().getProportionalHeight(height: 30.00)),
-
-
                   ],
                 ),
               ),
             ),
           ),
           Positioned(
-            top: UIUtills().getProportionalHeight(height: 162),left: UIUtills().getProportionalWidth(width: 179),
+            top: UIUtills().getProportionalHeight(height: 162),
+            left: UIUtills().getProportionalWidth(width: 179),
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -383,11 +384,10 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                   letter,
                   style: GoogleFonts.openSans(
                       color: Colors.black,
-                      fontSize: UIUtills()
-                          .getProportionalWidth(width: 32.00),
+                      fontSize: UIUtills().getProportionalWidth(width: 32.00),
                       fontWeight: FontWeight.w600,
-                      letterSpacing: UIUtills()
-                          .getProportionalWidth(width: -0.41)),
+                      letterSpacing:
+                          UIUtills().getProportionalWidth(width: -0.41)),
                 ),
               ],
             ),

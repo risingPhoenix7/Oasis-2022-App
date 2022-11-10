@@ -45,7 +45,7 @@ class _LoaderState extends State<Loader> {
                 width: 75,
                 child: CircularProgressIndicator(
                   strokeWidth: 5,
-                  backgroundColor: Colors.black,
+                  color: Colors.amberAccent,
                 ),
               ),
             ),

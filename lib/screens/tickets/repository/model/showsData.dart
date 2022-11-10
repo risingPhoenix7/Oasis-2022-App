@@ -2,16 +2,11 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'showsData.g.dart';
 
-class ShowsResult {
-  static AllShowsData? allShowsData = AllShowsData([], []);
-  static String? error;
-}
-
 @JsonSerializable()
 class AllShowsData {
   AllShowsData(this.shows, this.combos);
 
-  List<TicketData>? shows = [];
+  List<StoreItemData>? shows = [];
   List<CombosData>? combos = [];
 
   factory AllShowsData.fromJson(Map<String, dynamic> json) =>
@@ -19,31 +14,37 @@ class AllShowsData {
 }
 
 @JsonSerializable()
-class TicketData {
+class StoreItemData {
   int? id;
-  double? price;
+  int? price;
   String? name;
+  String? venue;
+  List<String> image_url;
   String? timestamp;
-  bool? allow_bitsians, allow_participants, tickets_available;
+  bool? allow_bitsians, allow_participants, tickets_available, is_merch, available;
 
-  TicketData({
+  StoreItemData({
     this.id,
+    this.available,
     this.price,
+    this.venue,
     this.timestamp,
     this.name,
     this.allow_participants,
     this.allow_bitsians,
+    this.is_merch,
+    required this.image_url,
     this.tickets_available,
   });
 
-  factory TicketData.fromJson(Map<String, dynamic> json) =>
-      _$TicketDataFromJson(json);
+  factory StoreItemData.fromJson(Map<String, dynamic> json) =>
+      _$StoreItemDataFromJson(json);
 }
 
 @JsonSerializable()
 class CombosData {
   int? id;
-  double? price;
+  int? price;
   String? name;
   bool? allow_bitsians, allow_participants;
   List<Shows>? shows;
@@ -72,4 +73,10 @@ class Shows {
   });
 
   factory Shows.fromJson(Map<String, dynamic> json) => _$ShowsFromJson(json);
+}
+
+class MerchCarouselItem {
+  List<StoreItemData>? merch;
+  String imageAsset;
+  MerchCarouselItem({required this.imageAsset, this.merch});
 }

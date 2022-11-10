@@ -13,26 +13,23 @@ class TicketPostViewModel {
   static ValueNotifier<double> totalAmount = ValueNotifier(0);
   static String? error;
 
-  Future<void> postOrders() async {
+  Future<void> postOrders(TicketPostBody ticketPostBody) async {
     error = null;
     String? jwt = UserDetailsViewModel.userDetails.JWT;
     final dio = Dio(); // Provide a dio instance
     dio.interceptors.add(ChuckerDioInterceptor());
     final client = PostTicketRestClient(dio);
-    await client.postTicket("JWT $jwt", cleanTicketPostBody()).then((it) async {
-      return it;
-    }).catchError((Object obj) {
-      try {
-        final res = (obj as DioError).response;
-        if (res?.statusCode == null || res == null) {
-          error = ErrorMessages.noInternet;
-        } else {
-          error = buyTicketsErrorResponse(res.statusCode, res.statusMessage);
-        }
-      } catch (e) {
-        error = ErrorMessages.unknownError;
+    try {
+      await client.postTicket("JWT $jwt", ticketPostBody);
+    } catch(e){
+      if (e.runtimeType == DioError) {
+        var code = (e as DioError).response?.statusCode;
+        var message = (e).response?.statusMessage;
+        throw Exception(e.response!.data["display_message"]);
+      } else {
+        throw Exception(e);
       }
-    });
+    }
   }
 
   TicketPostBody cleanTicketPostBody() {

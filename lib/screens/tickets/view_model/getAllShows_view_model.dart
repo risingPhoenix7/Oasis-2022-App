@@ -1,3 +1,6 @@
+import 'package:flutter/cupertino.dart';
+import 'package:oasis_2022/screens/tickets/controller/store_controller.dart';
+
 import '/provider/user_details_viewmodel.dart';
 import '/utils/error_messages.dart';
 import 'package:chucker_flutter/chucker_flutter.dart';
@@ -7,31 +10,62 @@ import '../repository/model/showsData.dart';
 import '../repository/retrofit/getAllShows.dart';
 
 class GetShowsViewModel {
-  Future<void> retrieveAllShowData() async {
-    ShowsResult.error = null;
+  Future<AllShowsData> retrieveAllShowData() async {
     String? jwt = UserDetailsViewModel.userDetails.JWT;
+    String? auth = "JWT $jwt";
+    AllShowsData allShowsData = AllShowsData([], []);
     final dio = Dio(); // Provide a dio instance
-    dio.interceptors.add(ChuckerDioInterceptor()); //to remove later
     final client = AllShowsRestClient(dio);
-    ShowsResult.allShowsData =
-        await client.getAllShows("JWT " + jwt!).then((it) {
-      return it;
-    }).catchError((Object obj) {
-      try {
-        final res = (obj as DioError).response;
-        ShowsResult.error = res?.statusCode.toString();
-        if (res?.statusCode == null || res == null) {
-          ShowsResult.error = ErrorMessages.noInternet;
-        } else {
-          ShowsResult.error =
-              getShowsErrorResponse(res.statusCode, res.statusMessage);
-        }
-      } catch (e) {
-        ShowsResult.error = ErrorMessages.unknownError;
+    try {
+      allShowsData = await client.getAllShows(auth);
+    } catch (e) {
+      if (e.runtimeType == DioError) {
+        var code = (e as DioError).response?.statusCode;
+        var message = (e).response?.statusMessage;
+        throw Exception(message);
+      } else {
+        throw Exception(e);
       }
-      return ShowsResult.allShowsData ??
-          AllShowsData(<TicketData>[], <CombosData>[]);
-    });
+    }
+    for (StoreItemData i in allShowsData.shows!) {
+      print(i.name);
+    }
+    return allShowsData;
+  }
+
+  void fillController(AllShowsData allShowsData) {
+    // filling carouselItem
+    StoreController.carouselItems.clear();
+    MerchCarouselItem merchCarouselItem = MerchCarouselItem(
+        imageAsset: "assets/images/merch_small.png", merch: []);
+    List<StoreItemData> merchItems = [];
+    for (StoreItemData i in allShowsData.shows ?? []) {
+      if (!i.is_merch!) {
+        StoreController.carouselItems.add(i);
+      } else {
+        merchItems.add(i);
+      }
+    }
+    for (StoreItemData i in merchItems) {
+      merchCarouselItem.merch!.add(i);
+    }
+    if (merchItems.isNotEmpty) {
+      StoreController.carouselItems.add(merchCarouselItem);
+    }
+    //filling carousel image
+    StoreController.carouselImage2.clear();
+    for (StoreItemData i in allShowsData.shows ?? []) {
+      if (!i.is_merch!) {
+        StoreController.carouselImage2.add(i.image_url[0]);
+      }
+    }
+    int k = 0;
+    for (StoreItemData i in allShowsData.shows ?? []) {
+      if (i.is_merch! && (k == 0)) {
+        k = 1;
+        StoreController.carouselImage2.add("assets/images/merch_small.png");
+      }
+    }
   }
 
   String getShowsErrorResponse(int? responseCode, String? statusMessage) {

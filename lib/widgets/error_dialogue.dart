@@ -1,10 +1,11 @@
-import '../utils/ui_utils.dart';
-import '../widgets/OkButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../utils/ui_utils.dart';
+import '../widgets/OkButton.dart';
 
 class ErrorDialog extends StatefulWidget {
   ErrorDialog(
@@ -27,7 +28,7 @@ class _ErrorDialogState extends State<ErrorDialog> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: const Color(0xFFFFFFFF),
+          color: Colors.black,
           boxShadow: const [
             BoxShadow(
               color: Color.fromRGBO(0, 0, 0, 0.2),
@@ -67,13 +68,12 @@ class _ErrorDialogState extends State<ErrorDialog> {
                   right: UIUtills().getProportionalWidth(width: 50),
                   top: UIUtills().getProportionalHeight(height: 10)),
               child: Text(
-                widget.errorMessage ??
-                    "An error occured, please check your network connection or try again after some time, if the problem persists please contact a DVM Official",
+                widget.errorMessage ?? 'Loading...',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.roboto(
                     fontWeight: FontWeight.w700,
                     fontSize: 18,
-                    color: const Color.fromRGBO(185, 184, 184, 1)),
+                    color: Colors.white),
               ),
             ),
             (widget.isFatalError == null || widget.isFatalError == false)

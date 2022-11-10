@@ -19,7 +19,7 @@ Map<String, dynamic> _$RefreshQrPostModelToJson(RefreshQrPostModel instance) =>
 RefreshQrResponseModel _$RefreshQrResponseModelFromJson(
         Map<String, dynamic> json) =>
     RefreshQrResponseModel(
-      message: json['message'] as String,
+      message: json['message'] as String?,
       qr_code: json['qr_code'] as String,
     );
 

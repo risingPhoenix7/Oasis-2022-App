@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oasis_2022/resources/resources.dart';
+import 'package:oasis_2022/screens/events/view_model/cached_misc_events_view_model.dart';
 import 'package:oasis_2022/utils/oasis_text_styles.dart';
 
 import '/utils/scroll_remover.dart';
@@ -21,15 +22,15 @@ class EventsScreen extends StatefulWidget {
 }
 
 class _EventsScreenState extends State<EventsScreen> {
-  MiscEventsViewModel miscEventsViewModel = MiscEventsViewModel();
+  CachedMiscEventsViewModel cachedMiscEventsViewModel =
+      CachedMiscEventsViewModel();
   bool isLoading = true;
   List<MiscEventData> currentDayMiscEventList = [];
   List<MiscEventData> searchMiscEventList = [];
   FocusNode focusNode = FocusNode();
   TextEditingController searchController = TextEditingController();
 
-  Future<void> updateMiscEventsResult() async {
-    await miscEventsViewModel.retrieveMiscEventResult();
+  void checkMiscEventsResult() {
     if (MiscEventsViewModel.error == null) {
       if (mounted) {
         setState(() {
@@ -54,8 +55,13 @@ class _EventsScreenState extends State<EventsScreen> {
     }
   }
 
+  Future<void> updateMiscEventsResult() async {
+    await cachedMiscEventsViewModel.retrieveMiscEventResult();
+    checkMiscEventsResult();
+  }
+
   void updateCurrentDayMiscEventList() {
-    currentDayMiscEventList = miscEventsViewModel
+    currentDayMiscEventList = cachedMiscEventsViewModel
         .retrieveDayMiscEventData(MiscScreenController.selectedTab.value);
   }
 
@@ -63,8 +69,9 @@ class _EventsScreenState extends State<EventsScreen> {
     print('comes here');
     print(a);
     if (a != null) {
-      searchMiscEventList = miscEventsViewModel.retrieveSearchMiscEventData(
-          MiscScreenController.selectedTab.value, a);
+      searchMiscEventList =
+          cachedMiscEventsViewModel.retrieveSearchMiscEventData(
+              MiscScreenController.selectedTab.value, a);
       print(searchMiscEventList);
     }
     setState(() {});
@@ -88,7 +95,44 @@ class _EventsScreenState extends State<EventsScreen> {
 
   @override
   void initState() {
-    updateMiscEventsResult();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      cachedMiscEventsViewModel.mergedRetriveMiscResult();
+    });
+    CachedMiscEventsViewModel.status.addListener(() {
+      print('klisadygfdef');
+      print(CachedMiscEventsViewModel.statusInt);
+      if (CachedMiscEventsViewModel.statusInt == 2) {
+        print('should refresh now after reading from network call');
+        if(mounted)ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          duration: Duration(milliseconds: 500),
+          content: SizedBox(
+              height: 25,
+              child: Center(child: Text("Fetched latest data"))),
+        ));
+        checkMiscEventsResult();
+      } else if (CachedMiscEventsViewModel.statusInt == 1) {
+        print('should refresh now after reading from local db');
+        if (MiscEventsViewModel.error == null) {
+          updateCurrentDayMiscEventList();
+          setState(() {
+            isLoading = false;
+            print('vghvjvhbkhb');
+
+          });
+        } else {
+          //return MiscEventResult.error;
+          showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (context) {
+                return Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ErrorDialog(errorMessage: MiscEventsViewModel.error!),
+                );
+              });
+        }
+      }
+    });
     MiscScreenController.selectedTab.addListener(() {
       if (mounted) {
         setState(() {

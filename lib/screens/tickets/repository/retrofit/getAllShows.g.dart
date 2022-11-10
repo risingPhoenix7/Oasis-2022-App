@@ -13,7 +13,7 @@ class _AllShowsRestClient implements AllShowsRestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://bits-oasis.org/2022/main';
+    baseUrl ??= 'https://test.bits-oasis.org/2022/main';
   }
 
   final Dio _dio;
@@ -35,7 +35,7 @@ class _AllShowsRestClient implements AllShowsRestClient {
     )
             .compose(
               _dio.options,
-              '/tickets-manager/shows/manager',
+              '/tickets-manager/shows',
               queryParameters: queryParameters,
               data: _data,
             )

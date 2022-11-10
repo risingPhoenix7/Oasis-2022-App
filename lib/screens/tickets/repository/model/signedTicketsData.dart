@@ -2,10 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'signedTicketsData.g.dart';
 
-class SignedTicketResult {
-  static SignedTickets? signedTickets = SignedTickets(shows: [], combos: []);
-  static String? error;
-}
+
 
 @JsonSerializable()
 class SignedTickets {
@@ -25,14 +22,12 @@ class SignedShow {
     this.used_count,
     this.unused_count,
     this.show_name,
-    this.timeStamp,
   });
 
   int? id;
   int? used_count;
   int? unused_count;
   String? show_name;
-  String? timeStamp;
 
   factory SignedShow.fromJson(Map<String, dynamic> json) =>
       _$SignedShowFromJson(json);

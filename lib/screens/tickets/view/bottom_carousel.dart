@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
 import 'package:oasis_2022/screens/tickets/store_controller.dart';
 
 class BottomCarousel extends StatefulWidget {
@@ -12,10 +14,10 @@ class BottomCarousel extends StatefulWidget {
 }
 
 class _BottomCarouselState extends State<BottomCarousel> {
-
   @override
   void initState() {
     StoreController.itemNumber.addListener(() {
+      if (!mounted) {}
       setState(() {});
     });
     super.initState();
@@ -53,16 +55,19 @@ class _BottomCarouselState extends State<BottomCarousel> {
                       return Padding(
                         padding: EdgeInsets.only(left: 16.w),
                         child: GestureDetector(
-                          onTap: (){
-                            print("ok");
+                          onTap: () {
                             StoreController.itemNumber.value = index;
-                            StoreController.itemNumber.notifyListeners();
                           },
-                          child: Image.asset(
-                              "assets/images/${StoreController().imageNamesCarousel[index]}.png"),
+                          child: (StoreController
+                                      .carouselItems[index].runtimeType ==
+                                  MerchCarouselItem)
+                              ? Image.asset(
+                                  StoreController.carouselImage2[index])
+                              : Image.network(
+                                  StoreController.carouselImage2[index]),
                         ),
                       );
-                    }, childCount: StoreController().imageNamesCarousel.length)))
+                    }, childCount: StoreController.carouselItems.length)))
               ],
             ),
           ),

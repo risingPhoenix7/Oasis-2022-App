@@ -27,7 +27,6 @@ SignedShow _$SignedShowFromJson(Map<String, dynamic> json) => SignedShow(
       used_count: json['used_count'] as int?,
       unused_count: json['unused_count'] as int?,
       show_name: json['show_name'] as String?,
-      timeStamp: json['timeStamp'] as String?,
     );
 
 Map<String, dynamic> _$SignedShowToJson(SignedShow instance) =>
@@ -36,7 +35,6 @@ Map<String, dynamic> _$SignedShowToJson(SignedShow instance) =>
       'used_count': instance.used_count,
       'unused_count': instance.unused_count,
       'show_name': instance.show_name,
-      'timeStamp': instance.timeStamp,
     };
 
 SignedCombo _$SignedComboFromJson(Map<String, dynamic> json) => SignedCombo(

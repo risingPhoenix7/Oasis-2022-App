@@ -21,6 +21,7 @@ class EventsScreen extends StatefulWidget {
 }
 
 class _EventsScreenState extends State<EventsScreen> {
+
   MiscEventsViewModel miscEventsViewModel = MiscEventsViewModel();
   bool isLoading = true;
   List<MiscEventData> currentDayMiscEventList = [];
@@ -276,3 +277,4 @@ class _EventsScreenState extends State<EventsScreen> {
     );
   }
 }
+

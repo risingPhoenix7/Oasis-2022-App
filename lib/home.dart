@@ -1,17 +1,14 @@
-import 'package:oasis_2022/morescreen/screens/more_info.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oasis_2022/screens/events/view/miscellaneous_screen.dart';
+import 'package:oasis_2022/screens/morescreen/screens/more_info.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../provider/user_details_viewmodel.dart';
 import '../screens/food_stalls/view/food_stall_screen.dart';
-import '../screens/quiz/view/round.dart';
 import '../screens/tickets/view/tickets_screen.dart';
 import '../screens/wallet_screen/view/wallet_screen.dart';
-import '../utils/nav_bar_icons_icons.dart';
 import '../utils/ui_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
 import 'widgets/loader.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -59,28 +56,33 @@ class _HomeScreenState extends State<HomeScreen> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset("assets/images/navbar_icons/stalls_active.svg"),
-        inactiveIcon: SvgPicture.asset("assets/images/navbar_icons/stall_inactive.svg"),
+        icon: Image.asset("assets/images/navbar_icons/stalls_active.png"),
+        inactiveIcon:
+            SvgPicture.asset("assets/images/navbar_icons/stall_inactive.svg"),
         iconSize: 25,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset("assets/images/navbar_icons/more_active.svg"),
-        inactiveIcon: SvgPicture.asset("assets/images/navbar_icons/more_inactive.svg"),
+        inactiveIcon:
+            SvgPicture.asset("assets/images/navbar_icons/more_inactive.svg"),
         iconSize: 25,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset("assets/images/navbar_icons/events_active.svg"),
-        inactiveIcon: SvgPicture.asset("assets/images/navbar_icons/events_inactive.svg"),
+        inactiveIcon:
+            SvgPicture.asset("assets/images/navbar_icons/events_inactive.svg"),
         iconSize: 25,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset("assets/images/navbar_icons/shows_active.svg"),
-        inactiveIcon: SvgPicture.asset("assets/images/navbar_icons/shows_inactive.svg"),
+        inactiveIcon:
+            SvgPicture.asset("assets/images/navbar_icons/shows_inactive.svg"),
         iconSize: 25,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset("assets/images/navbar_icons/wallet_active.svg"),
-        inactiveIcon: SvgPicture.asset("assets/images/navbar_icons/wallet_inactive.svg"),
+        inactiveIcon:
+            SvgPicture.asset("assets/images/navbar_icons/wallet_inactive.svg"),
         iconSize: 25,
       ),
     ];

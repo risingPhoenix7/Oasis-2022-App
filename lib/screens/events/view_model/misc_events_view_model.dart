@@ -8,7 +8,7 @@ import '../repository/retrofit/getMiscEvents.dart';
 class MiscEventsViewModel {
   static String? error;
   static List<MiscEventData> miscEventList = <MiscEventData>[];
-  static Map<int, List<int>> miscEventSortedMap = {}; //19:[1,3,4,6],20:[]....
+  Map<int, List<int>> miscEventSortedMap = {}; //19:[1,3,4,6],20:[]....
 
   Future<void> retrieveMiscEventResult() async {
     miscEventList = <MiscEventData>[];

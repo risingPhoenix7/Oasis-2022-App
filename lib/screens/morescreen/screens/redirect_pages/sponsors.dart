@@ -1,9 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:oasis_2022/widgets/app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
-import '../../widgets/app_bar.dart';
 
 class SponsorsScreen extends StatefulWidget {
   const SponsorsScreen({Key? key}) : super(key: key);
@@ -32,7 +31,7 @@ class _SponsorsScreenState extends State<SponsorsScreen> {
             isBackButtonRequired: true),
       ),
       body: const WebView(
-        initialUrl: "https://www.bitsbosm.org/sponsors",
+        initialUrl: "https://www.bits-oasis.org/sponsors",
         javascriptMode: JavascriptMode.unrestricted,
       ),
     );

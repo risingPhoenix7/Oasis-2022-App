@@ -12,9 +12,11 @@ class FoodStallViewModel {
     dio.interceptors.add(ChuckerDioInterceptor());
     final client = FoodStallRestClient(dio);
     List<FoodStall> foodStalls = [];
+    error=null;
 
     foodStalls = await client.getStalls().catchError((Object obj) {
       try {
+
         final res = (obj as DioError).response;
         error = res?.statusCode.toString();
         if (res?.statusCode == null || res == null) {
@@ -26,6 +28,10 @@ class FoodStallViewModel {
         }
       } catch (e) {
         error = ErrorMessages.unknownError;
+      }
+      if(foodStalls.isEmpty&&error==null){
+        print('getting assigned here');
+        error=ErrorMessages.stallsAreCurrentlyClosed;
       }
       return foodStalls;
     });

@@ -1,3 +1,5 @@
+import 'package:oasis_2022/utils/error_messages.dart';
+
 import '../order/controller/cart_and_order_controller.dart';
 import '../order/order_card.dart';
 import '../order/order_screen_viewmodel.dart';
@@ -61,7 +63,7 @@ class _OrderScreenState extends State<OrderScreen> {
             builder: (context) {
               return Align(
                 alignment: Alignment.bottomCenter,
-                child: ErrorDialog(),
+                child: ErrorDialog(errorMessage: ErrorMessages.noInternet,),
               );
             });
       }

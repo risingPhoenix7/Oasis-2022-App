@@ -7,7 +7,7 @@ import '../view_model/get_signedtickets_view_model.dart';
 
 class StoreController {
   static ValueNotifier<int> itemNumber = ValueNotifier(0);
-  static ValueNotifier<bool> itemBought = ValueNotifier(true);
+  static ValueNotifier<bool> itemBoughtOrRefreshed = ValueNotifier(true);
 
   static SignedTickets signedTickets = SignedTickets();
 
@@ -22,6 +22,7 @@ class StoreController {
   Future<void> initialCall() async {
     AllShowsData allShowsData = await GetShowsViewModel().retrieveAllShowData();
     GetShowsViewModel().fillController(allShowsData);
+    signedTickets = SignedTickets();
     signedTickets = await GetSignedTicketsViewModel().retrieveSignedShows();
   }
 

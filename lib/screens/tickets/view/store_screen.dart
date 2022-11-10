@@ -37,11 +37,11 @@ class _StoreScreenState extends State<StoreScreen>
   void initState() {
     controllerInitialize();
     StoreController.itemNumber.addListener(() {
-      if(!mounted){}
+      if (!mounted) {}
       setState(() {});
     });
-    StoreController.itemBought.addListener(() {
-      if(!mounted){}
+    StoreController.itemBoughtOrRefreshed.addListener(() {
+      if (!mounted) {}
       setState(() {});
     });
     super.initState();
@@ -54,11 +54,17 @@ class _StoreScreenState extends State<StoreScreen>
         color: Colors.amber,
         backgroundColor: Colors.black,
         onRefresh: () async {
+          isLoading.value = true;
           await StoreController().initialCall();
+          StoreController.itemBoughtOrRefreshed.value = !StoreController.itemBoughtOrRefreshed.value;
+          for(int i = 0; i < StoreController.carouselItems.length ; i++){
+            if(StoreController.carouselItems[i].runtimeType == StoreItemData){
+              print((StoreController.carouselItems[i] as StoreItemData).name);
+            }
+          }
+          print("********************");
+          print(StoreController.carouselImage2);
           isLoading.value = false;
-          StoreController.itemNumber.addListener(() {
-            setState(() {});
-          });
         },
         child: ValueListenableBuilder(
           valueListenable: isLoading,
@@ -68,35 +74,37 @@ class _StoreScreenState extends State<StoreScreen>
                 child: CircularProgressIndicator(),
               );
             } else {
-              return StoreController.carouselItems.isEmpty
-                  ? Center(
-                      child: Text(
-                        "Store is empty right now",
-                        style: GoogleFonts.openSans(
-                            color: Colors.white, fontSize: 25.sp),
-                      ),
-                    )
-                  : SizedBox(
-                      height: 1.sh,
-                      child: Stack(children: [
-                        FadeTransition(
-                          opacity: _fadeAnimation,
-                          child: (StoreController
-                                      .carouselItems[
-                                          StoreController.itemNumber.value]
-                                      .runtimeType ==
-                                  MerchCarouselItem)
-                              ? const Merch()
-                              : const ProfShow(),
+              return ListView(children: [
+                StoreController.carouselItems.isEmpty
+                    ? Center(
+                        child: Text(
+                          "Store is empty right now",
+                          style: GoogleFonts.openSans(
+                              color: Colors.white, fontSize: 25.sp),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: 600.h,
+                      )
+                    : SizedBox(
+                        height: 1.sh,
+                        child: Stack(children: [
+                          FadeTransition(
+                            opacity: _fadeAnimation,
+                            child: (StoreController
+                                        .carouselItems[
+                                            StoreController.itemNumber.value]
+                                        .runtimeType ==
+                                    MerchCarouselItem)
+                                ? const Merch()
+                                : const ProfShow(),
                           ),
-                          child: const BottomCarousel(),
-                        )
-                      ]),
-                    );
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: 600.h,
+                            ),
+                            child: const BottomCarousel(),
+                          )
+                        ]),
+                      ),
+              ]);
             }
           },
         ),

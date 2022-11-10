@@ -20,7 +20,7 @@ class _BottomCarouselState extends State<BottomCarousel> {
       if (!mounted) {}
       setState(() {});
     });
-    StoreController.itemBought.addListener(() {
+    StoreController.itemBoughtOrRefreshed.addListener(() {
       if (!mounted) {}
       setState(() {});
     });
@@ -29,62 +29,54 @@ class _BottomCarouselState extends State<BottomCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      color: Colors.amber,
-      backgroundColor: Colors.black,
-      onRefresh: () async {
-        await StoreController().initialCall();
-        setState(() {});
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 24.w),
-            child: Text(
-              "Store",
-              textScaleFactor: 1.0,
-              style: GoogleFonts.openSans(
-                  color: Colors.white,
-                  fontSize: 32.sp,
-                  fontWeight: FontWeight.bold),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: 24.w),
+          child: Text(
+            "Store",
+            textScaleFactor: 1.0,
+            style: GoogleFonts.openSans(
+                color: Colors.white,
+                fontSize: 32.sp,
+                fontWeight: FontWeight.bold),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 20.h),
+          child: SizedBox(
+            height: 161.h,
+            child: CustomScrollView(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              slivers: [
+                SliverPadding(
+                    padding: EdgeInsets.only(left: 13.w),
+                    sliver: SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                            (BuildContext context, int index) {
+                      return Padding(
+                        padding: EdgeInsets.only(left: 16.w),
+                        child: GestureDetector(
+                          onTap: () {
+                            StoreController.itemNumber.value = index;
+                          },
+                          child: (StoreController
+                                      .carouselItems[index].runtimeType ==
+                                  MerchCarouselItem)
+                              ? Image.asset(
+                                  StoreController.carouselImage2[index])
+                              : Image.network(
+                                  StoreController.carouselImage2[index]),
+                        ),
+                      );
+                    }, childCount: StoreController.carouselItems.length)))
+              ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 20.h),
-            child: SizedBox(
-              height: 161.h,
-              child: CustomScrollView(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                slivers: [
-                  SliverPadding(
-                      padding: EdgeInsets.only(left: 13.w),
-                      sliver: SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                              (BuildContext context, int index) {
-                        return Padding(
-                          padding: EdgeInsets.only(left: 16.w),
-                          child: GestureDetector(
-                            onTap: () {
-                              StoreController.itemNumber.value = index;
-                            },
-                            child: (StoreController
-                                        .carouselItems[index].runtimeType ==
-                                    MerchCarouselItem)
-                                ? Image.asset(
-                                    StoreController.carouselImage2[index])
-                                : Image.network(
-                                    StoreController.carouselImage2[index]),
-                          ),
-                        );
-                      }, childCount: StoreController.carouselItems.length)))
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }

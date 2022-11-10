@@ -21,11 +21,11 @@ class _BuyTicketState extends State<BuyTicket> {
   @override
   void initState() {
     StoreController.itemNumber.addListener(() {
-      if(!mounted){}
+      if (!mounted) {}
       setState(() {});
     });
-    StoreController.itemBought.addListener(() {
-      if(!mounted){}
+    StoreController.itemBoughtOrRefreshed.addListener(() {
+      if (!mounted) {}
       setState(() {});
     });
     super.initState();
@@ -156,11 +156,19 @@ class _BuyTicketState extends State<BuyTicket> {
                         (selectedIndex + 1);
                     try {
                       await TicketPostViewModel().postOrders(ticketPostBody);
-                      StoreController.itemBought.value =
-                          !StoreController.itemBought.value;
+                      await StoreController().initialCall();
+                      StoreController.itemBoughtOrRefreshed.value =
+                          !StoreController.itemBoughtOrRefreshed.value;
                       if (!mounted) {}
                       Navigator.pop(context);
                     } catch (e) {
+                      var snackBar = SnackBar(
+                        duration: const Duration(seconds: 2),
+                        content: SizedBox(
+                            height: 25,
+                            child: Center(child: Text(e.toString()!))),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       print(e);
                     }
                   },

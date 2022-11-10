@@ -24,6 +24,7 @@ Map<String, dynamic> _$AllShowsDataToJson(AllShowsData instance) =>
 StoreItemData _$StoreItemDataFromJson(Map<String, dynamic> json) =>
     StoreItemData(
       id: json['id'] as int?,
+      available: json['available'] as bool?,
       price: json['price'] as int?,
       venue: json['venue'] as String?,
       timestamp: json['timestamp'] as String?,
@@ -48,6 +49,7 @@ Map<String, dynamic> _$StoreItemDataToJson(StoreItemData instance) =>
       'allow_participants': instance.allow_participants,
       'tickets_available': instance.tickets_available,
       'is_merch': instance.is_merch,
+      'available': instance.available,
     };
 
 CombosData _$CombosDataFromJson(Map<String, dynamic> json) => CombosData(

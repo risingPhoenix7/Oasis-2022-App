@@ -22,6 +22,9 @@ class GetSignedTicketsViewModel {
       if (e.runtimeType == DioError) {
         var code = (e as DioError).response?.statusCode;
         var message = (e).response?.statusMessage;
+        if (e.response!.statusCode == 412) {
+          throw Exception("Tickets not available");
+        }
         throw Exception(message);
       } else {
         throw Exception(e);

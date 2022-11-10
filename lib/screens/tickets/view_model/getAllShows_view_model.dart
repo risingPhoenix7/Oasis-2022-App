@@ -27,7 +27,7 @@ class GetShowsViewModel {
         throw Exception(e);
       }
     }
-    for(StoreItemData i in allShowsData.shows!){
+    for (StoreItemData i in allShowsData.shows!) {
       print(i.name);
     }
     return allShowsData;
@@ -49,19 +49,20 @@ class GetShowsViewModel {
     for (StoreItemData i in merchItems) {
       merchCarouselItem.merch!.add(i);
     }
-    if(merchItems.isNotEmpty){
+    if (merchItems.isNotEmpty) {
       StoreController.carouselItems.add(merchCarouselItem);
     }
     //filling carousel image
+    StoreController.carouselImage2.clear();
     for (StoreItemData i in allShowsData.shows ?? []) {
       if (!i.is_merch!) {
         StoreController.carouselImage2.add(i.image_url[0]);
       }
     }
     int k = 0;
-    for(StoreItemData i in allShowsData.shows ?? []){
-      if(i.is_merch! && (k==0)){
-        k=1;
+    for (StoreItemData i in allShowsData.shows ?? []) {
+      if (i.is_merch! && (k == 0)) {
+        k = 1;
         StoreController.carouselImage2.add("assets/images/merch_small.png");
       }
     }

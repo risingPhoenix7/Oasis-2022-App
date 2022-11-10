@@ -25,7 +25,7 @@ class TicketPostViewModel {
       if (e.runtimeType == DioError) {
         var code = (e as DioError).response?.statusCode;
         var message = (e).response?.statusMessage;
-        throw Exception(message);
+        throw Exception(e.response!.data["display_message"]);
       } else {
         throw Exception(e);
       }

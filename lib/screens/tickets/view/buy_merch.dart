@@ -13,14 +13,18 @@ class BuyMerch extends StatefulWidget {
   const BuyMerch(
       {Key? key,
       required this.id,
+      required this.name,
       required this.price,
       required this.imageUrl,
-      required this.amountPurchased})
+      required this.amountPurchased,
+      required this.available})
       : super(key: key);
   final int id;
+  final String name;
   final int price;
   final String imageUrl;
   final int amountPurchased;
+  final bool available;
   @override
   State<BuyMerch> createState() => _BuyMerchState();
 }
@@ -31,11 +35,11 @@ class _BuyMerchState extends State<BuyMerch> {
   @override
   void initState() {
     StoreController.itemNumber.addListener(() {
-      if(!mounted){}
+      if (!mounted) {}
       setState(() {});
     });
-    StoreController.itemBought.addListener(() {
-      if(!mounted){}
+    StoreController.itemBoughtOrRefreshed.addListener(() {
+      if (!mounted) {}
       setState(() {});
     });
     super.initState();
@@ -62,7 +66,7 @@ class _BuyMerchState extends State<BuyMerch> {
                   Padding(
                     padding: EdgeInsets.only(top: 27.h, left: 75.w),
                     child: Text(
-                      "Number of Hoodies",
+                      "Number of ${widget.name}",
                       style: GoogleFonts.openSans(
                           fontSize: 24.sp, color: Colors.white),
                     ),
@@ -153,34 +157,47 @@ class _BuyMerchState extends State<BuyMerch> {
                 padding: EdgeInsets.only(top: 32.h),
                 child: GestureDetector(
                   onTap: () async {
-                    TicketPostBody ticketPostBody =
-                        TicketPostBody(individual: {}, combos: {});
-                    ticketPostBody.individual![widget.id.toString()] =
-                        (selectedIndex + 1);
-                    try{
-                      await TicketPostViewModel().postOrders(ticketPostBody);
-                      StoreController.itemBought.value = !StoreController.itemBought.value;
-                      if(!mounted){}
-                      Navigator.pop(context);
-                    } catch (e){
-                      print(e);
-                    }
+                    if (widget.available) {
+                      TicketPostBody ticketPostBody =
+                          TicketPostBody(individual: {}, combos: {});
+                      ticketPostBody.individual![widget.id.toString()] =
+                          (selectedIndex + 1);
+                      try {
+                        await TicketPostViewModel().postOrders(ticketPostBody);
+                        await StoreController().initialCall();
+                        StoreController.itemBoughtOrRefreshed.value =
+                            !StoreController.itemBoughtOrRefreshed.value;
+                        if (!mounted) {}
+                        Navigator.pop(context);
+                      } catch (e) {
+                        print(e);
+                      }
+                    } else {}
                   },
                   child: Container(
                     height: 52.h,
                     width: 171.w,
                     decoration: BoxDecoration(
-                        gradient: const LinearGradient(colors: [
-                          Color.fromRGBO(209, 154, 8, 1),
-                          Color.fromRGBO(254, 212, 102, 1),
-                          Color.fromRGBO(227, 186, 79, 1),
-                          Color.fromRGBO(209, 154, 8, 1),
-                          Color.fromRGBO(209, 154, 8, 1),
-                        ]),
+                        gradient: widget.available
+                            ? const LinearGradient(colors: [
+                                Color.fromRGBO(209, 154, 8, 1),
+                                Color.fromRGBO(254, 212, 102, 1),
+                                Color.fromRGBO(227, 186, 79, 1),
+                                Color.fromRGBO(209, 154, 8, 1),
+                                Color.fromRGBO(209, 154, 8, 1),
+                              ])
+                            : const LinearGradient(colors: [
+                                Color.fromRGBO(148, 145, 137, 1),
+                                Color.fromRGBO(146, 143, 135, 1),
+                                Color.fromRGBO(152, 150, 143, 1),
+                                Color.fromRGBO(149, 146, 138, 1),
+                                Color.fromRGBO(131, 125, 110, 1),
+                                Color.fromRGBO(126, 126, 125, 1)
+                              ]),
                         borderRadius: BorderRadius.circular(10.r)),
                     child: Center(
                       child: Text(
-                        "Confirm",
+                        widget.available ? "Confirm" : "Sold Out",
                         style: GoogleFonts.openSans(
                             color: Colors.black,
                             fontSize: 20.sp,

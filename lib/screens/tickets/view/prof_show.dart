@@ -20,7 +20,7 @@ class _ProfShowState extends State<ProfShow> {
       if(!mounted){}
       setState(() {});
     });
-    StoreController.itemBought.addListener(() {
+    StoreController.itemBoughtOrRefreshed.addListener(() {
       if(!mounted){}
       setState(() {});
     });
@@ -29,47 +29,36 @@ class _ProfShowState extends State<ProfShow> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      color: Colors.amber,
-      backgroundColor: Colors.black,
-      onRefresh: () async {
-        await StoreController().initialCall();
-        setState(() {});
-        StoreController.itemNumber.addListener(() {
-          setState(() {});
-        });
-      },
-      child: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 43.h, left: 8.w),
-            child: CachedNetworkImage(
-              imageUrl: (StoreController
-                          .carouselItems[StoreController.itemNumber.value]
-                      as StoreItemData)
-                  .image_url[1],
-              placeholder: (context, url) => const CircularProgressIndicator(
-                color: Colors.black,
-              ),
+    return Stack(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(top: 43.h, left: 8.w),
+          child: CachedNetworkImage(
+            imageUrl: (StoreController
+                        .carouselItems[StoreController.itemNumber.value]
+                    as StoreItemData)
+                .image_url[1],
+            placeholder: (context, url) => const CircularProgressIndicator(
+              color: Colors.black,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 180.h),
-            child: Container(
-              height: 356.h,
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [Colors.black, Colors.transparent],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter)),
-            ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 180.h),
+          child: Container(
+            height: 356.h,
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Colors.black, Colors.transparent],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter)),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 438.h, left: 20.w),
-            child: const BannerDetails(),
-          ),
-        ],
-      ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 438.h, left: 20.w),
+          child: const BannerDetails(),
+        ),
+      ],
     );
   }
 }

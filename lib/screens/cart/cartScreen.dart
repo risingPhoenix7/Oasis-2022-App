@@ -1,4 +1,5 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../order/order_screen.dart';
 import '/order/controller/cart_and_order_controller.dart';
 import '/order/order_ui.dart';
 import '/screens/cart/repo/model/cart_screen_model.dart';
@@ -46,7 +47,7 @@ class CartScreenState extends State<CartScreen> {
     return Scaffold(
       body: Column(children: [
         Padding(
-          padding: EdgeInsets.only(top: 72.h, left: 23.w, right: 30.w),
+          padding: EdgeInsets.only(top: 60.h, left: 23.w, right: 30.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -189,23 +190,27 @@ class CartScreenState extends State<CartScreen> {
                                                   .newOrder.value = false;
                                               CartAndOrderController.newOrder
                                                   .notifyListeners();
-                                              showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return const AlertDialog(
-                                                      content: Text(
-                                                        'Order placed successfully!',
-                                                      ),
-                                                    );
-                                                  });
+                                              var snackBar =
+                                              const SnackBar(
+                                                duration: Duration(
+                                                    seconds: 4),
+                                                content: SizedBox(
+                                                    height: 25,
+                                                    child: Center(
+                                                        child: Text(
+                                                            "Order placed successfully"))),
+                                              );
+                                              ScaffoldMessenger.of(
+                                                  context)
+                                                  .showSnackBar(
+                                                  snackBar);
                                               if (!mounted) {}
                                               PersistentNavBarNavigator
                                                   .pushNewScreenWithRouteSettings(
                                                 context,
                                                 settings: const RouteSettings(
                                                     name: 'order'),
-                                                screen: OrderScreen(),
+                                                screen: OrdersScreen(),
                                                 withNavBar: true,
                                                 pageTransitionAnimation:
                                                     PageTransitionAnimation

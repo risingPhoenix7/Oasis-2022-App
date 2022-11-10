@@ -1,3 +1,7 @@
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:oasis_2022/screens/wallet_screen/view/add_money_screens/updatedAddMoneyDialog.dart';
+import 'dart:ui';
+import '../../../../resources/resources.dart';
 import '../../view_model/wallet_viewmodel.dart';
 import '../wallet_screen_controller.dart';
 import '/provider/user_details_viewmodel.dart';
@@ -58,6 +62,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
           stickyAuth: true,
         ),
       );
+      print("${authenticated} lol 123");
       setState(() {
         _isAuthenticating = false;
       });
@@ -82,14 +87,8 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: CustomAppBar(
-            title: "Add Money",
-            isactionButtonRequired: false,
-            isBackButtonRequired: true),
-      ),
-      backgroundColor: const Color(0XFFFAFAFF),
+      //resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.black,
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -152,21 +151,20 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                                 builder: (context) {
                                   return Align(
                                     alignment: Alignment.bottomCenter,
-                                    child: AddMoneyDialogBox(
+                                    child: UpdatedAddMoneyDialogBox(
                                       isSuccessful: isSuccess,
-                                      amount: amountToAdd,
                                     ),
                                   );
                                 });
                           }
                           if (kDebugMode) {
-                            print(isSuccess);
+                            print('${isSuccess} lolol');
                           }
                           if (isSuccess) {
                             WalletScreenController.isSuccess.value = true;
                           }
                           print('error kehefbkjewfb');
-                          print(isSuccess);
+                          print('${isSuccess} lolol');
                           if (!mounted) {}
                           showDialog(
                               barrierDismissible: false,
@@ -174,9 +172,8 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                               builder: (context) {
                                 return Align(
                                   alignment: Alignment.bottomCenter,
-                                  child: AddMoneyDialogBox(
+                                  child: UpdatedAddMoneyDialogBox(
                                     isSuccessful: isSuccess,
-                                    amount: amountToAdd,
                                   ),
                                 );
                               });
@@ -194,17 +191,13 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
                           colors: [
-                            Color.fromRGBO(45, 45, 45, 1),
-                            Color.fromRGBO(0, 0, 0, 1)
+                            Color.fromRGBO(209, 154, 8, 1),
+                            Color.fromRGBO(254, 212, 102, 1),
+                            Color.fromRGBO(227, 186, 79, 1),
+                            Color.fromRGBO(209, 154, 8, 1),
+                            Color.fromRGBO(209, 154, 8, 1),
                           ],
                         ),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.20),
-                            blurRadius: 3.00,
-                            offset: Offset(0, 2.00),
-                          ),
-                        ],
                         borderRadius: BorderRadius.circular(
                           UIUtills().getProportionalWidth(width: 15.00),
                         ),
@@ -214,11 +207,11 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                         children: [
                           Text(
                             'Add Money',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w800,
-                              color: const Color.fromRGBO(255, 255, 255, 1),
+                            style: GoogleFonts.openSans(
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black,
                               fontSize:
-                                  UIUtills().getProportionalWidth(width: 20.00),
+                                  UIUtills().getProportionalWidth(width: 18.00),
                             ),
                           ),
                         ],
@@ -226,156 +219,177 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                     ),
                   ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 18, left: 32, right: 32),
-            child: Container(
-              width: UIUtills().getProportionalWidth(width: 364.00),
-              height: UIUtills().getProportionalHeight(height: 300.00),
-              decoration: BoxDecoration(
-                //color: const Color(0xFFFFFFFF),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.15),
-                    offset: Offset(0, 4),
-                    blurRadius: 4,
-                  )
-                ],
-                borderRadius: BorderRadius.circular(10),
-                // gradient: const LinearGradient(
-                //   colors: [
-                //     Color.fromRGBO(0, 0, 0, 1),
-                //     Color.fromRGBO(45, 45, 45, 1)
-                //   ],
-                // ),
-                color: const Color(0xFFFFFFFF),
-              ),
-              // margin: EdgeInsets.only(
-              //     // left: UIUtills().getProportionalWidth(width: 32.00),
-              //     // right: UIUtills().getProportionalWidth(width: 32.00),
-              //     top: UIUtills().getProportionalHeight(height: 18.00)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                      height: UIUtills().getProportionalHeight(height: 21.00)),
-                  Stack(
-                    children: [
-                      Row(
+          Positioned(
+              left: UIUtills().getProportionalWidth(width: 24),
+              top: UIUtills().getProportionalHeight(height: 72),
+              child: Text(
+                'Add Money',
+                style: GoogleFonts.openSans(fontSize: 32, color: Colors.white),
+              )),
+          Positioned(
+              top: UIUtills().getProportionalHeight(height: 75),
+              right: UIUtills().getProportionalWidth(width: 30),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: SvgPicture.asset('assets/images/exit_button.svg'),
+              )),
+          Positioned(
+            top: UIUtills().getProportionalHeight(height: 190),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 18, left: 22, right: 32),
+              child: Container(
+                width: UIUtills().getProportionalWidth(width: 388.00),
+                height: UIUtills().getProportionalHeight(height: 220.00),
+                decoration: BoxDecoration(
+                  image: const DecorationImage(
+                      image: AssetImage(ImageAssets.sendMoneyBack),
+                      fit: BoxFit.fill),
+                  //color: const Color(0xFFFFFFFF),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.15),
+                      offset: Offset(0, 4),
+                      blurRadius: 4,
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(10),
+                  // gradient: const LinearGradient(
+                  //   colors: [
+                  //     Color.fromRGBO(0, 0, 0, 1),
+                  //     Color.fromRGBO(45, 45, 45, 1)
+                  //   ],
+                  // ),
+                ),
+                // margin: EdgeInsets.only(
+                //     // left: UIUtills().getProportionalWidth(width: 32.00),
+                //     // right: UIUtills().getProportionalWidth(width: 32.00),
+                //     top: UIUtills().getProportionalHeight(height: 18.00)),
+
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                        height:
+                            UIUtills().getProportionalHeight(height: 21.00)),
+                    SizedBox(
+                        height:
+                            UIUtills().getProportionalHeight(height: 14.00)),
+                    Text(
+                      'User : ${UserDetailsViewModel.userDetails.userID}',
+                      style: GoogleFonts.openSans(
+                          color: Colors.white,
+                          fontSize:
+                              UIUtills().getProportionalWidth(width: 16.00),
+                          fontWeight: FontWeight.w600,
+                          letterSpacing:
+                              UIUtills().getProportionalWidth(width: -0.41)),
+                    ),
+                    SizedBox(
+                        height:
+                            UIUtills().getProportionalHeight(height: 12.00)),
+                    Text(
+                      '${UserDetailsViewModel.userDetails.username}',
+                      style: GoogleFonts.openSans(
+                          color: Colors.white,
+                          fontSize:
+                              UIUtills().getProportionalWidth(width: 16.00),
+                          fontWeight: FontWeight.w600,
+                          letterSpacing:
+                              UIUtills().getProportionalWidth(width: -0.41)),
+                    ),
+                    SizedBox(
+                        height:
+                            UIUtills().getProportionalHeight(height: 32.00)),
+                    Container(
+                      alignment: Alignment.center,
+                      width: UIUtills().getProportionalWidth(width: 82),
+                      height: UIUtills().getProportionalHeight(height: 40.00),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            'assets/images/addMoneyScreenElement.png',
-                            width:
-                                UIUtills().getProportionalWidth(width: 76.00),
-                            height:
-                                UIUtills().getProportionalHeight(height: 76.00),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                  height: UIUtills()
-                                      .getProportionalHeight(height: 10.50)),
-                              Text(
-                                letter,
-                                style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: UIUtills()
-                                        .getProportionalWidth(width: 32.00),
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: UIUtills()
-                                        .getProportionalWidth(width: -0.41)),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                      height: UIUtills().getProportionalHeight(height: 14.00)),
-                  Text(
-                    'User ID: ${UserDetailsViewModel.userDetails.userID}',
-                    style: GoogleFonts.poppins(
-                        color: const Color.fromRGBO(0, 0, 0, 1),
-                        fontSize: UIUtills().getProportionalWidth(width: 16.00),
-                        fontWeight: FontWeight.w400,
-                        letterSpacing:
-                            UIUtills().getProportionalWidth(width: -0.41)),
-                  ),
-                  SizedBox(
-                      height: UIUtills().getProportionalHeight(height: 23.00)),
-                  Text(
-                    'Your amount',
-                    style: GoogleFonts.roboto(
-                        color: const Color(0xFF171717),
-                        fontSize: UIUtills().getProportionalWidth(width: 20.00),
-                        fontWeight: FontWeight.w600,
-                        letterSpacing:
-                            UIUtills().getProportionalWidth(width: -0.41)),
-                  ),
-                  SizedBox(
-                      height: UIUtills().getProportionalHeight(height: 32.00)),
-                  Container(
-                    alignment: Alignment.center,
-                    width: UIUtills().getProportionalWidth(width: 82),
-                    height: UIUtills().getProportionalHeight(height: 40.00),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          '₹ ',
-                          style: GoogleFonts.roboto(
-                              color: const Color(0xFF171717),
-                              fontSize:
-                                  UIUtills().getProportionalWidth(width: 24.00),
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: UIUtills()
-                                  .getProportionalWidth(width: -0.41)),
-                        ),
-                        Flexible(
-                          child: TextField(
-                            controller: textEditingController,
-                            cursorColor: Colors.black,
-                            textAlign: TextAlign.right,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(4)
-                            ],
-                            keyboardType: TextInputType.number,
-                            style: GoogleFonts.roboto(
-                                color: const Color(0xFF171717),
+                          Text(
+                            '₹ ',
+                            style: GoogleFonts.openSans(
+                                color: Colors.white,
                                 fontSize: UIUtills()
                                     .getProportionalWidth(width: 24.00),
                                 fontWeight: FontWeight.w700,
                                 letterSpacing: UIUtills()
                                     .getProportionalWidth(width: -0.41)),
-                            decoration: const InputDecoration(
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black),
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black),
-                              ),
-                              errorBorder: InputBorder.none,
-                              disabledBorder: InputBorder.none,
-                            ),
                           ),
-                        )
-                      ],
+                          Flexible(
+                            child: TextField(
+                              controller: textEditingController,
+                              cursorColor: Colors.white,
+                              textAlign: TextAlign.right,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(4)
+                              ],
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      decimal: false),
+                              style: GoogleFonts.openSans(
+                                  color: Colors.white,
+                                  fontSize: UIUtills()
+                                      .getProportionalWidth(width: 24.00),
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: UIUtills()
+                                      .getProportionalWidth(width: -0.41)),
+                              decoration: const InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                                errorBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                      height: UIUtills().getProportionalHeight(height: 30.00)),
-                ],
+                    SizedBox(
+                        height:
+                            UIUtills().getProportionalHeight(height: 30.00)),
+                  ],
+                ),
               ),
+            ),
+          ),
+          Positioned(
+            top: UIUtills().getProportionalHeight(height: 162),
+            left: UIUtills().getProportionalWidth(width: 179),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/circle.png',
+                      // width:
+                      //     UIUtills().getProportionalWidth(width: 71.00),
+                      // height: UIUtills()
+                      //     .getProportionalHeight(height: 71.00),
+                    ),
+                  ],
+                ),
+                Text(
+                  letter,
+                  style: GoogleFonts.openSans(
+                      color: Colors.black,
+                      fontSize: UIUtills().getProportionalWidth(width: 32.00),
+                      fontWeight: FontWeight.w600,
+                      letterSpacing:
+                          UIUtills().getProportionalWidth(width: -0.41)),
+                ),
+              ],
             ),
           ),
         ]),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oasis_2022/notificationservice/local_notification_service.dart';
 import 'package:oasis_2022/order/repo/model/order_card_model.dart';
 
 import '../resources/resources.dart';
@@ -18,14 +19,46 @@ class OrderStatus extends StatefulWidget {
 
 class _OrderStatusState extends State<OrderStatus> {
   String otp = 'View OTP';
+  int? newstatus = 0;
   @override
   Widget build(BuildContext context) {
     var OrderId = widget.orderCardModel.orderId.toString();
+
+
+  Future<void> demo() async {
+
+      DocumentSnapshot documentSnapshot =
+
+      await FirebaseFirestore.instance
+          .collection('orders') // suppose you have a collection named "Users"
+          .doc(OrderId)
+          .get();
+
+        newstatus = await documentSnapshot['status'];
+
+
+    }
 
     Stream<DocumentSnapshot> collectionStream = FirebaseFirestore.instance
         .collection('orders')
         .doc(OrderId)
         .snapshots();
+    FirebaseFirestore.instance.collection('orders').
+    doc(OrderId).
+    snapshots().
+    listen((event) async {
+
+    await demo();
+      print(newstatus);
+      if(newstatus == 1) {
+
+        LocalNotificationService.shownotification('Your Order number #$OrderId','Your Order has been accepted!');
+      }
+      else if(newstatus == 2) {
+
+        LocalNotificationService.shownotification('Your Order number  #$OrderId','Your Order is ready!');
+      }
+    });
     return Scaffold(
       body: StreamBuilder<DocumentSnapshot>(
           stream: collectionStream,

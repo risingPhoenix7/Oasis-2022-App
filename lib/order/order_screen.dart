@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:oasis_2022/notificationservice/local_notification_service.dart';
 import 'package:oasis_2022/order/order_widget.dart';
 import 'package:oasis_2022/order/repo/model/get_orders_model.dart';
 import 'package:oasis_2022/order/repo/model/order_card_model.dart';
@@ -139,6 +140,13 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           ],
                         )
                     ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      print('tapped again');
+                      LocalNotificationService.shownotification('title', 'body');
+                    },
+                    child: Text('lol',style: TextStyle(fontSize: 20,color: Colors.white),),
                   )
                 ],
               ),

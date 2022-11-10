@@ -13,7 +13,7 @@ class _PostPaytmRestClient implements PostPaytmRestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://bits-oasis.org/2022/main';
+    baseUrl ??= 'https://test.bits-oasis.org/2022/main';
   }
 
   final Dio _dio;

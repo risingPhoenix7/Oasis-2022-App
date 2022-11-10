@@ -14,7 +14,11 @@ MiscEventCategory _$MiscEventCategoryFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-
+Map<String, dynamic> _$MiscEventCategoryToJson(MiscEventCategory instance) =>
+    <String, dynamic>{
+      'category_name': instance.category_name,
+      'events': instance.events,
+    };
 
 MiscEventData _$MiscEventDataFromJson(Map<String, dynamic> json) =>
     MiscEventData(
@@ -27,4 +31,13 @@ MiscEventData _$MiscEventDataFromJson(Map<String, dynamic> json) =>
       venue_name: json['venue_name'] as String?,
     );
 
-
+Map<String, dynamic> _$MiscEventDataToJson(MiscEventData instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'organiser': instance.organiser,
+      'time': instance.time,
+      'date_time': instance.date_time,
+      'venue_name': instance.venue_name,
+      'about': instance.about,
+    };

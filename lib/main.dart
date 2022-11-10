@@ -54,6 +54,7 @@ Future<void> main() async {
       }
     },
   );
+  LocalNotificationService.initialize();
   runApp(RestartWidget(child: BosmFestApp()));
 }
 

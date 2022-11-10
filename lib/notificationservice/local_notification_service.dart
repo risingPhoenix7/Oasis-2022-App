@@ -44,6 +44,9 @@ class LocalNotificationService {
         }
       },
     );
+
+        _notificationsPlugin.initialize(initializationSettings);
+
   }
 
   static void createanddisplaynotification(RemoteMessage message) async {
@@ -64,6 +67,28 @@ class LocalNotificationService {
         message.data['body'].toString(),
         notificationDetails,
         payload: message.data['_id'].toString(),
+      );
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+  static void shownotification(String title, String body) async {
+    try {
+      final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+      const NotificationDetails notificationDetails = NotificationDetails(
+        android: AndroidNotificationDetails(
+          "pushnotificationapp",
+          "pushnotificationappchannel",
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+      );
+
+      await _notificationsPlugin.show(
+        id,
+        title,
+        body,
+        notificationDetails,
       );
     } on Exception catch (e) {
       print(e);

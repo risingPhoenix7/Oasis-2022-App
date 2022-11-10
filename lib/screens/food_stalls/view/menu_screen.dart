@@ -133,11 +133,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const FoodStallScreen()));
+                          Navigator.pop(context);
                         },
                         child: Padding(
                           padding: EdgeInsets.only(left: 20.w, top: 20.h),

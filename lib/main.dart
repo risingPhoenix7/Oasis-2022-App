@@ -21,6 +21,7 @@ import '../screens/quiz/view_model/storage.dart';
 import '../screens/wallet_screen/view/wallet_screen.dart';
 import 'firebase_options.dart';
 import 'notificationservice/local_notification_service.dart';
+import 'order/order_screen.dart';
 import 'screens/food_stalls/repo/model/food_stall_model.dart';
 
 Future<void> main() async {
@@ -42,7 +43,9 @@ Future<void> main() async {
   await Hive.openBox<FoodStallList>('foodStallBox');
   SecureStorage secureStorage = SecureStorage();
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+      name: 'com.dvm.oasis2k22',
+      options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.subscribeToTopic('all');
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   FirebaseMessaging.onMessage.listen(
@@ -62,6 +65,7 @@ Future<void> main() async {
       }
     },
   );
+  LocalNotificationService.initialize();
   runApp(RestartWidget(child: BosmFestApp()));
 }
 

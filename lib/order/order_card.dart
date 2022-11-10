@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import '../order/Custom_expansion_tile.dart' as cet;
 import '../order/order_screen_viewmodel.dart';
 import '../order/repo/model/order_card_model.dart';
@@ -40,6 +42,8 @@ class _Order_cardState extends State<Order_card>
   Widget build(BuildContext context) {
     // ignore: non_constant_identifier_names
     var OrderId = widget.orderCardModel.orderId.toString();
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
     Stream<DocumentSnapshot> collectionStream = FirebaseFirestore.instance
         .collection('orders')
         .doc(OrderId)
@@ -169,15 +173,15 @@ class _Order_cardState extends State<Order_card>
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Image.asset(
-                                            'assets/images/PIC.png',
-                                            height: UIUtills()
-                                                .getProportionalHeight(
-                                                    height: 60),
-                                            width: UIUtills()
-                                                .getProportionalWidth(
-                                                    width: 60),
-                                          ),
+                                          // Image.asset(
+                                          //   'assets/images/PIC.png',
+                                          //   height: UIUtills()
+                                          //       .getProportionalHeight(
+                                          //           height: 60),
+                                          //   width: UIUtills()
+                                          //       .getProportionalWidth(
+                                          //           width: 60),
+                                          // ),
                                           Padding(
                                             padding:
                                                 const EdgeInsets.only(left: 10),
@@ -238,11 +242,11 @@ class _Order_cardState extends State<Order_card>
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w500)),
-                                                      SvgPicture.asset(
-                                                          'assets/images/dot.svg'),
-                                                      Text(
-                                                          widget.orderCardModel
-                                                              .timeStamp,
+                                                      // SvgPicture.asset(
+                                                      //     'assets/images/dot.svg'),
+                                                      Text(DateFormat.yMMMMEEEEd().format(DateTime.now()).toString(),
+                                                          //DateTime.parse(widget.orderCardModel.timeStamp)),
+
                                                           style: GoogleFonts.poppins(
                                                               fontSize: 11,
                                                               color: const Color
@@ -291,7 +295,7 @@ class _Order_cardState extends State<Order_card>
                                                     fontWeight: FontWeight.w600,
                                                     letterSpacing: 0.48,
                                                   ),
-                                                ),
+                                                )
                                               ],
                                             ),
                                           ),
@@ -355,14 +359,14 @@ class _Order_cardState extends State<Order_card>
                                     const SizedBox(
                                       width: 20,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: SvgPicture.asset(
-                                        'assets/images/veg.svg',
-                                        height: 18,
-                                        width: 18,
-                                      ),
-                                    ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(right: 8),
+                                    //   child: SvgPicture.asset(
+                                    //     'assets/images/veg.svg',
+                                    //     height: 18,
+                                    //     width: 18,
+                                    //   ),
+                                    // ),
                                     const SizedBox(
                                       width: 10,
                                     ),

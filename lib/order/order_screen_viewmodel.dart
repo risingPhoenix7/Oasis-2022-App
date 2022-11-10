@@ -38,6 +38,7 @@ class OrderScreenViewModel {
         double subTotal = j.price!;
         int status = j.status!;
         int? orderId = j.order_id;
+        print('order id: $orderId');
 
         List<MenuItemInOrdersScreen> tempItemList = [];
         List<Items> itemList = j.items!;

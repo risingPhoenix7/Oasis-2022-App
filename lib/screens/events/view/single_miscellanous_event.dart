@@ -55,7 +55,8 @@ class _SingleMiscellaneousEventState extends State<SingleMiscellaneousEvent> {
             image: DecorationImage(
                 image: AssetImage(ImageAssets.eventCardBg),
                 fit: BoxFit.fill),
-            borderRadius: BorderRadius.circular(20.r)),
+            borderRadius: BorderRadius.circular(20.r)
+        ),
         child: Padding(
           padding: EdgeInsets.fromLTRB(21.w, 26.h, 0.w, 27.h),
           child: Container(

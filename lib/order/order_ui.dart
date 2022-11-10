@@ -1,3 +1,5 @@
+import 'package:oasis_2022/order/order_status.dart';
+
 import 'package:oasis_2022/utils/error_messages.dart';
 
 import '../order/controller/cart_and_order_controller.dart';
@@ -13,6 +15,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/error_dialogue.dart';
+import 'order_widget.dart';
 
 class OrderScreen extends StatefulWidget {
   OrderScreen({Key? key}) : super(key: key);
@@ -63,7 +66,7 @@ class _OrderScreenState extends State<OrderScreen> {
             builder: (context) {
               return Align(
                 alignment: Alignment.bottomCenter,
-                child: ErrorDialog(errorMessage: ErrorMessages.noInternet,),
+                child: ErrorDialog(),
               );
             });
       }

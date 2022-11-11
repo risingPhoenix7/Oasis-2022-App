@@ -33,7 +33,7 @@ class _GeneralInformationState extends State<GeneralInformation> {
       ),
       body: const WebView(
         initialUrl:
-            "https://docs.google.com/document/d/1RV4sBOxF8A6pzsrWLROONuivftLUjOYbWy5cZjJe5lo/edit?usp=sharing",
+            "https://docs.google.com/document/d/1v9IAO-CeLMbZNK6w38ySMgDxBJB3FoiQP7xiglJt434/edit?usp=sharing",
         javascriptMode: JavascriptMode.disabled,
       ),
     );

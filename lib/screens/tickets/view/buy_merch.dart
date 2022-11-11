@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:oasis_2022/screens/tickets/controller/store_controller.dart';
 import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
 
+import '../../../widgets/OasisSnackbar.dart';
 import '../repository/model/ticketPostBody.dart';
 import '../view_model/tickets_post_view_model.dart';
 
@@ -170,7 +171,8 @@ class _BuyMerchState extends State<BuyMerch> {
                         if (!mounted) {}
                         Navigator.pop(context);
                       } catch (e) {
-                        print(e);
+                        var snackbar = CustomSnackBar().oasisSnackBar(e.toString());
+                        ScaffoldMessenger.of(context).showSnackBar(snackbar);
                       }
                     } else {}
                   },

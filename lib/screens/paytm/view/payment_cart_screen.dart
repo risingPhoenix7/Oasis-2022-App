@@ -1,3 +1,5 @@
+import 'package:oasis_2022/widgets/OasisSnackbar.dart';
+
 import '/provider/user_details_viewmodel.dart';
 import '/utils/ui_utils.dart';
 import '/widgets/app_bar.dart';
@@ -92,24 +94,13 @@ class _PaymentCartScreenState extends State<PaymentCartScreen> {
             child: InkWell(
               onTap: () async {
                 if (amountController.text.isEmpty) {
-                  var snackBar = const SnackBar(
-                    duration: Duration(seconds: 2),
-                    content: SizedBox(
-                        height: 25,
-                        child: Center(child: Text("Enter a Value"))),
-                  );
+                  var snackBar =  CustomSnackBar().oasisSnackBar('Enter a Value');
                   if (!mounted) {}
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
                 if (int.parse(amountController.text) == 0 ||
                     int.parse(amountController.text) < 0) {
-                  var snackBar = const SnackBar(
-                    duration: Duration(seconds: 2),
-                    content: SizedBox(
-                        height: 25,
-                        child: Center(
-                            child: Text("Enter a non zero postive value"))),
-                  );
+                  var snackBar = CustomSnackBar().oasisSnackBar('Enter a non zero postive value');
                   if (!mounted) {}
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 } else {

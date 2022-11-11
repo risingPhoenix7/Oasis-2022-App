@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oasis_2022/resources/resources.dart';
 import 'package:oasis_2022/screens/events/view_model/cached_misc_events_view_model.dart';
 import 'package:oasis_2022/utils/oasis_text_styles.dart';
+import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 
 import '/utils/scroll_remover.dart';
 import '/widgets/error_dialogue.dart';
@@ -103,12 +104,6 @@ class _EventsScreenState extends State<EventsScreen> {
       print(CachedMiscEventsViewModel.statusInt);
       if (CachedMiscEventsViewModel.statusInt == 2) {
         print('should refresh now after reading from network call');
-        if(mounted)ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          duration: Duration(milliseconds: 500),
-          content: SizedBox(
-              height: 25,
-              child: Center(child: Text("Fetched latest data"))),
-        ));
         checkMiscEventsResult();
       } else if (CachedMiscEventsViewModel.statusInt == 1) {
         print('should refresh now after reading from local db');
@@ -117,7 +112,6 @@ class _EventsScreenState extends State<EventsScreen> {
           setState(() {
             isLoading = false;
             print('vghvjvhbkhb');
-
           });
         } else {
           //return MiscEventResult.error;

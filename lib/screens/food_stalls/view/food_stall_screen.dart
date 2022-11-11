@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oasis_2022/screens/food_stalls/view_model/cached_food_stalls_viewmodel.dart';
-import 'package:oasis_2022/utils/error_messages.dart';
 
 import '/screens/food_stalls/repo/model/food_stall_model.dart';
 import '/utils/ui_utils.dart';
@@ -66,13 +65,6 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
       if (CachedFoodStallsViewModel.statusInt == 2) {
         isStallsClosed = false;
         print('should refresh now after reading from network call');
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            duration: Duration(milliseconds: 500),
-            content: SizedBox(
-                height: 25, child: Center(child: Text("Fetched latest data"))),
-          ));
-        }
         checkFoodStallResult();
       } else if (CachedFoodStallsViewModel.statusInt == 1) {
         isStallsClosed = false;

@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
 import 'package:oasis_2022/screens/tickets/controller/store_controller.dart';
+import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
+import 'package:oasis_2022/utils/scroll_remover.dart';
 
 class BottomCarousel extends StatefulWidget {
   const BottomCarousel({Key? key}) : super(key: key);
@@ -47,32 +46,35 @@ class _BottomCarouselState extends State<BottomCarousel> {
           padding: EdgeInsets.only(top: 20.h),
           child: SizedBox(
             height: 161.h,
-            child: CustomScrollView(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              slivers: [
-                SliverPadding(
-                    padding: EdgeInsets.only(left: 13.w),
-                    sliver: SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                            (BuildContext context, int index) {
-                      return Padding(
-                        padding: EdgeInsets.only(left: 16.w),
-                        child: GestureDetector(
-                          onTap: () {
-                            StoreController.itemNumber.value = index;
-                          },
-                          child: (StoreController
-                                      .carouselItems[index].runtimeType ==
-                                  MerchCarouselItem)
-                              ? Image.asset(
-                                  StoreController.carouselImage2[index])
-                              : Image.network(
-                                  StoreController.carouselImage2[index]),
-                        ),
-                      );
-                    }, childCount: StoreController.carouselItems.length)))
-              ],
+            child: ScrollConfiguration(
+              behavior: CustomScrollBehavior(),
+              child: CustomScrollView(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                slivers: [
+                  SliverPadding(
+                      padding: EdgeInsets.only(left: 13.w),
+                      sliver: SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                              (BuildContext context, int index) {
+                        return Padding(
+                          padding: EdgeInsets.only(left: 16.w),
+                          child: GestureDetector(
+                            onTap: () {
+                              StoreController.itemNumber.value = index;
+                            },
+                            child: (StoreController
+                                        .carouselItems[index].runtimeType ==
+                                    MerchCarouselItem)
+                                ? Image.asset(
+                                    StoreController.carouselImage2[index])
+                                : Image.network(
+                                    StoreController.carouselImage2[index]),
+                          ),
+                        );
+                      }, childCount: StoreController.carouselItems.length)))
+                ],
+              ),
             ),
           ),
         )

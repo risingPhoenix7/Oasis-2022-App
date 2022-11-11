@@ -21,6 +21,7 @@ BalanceData _$BalanceDataFromJson(Map<String, dynamic> json) => BalanceData(
       cash: json['cash'] as int?,
       pg: json['pg'] as int?,
       swd: json['swd'] as int?,
+      kind_active: json['kind_active'] as bool?,
       transfers: json['transfers'] as int?,
     );
 
@@ -30,4 +31,5 @@ Map<String, dynamic> _$BalanceDataToJson(BalanceData instance) =>
       'pg': instance.pg,
       'swd': instance.swd,
       'transfers': instance.transfers,
+      'kind_active': instance.kind_active,
     };

@@ -1,19 +1,19 @@
 import 'dart:ui';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '/utils/ui_utils.dart';
-import '/widgets/error_dialogue.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:oasis_2022/widgets/OasisSnackbar.dart';
+
+import '/widgets/error_dialogue.dart';
 import '../../../utils/error_messages.dart';
 import '../../../widgets/loader.dart';
 import '../repository/model/data.dart';
 import '../view_model/glogin_view_model.dart';
 import '../view_model/login_view_model.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
   hostedDomain: "pilani.bits-pilani.ac.in",
@@ -293,15 +293,9 @@ class _LoginScreenState extends State<LoginScreen>
                                   passwordTextFieldShakeController.forward();
                                   usernameTextFieldShakeController.forward();
                                   tempBlock = false;
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    duration: const Duration(milliseconds: 500),
-                                    content: SizedBox(
-                                        height: 25.h,
-                                        child: const Center(
-                                            child: Text(
-                                                "Enter the password and username"))),
-                                  ));
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      CustomSnackBar().oasisSnackBar(
+                                          'Enter the password and username'));
                                 } else if (tempBlock &&
                                     (passwordController.text.trim().isEmpty ||
                                         passwordController.text.trim() == "")) {
@@ -311,13 +305,7 @@ class _LoginScreenState extends State<LoginScreen>
                                   }
                                   passwordTextFieldShakeController.forward();
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    duration: const Duration(milliseconds: 500),
-                                    content: SizedBox(
-                                        height: 25.h,
-                                        child: const Center(
-                                            child: Text("Enter the password"))),
-                                  ));
+                                      .showSnackBar(CustomSnackBar().oasisSnackBar('Enter the password'));
                                 } else if (tempBlock &&
                                     (usernameController.text.trim().isEmpty ||
                                         usernameController.text.trim() == "")) {

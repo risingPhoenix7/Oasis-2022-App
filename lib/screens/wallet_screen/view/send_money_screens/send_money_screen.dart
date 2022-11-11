@@ -1,4 +1,5 @@
 import 'package:oasis_2022/screens/wallet_screen/view/send_money_screens/updatedSendMoneyDialog.dart';
+import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 
 import '/provider/user_details_viewmodel.dart';
 import 'package:flutter/foundation.dart';
@@ -119,25 +120,13 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                         });
                         amountToSend = int.parse(textEditingController.text);
                         if (textEditingController.text.isEmpty) {
-                          var snackBar = const SnackBar(
-                            duration: Duration(seconds: 2),
-                            content: SizedBox(
-                                height: 25,
-                                child: Center(child: Text("Enter a Value"))),
-                          );
+                          var snackBar = CustomSnackBar().oasisSnackBar("Enter a value");
                           if (!mounted) {}
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                         if (int.parse(textEditingController.text) == 0 ||
                             int.parse(textEditingController.text) < 0) {
-                          var snackBar = const SnackBar(
-                            duration: Duration(seconds: 2),
-                            content: SizedBox(
-                                height: 25,
-                                child: Center(
-                                    child: Text(
-                                        "Enter a non zero postive value"))),
-                          );
+                          var snackBar = CustomSnackBar().oasisSnackBar("Enter a non-zero positive value");
                           if (!mounted) {}
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         } else {

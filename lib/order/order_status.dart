@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oasis_2022/notificationservice/local_notification_service.dart';
 import 'package:oasis_2022/order/repo/model/order_card_model.dart';
+import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 
 import '../resources/resources.dart';
 import 'order_screen_viewmodel.dart';
@@ -308,15 +309,7 @@ class _OrderStatusState extends State<OrderStatus> {
                                         }
                                       } else {
                                         var snackBar =
-                                        const SnackBar(
-                                          duration: Duration(
-                                              seconds: 2),
-                                          content: SizedBox(
-                                              height: 25,
-                                              child: Center(
-                                                  child: Text(
-                                                      "OTP will be available when your order is ready"))),
-                                        );
+                                       CustomSnackBar().oasisSnackBar('OTP will be available when your order is ready');
                                         ScaffoldMessenger.of(
                                             context)
                                             .showSnackBar(

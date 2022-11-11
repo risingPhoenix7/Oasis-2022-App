@@ -1,3 +1,6 @@
+import 'package:chucker_flutter/chucker_flutter.dart';
+import 'package:dio/dio.dart';
+
 import '/provider/user_details_viewmodel.dart';
 import '/screens/wallet_screen/Repo/model/add_swd_model.dart';
 import '/screens/wallet_screen/Repo/model/balance_model.dart';
@@ -10,11 +13,10 @@ import '/screens/wallet_screen/Repo/retrofit/refresh_qr_retrofit.dart';
 import '/screens/wallet_screen/Repo/retrofit/send_money_retrofit.dart';
 import '/screens/wallet_screen/Repo/retrofit/swd_retrofit.dart';
 import '/utils/error_messages.dart';
-import 'package:chucker_flutter/chucker_flutter.dart';
-import 'package:dio/dio.dart';
 
 class WalletViewModel {
   static int balance = 0;
+  static bool isKindActive = true;
   String? jwt = UserDetailsViewModel.userDetails.JWT;
   static String? error;
 
@@ -57,8 +59,9 @@ class WalletViewModel {
     dio.interceptors.add(ChuckerDioInterceptor());
     String auth = "JWT $jwt";
     final balanceRestClient = BalanceRestClient(dio);
-    BalanceModel response =
-        BalanceModel(data: BalanceData(cash: 0, pg: 0, swd: 0, transfers: 0));
+    BalanceModel response = BalanceModel(
+        data: BalanceData(
+            cash: 0, pg: 0, swd: 0, transfers: 0, kind_active: false));
     response = await balanceRestClient.getBalance(auth).then((it) {
       return it;
     }).catchError((Object obj) {
@@ -85,6 +88,7 @@ class WalletViewModel {
         (response.data?.cash ?? 0) +
         (response.data?.transfers ?? 0) +
         (response.data?.pg ?? 0);
+    isKindActive = response.data?.kind_active ?? false;
 
 // catch (e) {
 //   if (e.runtimeType == DioError) {

@@ -1,4 +1,5 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 import '../../order/order_screen.dart';
 import '/order/controller/cart_and_order_controller.dart';
 import '/screens/cart/repo/model/cart_screen_model.dart';
@@ -190,15 +191,7 @@ class CartScreenState extends State<CartScreen> {
                                               CartAndOrderController.newOrder
                                                   .notifyListeners();
                                               var snackBar =
-                                              const SnackBar(
-                                                duration: Duration(
-                                                    seconds: 4),
-                                                content: SizedBox(
-                                                    height: 25,
-                                                    child: Center(
-                                                        child: Text(
-                                                            "Order placed successfully"))),
-                                              );
+                                              CustomSnackBar().oasisSnackBar('Order placed successfully');
                                               ScaffoldMessenger.of(
                                                   context)
                                                   .showSnackBar(

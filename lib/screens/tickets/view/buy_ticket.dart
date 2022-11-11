@@ -8,6 +8,8 @@ import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
 import 'package:oasis_2022/screens/tickets/repository/model/ticketPostBody.dart';
 import 'package:oasis_2022/screens/tickets/view_model/tickets_post_view_model.dart';
 
+import '../../../widgets/OasisSnackbar.dart';
+
 class BuyTicket extends StatefulWidget {
   const BuyTicket({Key? key}) : super(key: key);
 
@@ -162,14 +164,8 @@ class _BuyTicketState extends State<BuyTicket> {
                       if (!mounted) {}
                       Navigator.pop(context);
                     } catch (e) {
-                      var snackBar = SnackBar(
-                        duration: const Duration(seconds: 2),
-                        content: SizedBox(
-                            height: 25,
-                            child: Center(child: Text(e.toString()!))),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      print(e);
+                      var snackbar = CustomSnackBar().oasisSnackBar(e.toString());
+                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
                     }
                   },
                   child: Container(

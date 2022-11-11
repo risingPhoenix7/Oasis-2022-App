@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
 import 'package:oasis_2022/screens/tickets/controller/store_controller.dart';
-import 'package:oasis_2022/screens/tickets/view/banner_details.dart';
+import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
 import 'package:oasis_2022/screens/tickets/view/bottom_carousel.dart';
 import 'package:oasis_2022/screens/tickets/view/merch.dart';
 import 'package:oasis_2022/screens/tickets/view/prof_show.dart';
-import 'package:oasis_2022/screens/tickets/view_model/getAllShows_view_model.dart';
+import 'package:oasis_2022/utils/scroll_remover.dart';
 
 class StoreScreen extends StatefulWidget {
   const StoreScreen({Key? key}) : super(key: key);
@@ -56,9 +55,10 @@ class _StoreScreenState extends State<StoreScreen>
         onRefresh: () async {
           isLoading.value = true;
           await StoreController().initialCall();
-          StoreController.itemBoughtOrRefreshed.value = !StoreController.itemBoughtOrRefreshed.value;
-          for(int i = 0; i < StoreController.carouselItems.length ; i++){
-            if(StoreController.carouselItems[i].runtimeType == StoreItemData){
+          StoreController.itemBoughtOrRefreshed.value =
+              !StoreController.itemBoughtOrRefreshed.value;
+          for (int i = 0; i < StoreController.carouselItems.length; i++) {
+            if (StoreController.carouselItems[i].runtimeType == StoreItemData) {
               print((StoreController.carouselItems[i] as StoreItemData).name);
             }
           }
@@ -74,37 +74,40 @@ class _StoreScreenState extends State<StoreScreen>
                 child: CircularProgressIndicator(),
               );
             } else {
-              return ListView(children: [
-                StoreController.carouselItems.isEmpty
-                    ? Center(
-                        child: Text(
-                          "Store is empty right now",
-                          style: GoogleFonts.openSans(
-                              color: Colors.white, fontSize: 25.sp),
-                        ),
-                      )
-                    : SizedBox(
-                        height: 1.sh,
-                        child: Stack(children: [
-                          FadeTransition(
-                            opacity: _fadeAnimation,
-                            child: (StoreController
-                                        .carouselItems[
-                                            StoreController.itemNumber.value]
-                                        .runtimeType ==
-                                    MerchCarouselItem)
-                                ? const Merch()
-                                : const ProfShow(),
+              return ScrollConfiguration(
+                behavior: CustomScrollBehavior(),
+                child: ListView(children: [
+                  StoreController.carouselItems.isEmpty
+                      ? Center(
+                          child: Text(
+                            "Store is empty right now",
+                            style: GoogleFonts.openSans(
+                                color: Colors.white, fontSize: 25.sp),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: 600.h,
+                        )
+                      : SizedBox(
+                          height: 1.sh,
+                          child: Stack(children: [
+                            FadeTransition(
+                              opacity: _fadeAnimation,
+                              child: (StoreController
+                                          .carouselItems[
+                                              StoreController.itemNumber.value]
+                                          .runtimeType ==
+                                      MerchCarouselItem)
+                                  ? const Merch()
+                                  : const ProfShow(),
                             ),
-                            child: const BottomCarousel(),
-                          )
-                        ]),
-                      ),
-              ]);
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: 600.h,
+                              ),
+                              child: const BottomCarousel(),
+                            )
+                          ]),
+                        ),
+                ]),
+              );
             }
           },
         ),

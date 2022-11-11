@@ -99,13 +99,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
                             color: Colors.white,
                             fontWeight: FontWeight.w500),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: SvgPicture.asset(
-                            'assets/images/exit_button.svg'),
-                      )
                     ],
                   ),
 
@@ -141,13 +134,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         )
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      print('tapped again');
-                      LocalNotificationService.shownotification('title', 'body');
-                    },
-                    child: Text('lol',style: TextStyle(fontSize: 20,color: Colors.white),),
-                  )
                 ],
               ),
             ),

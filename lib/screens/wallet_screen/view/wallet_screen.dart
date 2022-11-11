@@ -532,122 +532,141 @@ class _WalletScreenState extends State<WalletScreen> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Container(
-                            width: UIUtills().getProportionalWidth(width: 388),
-                            decoration: BoxDecoration(
-                                color: const Color.fromRGBO(26, 28, 28, 1),
-                                borderRadius: BorderRadius.circular(10.79)),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(16, 14, 16, 14),
-                              child: Row(
-                                children: [
-                                  Container(
-                                      height: UIUtills()
-                                          .getProportionalHeight(height: 46),
-                                      width: UIUtills()
-                                          .getProportionalWidth(width: 46),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(top: 3),
-                                        child: Center(
-                                            child: SvgPicture.asset(
-                                          'assets/images/Kind_points.svg',
-                                          height: UIUtills()
-                                              .getProportionalHeight(
-                                                  height: 23),
+                        WalletViewModel.isKindActive
+                            ? Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Container(
+                                  width: UIUtills()
+                                      .getProportionalWidth(width: 388),
+                                  decoration: BoxDecoration(
+                                      color:
+                                          const Color.fromRGBO(26, 28, 28, 1),
+                                      borderRadius:
+                                          BorderRadius.circular(10.79)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        16, 14, 16, 14),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                            height: UIUtills()
+                                                .getProportionalHeight(
+                                                    height: 46),
+                                            width: UIUtills()
+                                                .getProportionalWidth(
+                                                    width: 46),
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 3),
+                                              child: Center(
+                                                  child: SvgPicture.asset(
+                                                'assets/images/Kind_points.svg',
+                                                height: UIUtills()
+                                                    .getProportionalHeight(
+                                                        height: 23),
+                                                width: UIUtills()
+                                                    .getProportionalWidth(
+                                                        width: 26),
+                                                color: Colors.black,
+                                              )),
+                                            )),
+                                        SizedBox(
                                           width: UIUtills()
-                                              .getProportionalWidth(width: 26),
-                                          color: Colors.black,
-                                        )),
-                                      )),
-                                  SizedBox(
-                                    width: UIUtills()
-                                        .getProportionalWidth(width: 12),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Kind Points',
-                                        style: GoogleFonts.openSans(
-                                            color: Colors.white,
-                                            fontSize: UIUtills()
-                                                .getProportionalHeight(
-                                                    height: 16),
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      Text(
-                                        '2541',
-                                        style: GoogleFonts.openSans(
-                                            color: Colors.white,
-                                            fontSize: UIUtills()
-                                                .getProportionalHeight(
-                                                    height: 20),
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: UIUtills()
-                                            .getProportionalWidth(width: 80)),
-                                    child: Container(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                                      decoration: BoxDecoration(
-                                        gradient: const LinearGradient(
-                                          colors: [
-                                            Color.fromRGBO(209, 154, 8, 1),
-                                            Color.fromRGBO(254, 212, 102, 1),
-                                            Color.fromRGBO(227, 186, 79, 1),
-                                            Color.fromRGBO(209, 154, 8, 1),
-                                            Color.fromRGBO(209, 154, 8, 1),
+                                              .getProportionalWidth(width: 12),
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Kind Points',
+                                              style: GoogleFonts.openSans(
+                                                  color: Colors.white,
+                                                  fontSize: UIUtills()
+                                                      .getProportionalHeight(
+                                                          height: 16),
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            Text(
+                                              '0',
+                                              style: GoogleFonts.openSans(
+                                                  color: Colors.white,
+                                                  fontSize: UIUtills()
+                                                      .getProportionalHeight(
+                                                          height: 20),
+                                                  fontWeight: FontWeight.w700),
+                                            ),
                                           ],
                                         ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Row(children: [
                                         Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              UIUtills().getProportionalWidth(
-                                                  width: 24),
-                                              0,
-                                              0,
-                                              0),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(builder: (builder) => KindStoreCatalog()),
-
-                                            );
-                                          },
-                                          child: Text(
-                                            'Claim now',
-                                            style: GoogleFonts.openSans(
-                                                color: Colors.black,
-                                                fontSize: UIUtills()
-                                                    .getProportionalWidth(
-                                                        width: 14),
-                                                fontWeight: FontWeight.w600),
+                                          padding: EdgeInsets.only(
+                                              left: UIUtills()
+                                                  .getProportionalWidth(
+                                                      width: 80)),
+                                          child: Container(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 8, 0, 8),
+                                            decoration: BoxDecoration(
+                                              gradient: const LinearGradient(
+                                                colors: [
+                                                  Color.fromRGBO(
+                                                      209, 154, 8, 1),
+                                                  Color.fromRGBO(
+                                                      254, 212, 102, 1),
+                                                  Color.fromRGBO(
+                                                      227, 186, 79, 1),
+                                                  Color.fromRGBO(
+                                                      209, 154, 8, 1),
+                                                  Color.fromRGBO(
+                                                      209, 154, 8, 1),
+                                                ],
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Row(children: [
+                                              Padding(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    UIUtills()
+                                                        .getProportionalWidth(
+                                                            width: 24),
+                                                    0,
+                                                    0,
+                                                    0),
+                                              ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (builder) =>
+                                                            KindStoreCatalog()),
+                                                  );
+                                                },
+                                                child: Text(
+                                                  'Claim now',
+                                                  style: GoogleFonts.openSans(
+                                                      color: Colors.black,
+                                                      fontSize: UIUtills()
+                                                          .getProportionalWidth(
+                                                              width: 14),
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                              ),
+                                              SizedBox(width: 24)
+                                            ]),
                                           ),
                                         ),
-                                        SizedBox(width: 24)
-                                      ]),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
+                                ),
+                              )
+                            : Container()
                       ],
                     ),
                   ),

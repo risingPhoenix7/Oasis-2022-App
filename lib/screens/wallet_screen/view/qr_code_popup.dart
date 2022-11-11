@@ -1,3 +1,5 @@
+import 'package:oasis_2022/utils/colors.dart';
+
 import '../../../resources/resources.dart';
 import '/utils/ui_utils.dart';
 import '/widgets/loader.dart';
@@ -126,15 +128,7 @@ class _QRCodeDialogBoxState extends State<QRCodeDialogBox> {
                       )
                     ],
                     borderRadius: BorderRadius.circular(10),
-                    gradient: const LinearGradient(
-                      colors: [
-                        Color.fromRGBO(209, 154, 8, 1),
-                        Color.fromRGBO(254, 212, 102, 1),
-                        Color.fromRGBO(227, 186, 79, 1),
-                        Color.fromRGBO(209, 154, 8, 1),
-                        Color.fromRGBO(209, 154, 8, 1),
-                      ],
-                    ),
+                    gradient: OasisColors.oasisWebsiteGoldGradient,
                   ),
                   child: Center(
                     child: Text(

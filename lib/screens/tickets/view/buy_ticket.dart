@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:oasis_2022/screens/tickets/controller/store_controller.dart';
 import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
 import 'package:oasis_2022/screens/tickets/repository/model/ticketPostBody.dart';
 import 'package:oasis_2022/screens/tickets/view_model/tickets_post_view_model.dart';
+import 'package:oasis_2022/utils/colors.dart';
 
 import '../../../widgets/OasisSnackbar.dart';
 
@@ -236,13 +236,7 @@ class _BuyTicketState extends State<BuyTicket> {
                     height: 52.h,
                     width: 171.w,
                     decoration: BoxDecoration(
-                        gradient: const LinearGradient(colors: [
-                          Color.fromRGBO(209, 154, 8, 1),
-                          Color.fromRGBO(254, 212, 102, 1),
-                          Color.fromRGBO(227, 186, 79, 1),
-                          Color.fromRGBO(209, 154, 8, 1),
-                          Color.fromRGBO(209, 154, 8, 1),
-                        ]),
+                        gradient: OasisColors.oasisWebsiteGoldGradient,
                         borderRadius: BorderRadius.circular(10.r)),
                     child: Center(
                       child: Text(

@@ -1,11 +1,11 @@
+import 'package:dio/dio.dart';
+
 import '/screens/quiz/repo/model/get_questions_model.dart';
 import '/screens/quiz/repo/model/get_rules_model.dart';
 import '/screens/quiz/repo/model/post_answer_model.dart';
 import '/screens/quiz/repo/retrofit/get_leaderboard_retrofit.dart';
 import '/screens/quiz/repo/retrofit/get_progress_retrofit.dart';
 import '/screens/quiz/repo/retrofit/get_rules_retrofit.dart';
-import 'package:dio/dio.dart';
-
 import '../../../provider/user_details_viewmodel.dart';
 import '../repo/model/get_leaderboard_model.dart';
 import '../repo/model/get_progress_model.dart';

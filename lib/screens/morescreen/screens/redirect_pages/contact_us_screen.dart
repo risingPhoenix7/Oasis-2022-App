@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:oasis_2022/resources/resources.dart';
 import 'package:oasis_2022/screens/morescreen/repo/models/contact_model.dart';
 import 'package:oasis_2022/utils/colors.dart';
 import 'package:oasis_2022/utils/oasis_text_styles.dart';
@@ -22,10 +21,33 @@ class _ContactScreenState extends State<ContactScreen> {
   List<Contact> contactList = [
     Contact(
       name: "Anshal Shukla",
+      desc: "Website, App and Payments",
+      email: "webmaster@bits-oasis.org",
+      imageAsset: "anshal_shukla.png",
+      phoneNumber: "8058088802",
+      githubUsername: "",
+      linkedinUsername: "",
+      twitterUsername: "",
+      behanceUsername: "",
+      dribbleUsername: "",
+      instagramUsername: "",
+      emailExists: false,
+      phoneNumberExists: false,
+      descExists: false,
+      imageAssetExists: false,
+      githubExists: false,
+      linkedinExists: false,
+      twitterExists: false,
+      behanceExists: false,
+      dribbleExists: false,
+      instagramExists: false,
+    ),
+    Contact(
+      name: "Madhav Gupta",
       desc: "Publications and Correspondence",
-      email: "pcr@bitsbosm.org",
-      imageAsset: "vaishnavi_raghav.png",
-      phoneNumber: "6395057581",
+      email: "pcr@bits-oasis.org",
+      imageAsset: "madhav_gupta.png",
+      phoneNumber: "8130127878",
       githubUsername: "",
       linkedinUsername: "",
       twitterUsername: "",
@@ -45,56 +67,10 @@ class _ContactScreenState extends State<ContactScreen> {
     ),
     Contact(
       name: "Angel Maria Baby",
-      desc: "Controls",
-      email: "controls@bitsbosm.org",
-      imageAsset: "AbhishekMSingh.png",
-      phoneNumber: "9632217970",
-      githubUsername: "",
-      linkedinUsername: "",
-      twitterUsername: "",
-      behanceUsername: "",
-      dribbleUsername: "",
-      instagramUsername: "",
-      emailExists: false,
-      phoneNumberExists: false,
-      descExists: false,
-      imageAssetExists: false,
-      githubExists: false,
-      linkedinExists: false,
-      twitterExists: false,
-      behanceExists: false,
-      dribbleExists: false,
-      instagramExists: false,
-    ),
-    Contact(
-      name: "Ravichandra Parvatham",
-      desc: "Sponsorship and Marketing",
-      email: "",
-      imageAsset: "RavichandranParvatham.png",
-      phoneNumber: "9100955331",
-      githubUsername: "",
-      linkedinUsername: "",
-      twitterUsername: "",
-      behanceUsername: "",
-      dribbleUsername: "",
-      instagramUsername: "",
-      emailExists: false,
-      phoneNumberExists: false,
-      descExists: false,
-      imageAssetExists: false,
-      githubExists: false,
-      linkedinExists: false,
-      twitterExists: false,
-      behanceExists: false,
-      dribbleExists: false,
-      instagramExists: false,
-    ),
-    Contact(
-      name: "Tejas Deshpande",
       desc: "Reception and Accomodation",
-      email: "recnacc@bitsbosm.org",
-      imageAsset: "TejasDeshpande.png",
-      phoneNumber: "7350334393",
+      email: "recnacc@bits-oasis.org",
+      imageAsset: "angel_maria_baby.png",
+      phoneNumber: "8921977221",
       githubUsername: "",
       linkedinUsername: "",
       twitterUsername: "",
@@ -113,11 +89,11 @@ class _ContactScreenState extends State<ContactScreen> {
       instagramExists: false,
     ),
     Contact(
-      name: "Ekansh Agarwal",
-      desc: "Sports Secretary",
-      email: "sportssecretary@bitsbosm.org",
-      imageAsset: "EkanshAgrawal.png",
-      phoneNumber: "8810211563",
+      name: "Karishma K",
+      desc: "Sponsorship and Marketing",
+      email: "sponsorship@bits-oasis.org",
+      imageAsset: "karishma.png",
+      phoneNumber: "9902819428",
       githubUsername: "",
       linkedinUsername: "",
       twitterUsername: "",
@@ -136,11 +112,11 @@ class _ContactScreenState extends State<ContactScreen> {
       instagramExists: false,
     ),
     Contact(
-      name: "Shalini Solanke",
-      desc: "Joint Sports Secretary",
-      email: "",
-      imageAsset: "ShaliniSolanke.png",
-      phoneNumber: "7058949468",
+      name: "Rythm Saxena",
+      desc: "Publicity and\nOnline Partnerships",
+      email: "collaborations@bits-oasis.org",
+      imageAsset: "rhythm.png",
+      phoneNumber: "7836809755",
       githubUsername: "",
       linkedinUsername: "",
       twitterUsername: "",
@@ -159,11 +135,11 @@ class _ContactScreenState extends State<ContactScreen> {
       instagramExists: false,
     ),
     Contact(
-      name: "Harshvardhan Singh",
-      desc: "Joint Sports Secretary",
-      email: "",
-      imageAsset: "HarshvardhanSingh.png",
-      phoneNumber: "6350648125",
+      name: "Pranav Dangi",
+      desc: "Events, Projects and\nLogistics",
+      email: "controls@bits-oasis.org",
+      imageAsset: "pranav_dangi.png",
+      phoneNumber: "8080263399",
       githubUsername: "",
       linkedinUsername: "",
       twitterUsername: "",
@@ -182,11 +158,11 @@ class _ContactScreenState extends State<ContactScreen> {
       instagramExists: false,
     ),
     Contact(
-      name: "Krishay Nangia",
-      desc: "Joint Sports Secretary",
-      email: "",
-      imageAsset: "KrishayNangia.png",
-      phoneNumber: "9820075904",
+      name: "Ashirwad Karande",
+      desc: "President\n Student Union",
+      email: "finance@bits-oasis.org",
+      imageAsset: "ashirwad.png",
+      phoneNumber: "8793009454",
       githubUsername: "",
       linkedinUsername: "",
       twitterUsername: "",
@@ -205,11 +181,11 @@ class _ContactScreenState extends State<ContactScreen> {
       instagramExists: false,
     ),
     Contact(
-      name: "Madhav Garg",
-      desc: "Online Registrations",
-      email: "webmaster@bitsbosm.org",
-      imageAsset: "Madhav.png",
-      phoneNumber: '9911448690',
+      name: "Naman Jalan",
+      desc: "General Secretary\n Student Union",
+      email: "inventory@bits-oasis.org",
+      imageAsset: "naman.png",
+      phoneNumber: "8617395921",
       githubUsername: "",
       linkedinUsername: "",
       twitterUsername: "",
@@ -242,12 +218,6 @@ class _ContactScreenState extends State<ContactScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: CustomAppBar(
-              title: "Contact Us",
-              isactionButtonRequired: false,
-              isBackButtonRequired: true)),
       body: Padding(
         padding: EdgeInsets.only(
           bottom: UIUtills().getProportionalHeight(height: 20),
@@ -262,12 +232,10 @@ class _ContactScreenState extends State<ContactScreen> {
             child: GridView.builder(
                 physics: const BouncingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing:
-                        24.w,
-                    mainAxisSpacing:
-                        20.h,
+                    crossAxisSpacing: 24.w,
+                    mainAxisSpacing: 20.h,
                     crossAxisCount: 2,
-                    childAspectRatio: 0.66),
+                    childAspectRatio: 0.62),
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     decoration: BoxDecoration(
@@ -297,16 +265,18 @@ class _ContactScreenState extends State<ContactScreen> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 1.w, vertical: 1.h),
                                 child: ClipOval(
-                                  child: Image.asset(
-                                    "assets/images/${contactList[index].imageAsset}",
+                                  child: Container(
+                                    color: Colors.black,
+                                    child: Image.asset(
+                                      "assets/images/${contactList[index].imageAsset}",
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(
-                                top: 12.h),
+                            padding: EdgeInsets.only(top: 12.h),
                             child: Center(
                               child: Text(
                                 contactList[index].name,
@@ -318,10 +288,8 @@ class _ContactScreenState extends State<ContactScreen> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(
-                                top:
-                                    16.08.h,
-                                bottom: 20.35.h),
+                            padding:
+                                EdgeInsets.only(top: 16.08.h, bottom: 20.35.h),
                             child: Center(
                               child: Text(
                                 contactList[index].desc,

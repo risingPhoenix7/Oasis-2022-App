@@ -5,7 +5,6 @@ import 'package:oasis_2022/resources/resources.dart';
 import 'package:oasis_2022/screens/events/view_model/cached_misc_events_view_model.dart';
 import 'package:oasis_2022/screens/morescreen/screens/more_info.dart';
 import 'package:oasis_2022/utils/oasis_text_styles.dart';
-import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 
 import '/utils/scroll_remover.dart';
 import '/widgets/error_dialogue.dart';
@@ -101,18 +100,13 @@ class _EventsScreenState extends State<EventsScreen> {
       cachedMiscEventsViewModel.mergedRetriveMiscResult();
     });
     CachedMiscEventsViewModel.status.addListener(() {
-      print('klisadygfdef');
-      print(CachedMiscEventsViewModel.statusInt);
       if (CachedMiscEventsViewModel.statusInt == 2) {
-        print('should refresh now after reading from network call');
         checkMiscEventsResult();
       } else if (CachedMiscEventsViewModel.statusInt == 1) {
-        print('should refresh now after reading from local db');
         if (MiscEventsViewModel.error == null) {
           updateCurrentDayMiscEventList();
           setState(() {
             isLoading = false;
-            print('vghvjvhbkhb');
           });
         } else {
           //return MiscEventResult.error;
@@ -169,18 +163,23 @@ class _EventsScreenState extends State<EventsScreen> {
                               ),
                             ),
                             Padding(
-                              padding:  EdgeInsets.only(top: 90.h, right: 28.w),
-                              child: GestureDetector(
-                                onTap: () {Navigator.push(context, MaterialPageRoute(
-                                    builder: (context) => MoreInfoScreen()));},
-                                child: SvgPicture.asset('assets/images/3gole.svg'),
-                              ),
-                            )
+                                padding:
+                                    EdgeInsets.only(top: 90.h, right: 28.w),
+                                child: IconButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MoreInfoScreen()));
+                                    },
+                                    icon: SvgPicture.asset(
+                                        'assets/images/3gole.svg'))),
                           ],
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              top: 52.h, bottom: 27.5, left: 36.w, right: 36.w),
+                              top: 48.h, bottom: 0, left: 36.w, right: 36.w),
                           child: Container(
                             color: Colors.black,
                             child: Container(

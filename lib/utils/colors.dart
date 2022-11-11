@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,20 +15,33 @@ class OasisColors {
       begin: Alignment.bottomCenter,
       end: Alignment.topCenter,
       colors: [Color(0xFF2D2D2D), Color(0xFF000000)]);
+  static const LinearGradient oasisWebsiteGoldGradient =
+      LinearGradient(colors: [
+    Color.fromRGBO(209, 154, 8, 1),
+    Color.fromRGBO(254, 212, 102, 1),
+    Color.fromRGBO(227, 186, 79, 1),
+    Color.fromRGBO(209, 154, 8, 1),
+    Color.fromRGBO(209, 154, 8, 1),
+  ]);
   static const LinearGradient darkBlackgradient = LinearGradient(colors: [
     Color.fromRGBO(0, 0, 0, 1),
     Color.fromRGBO(44, 44, 44, 1),
   ]);
-  static const LinearGradient goldenGradient =LinearGradient(
-  begin: Alignment.centerLeft,
-  end: Alignment.centerRight,
-  colors: [Color.fromRGBO(209, 153, 7, 1),Color.fromRGBO(253, 211, 101, 1),Color.fromRGBO(226, 186, 79, 1),Color.fromRGBO(209, 154, 8, 1),Color.fromRGBO(209, 154, 8, 1)]
-  );
-  // static const LinearGradient whiteGradient =LinearGradient(
-  //     begin: Alignment(0.9233271479606628,0.0766749233007431),
-  //     end: Alignment(-0.0766749233007431,0.07667377591133118),
-  //     colors: [Color.fromRGBO(209, 153, 7, 1),Color.fromRGBO(253, 211, 101, 1),Color.fromRGBO(226, 186, 79, 1),Color.fromRGBO(209, 154, 8, 1),Color.fromRGBO(209, 154, 8, 1)]
-  // );
+  static const LinearGradient goldenGradient = LinearGradient(
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+      colors: [
+        Color.fromRGBO(209, 153, 7, 1),
+        Color.fromRGBO(253, 211, 101, 1),
+        Color.fromRGBO(226, 186, 79, 1),
+        Color.fromRGBO(209, 154, 8, 1),
+        Color.fromRGBO(209, 154, 8, 1)
+      ]);
+// static const LinearGradient whiteGradient =LinearGradient(
+//     begin: Alignment(0.9233271479606628,0.0766749233007431),
+//     end: Alignment(-0.0766749233007431,0.07667377591133118),
+//     colors: [Color.fromRGBO(209, 153, 7, 1),Color.fromRGBO(253, 211, 101, 1),Color.fromRGBO(226, 186, 79, 1),Color.fromRGBO(209, 154, 8, 1),Color.fromRGBO(209, 154, 8, 1)]
+// );
 }
 
 // to use write BosmColors.backgroundColorWhite

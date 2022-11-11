@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
 import 'package:oasis_2022/screens/tickets/controller/store_controller.dart';
+import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
 import 'package:oasis_2022/screens/tickets/view/buy_ticket.dart';
 import 'package:oasis_2022/screens/tickets/view_model/get_signedtickets_view_model.dart';
 
@@ -13,10 +13,7 @@ class BannerDetails extends StatefulWidget {
   State<BannerDetails> createState() => _BannerDetailsState();
 }
 
-
 class _BannerDetailsState extends State<BannerDetails> {
-
-
   ValueNotifier<bool> isLoading = ValueNotifier(true);
 
   String Time(String timestamp) {
@@ -50,8 +47,6 @@ class _BannerDetailsState extends State<BannerDetails> {
     }
     return date;
   }
-
-
 
   @override
   void initState() {
@@ -142,13 +137,13 @@ class _BannerDetailsState extends State<BannerDetails> {
                   padding: EdgeInsets.only(right: 21.w),
                   child: GestureDetector(
                     onTap: () async {
-                        if ((StoreController.carouselItems[StoreController
-                            .itemNumber.value] as StoreItemData)
-                            .tickets_available!) {
-                          showDialog(
-                              context: context,
-                              builder: (context) => const BuyTicket());
-                        } else {}
+                      if ((StoreController.carouselItems[StoreController
+                              .itemNumber.value] as StoreItemData)
+                          .tickets_available!) {
+                        showDialog(
+                            context: context,
+                            builder: (context) => const BuyTicket());
+                      } else {}
                     },
                     child: Container(
                       height: 46.h,

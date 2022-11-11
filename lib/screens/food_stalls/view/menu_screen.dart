@@ -1,16 +1,16 @@
 import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/adapters.dart';
 
 import '/screens/cart/cartScreen.dart';
 import '/screens/food_stalls/repo/model/food_stall_model.dart' as menu;
 import '/utils/ui_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_flutter/adapters.dart';
 import '../view_model/menu_screen_viewmodel.dart';
-import 'food_stall_screen.dart';
 import 'menu_add_buttons.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -80,7 +80,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             height: 259.h,
                             width: 388.w,
                             child: const CircularProgressIndicator(
-                              color: Colors.black,
+                              color: Colors.amberAccent,
                             ),
                           ),
                           imageUrl:
@@ -321,7 +321,8 @@ class _MenuScreenState extends State<MenuScreen> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 37.w),
                                       child: AddButton(
-                                        is_available: menuItemsFiltered[index].is_available,
+                                        is_available: menuItemsFiltered[index]
+                                            .is_available,
                                         isVeg: menuItemsFiltered[index].is_veg,
                                         menuItemName:
                                             menuItemsFiltered[index].name,

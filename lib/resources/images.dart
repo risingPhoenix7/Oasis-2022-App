@@ -15,7 +15,8 @@ class ImageAssets {
   static const String background_stalls_ellipse =
       "assets/images/background_stalls_ellipse.svg";
   static const String hamburgerIcon = 'assets/icons/menu.svg';
-  static const String add_money_background = 'assets/images/add_money_background.png';
+  static const String add_money_background =
+      'assets/images/add_money_background.png';
   static const String bookmarkIcon = 'assets/icons/bookmark_icon.svg';
   static const String versusIcon = 'assets/icons/versus_icon.png';
   static const String filtersIcon = 'assets/icons/filters.png';

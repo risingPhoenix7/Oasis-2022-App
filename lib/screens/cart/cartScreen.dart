@@ -1,8 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:oasis_2022/widgets/OasisSnackbar.dart';
-import '../food_stalls/view/food_stall_screen.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+
 import '/order/controller/cart_and_order_controller.dart';
 import '/screens/cart/repo/model/cart_screen_model.dart';
 import '/screens/cart/repo/model/post_order_response_model.dart';
@@ -12,14 +17,11 @@ import '/screens/wallet_screen/view_model/wallet_viewmodel.dart';
 import '/utils/error_messages.dart';
 import '/utils/ui_utils.dart';
 import '/widgets/error_dialogue.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import '../food_stalls/view/food_stall_screen.dart';
 
 class CartScreen extends StatefulWidget {
   CartScreen({super.key});
+
   @override
   State<CartScreen> createState() => CartScreenState();
 }
@@ -157,7 +159,7 @@ class CartScreenState extends State<CartScreen> {
                         style: GoogleFonts.roboto(
                             textStyle: TextStyle(
                                 fontSize:
-                                    UIUtills().getProportionalWidth(width: 28),
+                                UIUtills().getProportionalWidth(width: 28),
                                 fontWeight: FontWeight.bold,
                                 color: const Color(0xFFB9B8B8))),
                       ),
@@ -177,17 +179,17 @@ class CartScreenState extends State<CartScreen> {
                           padding: const EdgeInsets.all(20.0),
                           sliver: SliverList(
                             delegate: SliverChildBuilderDelegate(
-                                (BuildContext context, int index) {
-                              return cartWidget(
-                                foodStallId: foodStallIdList[index],
-                                menuList: foodStallWithDetailsMap[
-                                        foodStallIdList[index]]!
-                                    .menuList,
-                                foodStallName: foodStallWithDetailsMap[
-                                        foodStallIdList[index]]!
-                                    .foodStall,
-                              );
-                            }, childCount: foodStallWithDetailsMap.length),
+                                    (BuildContext context, int index) {
+                                  return cartWidget(
+                                    foodStallId: foodStallIdList[index],
+                                    menuList: foodStallWithDetailsMap[
+                                    foodStallIdList[index]]!
+                                        .menuList,
+                                    foodStallName: foodStallWithDetailsMap[
+                                    foodStallIdList[index]]!
+                                        .foodStall,
+                                  );
+                                }, childCount: foodStallWithDetailsMap.length),
                           ),
                         ),
                       ],
@@ -198,13 +200,13 @@ class CartScreenState extends State<CartScreen> {
                       right: 0,
                       child: isPostingOrder
                           ? const Center(
-                              child: LinearProgressIndicator(
-                                color: Colors.yellow,
-                                backgroundColor: Colors.transparent,
-                              ),
-                            )
+                        child: LinearProgressIndicator(
+                          color: Colors.yellow,
+                          backgroundColor: Colors.transparent,
+                        ),
+                      )
                           : InkWell(
-                              onTap: () async {
+                        onTap: () async {
                                 if (await auth.isDeviceSupported()) {
                                   await _authenticate();
                                 }
@@ -347,7 +349,7 @@ class CartScreenState extends State<CartScreen> {
                                   }
                                 }
                               },
-                              child: Container(
+                        child: Container(
                                 width: 428.w,
                                 height: 72.h,
                                 decoration: BoxDecoration(
@@ -361,43 +363,43 @@ class CartScreenState extends State<CartScreen> {
                                   borderRadius: BorderRadius.circular(
                                     15.r,
                                   ),
-                                ),
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 40.w),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'Pay Now',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w800,
-                                              color: Colors.black,
-                                              fontSize: 20.sp,
-                                            ),
-                                          ),
-                                        ],
+                          ),
+                          child: Padding(
+                            padding:
+                            EdgeInsets.symmetric(horizontal: 40.w),
+                            child: Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Pay Now',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w800,
+                                        color: Colors.black,
+                                        fontSize: 20.sp,
                                       ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            '₹ $total',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.black,
-                                              fontSize: 19.sp,
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '₹ $total',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.black,
+                                        fontSize: 19.sp,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
+                          ),
+                        ),
+                      ),
                     )
                   ],
                 ),

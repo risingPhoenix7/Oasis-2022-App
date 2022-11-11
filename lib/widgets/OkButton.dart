@@ -1,6 +1,7 @@
-import '../utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../utils/ui_utils.dart';
 
 class OkButton extends StatelessWidget {
   const OkButton({Key? key}) : super(key: key);

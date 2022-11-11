@@ -61,22 +61,18 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
       cachedFoodStallEventsViewModel.getFoodStalls();
     });
     CachedFoodStallsViewModel.status.addListener(() {
-      print('klisadygfdef');
-      print(CachedFoodStallsViewModel.statusInt);
       if (CachedFoodStallsViewModel.statusInt == 2) {
         isStallsClosed = false;
-        print('should refresh now after reading from network call');
+
         checkFoodStallResult();
       } else if (CachedFoodStallsViewModel.statusInt == 1) {
         isStallsClosed = false;
-        print('should refresh now after reading from local db');
+
         setState(() {
           foodStall = CachedFoodStallsViewModel.listFoodStalls;
           isLoading = false;
-          print('vghvjvhbkhb');
         });
       } else if (CachedFoodStallsViewModel.statusInt == 4) {
-        print('should show empty stall');
         setState(() {
           isStallsClosed = true;
           isLoading = false;

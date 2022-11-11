@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../quiz/view/Quiz_ui.dart';
@@ -33,21 +32,42 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.only(top: 108.h, left: 24.w),
-                child: Text(
-                  "See More",
-                  style: GoogleFonts.openSans(
-                      fontSize: 28.sp, color: Colors.white),
-                ),
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 108.h, left: 24.w),
+                    child: Text(
+                      "See More",
+                      style: GoogleFonts.openSans(
+                          fontSize: 28.sp, color: Colors.white),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 200.w, top: 108.h),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: 28.r,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 52.h),
               SingleBlock(
                 assetName: 'assets/images/more_screen_icons/standup.svg',
                 name: 'Standup Soap Box',
                 action: () {
-                  {Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => quizUIScreen()));}
+                  {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => quizUIScreen()));
+                  }
                 },
               ),
               SingleBlock(
@@ -95,13 +115,12 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
                 },
               ),
               SingleBlock(
-                assetName: 'assets/images/more_screen_icons/generalinfo.svg',
-                name: 'General Info',
+                  assetName: 'assets/images/more_screen_icons/generalinfo.svg',
+                  name: 'General Info',
                   action: () {
                     PersistentNavBarNavigator.pushNewScreen(context,
                         screen: const GeneralInformation());
-                  }
-              ),
+                  }),
             ],
           )
         ],

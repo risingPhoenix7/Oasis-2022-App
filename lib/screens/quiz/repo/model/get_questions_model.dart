@@ -20,15 +20,15 @@ class Question {
   List<int?> option_ids;
   List<String?> option_texts;
 
- // bool? quiz_closed;
+  // bool? quiz_closed;
 
-  String?  question_text = '';
+  String? question_text = '';
 
   Question(
-      {//required this.category,
+      { //required this.category,
       required this.question_id,
       required this.total_options,
-     // required this.image_link,
+      // required this.image_link,
       //required this.time_given,
       required this.question_no,
       //required this.quiz_closed,

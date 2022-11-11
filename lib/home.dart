@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:oasis_2022/order/repo/model/get_orders_model.dart';
 import 'package:oasis_2022/screens/events/view/miscellaneous_screen.dart';
-import 'package:oasis_2022/screens/morescreen/screens/more_info.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import '../screens/tickets/view/store_screen.dart';
+
 import '../provider/user_details_viewmodel.dart';
 import '../screens/food_stalls/view/food_stall_screen.dart';
+import '../screens/tickets/view/store_screen.dart';
 import '../screens/wallet_screen/view/wallet_screen.dart';
 import '../utils/ui_utils.dart';
 import 'order/order_screen.dart';

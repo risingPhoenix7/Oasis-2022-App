@@ -5,7 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:oasis_2022/screens/kindstore/view/kind_store_view.dart';
+import 'package:oasis_2022/utils/colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+
 import '/provider/user_details_viewmodel.dart';
 import '/screens/paytm/view/payment_cart_screen.dart';
 import '/screens/paytm/view/refresh_wallet_controller.dart';
@@ -299,7 +301,8 @@ class _WalletScreenState extends State<WalletScreen> {
                                                                 CircularProgressIndicator(
                                                           strokeWidth: 2,
                                                           backgroundColor:
-                                                              Colors.black,
+                                                              Colors
+                                                                  .amberAccent,
                                                         )));
                                                   } else {
                                                     return Text(
@@ -339,15 +342,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                 padding:
                                     const EdgeInsets.fromLTRB(0, 15, 0, 15),
                                 decoration: BoxDecoration(
-                                  gradient: const LinearGradient(
-                                    colors: [
-                                      Color.fromRGBO(209, 154, 8, 1),
-                                      Color.fromRGBO(254, 212, 102, 1),
-                                      Color.fromRGBO(227, 186, 79, 1),
-                                      Color.fromRGBO(209, 154, 8, 1),
-                                      Color.fromRGBO(209, 154, 8, 1),
-                                    ],
-                                  ),
+                                  gradient: OasisColors.oasisWebsiteGoldGradient,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Column(
@@ -539,20 +534,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                             padding: const EdgeInsets.fromLTRB(
                                                 0, 8, 0, 8),
                                             decoration: BoxDecoration(
-                                              gradient: const LinearGradient(
-                                                colors: [
-                                                  Color.fromRGBO(
-                                                      209, 154, 8, 1),
-                                                  Color.fromRGBO(
-                                                      254, 212, 102, 1),
-                                                  Color.fromRGBO(
-                                                      227, 186, 79, 1),
-                                                  Color.fromRGBO(
-                                                      209, 154, 8, 1),
-                                                  Color.fromRGBO(
-                                                      209, 154, 8, 1),
-                                                ],
-                                              ),
+                                              gradient: OasisColors.oasisWebsiteGoldGradient,
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                             ),

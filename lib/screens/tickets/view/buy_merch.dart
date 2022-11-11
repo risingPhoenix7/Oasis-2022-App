@@ -2,11 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:oasis_2022/screens/tickets/controller/store_controller.dart';
-import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
 
 import '../../../widgets/OasisSnackbar.dart';
 import '../repository/model/ticketPostBody.dart';
@@ -28,6 +26,7 @@ class BuyMerch extends StatefulWidget {
   final String imageUrl;
   final int amountPurchased;
   final bool available;
+
   @override
   State<BuyMerch> createState() => _BuyMerchState();
 }
@@ -85,9 +84,9 @@ class _BuyMerchState extends State<BuyMerch> {
   void initState() {
     auth.isDeviceSupported().then(
           (bool isSupported) => setState(() => _supportState = isSupported
-          ? _SupportState.supported
-          : _SupportState.unsupported),
-    );
+              ? _SupportState.supported
+              : _SupportState.unsupported),
+        );
     StoreController.itemNumber.addListener(() {
       if (!mounted) {}
       setState(() {});

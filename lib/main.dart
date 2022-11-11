@@ -5,24 +5,20 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:oasis_2022/screens/events/repository/model/miscEventResult.dart';
 import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
-import 'package:oasis_2022/screens/kindstore/view/kind_store_view.dart';
-import 'package:oasis_2022/screens/overload/overload_page.dart';
+import 'package:oasis_2022/screens/onboarding/overboarding_page.dart';
 
 import '../home.dart';
 import '../provider/user_details_viewmodel.dart';
 import '../screens/food_stalls/repo/model/hive_model/hive_menu_entry.dart';
 import '../screens/login/view/login_screen.dart';
 import '../screens/quiz/view/leaderboard/leaderboard.dart';
-import '../screens/quiz/view_model/storage.dart';
 import '../screens/wallet_screen/view/wallet_screen.dart';
 import 'firebase_options.dart';
 import 'notificationservice/local_notification_service.dart';
-import 'order/order_screen.dart';
 import 'screens/food_stalls/repo/model/food_stall_model.dart';
 
 Future<void> main() async {
@@ -45,7 +41,7 @@ Future<void> main() async {
   await Hive.openBox('cartBox');
   await Hive.openBox<FoodStallList>('foodStallBox');
   print('initialised hive');
-print('initialising firebase');
+  print('initialising firebase');
   await Firebase.initializeApp(
       name: 'com.dvm.oasis2k22',
       options: DefaultFirebaseOptions.currentPlatform);
@@ -146,12 +142,12 @@ class _BosmFestAppState extends State<BosmFestApp> {
                           (route) => false,
                         ));
                   } else if (data == false) {
-                    Future.microtask(() =>
-                        Navigator.of(context).pushAndRemoveUntil(
+                    Future.microtask(
+                        () => Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (builder) => const OverloadPage()),
-                          (route) => false,
-                        ));
+                                  builder: (builder) => const OnBoardingPage()),
+                              (route) => false,
+                            ));
                   }
                 }
                 return Container(

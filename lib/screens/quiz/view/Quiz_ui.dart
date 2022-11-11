@@ -71,12 +71,20 @@ class _quizUIScreenState extends State<quizUIScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Stand Up Soapbox',
-                          style: GoogleFonts.openSans(
-                              color: Colors.white,
-                              fontSize: 28,
-                              fontWeight: FontWeight.w500),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Stand Up Soapbox',
+                              style: GoogleFonts.openSans(
+                                  color: Colors.white,
+                                  fontSize: 28.sp,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            GestureDetector(onTap: () {print('object');
+                              Navigator.pop(context);},
+                                child: SvgPicture.asset('assets/images/exit_button.svg'))
+                          ],
                         ),
                         SizedBox(
                           height: UIUtills().getProportionalHeight(height: 53),
@@ -93,7 +101,7 @@ class _quizUIScreenState extends State<quizUIScreen> {
                           'Select any one option',
                           style: GoogleFonts.openSans(
                               color: const Color.fromRGBO(255, 255, 255, 0.8),
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w300),
                         ),
                         SizedBox(
@@ -113,7 +121,7 @@ class _quizUIScreenState extends State<quizUIScreen> {
                                           color: const Color.fromRGBO(
                                               26, 28, 28, 1),
                                           border: Border.all(
-                                            width: 1.0,
+                                            width: 1.0.w,
                                           ),
                                           borderRadius: BorderRadius.circular(
                                             UIUtills().getProportionalWidth(

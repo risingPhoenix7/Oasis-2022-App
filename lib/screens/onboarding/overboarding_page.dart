@@ -94,9 +94,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 GestureDetector(
                   onTap: () {
                     Future.microtask(() {
-                      setState(() {
-                        hasLoader = true;
-                      });
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
@@ -107,8 +104,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   child: hasLoader
                       ? const Loader()
                       : Row(
-                          children: [
-                            const Text(
+                          children: const [
+                            Text(
                               "Skip",
                               style: TextStyle(
                                 color: Colors.white,
@@ -116,13 +113,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                                 fontFamily: "Gilroy",
                                 fontWeight: FontWeight.w700,
                               ),
-                            ),
-                            SizedBox(
-                              width: UIUtills().getProportionalWidth(width: 5),
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios,
-                              size: 15,
                             ),
                           ],
                         ),

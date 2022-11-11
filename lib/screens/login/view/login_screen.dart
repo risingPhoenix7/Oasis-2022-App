@@ -128,307 +128,312 @@ class _LoginScreenState extends State<LoginScreen>
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.black,
           body: !isLoaderVisible
-              ? Stack(
-                  children: [
-                    ImageFiltered(
-                        imageFilter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
-                        child: RotationTransition(
-                            turns: _rotationAnimation,
-                            child: SvgPicture.asset(
-                                "assets/images/loginBackground.svg"))),
-                    Positioned(
-                      bottom: 39.h,
-                      left: 0,
-                      right: 0,
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Made with 💛 by DVM",
-                              style: GoogleFonts.openSans(
-                                  color: Colors.white, fontSize: 14.sp),
+              ? SingleChildScrollView(
+                child: SizedBox(
+                  height: 1.sh,
+                  width: 1.sw,
+                  child: Stack(
+                      children: [
+                        ImageFiltered(
+                            imageFilter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+                            child: RotationTransition(
+                                turns: _rotationAnimation,
+                                child: SvgPicture.asset(
+                                    "assets/images/loginBackground.svg"))),
+                        Positioned(
+                          bottom: 39.h,
+                          left: 0,
+                          right: 0,
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Made with 💛 by DVM",
+                                  style: GoogleFonts.openSans(
+                                      color: Colors.white, fontSize: 14.sp),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 151.h),
-                            child: SvgPicture.asset(
-                                "assets/images/login_screen_logo.svg"),
                           ),
-                          Form(
-                              child: Padding(
-                            padding: EdgeInsets.only(top: 59.h),
-                            child: SizedBox(
-                              width: 360.w,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 13.h),
-                                    child: SlideTransition(
-                                      position: _usernameOffsetAnimation,
-                                      child: TextFormField(
-                                        cursorColor: const Color.fromRGBO(
-                                            255, 255, 255, 0.7),
-                                        controller: usernameController,
-                                        validator: (value) {},
-                                        style: GoogleFonts.openSans(
-                                            fontSize: 16.sp,
-                                            color: const Color.fromRGBO(
-                                                255, 255, 255, 0.7)),
-                                        decoration: InputDecoration(
-                                            contentPadding: EdgeInsets.only(
-                                                top: 19.h,
-                                                bottom: 19.h,
-                                                left: 24.w),
-                                            focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.7936.r),
-                                                borderSide: const BorderSide(
-                                                    color: Color(0xFFF8D848))),
-                                            filled: true,
-                                            fillColor: const Color(0xFF1A1C1C),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.7936.r)),
-                                            hintText: "Enter your username",
-                                            hintStyle: GoogleFonts.openSans(
+                        ),
+                        Center(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 151.h),
+                                child: SvgPicture.asset(
+                                    "assets/images/login_screen_logo.svg"),
+                              ),
+                              Form(
+                                  child: Padding(
+                                padding: EdgeInsets.only(top: 59.h),
+                                child: SizedBox(
+                                  width: 360.w,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(bottom: 13.h),
+                                        child: SlideTransition(
+                                          position: _usernameOffsetAnimation,
+                                          child: TextFormField(
+                                            cursorColor: const Color.fromRGBO(
+                                                255, 255, 255, 0.7),
+                                            controller: usernameController,
+                                            validator: (value) {},
+                                            style: GoogleFonts.openSans(
                                                 fontSize: 16.sp,
                                                 color: const Color.fromRGBO(
-                                                    255, 255, 255, 0.7))),
+                                                    255, 255, 255, 0.7)),
+                                            decoration: InputDecoration(
+                                                contentPadding: EdgeInsets.only(
+                                                    top: 19.h,
+                                                    bottom: 19.h,
+                                                    left: 24.w),
+                                                focusedBorder: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.7936.r),
+                                                    borderSide: const BorderSide(
+                                                        color: Color(0xFFF8D848))),
+                                                filled: true,
+                                                fillColor: const Color(0xFF1A1C1C),
+                                                border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.7936.r)),
+                                                hintText: "Enter your username",
+                                                hintStyle: GoogleFonts.openSans(
+                                                    fontSize: 16.sp,
+                                                    color: const Color.fromRGBO(
+                                                        255, 255, 255, 0.7))),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  SlideTransition(
-                                    position: _passwordOffsetAnimation,
-                                    child: TextFormField(
-                                      cursorColor: const Color.fromRGBO(
-                                          255, 255, 255, 0.7),
-                                      controller: passwordController,
-                                      obscureText: isHidden,
-                                      style: GoogleFonts.openSans(
-                                          fontSize: 16.sp,
-                                          color: const Color.fromRGBO(
-                                              255, 255, 255, 0.7)),
-                                      decoration: InputDecoration(
-                                          contentPadding: EdgeInsets.only(
-                                              top: 19.h,
-                                              bottom: 19.h,
-                                              left: 24.w),
-                                          suffixIcon: IconButton(
-                                              focusColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              splashColor: Colors.transparent,
-                                              onPressed: () {
-                                                bool blockTap = true;
-                                                if (iconColorController.value !=
-                                                        1 ||
-                                                    iconColorController.value !=
-                                                        0) {
-                                                  blockTap = true;
-                                                }
-                                                if (iconColorController.value ==
-                                                        1 &&
-                                                    blockTap) {
-                                                  isHidden = !isHidden;
-                                                  iconColorController.reverse();
-                                                }
-                                                if (blockTap &&
-                                                    iconColorController.value ==
-                                                        0) {
-                                                  isHidden = !isHidden;
-                                                  iconColorController.forward();
-                                                }
-                                              },
-                                              icon: Icon(Icons.visibility_outlined,
-                                                  color: animation?.value ??
-                                                      const Color.fromRGBO(
-                                                          255, 255, 255, 0.7))),
-                                          focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  10.7936),
-                                              borderSide: const BorderSide(
-                                                  color: Color(0xFFF8D848))),
-                                          filled: true,
-                                          fillColor: const Color(0xFF1A1C1C),
-                                          border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(
-                                                  10.7936)),
-                                          hintText: "Enter your password",
-                                          hintStyle: GoogleFonts.openSans(
+                                      SlideTransition(
+                                        position: _passwordOffsetAnimation,
+                                        child: TextFormField(
+                                          cursorColor: const Color.fromRGBO(
+                                              255, 255, 255, 0.7),
+                                          controller: passwordController,
+                                          obscureText: isHidden,
+                                          style: GoogleFonts.openSans(
                                               fontSize: 16.sp,
                                               color: const Color.fromRGBO(
-                                                  255, 255, 255, 0.7))),
+                                                  255, 255, 255, 0.7)),
+                                          decoration: InputDecoration(
+                                              contentPadding: EdgeInsets.only(
+                                                  top: 19.h,
+                                                  bottom: 19.h,
+                                                  left: 24.w),
+                                              suffixIcon: IconButton(
+                                                  focusColor: Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  splashColor: Colors.transparent,
+                                                  onPressed: () {
+                                                    bool blockTap = true;
+                                                    if (iconColorController.value !=
+                                                            1 ||
+                                                        iconColorController.value !=
+                                                            0) {
+                                                      blockTap = true;
+                                                    }
+                                                    if (iconColorController.value ==
+                                                            1 &&
+                                                        blockTap) {
+                                                      isHidden = !isHidden;
+                                                      iconColorController.reverse();
+                                                    }
+                                                    if (blockTap &&
+                                                        iconColorController.value ==
+                                                            0) {
+                                                      isHidden = !isHidden;
+                                                      iconColorController.forward();
+                                                    }
+                                                  },
+                                                  icon: Icon(Icons.visibility_outlined,
+                                                      color: animation?.value ??
+                                                          const Color.fromRGBO(
+                                                              255, 255, 255, 0.7))),
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(
+                                                      10.7936),
+                                                  borderSide: const BorderSide(
+                                                      color: Color(0xFFF8D848))),
+                                              filled: true,
+                                              fillColor: const Color(0xFF1A1C1C),
+                                              border: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(
+                                                      10.7936)),
+                                              hintText: "Enter your password",
+                                              hintStyle: GoogleFonts.openSans(
+                                                  fontSize: 16.sp,
+                                                  color: const Color.fromRGBO(
+                                                      255, 255, 255, 0.7))),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )),
+                              Padding(
+                                padding: EdgeInsets.only(top: 51.h, bottom: 22.h),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    bool tempBlock = true;
+                                    if ((passwordController.text.trim().isEmpty ||
+                                            passwordController.text.trim() == "") &&
+                                        (usernameController.text.trim().isEmpty ||
+                                            usernameController.text.trim() == "")) {
+                                      passwordTextFieldShakeController.reset();
+                                      usernameTextFieldShakeController.reset();
+                                      passwordTextFieldShakeController.forward();
+                                      usernameTextFieldShakeController.forward();
+                                      tempBlock = false;
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          CustomSnackBar().oasisSnackBar(
+                                              'Enter the password and username'));
+                                    } else if (tempBlock &&
+                                        (passwordController.text.trim().isEmpty ||
+                                            passwordController.text.trim() == "")) {
+                                      if (passwordTextFieldShakeController.value ==
+                                          1) {
+                                        passwordTextFieldShakeController.reset();
+                                      }
+                                      passwordTextFieldShakeController.forward();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(CustomSnackBar().oasisSnackBar('Enter the password'));
+                                    } else if (tempBlock &&
+                                        (usernameController.text.trim().isEmpty ||
+                                            usernameController.text.trim() == "")) {
+                                      if (usernameTextFieldShakeController.value ==
+                                          1) {
+                                        usernameTextFieldShakeController.reset();
+                                      }
+                                      usernameTextFieldShakeController.forward();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        duration: const Duration(milliseconds: 500),
+                                        content: SizedBox(
+                                            height: 25.h,
+                                            child: const Center(
+                                                child: Text("Enter the username"))),
+                                      ));
+                                    } else if (usernameController.text.isNotEmpty &&
+                                        passwordController.text.isNotEmpty) {
+                                      setState(() {
+                                        isLoaderVisible = true;
+                                        statusTypeGoogle = false;
+                                      });
+                                      authOrGoogleAuthResult =
+                                          loginViewModel.authenticate(
+                                              usernameController.text.trim(),
+                                              passwordController.text.trim(),
+                                              true);
+                                      usernameController.clear();
+                                      passwordController.clear();
+                                    } else {
+                                      showDialog(
+                                          barrierDismissible: false,
+                                          context: context,
+                                          builder: (context) {
+                                            return Align(
+                                              alignment: Alignment.bottomCenter,
+                                              child: ErrorDialog(
+                                                  errorMessage: ErrorMessages
+                                                      .emptyUsernamePassword),
+                                            );
+                                          });
+                                    }
+                                  },
+                                  child: Container(
+                                    height: 52.h,
+                                    width: 287.w,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xFFF8D848),
+                                        borderRadius: BorderRadius.circular(16)),
+                                    child: Text(
+                                      "Login",
+                                      style: GoogleFonts.openSans(
+                                          color: Colors.black,
+                                          fontSize: 21.sp,
+                                          fontWeight: FontWeight.w700),
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          )),
-                          Padding(
-                            padding: EdgeInsets.only(top: 51.h, bottom: 22.h),
-                            child: GestureDetector(
-                              onTap: () {
-                                bool tempBlock = true;
-                                if ((passwordController.text.trim().isEmpty ||
-                                        passwordController.text.trim() == "") &&
-                                    (usernameController.text.trim().isEmpty ||
-                                        usernameController.text.trim() == "")) {
-                                  passwordTextFieldShakeController.reset();
-                                  usernameTextFieldShakeController.reset();
-                                  passwordTextFieldShakeController.forward();
-                                  usernameTextFieldShakeController.forward();
-                                  tempBlock = false;
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      CustomSnackBar().oasisSnackBar(
-                                          'Enter the password and username'));
-                                } else if (tempBlock &&
-                                    (passwordController.text.trim().isEmpty ||
-                                        passwordController.text.trim() == "")) {
-                                  if (passwordTextFieldShakeController.value ==
-                                      1) {
-                                    passwordTextFieldShakeController.reset();
-                                  }
-                                  passwordTextFieldShakeController.forward();
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(CustomSnackBar().oasisSnackBar('Enter the password'));
-                                } else if (tempBlock &&
-                                    (usernameController.text.trim().isEmpty ||
-                                        usernameController.text.trim() == "")) {
-                                  if (usernameTextFieldShakeController.value ==
-                                      1) {
-                                    usernameTextFieldShakeController.reset();
-                                  }
-                                  usernameTextFieldShakeController.forward();
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    duration: const Duration(milliseconds: 500),
-                                    content: SizedBox(
-                                        height: 25.h,
-                                        child: const Center(
-                                            child: Text("Enter the username"))),
-                                  ));
-                                } else if (usernameController.text.isNotEmpty &&
-                                    passwordController.text.isNotEmpty) {
-                                  setState(() {
-                                    isLoaderVisible = true;
-                                    statusTypeGoogle = false;
-                                  });
-                                  authOrGoogleAuthResult =
-                                      loginViewModel.authenticate(
-                                          usernameController.text.trim(),
-                                          passwordController.text.trim(),
-                                          true);
-                                  usernameController.clear();
-                                  passwordController.clear();
-                                } else {
-                                  showDialog(
-                                      barrierDismissible: false,
-                                      context: context,
-                                      builder: (context) {
-                                        return Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: ErrorDialog(
-                                              errorMessage: ErrorMessages
-                                                  .emptyUsernamePassword),
-                                        );
-                                      });
-                                }
-                              },
-                              child: Container(
-                                height: 52.h,
-                                width: 287.w,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: const Color(0xFFF8D848),
-                                    borderRadius: BorderRadius.circular(16)),
-                                child: Text(
-                                  "Login",
-                                  style: GoogleFonts.openSans(
-                                      color: Colors.black,
-                                      fontSize: 21.sp,
-                                      fontWeight: FontWeight.w700),
                                 ),
                               ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () async {
-                              try {
-                                await _googleSignIn.signIn().then((result) {
-                                  result?.authentication.then((googleKey) {
-                                    setState(() {
-                                      isLoaderVisible = true;
-                                      statusTypeGoogle = true;
+                              GestureDetector(
+                                onTap: () async {
+                                  try {
+                                    await _googleSignIn.signIn().then((result) {
+                                      result?.authentication.then((googleKey) {
+                                        setState(() {
+                                          isLoaderVisible = true;
+                                          statusTypeGoogle = true;
+                                        });
+                                        authOrGoogleAuthResult =
+                                            googleLoginViewModel.authenticate(
+                                                googleKey.idToken, true);
+                                      });
                                     });
-                                    authOrGoogleAuthResult =
-                                        googleLoginViewModel.authenticate(
-                                            googleKey.idToken, true);
-                                  });
-                                });
-                              } catch (error) {
-                                Future.microtask(() => setState(() {
-                                      isLoaderVisible = false;
-                                    }));
-                                Future.microtask(() => showDialog(
-                                    barrierDismissible: false,
-                                    context: context,
-                                    builder: (context) {
-                                      return Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: ErrorDialog(
-                                            errorMessage:
-                                                ErrorMessages.invalidLogin),
-                                      );
-                                    }));
-                              }
-                            },
-                            child: Container(
-                              height: 52.h,
-                              width: 287.w,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  border: const Border(
-                                      top: BorderSide(color: Colors.white),
-                                      left: BorderSide(color: Colors.white),
-                                      right: BorderSide(color: Colors.white),
-                                      bottom: BorderSide(color: Colors.white))),
-                              child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 8.w),
-                                      child: SvgPicture.asset(
-                                          "assets/images/google_logo.svg"),
-                                    ),
-                                    Text(
-                                      "Login with BITS Mail",
-                                      style: GoogleFonts.openSans(
-                                          fontSize: 16.sp, color: Colors.white),
-                                    )
-                                  ]),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                )
+                                  } catch (error) {
+                                    Future.microtask(() => setState(() {
+                                          isLoaderVisible = false;
+                                        }));
+                                    Future.microtask(() => showDialog(
+                                        barrierDismissible: false,
+                                        context: context,
+                                        builder: (context) {
+                                          return Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: ErrorDialog(
+                                                errorMessage:
+                                                    ErrorMessages.invalidLogin),
+                                          );
+                                        }));
+                                  }
+                                },
+                                child: Container(
+                                  height: 52.h,
+                                  width: 287.w,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(16),
+                                      border: const Border(
+                                          top: BorderSide(color: Colors.white),
+                                          left: BorderSide(color: Colors.white),
+                                          right: BorderSide(color: Colors.white),
+                                          bottom: BorderSide(color: Colors.white))),
+                                  child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 8.w),
+                                          child: SvgPicture.asset(
+                                              "assets/images/google_logo.svg"),
+                                        ),
+                                        Text(
+                                          "Login with BITS Mail",
+                                          style: GoogleFonts.openSans(
+                                              fontSize: 16.sp, color: Colors.white),
+                                        )
+                                      ]),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                ),
+              )
               : FutureBuilder<AuthResult>(
                   future: authOrGoogleAuthResult,
                   builder: (context, snapshot) {

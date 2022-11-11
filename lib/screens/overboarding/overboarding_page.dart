@@ -27,14 +27,15 @@ class _OverBoardingPageState extends State<OverBoardingPage> {
     OnBoarding(
         imagePath: 'assets/images/events_overboarding.svg',
         text:
-            'Stay updated with all the events happening on campus with timings and location.'),
+            'Stay updated and get notified with all the events happening on campus with timings and location.'),
     OnBoarding(
         imagePath: 'assets/images/tickets-overboarding.svg',
         text:
             'Buy tickets using the app and scan the QR code available on the wallet screen to enter the prof shows'),
     OnBoarding(
         imagePath: 'assets/images/merch_overboarding.svg',
-        text: 'Buy official oasis merchandise from the Oasis App itself.'),
+        text:
+            'Browse and shop for official Oasis 2022 merchandise directly from the App. Orders can be collected from the merch stall using the QR code in wallet'),
   ];
 
   double currentIndexPage = 0.0;
@@ -108,14 +109,14 @@ class _OverBoardingPageState extends State<OverBoardingPage> {
                       : Row(
                           children: [
                             const Text(
-                                    "Skip",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontFamily: "Gilroy",
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
+                              "Skip",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontFamily: "Gilroy",
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
                             SizedBox(
                               width: UIUtills().getProportionalWidth(width: 5),
                             ),

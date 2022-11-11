@@ -122,110 +122,94 @@ class _KindStoreCatalogState extends State<KindStoreCatalog> {
                                 ),
                                 itemBuilder: (BuildContext context, int index) {
                                   return Container(
-                                    // width: 180.w,
-                                    // height: 271.h,
-                                    // decoration: BoxDecoration(
-                                    //   borderRadius: BorderRadius.circular(20.r),
-                                    //   gradient: const LinearGradient(
-                                    //     colors: [
-                                    //       Color.fromRGBO(209, 154, 8, 1),
-                                    //       Color.fromRGBO(254, 212, 102, 1),
-                                    //       Color.fromRGBO(227, 186, 79, 1),
-                                    //       Color.fromRGBO(209, 154, 8, 1),
-                                    //       Color.fromRGBO(209, 154, 8, 1),
-                                    //     ],
-                                    //   ),
-                                    // ),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      padding: EdgeInsets.only(
-                                          left: 13.00.w,
-                                          right: 13.00.w,
-                                          top: 9.00.h),
-                                      decoration: BoxDecoration(
-                                          border: GradientBoxBorder(
-                                            width: 0.15.w,
-                                            gradient: LinearGradient(
-                                              colors: [
-                                                Color.fromRGBO(209, 154, 8, 1),
-                                                Color.fromRGBO(
-                                                    254, 212, 102, 1),
-                                                Color.fromRGBO(227, 186, 79, 1),
-                                                Color.fromRGBO(209, 154, 8, 1),
-                                                Color.fromRGBO(209, 154, 8, 1),
-                                              ],
-                                            ),
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.only(
+                                        left: 13.00.w,
+                                        right: 13.00.w,
+                                        top: 9.00.h),
+                                    decoration: BoxDecoration(
+                                        border: GradientBoxBorder(
+                                          width: 0.15.w,
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              Color.fromRGBO(209, 154, 8, 1),
+                                              Color.fromRGBO(
+                                                  254, 212, 102, 1),
+                                              Color.fromRGBO(227, 186, 79, 1),
+                                              Color.fromRGBO(209, 154, 8, 1),
+                                              Color.fromRGBO(209, 154, 8, 1),
+                                            ],
                                           ),
-                                          color: Colors.black,
-                                          borderRadius:
-                                              BorderRadius.circular(20.r)),
-                                      // width: 179.w,
-                                      // height: 270.h,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 9.h,
-                                          ),
-                                          Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.74.r),
-                                                child: Image.asset(
-                                                    fit: BoxFit.fill,
-                                                    height: 183.h,
-                                                    width: 152.h,
-                                                    'assets/images/OASISLogoGoldPNG.png'),
-                                              ),
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.74.r),
-                                                child: Image(
+                                        ),
+                                        color: Colors.black,
+                                        borderRadius:
+                                            BorderRadius.circular(20.r)),
+                                    // width: 179.w,
+                                    // height: 270.h,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          height: 9.h,
+                                        ),
+                                        Stack(
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      10.74.r),
+                                              child: Image.asset(
                                                   fit: BoxFit.fill,
                                                   height: 183.h,
                                                   width: 152.h,
-                                                  image: NetworkImage(
-                                                      KindStoreViewModel
-                                                          .kindItemsResult
-                                                          .items_details![index]
-                                                          .image!),
-                                                ),
+                                                  'assets/images/OASISLogoGoldPNG.png'),
+                                            ),
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      10.74.r),
+                                              child: Image(
+                                                fit: BoxFit.fill,
+                                                height: 183.h,
+                                                width: 152.h,
+                                                image: NetworkImage(
+                                                    KindStoreViewModel
+                                                        .kindItemsResult
+                                                        .items_details![index]
+                                                        .image!),
                                               ),
-                                            ],
-                                          ),
-                                          SizedBox(height: 15.h),
-                                          Text(
-                                            KindStoreViewModel.kindItemsResult
-                                                .items_details![index].name!,
-                                            textAlign: TextAlign.left,
-                                            style: GoogleFonts.openSans(
-                                                fontSize: 16.sp,
-                                                color: const Color.fromRGBO(
-                                                    239, 239, 239, 1),
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                          SizedBox(height: 7.56.h),
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                  'assets/icons/KindStoreIcon.svg'),
-                                              Text(
-                                                '  ${KindStoreViewModel.kindItemsResult.items_details![index].price}',
-                                                style: GoogleFonts.openSans(
-                                                    fontSize: 12.91.sp,
-                                                    color: const Color.fromRGBO(
-                                                        250, 250, 250, 1),
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                              )
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 15.h),
+                                        Text(
+                                          KindStoreViewModel.kindItemsResult
+                                              .items_details![index].name!,
+                                          textAlign: TextAlign.left,
+                                          style: GoogleFonts.openSans(
+                                              fontSize: 16.sp,
+                                              color: const Color.fromRGBO(
+                                                  239, 239, 239, 1),
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                        SizedBox(height: 7.56.h),
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                                'assets/icons/KindStoreIcon.svg'),
+                                            Text(
+                                              '  ${KindStoreViewModel.kindItemsResult.items_details![index].price}',
+                                              style: GoogleFonts.openSans(
+                                                  fontSize: 12.91.sp,
+                                                  color: const Color.fromRGBO(
+                                                      250, 250, 250, 1),
+                                                  fontWeight:
+                                                      FontWeight.w600),
+                                            )
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   );
                                 },

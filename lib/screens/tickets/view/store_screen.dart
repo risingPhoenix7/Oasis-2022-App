@@ -7,6 +7,7 @@ import 'package:oasis_2022/screens/tickets/view/bottom_carousel.dart';
 import 'package:oasis_2022/screens/tickets/view/merch.dart';
 import 'package:oasis_2022/screens/tickets/view/prof_show.dart';
 import 'package:oasis_2022/utils/scroll_remover.dart';
+import 'package:oasis_2022/widgets/loader.dart';
 
 class StoreScreen extends StatefulWidget {
   const StoreScreen({Key? key}) : super(key: key);
@@ -71,7 +72,7 @@ class _StoreScreenState extends State<StoreScreen>
           builder: (BuildContext context, bool value, Widget? child) {
             if (value) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: Loader(),
               );
             } else {
               return ScrollConfiguration(

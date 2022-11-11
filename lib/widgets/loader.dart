@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import '../utils/error_messages.dart';
 import '../widgets/error_dialogue.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,7 @@ class _LoaderState extends State<Loader> {
 
   @override
   void initState() {
-    timer = Timer(Duration(seconds: 20), () {
+    timer = Timer(const Duration(seconds: 30), () {
       setState(() {
         isError = true;
       });
@@ -39,13 +41,12 @@ class _LoaderState extends State<Loader> {
           ? Center(
               child: ErrorDialog(
                   errorMessage: ErrorMessages.timeOutError, isFatalError: true))
-          : Center(
+          : const Center(
               child: SizedBox(
                 height: 75,
                 width: 75,
-                child: CircularProgressIndicator(
-                  strokeWidth: 5,
-                  color: Colors.amberAccent,
+                child: SpinKitSpinningLines(
+                  color: Colors.amber,
                 ),
               ),
             ),

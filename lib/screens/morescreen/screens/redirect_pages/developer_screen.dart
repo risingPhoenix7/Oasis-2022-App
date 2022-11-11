@@ -38,7 +38,7 @@ class DevelopersScreen2 extends StatelessWidget {
                   mainAxisSpacing: 16,
                   crossAxisCount: 2,
                   childAspectRatio: 0.57),
-              children: [
+              children: const [
                 SingleCard(
                     iconsMap: {
                       "github": 'shashvat1965',
@@ -267,7 +267,7 @@ class SingleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          image: DecorationImage(
+          image: const DecorationImage(
               image: AssetImage(ImageAssets.eventCardBg), fit: BoxFit.fill),
           borderRadius: BorderRadius.circular(20.r)),
       width: UIUtills().getProportionalWidth(width: 170),

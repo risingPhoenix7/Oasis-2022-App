@@ -150,7 +150,7 @@ class _BosmFestAppState extends State<BosmFestApp> {
                     Future.microtask(() =>
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (builder) => const LoginScreen()),
+                              builder: (builder) => const OverloadPage()),
                           (route) => false,
                         ));
                   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oasis_2022/screens/overload/overload_four.dart';
 import 'package:oasis_2022/utils/oasis_text_styles.dart';
 import 'package:oasis_2022/utils/scroll_remover.dart';
 
@@ -21,10 +22,11 @@ class _OverloadPageState extends State<OverloadPage>
   bool isGoingBackWards = false;
   bool isLoader = false;
   PageController _controller = PageController(initialPage: 0, keepPage: false);
-  List<Widget> overloadPages = const [
+  List<Widget> overloadPages = [
     OverloadOne(),
     OverloadTwo(),
     OverloadThree(),
+    OverloadFour(),
   ];
 
   double currentIndexPage = 0;
@@ -63,21 +65,9 @@ class _OverloadPageState extends State<OverloadPage>
     final screenSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-          body: Container(
+          body: SizedBox(
         height: screenSize.height,
         width: screenSize.width,
-        // decoration: BoxDecoration(
-        //   gradient: RadialGradient(
-        //     center: Alignment.topRight,
-        //     radius: 1,
-        //     colors: [
-        //       Color(0xff1B1E35),
-        //       Color(0xff1A1D3D),
-        //       Color(0xff07091B),
-        //       Color(0xff04050E)
-        //     ],
-        //   ),
-        // ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -185,6 +175,8 @@ class _OverloadPageState extends State<OverloadPage>
                   alignment: AlignmentDirectional.center,
                   children: [
                     SizedBox(
+                      width: UIUtills().getProportionalHeight(height: 77),
+                      height: UIUtills().getProportionalHeight(height: 77),
                       child: CircularProgressIndicator(
                           value: isLoader
                               ? null
@@ -194,17 +186,11 @@ class _OverloadPageState extends State<OverloadPage>
                           strokeWidth: 2,
                           backgroundColor: Color(0xFFC0C0C0),
                           color: Color(0xFF585858)),
-                      width: UIUtills().getProportionalHeight(height: 77),
-                      height: UIUtills().getProportionalHeight(height: 77),
                     ),
-                    // Container(
-                    //   width: UIUtills().getProportionalWidth(width: 50),
-                    // ),
-                    // Figma Flutter Generator Ellipse296Widget - ELLIPSE
                     Container(
                         width: UIUtills().getProportionalHeight(height: 61),
                         height: UIUtills().getProportionalHeight(height: 61),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           gradient: LinearGradient(
                               begin: Alignment.bottomCenter,
                               end: Alignment.topCenter,
@@ -215,20 +201,6 @@ class _OverloadPageState extends State<OverloadPage>
                           borderRadius:
                               BorderRadius.all(Radius.elliptical(61, 61)),
                         )),
-
-                    // DotsIndicator(
-                    //   dotsCount: overloadPages.length,
-                    //   position: currentIndexPage,
-                    //   decorator: DotsDecorator(
-                    //     color: Colors.white,
-                    //     // Inactive color
-                    //     activeColor: const Color(0xffFFFFFF),
-                    //     spacing: const EdgeInsets.all(3.0),
-                    //     activeSize: const Size(25.0, 8.0),
-                    //     activeShape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(5.0)),
-                    //   ),
-                    // ),
                     Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.white,

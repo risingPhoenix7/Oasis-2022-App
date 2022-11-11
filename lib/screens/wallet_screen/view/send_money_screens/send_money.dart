@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oasis_2022/screens/wallet_screen/view/send_money_screens/updatedSendMoneyDialog.dart';
 import 'dart:ui';
@@ -206,7 +207,7 @@ class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
               top: UIUtills().getProportionalHeight(height: 72),
               child: Text(
                 'Send Money',
-                style: GoogleFonts.openSans(fontSize: 32, color: Colors.white),
+                style: GoogleFonts.openSans(fontSize: 32.sp, color: Colors.white),
               )),
           Positioned(
               top: UIUtills().getProportionalHeight(height: 75),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
@@ -195,6 +196,8 @@ class _WalletScreenState extends State<WalletScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: RefreshIndicator(
+        backgroundColor: Colors.black,
+        color: Colors.amber,
         onRefresh: getBalance,
         child: ScrollConfiguration(
           behavior: CustomScrollBehavior(),
@@ -240,7 +243,7 @@ class _WalletScreenState extends State<WalletScreen> {
                               width: MediaQuery.of(context).size.width,
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.fromLTRB(25, 20, 15, 15),
+                                     EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 15.h),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -262,9 +265,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                               style: GoogleFonts.openSans(
                                                   color:
                                                       const Color(0xFFFFFFFF),
-                                                  fontSize: UIUtills()
-                                                      .getProportionalHeight(
-                                                          height: 14),
+                                                  fontSize:14.sp,
                                                   fontWeight: FontWeight.w400),
                                             ),
                                             Text(
@@ -355,35 +356,38 @@ class _WalletScreenState extends State<WalletScreen> {
                                                           height: 16),
                                                   fontWeight: FontWeight.w600),
                                             ),
-                                            ValueListenableBuilder(
-                                              valueListenable: isLoading,
-                                              builder:
-                                                  (context, bool value, child) {
-                                                if (isLoading.value) {
-                                                  return const SizedBox(
-                                                      width: 20,
-                                                      height: 20,
-                                                      child: Center(
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                        strokeWidth: 2,
-                                                        backgroundColor:
-                                                            Colors.black,
-                                                      )));
-                                                } else {
-                                                  return Text(
-                                                    'Rs. ${WalletViewModel.balance}',
-                                                    style: GoogleFonts.openSans(
-                                                        color: const Color(
-                                                            0xFFFFFFFF),
-                                                        fontSize: UIUtills()
-                                                            .getProportionalHeight(
-                                                                height: 24),
-                                                        fontWeight:
-                                                            FontWeight.w700),
-                                                  );
-                                                }
-                                              },
+                                            Padding(
+                                              padding:  EdgeInsets.only(bottom: 20.h),
+                                              child: ValueListenableBuilder(
+                                                valueListenable: isLoading,
+                                                builder:
+                                                    (context, bool value, child) {
+                                                  if (isLoading.value) {
+                                                    return const SizedBox(
+                                                        width: 20,
+                                                        height: 20,
+                                                        child: Center(
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                          strokeWidth: 2,
+                                                          backgroundColor:
+                                                              Colors.black,
+                                                        )));
+                                                  } else {
+                                                    return Text(
+                                                      'Rs. ${WalletViewModel.balance}',
+                                                      style: GoogleFonts.openSans(
+                                                          color: const Color(
+                                                              0xFFFFFFFF),
+                                                          fontSize: UIUtills()
+                                                              .getProportionalHeight(
+                                                                  height: 24),
+                                                          fontWeight:
+                                                              FontWeight.w700),
+                                                    );
+                                                  }
+                                                },
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -395,12 +399,10 @@ class _WalletScreenState extends State<WalletScreen> {
                             )
                           ],
                         ),
-                        SizedBox(
-                          height: UIUtills().getProportionalHeight(height: 20),
-                        ),
+
                         Padding(
-                          padding: EdgeInsets.only(
-                              left: UIUtills().getProportionalWidth(width: 13)),
+                          padding: EdgeInsets.only(left: 13.w,top: 15.h)
+                              ,
                           child: Row(
                             children: [
                               Container(
@@ -592,12 +594,10 @@ class _WalletScreenState extends State<WalletScreen> {
                                                   fontWeight: FontWeight.w600),
                                             ),
                                             Text(
-                                              '0',
+                                             '${ WalletViewModel.kindpoints}',
                                               style: GoogleFonts.openSans(
                                                   color: Colors.white,
-                                                  fontSize: UIUtills()
-                                                      .getProportionalHeight(
-                                                          height: 20),
+                                                  fontSize:  20.sp,
                                                   fontWeight: FontWeight.w700),
                                             ),
                                           ],

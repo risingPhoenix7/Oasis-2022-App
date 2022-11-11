@@ -35,7 +35,6 @@ class _QRCodeDialogBoxState extends State<QRCodeDialogBox> {
 
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: Colors.red,
         child: Container(
 
           decoration: BoxDecoration(

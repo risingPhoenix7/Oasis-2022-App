@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oasis_2022/screens/wallet_screen/view/send_money_screens/send_money.dart';
 
 import '/screens/wallet_screen/view/send_money_screens/send_money_screen.dart';
@@ -53,35 +55,15 @@ class _ScanningViewState extends State<ScanningView> {
         child: Stack(
           children: [
             qrCodeScanner(),
+
             Positioned(
-              left: UIUtills().getProportionalWidth(width: 112),
-              top: UIUtills().getProportionalHeight(height: 38),
-              child: Text(
-                "Scan QR Code",
-                style: GoogleFonts.roboto(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: UIUtills().getProportionalWidth(width: 32)),
-              ),
-            ),
-            Positioned(
-                top: UIUtills().getProportionalHeight(height: 43),
+                top: UIUtills().getProportionalHeight(height: 54),
                 right: UIUtills().getProportionalWidth(width: 24),
                 child: InkWell(
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color.fromRGBO(237, 237, 237, 0.6)),
-                    width: 28,
-                    child: const Icon(
-                      Icons.close,
-                      color: Colors.black,
-                      size: 14,
-                    ),
-                  ),
+                  child: SvgPicture.asset('assets/images/cross1.svg',height: 32.h,width: 32.w,),
                 )),
             Positioned(
               bottom:
@@ -90,7 +72,7 @@ class _ScanningViewState extends State<ScanningView> {
                 width: MediaQuery.of(context).size.width,
                 height: UIUtills().getProportionalHeight(height: 210),
                 decoration: const BoxDecoration(
-                    color: Color(0xFFFAFAFF),
+                    color: Color.fromRGBO(5, 5, 5, 1),
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15),
                         topRight: Radius.circular(15))),
@@ -105,6 +87,7 @@ class _ScanningViewState extends State<ScanningView> {
                         width: UIUtills().getProportionalWidth(width: 388),
                         decoration: BoxDecoration(
                             boxShadow: const [
+                              
                               BoxShadow(
                                 color: Color.fromRGBO(0, 0, 0, 0.2),
                                 offset: Offset(0, 2),
@@ -112,7 +95,7 @@ class _ScanningViewState extends State<ScanningView> {
                               )
                             ],
                             borderRadius: BorderRadius.circular(14),
-                            color: Colors.white),
+                            color: Color.fromRGBO(26, 28, 28, 1)),
                         child: Center(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -133,12 +116,13 @@ class _ScanningViewState extends State<ScanningView> {
                               decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Enter User Id",
+                                  filled: true,
+                                  fillColor: Color.fromRGBO(26, 28, 28, 1),
                                   hintStyle: GoogleFonts.poppins(
                                       textStyle: TextStyle(
-                                    color: const Color(0xFF656565),
-                                    fontSize: UIUtills()
-                                        .getProportionalWidth(width: 20),
-                                    fontWeight: FontWeight.w500,
+                                    color:  Colors.white,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w400,
                                   )),
                                   suffixIcon: IconButton(
                                       onPressed: () {
@@ -168,17 +152,20 @@ class _ScanningViewState extends State<ScanningView> {
                         },
                         child: Container(
                           // alignment: Alignment.bottomCenter,
-                          width: MediaQuery.of(context).size.width,
+                          width: 356.w,
                           height:
-                              UIUtills().getProportionalHeight(height: 72.00),
+                              UIUtills().getProportionalHeight(height: 47.00),
                           margin: EdgeInsets.symmetric(
                               horizontal: UIUtills()
                                   .getProportionalWidth(width: 20.00)),
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
                               colors: [
-                                Color.fromRGBO(45, 45, 45, 1),
-                                Color.fromRGBO(0, 0, 0, 1)
+                                Color.fromRGBO(209, 154, 8, 1),
+                                Color.fromRGBO(254, 212, 102, 1),
+                                Color.fromRGBO(227, 186, 79, 1),
+                                Color.fromRGBO(209, 154, 8, 1),
+                                Color.fromRGBO(209, 154, 8, 1),
                               ],
                             ),
                             boxShadow: const [
@@ -189,7 +176,7 @@ class _ScanningViewState extends State<ScanningView> {
                               ),
                             ],
                             borderRadius: BorderRadius.circular(
-                              UIUtills().getProportionalWidth(width: 15.00),
+                             15.r,
                             ),
                           ),
                           child: Row(
@@ -201,8 +188,7 @@ class _ScanningViewState extends State<ScanningView> {
                                     'Proceed',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w800,
-                                      color: const Color.fromRGBO(
-                                          255, 255, 255, 1),
+                                      color: Colors.black,
                                       fontSize: UIUtills()
                                           .getProportionalWidth(width: 20.00),
                                     ),
@@ -267,7 +253,7 @@ class _ScanningViewState extends State<ScanningView> {
       onQRViewCreated: _onQRViewCreated,
       // onPermissionSet: (ctrl, p) => _onPermissionSet(context, ctrl, p),
       overlay: QrScannerOverlayShape(
-        borderColor: Colors.white,
+        borderColor: Colors.amber,
         borderLength: 30,
         borderWidth: 5,
         cutOutSize: UIUtills().getProportionalHeight(height: 246),

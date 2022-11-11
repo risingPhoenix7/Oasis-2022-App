@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oasis_2022/screens/cart/cartScreen.dart';
 import 'package:oasis_2022/screens/food_stalls/view_model/cached_food_stalls_viewmodel.dart';
@@ -96,10 +98,10 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
               child: isStallsClosed
                   ? ListView(
                       children: [
-                        Center(
-                          child: ErrorDialog(
-                              isFatalError: true,
-                              errorMessage: FoodStallViewModel.error),
+                        Padding(
+                          padding: EdgeInsets.only(top: 200.h),
+                          child:
+                              SvgPicture.asset('assets/images/no_stalls.svg'),
                         )
                       ],
                     )

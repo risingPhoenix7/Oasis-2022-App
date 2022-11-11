@@ -143,28 +143,13 @@ class CartScreenState extends State<CartScreen> {
                 box.keys.isEmpty ||
                 box.isEmpty) {
               return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/images/EmptyCart.svg',
-                      height: UIUtills().getProportionalHeight(height: 212.18),
-                      width: UIUtills().getProportionalWidth(width: 255.7),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: UIUtills().getProportionalHeight(height: 27.82)),
-                      child: Text(
-                        "Empty Cart",
-                        style: GoogleFonts.roboto(
-                            textStyle: TextStyle(
-                                fontSize:
-                                UIUtills().getProportionalWidth(width: 28),
-                                fontWeight: FontWeight.bold,
-                                color: const Color(0xFFB9B8B8))),
-                      ),
-                    )
-                  ],
+                child: Padding(
+                  padding: EdgeInsets.only(top: 150.h),
+                  child: SvgPicture.asset(
+                    'assets/images/empty_cart.svg',
+                    height: UIUtills().getProportionalHeight(height: 321),
+                    width: UIUtills().getProportionalWidth(width: 325),
+                  ),
                 ),
               );
             } else {
@@ -179,17 +164,17 @@ class CartScreenState extends State<CartScreen> {
                           padding: const EdgeInsets.all(20.0),
                           sliver: SliverList(
                             delegate: SliverChildBuilderDelegate(
-                                    (BuildContext context, int index) {
-                                  return cartWidget(
-                                    foodStallId: foodStallIdList[index],
-                                    menuList: foodStallWithDetailsMap[
-                                    foodStallIdList[index]]!
-                                        .menuList,
-                                    foodStallName: foodStallWithDetailsMap[
-                                    foodStallIdList[index]]!
-                                        .foodStall,
-                                  );
-                                }, childCount: foodStallWithDetailsMap.length),
+                                (BuildContext context, int index) {
+                              return cartWidget(
+                                foodStallId: foodStallIdList[index],
+                                menuList: foodStallWithDetailsMap[
+                                        foodStallIdList[index]]!
+                                    .menuList,
+                                foodStallName: foodStallWithDetailsMap[
+                                        foodStallIdList[index]]!
+                                    .foodStall,
+                              );
+                            }, childCount: foodStallWithDetailsMap.length),
                           ),
                         ),
                       ],
@@ -200,11 +185,11 @@ class CartScreenState extends State<CartScreen> {
                       right: 0,
                       child: isPostingOrder
                           ? const Center(
-                        child: LinearProgressIndicator(
-                          color: Colors.yellow,
-                          backgroundColor: Colors.transparent,
-                        ),
-                      )
+                              child: LinearProgressIndicator(
+                                color: Colors.yellow,
+                                backgroundColor: Colors.transparent,
+                              ),
+                            )
                           : InkWell(
                         onTap: () async {
                                 if (await auth.isDeviceSupported()) {
@@ -363,43 +348,43 @@ class CartScreenState extends State<CartScreen> {
                                   borderRadius: BorderRadius.circular(
                                     15.r,
                                   ),
-                          ),
-                          child: Padding(
-                            padding:
-                            EdgeInsets.symmetric(horizontal: 40.w),
-                            child: Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Pay Now',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w800,
-                                        color: Colors.black,
-                                        fontSize: 20.sp,
-                                      ),
-                                    ),
-                                  ],
                                 ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      '₹ $total',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.black,
-                                        fontSize: 19.sp,
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 40.w),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Pay Now',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w800,
+                                              color: Colors.black,
+                                              fontSize: 20.sp,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                  ],
-                                )
-                              ],
+                                      Row(
+                                        children: [
+                                          Text(
+                                            '₹ $total',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.black,
+                                              fontSize: 19.sp,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
                     )
                   ],
                 ),

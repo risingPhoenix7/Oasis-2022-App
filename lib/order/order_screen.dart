@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:oasis_2022/notificationservice/local_notification_service.dart';
 import 'package:oasis_2022/order/order_widget.dart';
 import 'package:oasis_2022/order/repo/model/get_orders_model.dart';
 import 'package:oasis_2022/order/repo/model/order_card_model.dart';
@@ -49,8 +48,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
     orderCardList = OrderScreenViewModel().changeDataModel(orderResultList);
     isLoading.value = false;
   }
-  Widget build(BuildContext context) {
 
+  Widget build(BuildContext context) {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       bool gotError = await checkConnection();
       if (gotError) {
@@ -66,79 +65,77 @@ class _OrdersScreenState extends State<OrdersScreen> {
       }
     });
     return Scaffold(
-      body: ValueListenableBuilder(
-        valueListenable: isLoading,
-        builder: (context, bool value, child) {
-      getOrderResult();
-      if (isLoading.value) {
-        return const Center(child: Loader());
-      } else {
-        return
-          Container(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
-            color: Colors.black,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(28.w, 72.h, 30.w, 0),
-              child: Column(
-                children: [
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Orders',
-                        style: GoogleFonts.openSans(
-                            fontSize: 28.sp,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.only(top: 23.h),
-                    child: Text(
-                      'Know your orders. Click on view details to know more',
-                      style: GoogleFonts.openSans(
-                          color: Color.fromRGBO(255, 255, 255, 0.75),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18.sp
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 58.h),
-                    child: SizedBox(
-                        height: 410.h,
-                        child: CustomScrollView(
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          slivers: [
-                            SliverPadding(
-                              padding: const EdgeInsets.all(10),
-                              sliver: SliverList(
-                                  delegate: SliverChildBuilderDelegate(
-                                          (BuildContext context, int index) {
-                                        return OrderWidget(
-                                            orderCardModel: orderCardList[index]);
-                                      }, childCount: orderCardList.length)),
-                            )
+        body: ValueListenableBuilder(
+            valueListenable: isLoading,
+            builder: (context, bool value, child) {
+              getOrderResult();
+              if (isLoading.value) {
+                return const Center(child: Loader());
+              } else {
+                return Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.black,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(28.w, 72.h, 30.w, 0),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Orders',
+                              style: GoogleFonts.openSans(
+                                  fontSize: 28.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ],
-                        )
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 23.h),
+                          child: Text(
+                            'Keep track of your orders. Click on view details to know more',
+                            style: GoogleFonts.openSans(
+                                color: Color.fromRGBO(255, 255, 255, 0.75),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18.sp),
+                          ),
+                        ),
+                        orderCardList.isEmpty
+                            ? Padding(
+                                padding: EdgeInsets.only(top: 80.h),
+                                child: SvgPicture.asset(
+                                    'assets/images/no_orders.svg'),
+                              )
+                            : Padding(
+                                padding: EdgeInsets.only(top: 58.h),
+                                child: SizedBox(
+                                    height: 410.h,
+                                    child: CustomScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      slivers: [
+                                        SliverPadding(
+                                          padding: const EdgeInsets.all(10),
+                                          sliver: SliverList(
+                                              delegate:
+                                                  SliverChildBuilderDelegate(
+                                                      (BuildContext context,
+                                                          int index) {
+                                            return OrderWidget(
+                                                orderCardModel:
+                                                    orderCardList[index]);
+                                          }, childCount: orderCardList.length)),
+                                        )
+                                      ],
+                                    )),
+                              ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          );
-      }})
-    );
+                );
+              }
+            }));
   }
 }

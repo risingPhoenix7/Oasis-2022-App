@@ -1,7 +1,8 @@
-import '/utils/ui_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '/utils/ui_utils.dart';
 
 class FoodStallTile extends StatelessWidget {
   FoodStallTile({Key? key, required this.image, required this.foodStallName})
@@ -13,11 +14,16 @@ class FoodStallTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: CachedNetworkImage(
-              imageUrl: image,
-            )),
+        Container(
+          width: UIUtills().getProportionalWidth(width: 184),
+          height: UIUtills().getProportionalHeight(height: 230),
+          // clipBehavior: Clip.hardEdge,
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: CachedNetworkImage(
+                imageUrl: image,
+              )),
+        ),
         Padding(
           padding: EdgeInsets.only(
               top: UIUtills().getProportionalHeight(height: 10),

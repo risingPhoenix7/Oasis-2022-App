@@ -114,25 +114,25 @@ class QuizScreenViewModel {
     return optionMap;
   }
 
-  int? getQuestionTime(int questionNumber, Questions questions) {
-    int? time;
-    for (Question i in questions.active_questions!) {
-      if (i.question_no == questionNumber) {
-        time = i.time_given;
-      }
-    }
-    return time;
-  }
-
-  String? getQuestionImage(int questionNumber, Questions questions) {
-    String? link;
-    for (Question i in questions.active_questions!) {
-      if (i.question_no == questionNumber) {
-        link = i.image_link;
-      }
-    }
-    return link;
-  }
+  // int? getQuestionTime(int questionNumber, Questions questions) {
+  //   int? time;
+  //   for (Question i in questions.active_questions!) {
+  //     if (i.question_no == questionNumber) {
+  //       time = i.time_given;
+  //     }
+  //   }
+  //   return time;
+  // }
+  //
+  // String? getQuestionImage(int questionNumber, Questions questions) {
+  //   String? link;
+  //   for (Question i in questions.active_questions!) {
+  //     if (i.question_no == questionNumber) {
+  //       link = i.image_link;
+  //     }
+  //   }
+  //   return link;
+  // }
 
   Future<Questions> getQuestionslist() async {
     final dio = Dio();

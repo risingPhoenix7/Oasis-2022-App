@@ -8,7 +8,7 @@ class ImageAssets {
   static const String bookMarkIcon = 'assets/icons/bookmark_icon.svg';
   static const String eventCardBg = 'assets/images/event_card_bg.png';
   static const String backgroundOrd = 'assets/images/backgroundOrd.png';
-  static const String eventBg = 'assets/images/events_bg.png';
+  static const String eventBg = 'assets/images/events_bg.svg';
 
   //TODO:remove old ones
   static const String pizza = "assets/images/pizza.png";

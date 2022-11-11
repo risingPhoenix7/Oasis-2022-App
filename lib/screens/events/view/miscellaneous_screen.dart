@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oasis_2022/resources/resources.dart';
 import 'package:oasis_2022/screens/events/view_model/cached_misc_events_view_model.dart';
+import 'package:oasis_2022/screens/morescreen/screens/more_info.dart';
 import 'package:oasis_2022/utils/oasis_text_styles.dart';
 import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 
@@ -155,12 +156,25 @@ class _EventsScreenState extends State<EventsScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 90.h, left: 28.w),
-                          child: Text(
-                            'Events',
-                            style: OasisTextStyles.inter500,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(top: 90.h, left: 28.w),
+                              child: Text(
+                                'Events',
+                                style: OasisTextStyles.inter500,
+                              ),
+                            ),
+                            Padding(
+                              padding:  EdgeInsets.only(top: 90.h, right: 28.w),
+                              child: GestureDetector(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) => MoreInfoScreen()));},
+                                child: SvgPicture.asset('assets/images/3gole.svg'),
+                              ),
+                            )
+                          ],
                         ),
                         Padding(
                           padding: EdgeInsets.only(

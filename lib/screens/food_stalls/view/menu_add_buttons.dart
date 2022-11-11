@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
+import 'package:oasis_2022/utils/colors.dart';
 
 import '../../../utils/ui_utils.dart';
 import '../repo/model/hive_model/hive_menu_entry.dart';
@@ -54,13 +55,7 @@ class _AddButtonState extends State<AddButton> {
                 height: UIUtills().getProportionalHeight(height: 34),
                 width: UIUtills().getProportionalWidth(width: 90),
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(colors: [
-                    Color.fromRGBO(209, 154, 8, 1),
-                    Color.fromRGBO(254, 212, 102, 1),
-                    Color.fromRGBO(227, 186, 79, 1),
-                    Color.fromRGBO(209, 154, 8, 1),
-                    Color.fromRGBO(209, 154, 8, 1),
-                  ]),
+                  gradient: OasisColors.oasisWebsiteGoldGradient,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
@@ -109,13 +104,7 @@ class _AddButtonState extends State<AddButton> {
                       blurRadius: 4.72727)
                 ],
                 borderRadius: BorderRadius.circular(10),
-                gradient: const LinearGradient(colors: [
-                  Color.fromRGBO(209, 154, 8, 1),
-                  Color.fromRGBO(254, 212, 102, 1),
-                  Color.fromRGBO(227, 186, 79, 1),
-                  Color.fromRGBO(209, 154, 8, 1),
-                  Color.fromRGBO(209, 154, 8, 1),
-                ]),
+                gradient: OasisColors.oasisWebsiteGoldGradient,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.max,

@@ -11,7 +11,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:oasis_2022/screens/events/repository/model/miscEventResult.dart';
 import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
 import 'package:oasis_2022/screens/kindstore/view/kind_store_view.dart';
-import 'package:oasis_2022/screens/overload/overload_page.dart';
+import 'package:oasis_2022/screens/overboarding/overboarding_page.dart';
 
 import '../home.dart';
 import '../provider/user_details_viewmodel.dart';
@@ -45,7 +45,7 @@ Future<void> main() async {
   await Hive.openBox('cartBox');
   await Hive.openBox<FoodStallList>('foodStallBox');
   print('initialised hive');
-print('initialising firebase');
+  print('initialising firebase');
   await Firebase.initializeApp(
       name: 'com.dvm.oasis2k22',
       options: DefaultFirebaseOptions.currentPlatform);
@@ -147,12 +147,12 @@ class _BosmFestAppState extends State<BosmFestApp> {
                           (route) => false,
                         ));
                   } else if (data == false) {
-                    Future.microtask(() =>
-                        Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (builder) => const OverloadPage()),
-                          (route) => false,
-                        ));
+                    Future.microtask(
+                        () => Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (builder) => const OverBoardingPage()),
+                              (route) => false,
+                            ));
                   }
                 }
                 return Container(

@@ -1,5 +1,6 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oasis_2022/screens/wallet_screen/view/add_money_screens/updatedAddMoneyDialog.dart';
+import 'package:oasis_2022/utils/colors.dart';
 import 'dart:ui';
 import '../../../../resources/resources.dart';
 import '../../view_model/wallet_viewmodel.dart';
@@ -189,15 +190,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                       //     horizontal:
                       //     UIUtills().getProportionalWidth(width: 20.00)),
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color.fromRGBO(209, 154, 8, 1),
-                            Color.fromRGBO(254, 212, 102, 1),
-                            Color.fromRGBO(227, 186, 79, 1),
-                            Color.fromRGBO(209, 154, 8, 1),
-                            Color.fromRGBO(209, 154, 8, 1),
-                          ],
-                        ),
+                        gradient: OasisColors.oasisWebsiteGoldGradient,
                         borderRadius: BorderRadius.circular(
                           UIUtills().getProportionalWidth(width: 15.00),
                         ),

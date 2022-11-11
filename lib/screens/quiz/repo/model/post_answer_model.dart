@@ -5,11 +5,11 @@ part 'post_answer_model.g.dart';
 @JsonSerializable()
 class PostAnswers {
   int? question_id;
-  List<int?> answer_ids;
+  int? answer_id;
 
   PostAnswers({
     required this.question_id,
-    required this.answer_ids,
+    required this.answer_id,
   });
 
   factory PostAnswers.fromJson(Map<String, dynamic> json) =>

@@ -32,9 +32,9 @@ class QuizScreenViewModel {
     }
   }
 
-  Future<void> postAnswers(int? question_id, List<int?> answer_ids) async {
+  Future<void> postAnswers(int? question_id, int? answer_id) async {
     PostAnswers postAnswers =
-    PostAnswers(question_id: question_id, answer_ids: answer_ids);
+        PostAnswers(question_id: question_id, answer_id: answer_id);
     final dio = Dio();
     final client = PostAnswersRestClient(dio);
     String jwt = "JWT ${UserDetailsViewModel.userDetails.JWT}";
@@ -101,6 +101,7 @@ class QuizScreenViewModel {
     }
     return questionText;
   }
+
 
   Map<int, String> getQuestionOption(int questionNumber, Questions questions) {
     Map<int, String> optionMap = {};

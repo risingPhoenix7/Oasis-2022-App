@@ -60,7 +60,7 @@ class _quizUIScreenState extends State<quizUIScreen> {
                         ),
                       ),
                       Text(
-                        "No more poll active right now",
+                        "No More Poll Active Right Now",
                         style: GoogleFonts.openSans(
                             color: Colors.white, fontSize: 20.sp),
                       )

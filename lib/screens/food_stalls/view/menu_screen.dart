@@ -17,7 +17,6 @@ import 'menu_add_buttons.dart';
 class MenuScreen extends StatefulWidget {
   MenuScreen(
       {Key? key,
-
       required this.menuItemList,
       required this.foodStallName,
       required this.image,
@@ -79,12 +78,10 @@ class _MenuScreenState extends State<MenuScreen> {
                         borderRadius: BorderRadius.circular(20),
                         child: CachedNetworkImage(
                           placeholder: (context, url) => SizedBox(
-                            height: 259.h,
-                            width: 388.w,
-                            child: const Loader()
-                          ),
-                          imageUrl:
-                              '${widget.image}',
+                              height: 259.h,
+                              width: 388.w,
+                              child: const Loader()),
+                          imageUrl: '${widget.image}',
                         ),
                       ),
                       Positioned(

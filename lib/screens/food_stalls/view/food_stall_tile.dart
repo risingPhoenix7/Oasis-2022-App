@@ -1,7 +1,8 @@
-import '/utils/ui_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '/utils/ui_utils.dart';
 
 class FoodStallTile extends StatelessWidget {
   FoodStallTile({Key? key, required this.image, required this.foodStallName})

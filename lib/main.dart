@@ -69,7 +69,7 @@ Future<void> main() async {
   );
   LocalNotificationService.initialize();
 
-  runApp(RestartWidget(child: BosmFestApp()));
+  runApp(RestartWidget(child: OasisFestApp()));
 }
 
 class RestartWidget extends StatefulWidget {
@@ -103,14 +103,14 @@ class _RestartWidgetState extends State<RestartWidget> {
   }
 }
 
-class BosmFestApp extends StatefulWidget {
-  const BosmFestApp({Key? key}) : super(key: key);
+class OasisFestApp extends StatefulWidget {
+  const OasisFestApp({Key? key}) : super(key: key);
 
   @override
-  State<BosmFestApp> createState() => _BosmFestAppState();
+  State<OasisFestApp> createState() => _OasisFestAppState();
 }
 
-class _BosmFestAppState extends State<BosmFestApp> {
+class _OasisFestAppState extends State<OasisFestApp> {
   UserDetailsViewModel userDetailsViewModel = UserDetailsViewModel();
 
   @override

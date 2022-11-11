@@ -39,7 +39,8 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       otp_seen: json['otp_seen'] as bool?,
     );
 
-Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
+Map<String, dynamic> _$OrderToJson(Order instance) =>
+    <String, dynamic>{
       'order_id': instance.order_id,
       'status': instance.status,
       'shell': instance.shell,

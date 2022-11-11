@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:oasis_2022/screens/kindstore/view/kind_store_view.dart';
 import 'package:oasis_2022/utils/colors.dart';
-import 'package:oasis_2022/widgets/loader.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '/provider/user_details_viewmodel.dart';
@@ -204,7 +203,6 @@ class _WalletScreenState extends State<WalletScreen> {
                                                   fontWeight: FontWeight.w400),
                                             ),
                                             Container(
-
                                               width: 250.w,
                                               child: Text(
                                                 UserDetailsViewModel
@@ -213,7 +211,8 @@ class _WalletScreenState extends State<WalletScreen> {
                                                 style: GoogleFonts.openSans(
                                                     color: Colors.white,
                                                     fontSize: 20,
-                                                    fontWeight: FontWeight.w700),
+                                                    fontWeight:
+                                                        FontWeight.w700),
                                               ),
                                             ),
                                           ],

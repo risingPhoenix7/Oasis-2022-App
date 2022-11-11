@@ -1,10 +1,11 @@
+import 'package:dio/dio.dart';
+
 import '../order/repo/model/get_orders_model.dart';
 import '../order/repo/model/make_otp_seen_model.dart';
 import '../order/repo/model/order_card_model.dart';
 import '../order/repo/retrofit/get_orders_retrofit.dart';
 import '../order/repo/retrofit/make_otp_seen_retrofit.dart';
 import '../provider/user_details_viewmodel.dart';
-import 'package:dio/dio.dart';
 
 class OrderScreenViewModel {
   Future<void> makeOtpSeen(int orderid) async {
@@ -60,8 +61,7 @@ class OrderScreenViewModel {
             status: status,
             subtotal: subTotal,
             timeStamp: timeStamp,
-            order_image_url: order_image_url)
-           );
+            order_image_url: order_image_url));
       }
     }
     return orderCardModelList;

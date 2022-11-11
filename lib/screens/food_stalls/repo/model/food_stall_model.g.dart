@@ -161,7 +161,7 @@ class MenuItemAdapter extends TypeAdapter<MenuItem> {
 // **************************************************************************
 
 FoodStall _$FoodStallFromJson(Map<String, dynamic> json) => FoodStall(
-      name: json['name'] as String,
+  name: json['name'] as String,
       image_url: json['image_url'] as String,
       menu_image_url: json['menu_image_url'] as String?,
       id: json['id'] as int,
@@ -175,7 +175,8 @@ FoodStall _$FoodStallFromJson(Map<String, dynamic> json) => FoodStall(
           .toList(),
     );
 
-Map<String, dynamic> _$FoodStallToJson(FoodStall instance) => <String, dynamic>{
+Map<String, dynamic> _$FoodStallToJson(FoodStall instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'image_url': instance.image_url,
       'id': instance.id,

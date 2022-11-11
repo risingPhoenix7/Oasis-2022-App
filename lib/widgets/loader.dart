@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../utils/error_messages.dart';
 import '../widgets/error_dialogue.dart';
-import 'package:flutter/material.dart';
 
 class Loader extends StatefulWidget {
   const Loader({Key? key}) : super(key: key);

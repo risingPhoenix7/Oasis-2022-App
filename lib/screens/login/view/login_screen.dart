@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen>
         tween: Tween<Offset>(begin: const Offset(0.125, 0.0), end: Offset.zero),
         weight: 1),
     TweenSequenceItem(
-        tween: Tween<Offset>(begin: Offset.zero, end: Offset(-0.0625, 0.0)),
+        tween: Tween<Offset>(begin: Offset.zero, end: const Offset(-0.0625, 0.0)),
         weight: 1),
     TweenSequenceItem(
         tween:
@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen>
               ? Stack(
                   children: [
                     ImageFiltered(
-                        imageFilter: ImageFilter.blur(sigmaX: 60, sigmaY: 60),
+                        imageFilter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
                         child: RotationTransition(
                             turns: _rotationAnimation,
                             child: SvgPicture.asset(

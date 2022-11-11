@@ -34,6 +34,7 @@ class FoodStall {
   List<MenuItem> menu;
   @HiveField(9)
   String? menu_image_url;
+
   FoodStall(
       {required this.name,
       required this.image_url,

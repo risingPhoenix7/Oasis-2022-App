@@ -27,12 +27,11 @@ class Order {
 
   Order(
       {this.status,
-
       this.price,
       this.shell,
       this.items,
       this.otp,
-        this.order_image_url,
+      this.order_image_url,
       this.vendor,
       this.rating,
       this.transaction,

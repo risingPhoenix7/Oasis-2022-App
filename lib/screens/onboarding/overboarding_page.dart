@@ -9,14 +9,14 @@ import 'package:oasis_2022/widgets/loader.dart';
 
 import 'onboarding.dart';
 
-class OverBoardingPage extends StatefulWidget {
-  const OverBoardingPage({Key? key}) : super(key: key);
+class OnBoardingPage extends StatefulWidget {
+  const OnBoardingPage({Key? key}) : super(key: key);
 
   @override
-  State<OverBoardingPage> createState() => _OverBoardingPageState();
+  State<OnBoardingPage> createState() => _OnBoardingPageState();
 }
 
-class _OverBoardingPageState extends State<OverBoardingPage> {
+class _OnBoardingPageState extends State<OnBoardingPage> {
   PageController _controller = PageController(initialPage: 0, keepPage: false);
 
   List<Widget> onBoardingPages = const [

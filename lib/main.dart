@@ -9,7 +9,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:oasis_2022/screens/events/repository/model/miscEventResult.dart';
 import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
-import 'package:oasis_2022/screens/overboarding/overboarding_page.dart';
+import 'package:oasis_2022/screens/onboarding/overboarding_page.dart';
 
 import '../home.dart';
 import '../provider/user_details_viewmodel.dart';
@@ -144,8 +144,8 @@ class _BosmFestAppState extends State<BosmFestApp> {
                   } else if (data == false) {
                     Future.microtask(
                         () => Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (builder) => const OverBoardingPage()),
+                          MaterialPageRoute(
+                                  builder: (builder) => const OnBoardingPage()),
                               (route) => false,
                             ));
                   }

@@ -100,18 +100,13 @@ class _EventsScreenState extends State<EventsScreen> {
       cachedMiscEventsViewModel.mergedRetriveMiscResult();
     });
     CachedMiscEventsViewModel.status.addListener(() {
-      print('klisadygfdef');
-      print(CachedMiscEventsViewModel.statusInt);
       if (CachedMiscEventsViewModel.statusInt == 2) {
-        print('should refresh now after reading from network call');
         checkMiscEventsResult();
       } else if (CachedMiscEventsViewModel.statusInt == 1) {
-        print('should refresh now after reading from local db');
         if (MiscEventsViewModel.error == null) {
           updateCurrentDayMiscEventList();
           setState(() {
             isLoading = false;
-            print('vghvjvhbkhb');
           });
         } else {
           //return MiscEventResult.error;

@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oasis_2022/screens/quiz/view_model/questions_view_model.dart';
 import 'package:oasis_2022/utils/ui_utils.dart';
+import 'package:oasis_2022/widgets/OasisSnackbar.dart';
+import 'package:oasis_2022/widgets/loader.dart';
 
 import '../repo/model/get_questions_model.dart';
 import '../view_model/poll_view_model.dart';
@@ -16,6 +18,7 @@ class quizUIScreen extends StatefulWidget {
 
 class _quizUIScreenState extends State<quizUIScreen> {
   var optionArray = [0, 0, 0, 0];
+  ValueNotifier<bool> isLoading = ValueNotifier(true);
   Questions questionList = Questions();
   String questionText = "";
   List<String?> optionstexts = [];
@@ -30,142 +33,63 @@ class _quizUIScreenState extends State<quizUIScreen> {
     questionList = await Quizviewmodel().getQuestionslist();
     questionText = Quizviewmodel().getQuestionText(questionList)!;
     optionstexts = Quizviewmodel().getOptionText(questionList);
+    isLoading.value = false;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.black,
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 72, 15, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Stand Up Soapbox',
-                  style: GoogleFonts.openSans(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.w500),
-                ),
-                SizedBox(
-                  height: UIUtills().getProportionalHeight(height: 53),
-                ),
-                Text(
-                  '${questionText}',
-                  style:
-                      GoogleFonts.openSans(color: Colors.white, fontSize: 20),
-                ),
-                SizedBox(
-                  height: UIUtills().getProportionalHeight(height: 53),
-                ),
-                Text(
-                  'Select any one option',
-                  style: GoogleFonts.openSans(
-                      color: Color.fromRGBO(255, 255, 255, 0.8),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w300),
-                ),
-                SizedBox(
-                  height: UIUtills().getProportionalHeight(height: 10),
-                ),
-                Column(
+      body: ValueListenableBuilder(
+        valueListenable: isLoading,
+        builder: (context, bool value, child){
+          if(value){
+            return const Loader();
+          }
+          else{
+            return Padding(
+                padding: const EdgeInsets.fromLTRB(20, 72, 15, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                        onTap: () {
-                          optionArray = [1, 0, 0, 0];
-
-                          setState(() {});
-                        },
-                        child: optionArray[0] == 0
-                            ? Container(
-                                decoration: BoxDecoration(
-                                  color: const Color.fromRGBO(26, 28, 28, 1),
-                                  border: Border.all(
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                    UIUtills()
-                                        .getProportionalWidth(width: 8.00),
-                                  ),
-                                ),
-                                width: UIUtills()
-                                    .getProportionalWidth(width: 384.00),
-                                height: UIUtills()
-                                    .getProportionalHeight(height: 56.00),
-                                child: Center(
-                                  child: Text(
-                                    '${optionstexts[0
-                                    ]}',
-
-                                    //optionText[0],
-                                    textAlign: TextAlign.start,
-                                    style: GoogleFonts.openSans(
-                                        color: Colors.white,
-                                        fontSize: UIUtills()
-                                            .getProportionalWidth(width: 18.00),
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: UIUtills()
-                                            .getProportionalWidth(
-                                                width: -0.41)),
-                                  ),
-                                ),
-                              )
-                            : Container(
-                                decoration: BoxDecoration(
-                                  boxShadow: const [],
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color.fromRGBO(209, 154, 8, 1),
-                                      Color.fromRGBO(254, 212, 102, 1),
-                                      Color.fromRGBO(227, 186, 79, 1),
-                                      Color.fromRGBO(209, 154, 8, 1),
-                                      Color.fromRGBO(209, 154, 8, 1),
-                                    ],
-                                  ),
-                                  border: Border.all(
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                    UIUtills()
-                                        .getProportionalWidth(width: 8.00),
-                                  ),
-                                ),
-                                width: UIUtills()
-                                    .getProportionalWidth(width: 384.00),
-                                height: UIUtills()
-                                    .getProportionalHeight(height: 56.00),
-                                child: Center(
-                                  child: Text(
-                                    '${optionstexts[0]}',
-                                    //optionText[0],
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.openSans(
-                                        color: Colors.black,
-                                        fontSize: UIUtills()
-                                            .getProportionalWidth(width: 18.00),
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: UIUtills()
-                                            .getProportionalWidth(
-                                                width: -0.41)),
-                                  ),
-                                ),
-                              )),
+                    Text(
+                      'Stand Up Soapbox',
+                      style: GoogleFonts.openSans(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w500),
+                    ),
                     SizedBox(
-                        height:
-                            UIUtills().getProportionalHeight(height: 20.00)),
-                    GestureDetector(
-                      onTap: () {
-                        optionArray = [0, 1, 0, 0];
-                        setState(() {});
-                      },
-                      child: optionArray[1] == 0
-                          ? Container(
+                      height: UIUtills().getProportionalHeight(height: 53),
+                    ),
+                    Text(
+                      questionText,
+                      style: GoogleFonts.openSans(color: Colors.white, fontSize: 20),
+                    ),
+                    SizedBox(
+                      height: UIUtills().getProportionalHeight(height: 53),
+                    ),
+                    Text(
+                      'Select any one option',
+                      style: GoogleFonts.openSans(
+                          color: const Color.fromRGBO(255, 255, 255, 0.8),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w300),
+                    ),
+                    SizedBox(
+                      height: UIUtills().getProportionalHeight(height: 10),
+                    ),
+                    Column(
+                      children: [
+                        GestureDetector(
+                            onTap: () {
+                              optionArray = [1, 0, 0, 0];
+
+                              setState(() {});
+                            },
+                            child: optionArray[0] == 0
+                                ? Container(
                               decoration: BoxDecoration(
-                                color: Color.fromRGBO(26, 28, 28, 1),
+                                color: const Color.fromRGBO(26, 28, 28, 1),
                                 border: Border.all(
                                   width: 1.0,
                                 ),
@@ -179,8 +103,7 @@ class _quizUIScreenState extends State<quizUIScreen> {
                                   .getProportionalHeight(height: 56.00),
                               child: Center(
                                 child: Text(
-                                  '${optionstexts[1]}',
-                                  //   optionText[1],
+                                  '${optionstexts[0]}',
                                   textAlign: TextAlign.start,
                                   style: GoogleFonts.openSans(
                                       color: Colors.white,
@@ -192,14 +115,10 @@ class _quizUIScreenState extends State<quizUIScreen> {
                                 ),
                               ),
                             )
-                          : Container(
+                                : Container(
                               decoration: BoxDecoration(
                                 boxShadow: const [],
-                                color: const Color(0xFF747EF1),
-                                border: Border.all(
-                                  width: 1.0,
-                                ),
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                   colors: [
                                     Color.fromRGBO(209, 154, 8, 1),
                                     Color.fromRGBO(254, 212, 102, 1),
@@ -207,6 +126,9 @@ class _quizUIScreenState extends State<quizUIScreen> {
                                     Color.fromRGBO(209, 154, 8, 1),
                                     Color.fromRGBO(209, 154, 8, 1),
                                   ],
+                                ),
+                                border: Border.all(
+                                  width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(
                                   UIUtills().getProportionalWidth(width: 8.00),
@@ -218,8 +140,8 @@ class _quizUIScreenState extends State<quizUIScreen> {
                                   .getProportionalHeight(height: 56.00),
                               child: Center(
                                 child: Text(
-                                  '${optionstexts[1]}',
-                                  // optionText[1],
+                                  '${optionstexts[0]}',
+                                  textAlign: TextAlign.center,
                                   style: GoogleFonts.openSans(
                                       color: Colors.black,
                                       fontSize: UIUtills()
@@ -229,208 +151,289 @@ class _quizUIScreenState extends State<quizUIScreen> {
                                           .getProportionalWidth(width: -0.41)),
                                 ),
                               ),
-                            ),
-                    ),
-                    SizedBox(
-                        height:
-                            UIUtills().getProportionalHeight(height: 20.00)),
-                    GestureDetector(
-                      onTap: () {
-                        optionArray = [0, 0, 1, 0];
-
-                        setState(() {});
-                      },
-                      child: optionArray[2] == 0
-                          ? Container(
-                              decoration: BoxDecoration(
-                                color: const Color.fromRGBO(26, 28, 28, 1),
-                                border: Border.all(
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  UIUtills().getProportionalWidth(width: 8.00),
-                                ),
+                            )),
+                        SizedBox(
+                            height: UIUtills().getProportionalHeight(height: 20.00)),
+                        GestureDetector(
+                          onTap: () {
+                            optionArray = [0, 1, 0, 0];
+                            setState(() {});
+                          },
+                          child: optionArray[1] == 0
+                              ? Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(26, 28, 28, 1),
+                              border: Border.all(
+                                width: 1.0,
                               ),
-                              width: UIUtills()
-                                  .getProportionalWidth(width: 384.00),
-                              height: UIUtills()
-                                  .getProportionalHeight(height: 56.00),
-                              child: Center(
-                                child: Text(
-                                  '${optionstexts[2]}',
-                                  // optionText[2],
-                                  style: GoogleFonts.openSans(
-                                      color: Colors.white,
-                                      fontSize: UIUtills()
-                                          .getProportionalWidth(width: 18.00),
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: UIUtills()
-                                          .getProportionalWidth(width: -0.41)),
-                                ),
-                              ),
-                            )
-                          : Container(
-                              decoration: BoxDecoration(
-                                boxShadow: const [],
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color.fromRGBO(209, 154, 8, 1),
-                                    Color.fromRGBO(254, 212, 102, 1),
-                                    Color.fromRGBO(227, 186, 79, 1),
-                                    Color.fromRGBO(209, 154, 8, 1),
-                                    Color.fromRGBO(209, 154, 8, 1),
-                                  ],
-                                ),
-                                border: Border.all(
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  UIUtills().getProportionalWidth(width: 8.00),
-                                ),
-                              ),
-                              width: UIUtills()
-                                  .getProportionalWidth(width: 384.00),
-                              height: UIUtills()
-                                  .getProportionalHeight(height: 56.00),
-                              child: Center(
-                                child: Text(
-                                  '${optionstexts[2]}',
-                                  // optionText[2],
-                                  style: GoogleFonts.openSans(
-                                      color: Colors.black,
-                                      fontSize: UIUtills()
-                                          .getProportionalWidth(width: 18.00),
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: UIUtills()
-                                          .getProportionalWidth(width: -0.41)),
-                                ),
+                              borderRadius: BorderRadius.circular(
+                                UIUtills().getProportionalWidth(width: 8.00),
                               ),
                             ),
-                    ),
-                    SizedBox(
-                        height:
-                            UIUtills().getProportionalHeight(height: 20.00)),
-                    GestureDetector(
-                      onTap: () {
-                        optionArray = [0, 0, 0, 1];
-
-                        setState(() {});
-                      },
-                      child: optionArray[3] == 0
-                          ? Container(
-                              decoration: BoxDecoration(
-                                color: const Color.fromRGBO(26, 28, 28, 1),
-                                border: Border.all(
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  UIUtills().getProportionalWidth(width: 8.00),
-                                ),
+                            width:
+                            UIUtills().getProportionalWidth(width: 384.00),
+                            height:
+                            UIUtills().getProportionalHeight(height: 56.00),
+                            child: Center(
+                              child: Text(
+                                '${optionstexts[1]}',
+                                //   optionText[1],
+                                textAlign: TextAlign.start,
+                                style: GoogleFonts.openSans(
+                                    color: Colors.white,
+                                    fontSize: UIUtills()
+                                        .getProportionalWidth(width: 18.00),
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: UIUtills()
+                                        .getProportionalWidth(width: -0.41)),
                               ),
-                              width: UIUtills()
-                                  .getProportionalWidth(width: 384.00),
-                              height: UIUtills()
-                                  .getProportionalHeight(height: 56.00),
-                              child: Center(
-                                child: Text(
-                                  '${optionstexts[3]}',
-                                  // optionText[3],
-                                  style: GoogleFonts.openSans(
-                                      color: Colors.white,
-                                      fontSize: UIUtills()
-                                          .getProportionalWidth(width: 18.00),
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: UIUtills()
-                                          .getProportionalWidth(width: -0.41)),
-                                ),
+                            ),
+                          )
+                              : Container(
+                            decoration: BoxDecoration(
+                              boxShadow: const [],
+                              color: const Color(0xFF747EF1),
+                              border: Border.all(
+                                width: 1.0,
                               ),
-                            )
-                          : Container(
-                              decoration: BoxDecoration(
-                                boxShadow: const [],
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color.fromRGBO(209, 154, 8, 1),
-                                    Color.fromRGBO(254, 212, 102, 1),
-                                    Color.fromRGBO(227, 186, 79, 1),
-                                    Color.fromRGBO(209, 154, 8, 1),
-                                    Color.fromRGBO(209, 154, 8, 1),
-                                  ],
-                                ),
-                                border: Border.all(
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  UIUtills().getProportionalWidth(width: 8.00),
-                                ),
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                  Color.fromRGBO(254, 212, 102, 1),
+                                  Color.fromRGBO(227, 186, 79, 1),
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                ],
                               ),
-                              width: UIUtills()
-                                  .getProportionalWidth(width: 384.00),
-                              height: UIUtills()
-                                  .getProportionalHeight(height: 56.00),
-                              child: Center(
-                                child: Text(
-                                  '${optionstexts[3]}',
-                                  // optionText[3],
-                                  style: GoogleFonts.openSans(
+                              borderRadius: BorderRadius.circular(
+                                UIUtills().getProportionalWidth(width: 8.00),
+                              ),
+                            ),
+                            width:
+                            UIUtills().getProportionalWidth(width: 384.00),
+                            height:
+                            UIUtills().getProportionalHeight(height: 56.00),
+                            child: Center(
+                              child: Text(
+                                '${optionstexts[1]}',
+                                // optionText[1],
+                                style: GoogleFonts.openSans(
                                     color: Colors.black,
                                     fontSize: UIUtills()
                                         .getProportionalWidth(width: 18.00),
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: UIUtills()
-                                        .getProportionalWidth(width: -0.41),
-                                  ),
+                                        .getProportionalWidth(width: -0.41)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                            height: UIUtills().getProportionalHeight(height: 20.00)),
+                        GestureDetector(
+                          onTap: () {
+                            optionArray = [0, 0, 1, 0];
+
+                            setState(() {});
+                          },
+                          child: optionArray[2] == 0
+                              ? Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(26, 28, 28, 1),
+                              border: Border.all(
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                UIUtills().getProportionalWidth(width: 8.00),
+                              ),
+                            ),
+                            width:
+                            UIUtills().getProportionalWidth(width: 384.00),
+                            height:
+                            UIUtills().getProportionalHeight(height: 56.00),
+                            child: Center(
+                              child: Text(
+                                '${optionstexts[2]}',
+                                // optionText[2],
+                                style: GoogleFonts.openSans(
+                                    color: Colors.white,
+                                    fontSize: UIUtills()
+                                        .getProportionalWidth(width: 18.00),
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: UIUtills()
+                                        .getProportionalWidth(width: -0.41)),
+                              ),
+                            ),
+                          )
+                              : Container(
+                            decoration: BoxDecoration(
+                              boxShadow: const [],
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                  Color.fromRGBO(254, 212, 102, 1),
+                                  Color.fromRGBO(227, 186, 79, 1),
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                ],
+                              ),
+                              border: Border.all(
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                UIUtills().getProportionalWidth(width: 8.00),
+                              ),
+                            ),
+                            width:
+                            UIUtills().getProportionalWidth(width: 384.00),
+                            height:
+                            UIUtills().getProportionalHeight(height: 56.00),
+                            child: Center(
+                              child: Text(
+                                '${optionstexts[2]}',
+                                // optionText[2],
+                                style: GoogleFonts.openSans(
+                                    color: Colors.black,
+                                    fontSize: UIUtills()
+                                        .getProportionalWidth(width: 18.00),
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: UIUtills()
+                                        .getProportionalWidth(width: -0.41)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                            height: UIUtills().getProportionalHeight(height: 20.00)),
+                        GestureDetector(
+                          onTap: () {
+                            optionArray = [0, 0, 0, 1];
+
+                            setState(() {});
+                          },
+                          child: optionArray[3] == 0
+                              ? Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(26, 28, 28, 1),
+                              border: Border.all(
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                UIUtills().getProportionalWidth(width: 8.00),
+                              ),
+                            ),
+                            width:
+                            UIUtills().getProportionalWidth(width: 384.00),
+                            height:
+                            UIUtills().getProportionalHeight(height: 56.00),
+                            child: Center(
+                              child: Text(
+                                '${optionstexts[3]}',
+                                // optionText[3],
+                                style: GoogleFonts.openSans(
+                                    color: Colors.white,
+                                    fontSize: UIUtills()
+                                        .getProportionalWidth(width: 18.00),
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: UIUtills()
+                                        .getProportionalWidth(width: -0.41)),
+                              ),
+                            ),
+                          )
+                              : Container(
+                            decoration: BoxDecoration(
+                              boxShadow: const [],
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                  Color.fromRGBO(254, 212, 102, 1),
+                                  Color.fromRGBO(227, 186, 79, 1),
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                ],
+                              ),
+                              border: Border.all(
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                UIUtills().getProportionalWidth(width: 8.00),
+                              ),
+                            ),
+                            width:
+                            UIUtills().getProportionalWidth(width: 384.00),
+                            height:
+                            UIUtills().getProportionalHeight(height: 56.00),
+                            child: Center(
+                              child: Text(
+                                '${optionstexts[3]}',
+                                // optionText[3],
+                                style: GoogleFonts.openSans(
+                                  color: Colors.black,
+                                  fontSize: UIUtills()
+                                      .getProportionalWidth(width: 18.00),
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: UIUtills()
+                                      .getProportionalWidth(width: -0.41),
                                 ),
                               ),
                             ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                    height: UIUtills().getProportionalHeight(height: 45.00)),
-                Center(
-                  child: GestureDetector(
-                    onTap: () async {
-                      await QuizScreenViewModel()
-                          .postAnswers(1, optionSelected());
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      // alignment: Alignment.bottomCenter,
-                      width: 171.w,
-                      height: 52.h,
-                      // margin: EdgeInsets.symmetric(
-                      //     horizontal:
-                      //     UIUtills().getProportionalWidth(width: 20.00)),
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color.fromRGBO(209, 154, 8, 1),
-                            Color.fromRGBO(254, 212, 102, 1),
-                            Color.fromRGBO(227, 186, 79, 1),
-                            Color.fromRGBO(209, 154, 8, 1),
-                            Color.fromRGBO(209, 154, 8, 1),
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Submit',
-                            style: GoogleFonts.openSans(
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                                fontSize: 14.sp),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ),
-                )
-              ],
-            )),
+                    SizedBox(height: UIUtills().getProportionalHeight(height: 45.00)),
+                    Center(
+                      child: GestureDetector(
+                        onTap: () async {
+                          try {
+                            await QuizScreenViewModel()
+                                .postAnswers(1, optionSelected());
+                          } catch (e) {
+                            var snackbar =
+                            CustomSnackBar().oasisSnackBar("Some Error Occurred");
+                            if (!mounted) {}
+                            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                          }
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          // alignment: Alignment.bottomCenter,
+                          width: 171.w,
+                          height: 52.h,
+                          // margin: EdgeInsets.symmetric(
+                          //     horizontal:
+                          //     UIUtills().getProportionalWidth(width: 20.00)),
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [
+                                Color.fromRGBO(209, 154, 8, 1),
+                                Color.fromRGBO(254, 212, 102, 1),
+                                Color.fromRGBO(227, 186, 79, 1),
+                                Color.fromRGBO(209, 154, 8, 1),
+                                Color.fromRGBO(209, 154, 8, 1),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Submit',
+                                style: GoogleFonts.openSans(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                    fontSize: 14.sp),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ));
+          }
+        },
       ),
     );
   }

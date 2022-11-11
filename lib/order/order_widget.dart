@@ -70,10 +70,13 @@ class _OrderWidgetState extends State<OrderWidget> {
                     padding: EdgeInsets.only(
                       top: 15.h,
                     ),
-                    child: Image.asset(
-                      'assets/images/orderTea.png',
-                      height: 139.h,
-                      width: 139.w,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(6.25.r),
+                      child: Image.network(
+                        widget.orderCardModel.order_image_url ?? '',
+                        height: 139.h,
+                        width: 139.w,
+                      ),
                     ),
                   ),
                   Padding(
@@ -106,6 +109,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                     padding: EdgeInsets.only(top: 9.h),
                     child: Text(
                       widget.orderCardModel.foodStallName,
+                        overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.openSans(
                         color: const Color.fromRGBO(225, 225, 225, 1),
                         fontWeight: FontWeight.w700,

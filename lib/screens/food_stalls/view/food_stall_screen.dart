@@ -176,7 +176,8 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
                                                     foodStallName:
                                                         foodStall[index].name,
                                                     image: foodStall[index]
-                                                        .image_url,
+
+                                                        .menu_image_url ?? '',
                                                     foodStallId:
                                                         foodStall[index].id,
                                                   )));

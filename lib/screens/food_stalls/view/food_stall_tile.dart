@@ -13,11 +13,15 @@ class FoodStallTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: CachedNetworkImage(
-              imageUrl: image,
-            )),
+        SizedBox(
+          width: UIUtills().getProportionalWidth(width: 184),
+          height: UIUtills().getProportionalHeight(height: 230),
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: CachedNetworkImage(
+                imageUrl: image,
+              )),
+        ),
         Padding(
           padding: EdgeInsets.only(
               top: UIUtills().getProportionalHeight(height: 10),

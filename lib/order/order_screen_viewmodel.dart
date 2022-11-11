@@ -38,6 +38,7 @@ class OrderScreenViewModel {
         double subTotal = j.price!;
         int status = j.status!;
         int? orderId = j.order_id;
+        String? order_image_url = j.order_image_url;
         print('order id: $orderId');
 
         List<MenuItemInOrdersScreen> tempItemList = [];
@@ -58,7 +59,9 @@ class OrderScreenViewModel {
             otp: otp,
             status: status,
             subtotal: subTotal,
-            timeStamp: timeStamp));
+            timeStamp: timeStamp,
+            order_image_url: order_image_url)
+           );
       }
     }
     return orderCardModelList;

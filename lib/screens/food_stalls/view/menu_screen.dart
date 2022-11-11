@@ -16,6 +16,7 @@ import 'menu_add_buttons.dart';
 class MenuScreen extends StatefulWidget {
   MenuScreen(
       {Key? key,
+
       required this.menuItemList,
       required this.foodStallName,
       required this.image,
@@ -84,7 +85,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             ),
                           ),
                           imageUrl:
-                              'https://picsum.photos/${388.w.toInt()}/${259.h.toInt()}',
+                              '${widget.image}',
                         ),
                       ),
                       Positioned(

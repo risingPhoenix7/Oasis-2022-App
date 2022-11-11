@@ -2,6 +2,7 @@ class OrderCardModel {
   int id;
   int? orderId;
   String foodStallName;
+  String? order_image_url;
   int itemCount;
   String timeStamp;
   int otp;
@@ -18,7 +19,8 @@ class OrderCardModel {
       required this.otp,
       required this.status,
       required this.subtotal,
-      required this.timeStamp});
+      required this.timeStamp,
+      required this.order_image_url});
 }
 
 class MenuItemInOrdersScreen {

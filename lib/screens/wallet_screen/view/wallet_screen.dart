@@ -202,14 +202,18 @@ class _WalletScreenState extends State<WalletScreen> {
                                                   fontSize:14.sp,
                                                   fontWeight: FontWeight.w400),
                                             ),
-                                            Text(
-                                              UserDetailsViewModel
-                                                      .userDetails.username ??
-                                                  'NA',
-                                              style: GoogleFonts.openSans(
-                                                  color: Colors.white,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w700),
+                                            Container(
+
+                                              width: 250.w,
+                                              child: Text(
+                                                UserDetailsViewModel
+                                                        .userDetails.username ??
+                                                    'NA',
+                                                style: GoogleFonts.openSans(
+                                                    color: Colors.white,
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w700),
+                                              ),
                                             ),
                                           ],
                                         ),

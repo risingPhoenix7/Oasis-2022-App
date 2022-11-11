@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oasis_2022/screens/cart/cartScreen.dart';
 import 'package:oasis_2022/screens/food_stalls/view_model/cached_food_stalls_viewmodel.dart';
 
 import '/screens/food_stalls/repo/model/food_stall_model.dart';
@@ -129,10 +130,19 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
                                         fontWeight: FontWeight.w600),
                                   ),
                                   Row(
-                                    children: const [
-                                      Icon(
-                                        Icons.shopping_cart,
-                                        color: Colors.white,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CartScreen()));
+                                        },
+                                        child: const Icon(
+                                          Icons.shopping_cart,
+                                          color: Colors.white,
+                                        ),
                                       )
                                     ],
                                   )

@@ -7,6 +7,7 @@ part 'hive_menu_entry.g.dart';
 class HiveMenuEntry {
   HiveMenuEntry(
       {required this.price,
+      required this.isVeg,
       required this.menuItemName,
       required this.FoodStall,
       required this.quantity,
@@ -26,4 +27,7 @@ class HiveMenuEntry {
 
   @HiveField(4)
   String menuItemName;
+
+  @HiveField(5)
+  bool isVeg;
 }

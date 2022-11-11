@@ -1,13 +1,9 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '/screens/cart/viewmodel/cart_viewmodel.dart';
 import '/screens/cart/widgets/cartItemWidget.dart';
-import '/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:oasis_2022/screens/food_stalls/repo/model/food_stall_model.dart'
-    as menu;
 import '../repo/model/cart_screen_model.dart';
 
 class cartWidget extends StatefulWidget {
@@ -15,11 +11,9 @@ class cartWidget extends StatefulWidget {
       {super.key,
       required this.foodStallName,
       required this.menuList,
-      required this.menuItemList,
       required this.foodStallId});
 
   String foodStallName;
-  List<menu.MenuItem> menuItemList;
   int foodStallId;
   List<MenuItemInCartScreen> menuList;
 
@@ -83,13 +77,13 @@ class _cartWidgetState extends State<cartWidget> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return CartItemWidget(
+                          isVeg: widget.menuList[index].isVeg,
                           menuItemId: widget.menuList[index].menuItemId,
                           foodStallName: widget.foodStallName,
                           foodStallId: widget.foodStallId,
                           menuItemName: widget.menuList[index].menuItemName,
                           price: widget.menuList[index].menuItemPrice,
                           quantity: widget.menuList[index].menuItemQuantity,
-                          menuItemList: widget.menuItemList,
                         );
                       },
                       itemCount: widget.menuList.length,

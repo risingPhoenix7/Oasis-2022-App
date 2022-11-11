@@ -102,7 +102,8 @@ class CartScreenViewModel {
             menuItemName: temp.menuItemName,
             menuItemPrice: temp.price,
             foodStallName: temp.FoodStall,
-            menuItemQuantity: temp.quantity);
+            menuItemQuantity: temp.quantity,
+            isVeg: temp.isVeg);
         if (copyFoodStallId == tempFoodStallId) {
           menuList.add(menuItemInCartScreen);
           foodStallWithDetailsMap[tempFoodStallId] = FoodStallInCartScreen(

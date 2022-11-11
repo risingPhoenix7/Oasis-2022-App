@@ -10,11 +10,13 @@ class MenuItemInCartScreen {
   String foodStallName;
   int menuItemQuantity;
   int menuItemId;
+  bool isVeg;
   int menuItemPrice;
 
   MenuItemInCartScreen(
       {required this.menuItemId,
       required this.menuItemName,
+      required this.isVeg,
       required this.menuItemPrice,
       required this.foodStallName,
       required this.menuItemQuantity});

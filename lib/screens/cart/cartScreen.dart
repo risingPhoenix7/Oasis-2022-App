@@ -1,6 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oasis_2022/widgets/OasisSnackbar.dart';
-import '../../order/order_screen.dart';
+import '../food_stalls/view/food_stall_screen.dart';
 import '/order/controller/cart_and_order_controller.dart';
 import '/screens/cart/repo/model/cart_screen_model.dart';
 import '/screens/cart/repo/model/post_order_response_model.dart';
@@ -13,15 +13,11 @@ import '/widgets/error_dialogue.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
-import 'package:oasis_2022/screens/food_stalls/repo/model/food_stall_model.dart'
-    as menu;
 import 'package:hive_flutter/adapters.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class CartScreen extends StatefulWidget {
-  CartScreen({super.key, required this.list});
-  List<menu.MenuItem> list;
+  CartScreen({super.key});
   @override
   State<CartScreen> createState() => CartScreenState();
 }
@@ -136,7 +132,7 @@ class CartScreenState extends State<CartScreen> {
                                     .menuList,
                                 foodStallName: foodStallWithDetailsMap[
                                         foodStallIdList[index]]!
-                                    .foodStall, menuItemList: widget.list,
+                                    .foodStall,
                               );
                             }, childCount: foodStallWithDetailsMap.length),
                           ),
@@ -190,23 +186,19 @@ class CartScreenState extends State<CartScreen> {
                                                   .newOrder.value = false;
                                               CartAndOrderController.newOrder
                                                   .notifyListeners();
-                                              var snackBar =
-                                              CustomSnackBar().oasisSnackBar('Order placed successfully');
-                                              ScaffoldMessenger.of(
-                                                  context)
-                                                  .showSnackBar(
-                                                  snackBar);
+                                              var snackBar = CustomSnackBar()
+                                                  .oasisSnackBar(
+                                                      'Order placed successfully');
                                               if (!mounted) {}
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(snackBar);
                                               PersistentNavBarNavigator
                                                   .pushNewScreenWithRouteSettings(
                                                 context,
                                                 settings: const RouteSettings(
                                                     name: 'order'),
-                                                screen: OrdersScreen(),
+                                                screen: const FoodStallScreen(),
                                                 withNavBar: true,
-                                                pageTransitionAnimation:
-                                                    PageTransitionAnimation
-                                                        .cupertino,
                                               );
                                               box.clear();
                                             } else {

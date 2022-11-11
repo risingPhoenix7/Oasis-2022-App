@@ -49,7 +49,6 @@ class _MenuScreenState extends State<MenuScreen> {
         MenuScreenViewModel().populateListFromHive(menuItemsFiltered);
   }
 
-
   //TODO: add a foodstall banner image in backend
   @override
   void initState() {
@@ -77,7 +76,15 @@ class _MenuScreenState extends State<MenuScreen> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: CachedNetworkImage(
-                          imageUrl: 'https://picsum.photos/388/259',
+                          placeholder: (context, url) => SizedBox(
+                            height: 259.h,
+                            width: 388.w,
+                            child: const CircularProgressIndicator(
+                              color: Colors.black,
+                            ),
+                          ),
+                          imageUrl:
+                              'https://picsum.photos/${388.w.toInt()}/${259.h.toInt()}',
                         ),
                       ),
                       Positioned(
@@ -314,6 +321,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 37.w),
                                       child: AddButton(
+                                        isVeg: menuItemsFiltered[index].is_veg,
                                         menuItemName:
                                             menuItemsFiltered[index].name,
                                         amount: menuItemsAmount[
@@ -351,9 +359,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CartScreen(
-                                    list: widget.menuItemList,
-                                  )));
+                              builder: (context) => CartScreen()));
                     },
                     child: Container(
                       // alignment: Alignment.bottomCenter,

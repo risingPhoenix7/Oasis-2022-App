@@ -18,6 +18,7 @@ class HiveMenuEntryAdapter extends TypeAdapter<HiveMenuEntry> {
     };
     return HiveMenuEntry(
       price: fields[0] as int,
+      isVeg: fields[5] as bool,
       menuItemName: fields[4] as String,
       FoodStall: fields[1] as String,
       quantity: fields[2] as int,
@@ -28,7 +29,7 @@ class HiveMenuEntryAdapter extends TypeAdapter<HiveMenuEntry> {
   @override
   void write(BinaryWriter writer, HiveMenuEntry obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.price)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class HiveMenuEntryAdapter extends TypeAdapter<HiveMenuEntry> {
       ..writeByte(3)
       ..write(obj.FoodStallId)
       ..writeByte(4)
-      ..write(obj.menuItemName);
+      ..write(obj.menuItemName)
+      ..writeByte(5)
+      ..write(obj.isVeg);
   }
 
   @override

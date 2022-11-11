@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
-
-import '../../../utils/ui_utils.dart';
 import '../../food_stalls/repo/model/hive_model/hive_menu_entry.dart';
 
 class CartAddButton extends StatefulWidget {
   CartAddButton(
       {Key? key,
       required this.foodStallName,
+      required this.isVeg,
       required this.foodStallId,
       required this.menuItemId,
       required this.price,
@@ -19,6 +18,7 @@ class CartAddButton extends StatefulWidget {
   int amount;
   String menuItemName;
   int price;
+  bool isVeg;
   String foodStallName;
   int foodStallId;
   int menuItemId;
@@ -67,7 +67,8 @@ class _CartAddButtonState extends State<CartAddButton> {
                           price: widget.price,
                           FoodStall: widget.foodStallName,
                           quantity: widget.amount,
-                          FoodStallId: widget.foodStallId));
+                          FoodStallId: widget.foodStallId,
+                          isVeg: widget.isVeg));
                 }
               });
             },
@@ -112,7 +113,8 @@ class _CartAddButtonState extends State<CartAddButton> {
                         price: widget.price,
                         FoodStall: widget.foodStallName,
                         quantity: widget.amount,
-                        FoodStallId: widget.foodStallId));
+                        FoodStallId: widget.foodStallId,
+                        isVeg: widget.isVeg));
               });
             },
           ),

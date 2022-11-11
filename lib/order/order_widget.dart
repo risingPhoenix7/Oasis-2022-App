@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:oasis_2022/order/repo/model/order_card_model.dart';
 
 import '../resources/resources.dart';
+import '../screens/wallet_screen/view/qr_code_popup.dart';
 import 'order_status.dart';
 
 class OrderWidget extends StatefulWidget {
@@ -177,12 +178,15 @@ class _OrderWidgetState extends State<OrderWidget> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => OrderStatus(
-                                    orderCardModel: widget.orderCardModel,
-                                  )));
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Align(
+                                alignment: Alignment
+                                    .bottomCenter,
+                                child:
+                                OrderStatus(orderCardModel: widget.orderCardModel,));
+                          });
                     },
                     child: Padding(
                       padding: EdgeInsets.only(top: 22.h),

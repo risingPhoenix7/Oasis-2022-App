@@ -23,6 +23,7 @@ class BalanceData {
       required this.pg,
       required this.swd,
       required this.kind_active,
+      required this.kind_points,
       required this.transfers});
 
   int? cash;
@@ -30,6 +31,7 @@ class BalanceData {
   int? swd;
   int? transfers;
   bool? kind_active;
+  int? kind_points;
 
   factory BalanceData.fromJson(Map<String, dynamic> json) =>
       _$BalanceDataFromJson(json);

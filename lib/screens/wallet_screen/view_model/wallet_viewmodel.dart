@@ -17,6 +17,7 @@ import '/utils/error_messages.dart';
 class WalletViewModel {
   static int balance = 0;
   static bool isKindActive = true;
+  static int? kindpoints = 0;
   String? jwt = UserDetailsViewModel.userDetails.JWT;
   static String? error;
 
@@ -61,7 +62,7 @@ class WalletViewModel {
     final balanceRestClient = BalanceRestClient(dio);
     BalanceModel response = BalanceModel(
         data: BalanceData(
-            cash: 0, pg: 0, swd: 0, transfers: 0, kind_active: false));
+            cash: 0, pg: 0, swd: 0, transfers: 0, kind_active: false, kind_points: 0));
     response = await balanceRestClient.getBalance(auth).then((it) {
       return it;
     }).catchError((Object obj) {
@@ -89,7 +90,7 @@ class WalletViewModel {
         (response.data?.transfers ?? 0) +
         (response.data?.pg ?? 0);
     isKindActive = response.data?.kind_active ?? false;
-
+    kindpoints = response.data?.kind_points ?? 0;
 // catch (e) {
 //   if (e.runtimeType == DioError) {
 //     DioError errore = e as DioError;

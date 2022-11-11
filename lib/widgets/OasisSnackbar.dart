@@ -6,7 +6,7 @@ class CustomSnackBar {
   SnackBar oasisSnackBar(String? text) {
     print('sefehsfhjbwfw');
     return SnackBar(
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 1000),
       content: Text(
         text ?? "Unknown Error",
         textAlign: TextAlign.center,

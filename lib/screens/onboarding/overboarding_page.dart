@@ -27,7 +27,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     OnBoarding(
         imagePath: 'assets/images/events_overboarding.svg',
         text:
-            'Stay updated and get notified with all the events happening on campus with timings and location.'),
+            'Stay updated and get notified with all the events happening on campus sorted by timings and location. Search for your favourite events by name, description and organiser.'),
     OnBoarding(
         imagePath: 'assets/images/tickets-overboarding.svg',
         text:

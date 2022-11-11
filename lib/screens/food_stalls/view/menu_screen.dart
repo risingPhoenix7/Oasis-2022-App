@@ -80,7 +80,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             height: 259.h,
                             width: 388.w,
                             child: const CircularProgressIndicator(
-                              color: Colors.black,
+                              color: Colors.amberAccent,
                             ),
                           ),
                           imageUrl:

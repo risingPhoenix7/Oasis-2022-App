@@ -39,7 +39,7 @@ class _ProfShowState extends State<ProfShow> {
                     as StoreItemData)
                 .image_url[1],
             placeholder: (context, url) => const CircularProgressIndicator(
-              color: Colors.black,
+              color: Colors.amberAccent,
             ),
           ),
         ),

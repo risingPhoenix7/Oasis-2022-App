@@ -161,24 +161,23 @@ class _EventsScreenState extends State<EventsScreen> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top: 90.h, right: 28.w),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              MoreInfoScreen()));
-                                },
-                                child:
-                                    SvgPicture.asset('assets/images/3gole.svg'),
-                              ),
-                            )
+                                padding:
+                                    EdgeInsets.only(top: 90.h, right: 28.w),
+                                child: IconButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MoreInfoScreen()));
+                                    },
+                                    icon: SvgPicture.asset(
+                                        'assets/images/3gole.svg'))),
                           ],
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              top: 52.h, bottom: 27.5, left: 36.w, right: 36.w),
+                              top: 48.h, bottom: 0, left: 36.w, right: 36.w),
                           child: Container(
                             color: Colors.black,
                             child: Container(

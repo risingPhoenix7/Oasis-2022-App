@@ -301,7 +301,8 @@ class _WalletScreenState extends State<WalletScreen> {
                                                                 CircularProgressIndicator(
                                                           strokeWidth: 2,
                                                           backgroundColor:
-                                                              Colors.black,
+                                                              Colors
+                                                                  .amberAccent,
                                                         )));
                                                   } else {
                                                     return Text(

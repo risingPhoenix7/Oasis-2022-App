@@ -1,4 +1,6 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 import '../food_stalls/view/food_stall_screen.dart';
 import '/order/controller/cart_and_order_controller.dart';
@@ -22,6 +24,12 @@ class CartScreen extends StatefulWidget {
   State<CartScreen> createState() => CartScreenState();
 }
 
+enum _SupportState {
+  unknown,
+  supported,
+  unsupported,
+}
+
 class CartScreenState extends State<CartScreen> {
   List<FoodStallInCartScreen> foodStallist = [];
   Map<int, FoodStallInCartScreen> foodStallWithDetailsMap = {};
@@ -30,8 +38,53 @@ class CartScreenState extends State<CartScreen> {
   List<int> subTotallist = [];
   bool isPostingOrder = false;
 
+  // ignore: non_constant_identifier_names
+  final LocalAuthentication auth = LocalAuthentication();
+  _SupportState _supportState = _SupportState.unknown;
+  bool? _canCheckBiometrics;
+  List<BiometricType>? _availableBiometrics;
+  String _authorized = 'Not Authorized';
+  bool _isAuthenticating = false;
+  bool authenticated = true;
+
+  Future<void> _authenticate() async {
+    authenticated = false;
+    try {
+      setState(() {
+        _isAuthenticating = true;
+        _authorized = 'Authenticating';
+      });
+      authenticated = await auth.authenticate(
+        localizedReason: 'Please authenticate to view QR',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+        ),
+      );
+      setState(() {
+        _isAuthenticating = false;
+      });
+    } on PlatformException catch (e) {
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Error - ${e.message}';
+      });
+      return;
+    }
+    if (!mounted) {
+      return;
+    }
+
+    setState(
+        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+  }
+
   @override
   void initState() {
+    auth.isDeviceSupported().then(
+          (bool isSupported) => setState(() => _supportState = isSupported
+              ? _SupportState.supported
+              : _SupportState.unsupported),
+        );
     foodStallWithDetailsMap = CartScreenViewModel().getValuesForScreen();
     foodStallIdList = CartScreenViewModel().getIdList(foodStallWithDetailsMap);
     total = CartScreenViewModel().getTotalValue(foodStallWithDetailsMap);
@@ -152,55 +205,78 @@ class CartScreenState extends State<CartScreen> {
                             )
                           : InkWell(
                               onTap: () async {
-                                if (!isPostingOrder) {
-                                  setState(() {
-                                    isPostingOrder = true;
-                                  });
-                                  if (box.isNotEmpty) {
-                                    var orderdict = CartScreenViewModel()
-                                        .getPostRequestBody();
-                                    try {
-                                      await WalletViewModel().getBalance();
-                                      if (WalletViewModel.error != null) {
-                                        showDialog(
-                                            barrierDismissible: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return Align(
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                                child: ErrorDialog(
-                                                    errorMessage:
-                                                        WalletViewModel.error!),
-                                              );
-                                            });
-                                      } else {
-                                        if (WalletViewModel.balance >= total) {
-                                          OrderResult orderResult =
-                                              await CartScreenViewModel()
-                                                  .postOrder(orderdict);
-                                          if (CartScreenViewModel.error ==
-                                              null) {
-                                            if (orderResult.id != null) {
-                                              CartAndOrderController
-                                                  .newOrder.value = false;
-                                              CartAndOrderController.newOrder
-                                                  .notifyListeners();
-                                              var snackBar = CustomSnackBar()
-                                                  .oasisSnackBar(
-                                                      'Order placed successfully');
-                                              if (!mounted) {}
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(snackBar);
-                                              PersistentNavBarNavigator
-                                                  .pushNewScreenWithRouteSettings(
-                                                context,
-                                                settings: const RouteSettings(
-                                                    name: 'order'),
-                                                screen: const FoodStallScreen(),
-                                                withNavBar: true,
-                                              );
-                                              box.clear();
+                                if (await auth.isDeviceSupported()) {
+                                  await _authenticate();
+                                }
+                                if (authenticated) {
+                                  if (!isPostingOrder) {
+                                    setState(() {
+                                      isPostingOrder = true;
+                                    });
+                                    if (box.isNotEmpty) {
+                                      var orderdict = CartScreenViewModel()
+                                          .getPostRequestBody();
+                                      try {
+                                        await WalletViewModel().getBalance();
+                                        if (WalletViewModel.error != null) {
+                                          showDialog(
+                                              barrierDismissible: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return Align(
+                                                  alignment:
+                                                      Alignment.bottomCenter,
+                                                  child: ErrorDialog(
+                                                      errorMessage:
+                                                          WalletViewModel
+                                                              .error!),
+                                                );
+                                              });
+                                        } else {
+                                          if (WalletViewModel.balance >=
+                                              total) {
+                                            OrderResult orderResult =
+                                                await CartScreenViewModel()
+                                                    .postOrder(orderdict);
+                                            if (CartScreenViewModel.error ==
+                                                null) {
+                                              if (orderResult.id != null) {
+                                                CartAndOrderController
+                                                    .newOrder.value = false;
+                                                CartAndOrderController.newOrder
+                                                    .notifyListeners();
+                                                var snackBar = CustomSnackBar()
+                                                    .oasisSnackBar(
+                                                        'Order placed successfully');
+                                                if (!mounted) {}
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(snackBar);
+                                                PersistentNavBarNavigator
+                                                    .pushNewScreenWithRouteSettings(
+                                                  context,
+                                                  settings: const RouteSettings(
+                                                      name: 'order'),
+                                                  screen:
+                                                      const FoodStallScreen(),
+                                                  withNavBar: true,
+                                                );
+                                                box.clear();
+                                              } else {
+                                                isPostingOrder = false;
+                                                setState(() {});
+                                                showDialog(
+                                                    barrierDismissible: false,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Align(
+                                                        alignment: Alignment
+                                                            .bottomCenter,
+                                                        child: ErrorDialog(
+                                                            errorMessage:
+                                                                'Order Invalid'),
+                                                      );
+                                                    });
+                                              }
                                             } else {
                                               isPostingOrder = false;
                                               setState(() {});
@@ -213,7 +289,8 @@ class CartScreenState extends State<CartScreen> {
                                                           .bottomCenter,
                                                       child: ErrorDialog(
                                                           errorMessage:
-                                                              'Order Invalid'),
+                                                              CartScreenViewModel
+                                                                  .error!),
                                                     );
                                                   });
                                             }
@@ -228,71 +305,51 @@ class CartScreenState extends State<CartScreen> {
                                                     alignment:
                                                         Alignment.bottomCenter,
                                                     child: ErrorDialog(
-                                                        errorMessage:
-                                                            CartScreenViewModel
-                                                                .error!),
+                                                        errorMessage: ErrorMessages
+                                                            .insufficientFunds),
                                                   );
                                                 });
                                           }
-                                        } else {
-                                          isPostingOrder = false;
-                                          setState(() {});
-                                          showDialog(
-                                              barrierDismissible: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return Align(
-                                                  alignment:
-                                                      Alignment.bottomCenter,
-                                                  child: ErrorDialog(
-                                                      errorMessage: ErrorMessages
-                                                          .insufficientFunds),
-                                                );
-                                              });
                                         }
+                                      } catch (e) {
+                                        print('goes into this');
+                                        isPostingOrder = false;
+                                        setState(() {});
+                                        showDialog(
+                                            barrierDismissible: false,
+                                            context: context,
+                                            builder: (context) {
+                                              return Align(
+                                                alignment:
+                                                    Alignment.bottomCenter,
+                                                child: ErrorDialog(
+                                                    errorMessage:
+                                                        WalletViewModel.error ??
+                                                            ErrorMessages
+                                                                .unknownError),
+                                              );
+                                            });
                                       }
-                                    } catch (e) {
-                                      print('goes into this');
+                                    } else {
                                       isPostingOrder = false;
                                       setState(() {});
-                                      showDialog(
+                                      return showDialog(
                                           barrierDismissible: false,
                                           context: context,
                                           builder: (context) {
                                             return Align(
                                               alignment: Alignment.bottomCenter,
                                               child: ErrorDialog(
-                                                  errorMessage:
-                                                      WalletViewModel.error ??
-                                                          ErrorMessages
-                                                              .unknownError),
+                                                  errorMessage: 'Cart empty'),
                                             );
                                           });
                                     }
-                                  } else {
-                                    isPostingOrder = false;
-                                    setState(() {});
-                                    return showDialog(
-                                        barrierDismissible: false,
-                                        context: context,
-                                        builder: (context) {
-                                          return Align(
-                                            alignment: Alignment.bottomCenter,
-                                            child: ErrorDialog(
-                                                errorMessage: 'Cart empty'),
-                                          );
-                                        });
                                   }
                                 }
                               },
                               child: Container(
-                                width:
-                                    UIUtills().getProportionalWidth(width: 428),
-                                height: UIUtills()
-                                    .getProportionalHeight(height: 72.00),
-                                // margin: EdgeInsets.symmetric(
-                                //     horizontal: UIUtills()
-                                //         .getProportionalWidth(width: 20.00)),
+                                width: 428.w,
+                                height: 72.h,
                                 decoration: BoxDecoration(
                                   gradient: const LinearGradient(colors: [
                                     Color.fromRGBO(209, 154, 8, 1),

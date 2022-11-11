@@ -321,6 +321,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 37.w),
                                       child: AddButton(
+                                        is_available: menuItemsFiltered[index].is_available,
                                         isVeg: menuItemsFiltered[index].is_veg,
                                         menuItemName:
                                             menuItemsFiltered[index].name,

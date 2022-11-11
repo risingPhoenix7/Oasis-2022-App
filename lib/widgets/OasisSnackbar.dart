@@ -4,16 +4,15 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomSnackBar {
   SnackBar oasisSnackBar(String? text) {
-    print('sefehsfhjbwfw');
     return SnackBar(
-      duration: Duration(milliseconds: 1000),
+      duration: const Duration(seconds: 2),
       content: Text(
         text ?? "Unknown Error",
         textAlign: TextAlign.center,
         style: GoogleFonts.openSans(
-            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12.sp),
+            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16.sp),
       ),
-      backgroundColor: Colors.amber.withOpacity(0.8),
+      backgroundColor: Colors.amber.withOpacity(0.9),
       behavior: SnackBarBehavior.floating,
     );
   }

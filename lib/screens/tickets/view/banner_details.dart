@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
-import 'package:oasis_2022/screens/tickets/repository/model/signedTicketsData.dart';
 import 'package:oasis_2022/screens/tickets/controller/store_controller.dart';
 import 'package:oasis_2022/screens/tickets/view/buy_ticket.dart';
 import 'package:oasis_2022/screens/tickets/view_model/get_signedtickets_view_model.dart';
@@ -14,7 +13,10 @@ class BannerDetails extends StatefulWidget {
   State<BannerDetails> createState() => _BannerDetailsState();
 }
 
+
 class _BannerDetailsState extends State<BannerDetails> {
+
+
   ValueNotifier<bool> isLoading = ValueNotifier(true);
 
   String Time(String timestamp) {
@@ -49,6 +51,8 @@ class _BannerDetailsState extends State<BannerDetails> {
     return date;
   }
 
+
+
   @override
   void initState() {
     super.initState();
@@ -82,8 +86,7 @@ class _BannerDetailsState extends State<BannerDetails> {
                   .createShader(
                       Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
               child: Text(
-                (StoreController
-                            .carouselItems[StoreController.itemNumber.value]
+                (StoreController.carouselItems[StoreController.itemNumber.value]
                         as StoreItemData)
                     .name!,
                 style: GoogleFonts.openSans(
@@ -118,8 +121,7 @@ class _BannerDetailsState extends State<BannerDetails> {
                           textScaleFactor: 1.0,
                           textAlign: TextAlign.start,
                           style: GoogleFonts.openSans(
-                              fontSize: 15.sp,
-                              color: const Color(0xFFD3D3D3)),
+                              fontSize: 15.sp, color: const Color(0xFFD3D3D3)),
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 21.w),
@@ -136,51 +138,54 @@ class _BannerDetailsState extends State<BannerDetails> {
                     )
                   ],
                 ),
-                GestureDetector(
-                  onTap: () {
-                    if ((StoreController.carouselItems[StoreController
+                Padding(
+                  padding: EdgeInsets.only(right: 21.w),
+                  child: GestureDetector(
+                    onTap: () async {
+                        if ((StoreController.carouselItems[StoreController
                             .itemNumber.value] as StoreItemData)
-                        .tickets_available!) {
-                      showDialog(
-                          context: context,
-                          builder: (context) => const BuyTicket());
-                    } else {}
-                  },
-                  child: Container(
-                    height: 46.h,
-                    width: 132.w,
-                    decoration: BoxDecoration(
-                        gradient: (StoreController.carouselItems[
-                                        StoreController.itemNumber.value]
-                                    as StoreItemData)
-                                .tickets_available!
-                            ? const LinearGradient(colors: [
-                                Color.fromRGBO(209, 154, 8, 1),
-                                Color.fromRGBO(254, 212, 102, 1),
-                                Color.fromRGBO(227, 186, 79, 1),
-                                Color.fromRGBO(209, 154, 8, 1),
-                                Color.fromRGBO(209, 154, 8, 1),
-                              ])
-                            : const LinearGradient(colors: [
-                                Color.fromRGBO(148, 145, 137, 1),
-                                Color.fromRGBO(146, 143, 135, 1),
-                                Color.fromRGBO(152, 150, 143, 1),
-                                Color.fromRGBO(149, 146, 138, 1),
-                                Color.fromRGBO(131, 125, 110, 1),
-                                Color.fromRGBO(126, 126, 125, 1)
-                              ]),
-                        borderRadius: BorderRadius.circular(10.r)),
-                    child: Center(
-                      child: Text(
-                        (StoreController.carouselItems[StoreController
-                                    .itemNumber.value] as StoreItemData)
-                                .tickets_available!
-                            ? "Buy Tickets"
-                            : "Sold Out",
-                        style: GoogleFonts.openSans(
-                            color: Colors.black,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.bold),
+                            .tickets_available!) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => const BuyTicket());
+                        } else {}
+                    },
+                    child: Container(
+                      height: 46.h,
+                      width: 132.w,
+                      decoration: BoxDecoration(
+                          gradient: (StoreController.carouselItems[
+                                          StoreController.itemNumber.value]
+                                      as StoreItemData)
+                                  .tickets_available!
+                              ? const LinearGradient(colors: [
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                  Color.fromRGBO(254, 212, 102, 1),
+                                  Color.fromRGBO(227, 186, 79, 1),
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                ])
+                              : const LinearGradient(colors: [
+                                  Color.fromRGBO(148, 145, 137, 1),
+                                  Color.fromRGBO(146, 143, 135, 1),
+                                  Color.fromRGBO(152, 150, 143, 1),
+                                  Color.fromRGBO(149, 146, 138, 1),
+                                  Color.fromRGBO(131, 125, 110, 1),
+                                  Color.fromRGBO(126, 126, 125, 1)
+                                ]),
+                          borderRadius: BorderRadius.circular(10.r)),
+                      child: Center(
+                        child: Text(
+                          (StoreController.carouselItems[StoreController
+                                      .itemNumber.value] as StoreItemData)
+                                  .tickets_available!
+                              ? "Buy Tickets"
+                              : "Sold Out",
+                          style: GoogleFonts.openSans(
+                              color: Colors.black,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),

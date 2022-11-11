@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:oasis_2022/order/repo/model/get_orders_model.dart';
 import 'package:oasis_2022/screens/events/view/miscellaneous_screen.dart';
 import 'package:oasis_2022/screens/morescreen/screens/more_info.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -46,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _buildScreens() {
     return [
       const FoodStallScreen(),
-      OrdersScreen(),
+      const OrdersScreen(),
       const EventsScreen(),
       const StoreScreen(),
       const WalletScreen(),

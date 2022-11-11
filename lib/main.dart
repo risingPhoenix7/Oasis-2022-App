@@ -72,7 +72,6 @@ print('initialising firebase');
     },
   );
   LocalNotificationService.initialize();
-  print('notification');
 
   runApp(RestartWidget(child: BosmFestApp()));
 }

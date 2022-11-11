@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:oasis_2022/screens/kindstore/view/kind_store_view.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
 import '/provider/user_details_viewmodel.dart';
 import '/screens/paytm/view/payment_cart_screen.dart';
 import '/screens/paytm/view/refresh_wallet_controller.dart';
@@ -93,38 +92,6 @@ class _WalletScreenState extends State<WalletScreen> {
     }
   }
 
-  Future<void> _checkBiometrics() async {
-    late bool canCheckBiometrics;
-    try {
-      canCheckBiometrics = await auth.canCheckBiometrics;
-    } on PlatformException catch (_) {
-      canCheckBiometrics = false;
-    }
-    if (!mounted) {
-      return;
-    }
-
-    setState(() {
-      _canCheckBiometrics = canCheckBiometrics;
-    });
-  }
-
-  Future<void> _getAvailableBiometrics() async {
-    late List<BiometricType> availableBiometrics;
-    try {
-      availableBiometrics = await auth.getAvailableBiometrics();
-    } on PlatformException catch (_) {
-      availableBiometrics = <BiometricType>[];
-    }
-    if (!mounted) {
-      return;
-    }
-
-    setState(() {
-      _availableBiometrics = availableBiometrics;
-    });
-  }
-
   Future<void> _authenticate() async {
     authenticated = false;
     try {
@@ -156,41 +123,6 @@ class _WalletScreenState extends State<WalletScreen> {
         () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
   }
 
-  Future<void> _authenticateWithBiometrics() async {
-    bool authenticated = false;
-    try {
-      setState(() {
-        _isAuthenticating = true;
-        _authorized = 'Authenticating';
-      });
-      authenticated = await auth.authenticate(
-        localizedReason:
-            'Scan your fingerprint (or face or whatever) to authenticate',
-        options: const AuthenticationOptions(
-          stickyAuth: true,
-          biometricOnly: true,
-        ),
-      );
-      setState(() {
-        _isAuthenticating = false;
-        _authorized = 'Authenticating';
-      });
-    } on PlatformException catch (e) {
-      setState(() {
-        _isAuthenticating = false;
-        _authorized = 'Error - ${e.message}';
-      });
-      return;
-    }
-    if (!mounted) {
-      return;
-    }
-
-    final String message = authenticated ? 'Authorized' : 'Not Authorized';
-    setState(() {
-      _authorized = message;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -281,14 +213,10 @@ class _WalletScreenState extends State<WalletScreen> {
                                         ),
                                         InkWell(
                                           onTap: () async {
-                                            print('clicked');
                                             if (await auth
                                                 .isDeviceSupported()) {
-                                              print('$authenticated lol1');
                                               await _authenticate();
-                                              print('$authenticated lol2');
                                             }
-                                            print('authenticated');
                                             if (authenticated) {
                                               if (UserDetailsViewModel
                                                           .userDetails.userID ==

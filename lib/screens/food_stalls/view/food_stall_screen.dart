@@ -94,6 +94,8 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
       backgroundColor: Colors.black,
       body: !isLoading
           ? RefreshIndicator(
+        color: Colors.amber,
+              backgroundColor: Colors.black,
               onRefresh: updateFoodStallResult,
               child: isStallsClosed
                   ? ListView(

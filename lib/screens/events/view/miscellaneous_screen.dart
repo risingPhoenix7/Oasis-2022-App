@@ -149,6 +149,8 @@ class _EventsScreenState extends State<EventsScreen> {
           ? GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
               child: RefreshIndicator(
+                color: Colors.amber,
+                backgroundColor: Colors.black,
                 onRefresh: updateMiscEventsResult,
                 child: Stack(
                   children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
@@ -125,7 +126,6 @@ class _WalletScreenState extends State<WalletScreen> {
         () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -177,7 +177,7 @@ class _WalletScreenState extends State<WalletScreen> {
                               width: MediaQuery.of(context).size.width,
                               child: Padding(
                                 padding:
-                                     EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 15.h),
+                                    EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 15.h),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -199,17 +199,21 @@ class _WalletScreenState extends State<WalletScreen> {
                                               style: GoogleFonts.openSans(
                                                   color:
                                                       const Color(0xFFFFFFFF),
-                                                  fontSize:14.sp,
+                                                  fontSize: 14.sp,
                                                   fontWeight: FontWeight.w400),
                                             ),
-                                            Text(
-                                              UserDetailsViewModel
-                                                      .userDetails.username ??
-                                                  'NA',
-                                              style: GoogleFonts.openSans(
-                                                  color: Colors.white,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w700),
+                                            Container(
+                                              width: 250.w,
+                                              child: Text(
+                                                UserDetailsViewModel
+                                                        .userDetails.username ??
+                                                    'NA',
+                                                style: GoogleFonts.openSans(
+                                                    color: Colors.white,
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -287,22 +291,21 @@ class _WalletScreenState extends State<WalletScreen> {
                                                   fontWeight: FontWeight.w600),
                                             ),
                                             Padding(
-                                              padding:  EdgeInsets.only(bottom: 20.h),
+                                              padding:
+                                                  EdgeInsets.only(bottom: 20.h),
                                               child: ValueListenableBuilder(
                                                 valueListenable: isLoading,
-                                                builder:
-                                                    (context, bool value, child) {
+                                                builder: (context, bool value,
+                                                    child) {
                                                   if (isLoading.value) {
-                                                    return const SizedBox(
+                                                    return SizedBox(
                                                         width: 20,
                                                         height: 20,
                                                         child: Center(
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                          strokeWidth: 2,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .amberAccent,
+                                                            child: SpinKitWave(
+                                                          color: Colors.white
+                                                              .withOpacity(0.5),
+                                                          size: 15.r,
                                                         )));
                                                   } else {
                                                     return Text(
@@ -330,10 +333,8 @@ class _WalletScreenState extends State<WalletScreen> {
                             )
                           ],
                         ),
-
                         Padding(
-                          padding: EdgeInsets.only(left: 13.w,top: 15.h)
-                              ,
+                          padding: EdgeInsets.only(left: 13.w, top: 15.h),
                           child: Row(
                             children: [
                               Container(
@@ -342,7 +343,8 @@ class _WalletScreenState extends State<WalletScreen> {
                                 padding:
                                     const EdgeInsets.fromLTRB(0, 15, 0, 15),
                                 decoration: BoxDecoration(
-                                  gradient: OasisColors.oasisWebsiteGoldGradient,
+                                  gradient:
+                                      OasisColors.oasisWebsiteGoldGradient,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Column(
@@ -517,10 +519,10 @@ class _WalletScreenState extends State<WalletScreen> {
                                                   fontWeight: FontWeight.w600),
                                             ),
                                             Text(
-                                             '${ WalletViewModel.kindpoints}',
+                                              '${WalletViewModel.kindpoints}',
                                               style: GoogleFonts.openSans(
                                                   color: Colors.white,
-                                                  fontSize:  20.sp,
+                                                  fontSize: 20.sp,
                                                   fontWeight: FontWeight.w700),
                                             ),
                                           ],
@@ -534,7 +536,8 @@ class _WalletScreenState extends State<WalletScreen> {
                                             padding: const EdgeInsets.fromLTRB(
                                                 0, 8, 0, 8),
                                             decoration: BoxDecoration(
-                                              gradient: OasisColors.oasisWebsiteGoldGradient,
+                                              gradient: OasisColors
+                                                  .oasisWebsiteGoldGradient,
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                             ),

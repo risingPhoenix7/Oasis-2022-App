@@ -53,6 +53,7 @@ class FoodStallAdapter extends TypeAdapter<FoodStall> {
     return FoodStall(
       name: fields[0] as String,
       image_url: fields[1] as String,
+      menu_image_url: fields[9] as String?,
       id: fields[2] as int,
       closed: fields[3] as bool,
       description: fields[6] as String,
@@ -66,7 +67,7 @@ class FoodStallAdapter extends TypeAdapter<FoodStall> {
   @override
   void write(BinaryWriter writer, FoodStall obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -84,7 +85,9 @@ class FoodStallAdapter extends TypeAdapter<FoodStall> {
       ..writeByte(7)
       ..write(obj.tags)
       ..writeByte(8)
-      ..write(obj.menu);
+      ..write(obj.menu)
+      ..writeByte(9)
+      ..write(obj.menu_image_url);
   }
 
   @override
@@ -158,8 +161,9 @@ class MenuItemAdapter extends TypeAdapter<MenuItem> {
 // **************************************************************************
 
 FoodStall _$FoodStallFromJson(Map<String, dynamic> json) => FoodStall(
-      name: json['name'] as String,
+  name: json['name'] as String,
       image_url: json['image_url'] as String,
+      menu_image_url: json['menu_image_url'] as String?,
       id: json['id'] as int,
       closed: json['closed'] as bool,
       description: json['description'] as String,
@@ -171,7 +175,8 @@ FoodStall _$FoodStallFromJson(Map<String, dynamic> json) => FoodStall(
           .toList(),
     );
 
-Map<String, dynamic> _$FoodStallToJson(FoodStall instance) => <String, dynamic>{
+Map<String, dynamic> _$FoodStallToJson(FoodStall instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'image_url': instance.image_url,
       'id': instance.id,
@@ -181,6 +186,7 @@ Map<String, dynamic> _$FoodStallToJson(FoodStall instance) => <String, dynamic>{
       'description': instance.description,
       'tags': instance.tags,
       'menu': instance.menu,
+      'menu_image_url': instance.menu_image_url,
     };
 
 MenuItem _$MenuItemFromJson(Map<String, dynamic> json) => MenuItem(

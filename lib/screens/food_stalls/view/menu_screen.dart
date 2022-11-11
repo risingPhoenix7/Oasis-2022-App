@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:oasis_2022/widgets/loader.dart';
 
 import '/screens/cart/cartScreen.dart';
 import '/screens/food_stalls/repo/model/food_stall_model.dart' as menu;
@@ -77,14 +78,10 @@ class _MenuScreenState extends State<MenuScreen> {
                         borderRadius: BorderRadius.circular(20),
                         child: CachedNetworkImage(
                           placeholder: (context, url) => SizedBox(
-                            height: 259.h,
-                            width: 388.w,
-                            child: const CircularProgressIndicator(
-                              color: Colors.amberAccent,
-                            ),
-                          ),
-                          imageUrl:
-                              'https://picsum.photos/${388.w.toInt()}/${259.h.toInt()}',
+                              height: 259.h,
+                              width: 388.w,
+                              child: const Loader()),
+                          imageUrl: '${widget.image}',
                         ),
                       ),
                       Positioned(

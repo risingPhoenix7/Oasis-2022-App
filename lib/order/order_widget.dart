@@ -1,13 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:oasis_2022/order/repo/model/order_card_model.dart';
 
 import '../resources/resources.dart';
-import '../screens/wallet_screen/view/qr_code_popup.dart';
 import 'order_status.dart';
 
 class OrderWidget extends StatefulWidget {
@@ -70,10 +68,13 @@ class _OrderWidgetState extends State<OrderWidget> {
                     padding: EdgeInsets.only(
                       top: 15.h,
                     ),
-                    child: Image.asset(
-                      'assets/images/orderTea.png',
-                      height: 139.h,
-                      width: 139.w,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(6.25.r),
+                      child: Image.network(
+                        widget.orderCardModel.order_image_url ?? '',
+                        height: 139.h,
+                        width: 139.w,
+                      ),
                     ),
                   ),
                   Padding(
@@ -106,6 +107,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                     padding: EdgeInsets.only(top: 9.h),
                     child: Text(
                       widget.orderCardModel.foodStallName,
+                      overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.openSans(
                         color: const Color.fromRGBO(225, 225, 225, 1),
                         fontWeight: FontWeight.w700,

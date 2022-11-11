@@ -29,6 +29,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
           ?.map((e) => Items.fromJson(e as Map<String, dynamic>))
           .toList(),
       otp: json['otp'] as int?,
+      order_image_url: json['order_image_url'] as String?,
       vendor: json['vendor'] == null
           ? null
           : Vendor.fromJson(json['vendor'] as Map<String, dynamic>),
@@ -38,7 +39,8 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       otp_seen: json['otp_seen'] as bool?,
     );
 
-Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
+Map<String, dynamic> _$OrderToJson(Order instance) =>
+    <String, dynamic>{
       'order_id': instance.order_id,
       'status': instance.status,
       'shell': instance.shell,
@@ -48,6 +50,7 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'price': instance.price,
       'otp_seen': instance.otp_seen,
       'items': instance.items,
+      'order_image_url': instance.order_image_url,
       'vendor': instance.vendor,
     };
 

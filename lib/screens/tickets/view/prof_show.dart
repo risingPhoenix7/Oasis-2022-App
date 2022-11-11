@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
+import 'package:oasis_2022/widgets/loader.dart';
 
 import '../controller/store_controller.dart';
 import 'banner_details.dart';
@@ -34,14 +35,11 @@ class _ProfShowState extends State<ProfShow> {
         Padding(
           padding: EdgeInsets.only(top: 43.h, left: 8.w),
           child: CachedNetworkImage(
-            imageUrl: (StoreController
-                        .carouselItems[StoreController.itemNumber.value]
-                    as StoreItemData)
-                .image_url[1],
-            placeholder: (context, url) => const CircularProgressIndicator(
-              color: Colors.amberAccent,
-            ),
-          ),
+              imageUrl: (StoreController
+                          .carouselItems[StoreController.itemNumber.value]
+                      as StoreItemData)
+                  .image_url[1],
+              placeholder: (context, url) => const Loader()),
         ),
         Padding(
           padding: EdgeInsets.only(top: 350.h),

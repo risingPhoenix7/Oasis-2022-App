@@ -22,6 +22,7 @@ class Order {
   double? price;
   bool? otp_seen;
   List<Items>? items;
+  String? order_image_url;
   Vendor? vendor;
 
   Order(
@@ -30,6 +31,7 @@ class Order {
       this.shell,
       this.items,
       this.otp,
+      this.order_image_url,
       this.vendor,
       this.rating,
       this.transaction,

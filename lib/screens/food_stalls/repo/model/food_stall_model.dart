@@ -32,10 +32,13 @@ class FoodStall {
   String tags;
   @HiveField(8)
   List<MenuItem> menu;
+  @HiveField(9)
+  String? menu_image_url;
 
   FoodStall(
       {required this.name,
       required this.image_url,
+      required this.menu_image_url,
       required this.id,
       required this.closed,
       required this.description,

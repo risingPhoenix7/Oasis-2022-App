@@ -31,7 +31,9 @@ Future<void> main() async {
     [DeviceOrientation.portraitUp],
   );
   ChuckerFlutter.showOnRelease = false;
+  print('initialising hive');
   await Hive.initFlutter();
+
   Hive.registerAdapter(HiveMenuEntryAdapter());
   Hive.registerAdapter(MiscEventListAdapter());
   Hive.registerAdapter(MiscEventDataAdapter());
@@ -42,13 +44,16 @@ Future<void> main() async {
   await Hive.openBox('subscribeBox');
   await Hive.openBox('cartBox');
   await Hive.openBox<FoodStallList>('foodStallBox');
-  SecureStorage secureStorage = SecureStorage();
-
+  print('initialised hive');
+print('initialising firebase');
   await Firebase.initializeApp(
       name: 'com.dvm.oasis2k22',
       options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.subscribeToTopic('all');
+  print('initialising firebase');
+  print('crashylitics');
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  print('notification');
   FirebaseMessaging.onMessage.listen(
     (message) {
       print(message.data.toString() + "             lol");
@@ -67,6 +72,8 @@ Future<void> main() async {
     },
   );
   LocalNotificationService.initialize();
+  print('notification');
+
   runApp(RestartWidget(child: BosmFestApp()));
 }
 
@@ -153,7 +160,7 @@ class _BosmFestAppState extends State<BosmFestApp> {
                   width: double.infinity,
                   alignment: Alignment.center,
                   color: Colors.black,
-                  child: SvgPicture.asset('assets/images/oasis_logo.svg'),
+                  child: Image.asset('assets/images/OASISLogoGoldPNG.png'),
                 );
               },
             ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:oasis_2022/resources/resources.dart';
 import 'package:oasis_2022/screens/morescreen/repo/models/contact_model.dart';
 import 'package:oasis_2022/utils/colors.dart';
 import 'package:oasis_2022/utils/oasis_text_styles.dart';
@@ -21,7 +20,7 @@ class ContactScreen extends StatefulWidget {
 class _ContactScreenState extends State<ContactScreen> {
   List<Contact> contactList = [
     Contact(
-      name: "Vaishnavi Raghav",
+      name: "Anshal Shukla",
       desc: "Publications and Correspondence",
       email: "pcr@bitsbosm.org",
       imageAsset: "vaishnavi_raghav.png",
@@ -44,7 +43,7 @@ class _ContactScreenState extends State<ContactScreen> {
       instagramExists: false,
     ),
     Contact(
-      name: "Abhishek M. Singh",
+      name: "Angel Maria Baby",
       desc: "Controls",
       email: "controls@bitsbosm.org",
       imageAsset: "AbhishekMSingh.png",
@@ -260,22 +259,18 @@ class _ContactScreenState extends State<ContactScreen> {
           child: ScrollConfiguration(
             behavior: CustomScrollBehavior(),
             child: GridView.builder(
-              physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing:
-                        UIUtills().getProportionalWidth(width: 16),
-                    mainAxisSpacing:
-                        UIUtills().getProportionalHeight(height: 16),
+                    crossAxisSpacing: 24.w,
+                    mainAxisSpacing: 20.h,
                     crossAxisCount: 2,
-                    childAspectRatio: 0.55),
+                    childAspectRatio: 0.66),
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(ImageAssets.eventCardBg),
-                            fit: BoxFit.fill),
-                        borderRadius: BorderRadius.circular(20.r)),
-                    width: UIUtills().getProportionalWidth(width: 170),
+                        color: const Color(0xFF17181C),
+                        borderRadius: BorderRadius.circular(10.r)),
+                    width: UIUtills().getProportionalWidth(width: 182),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           vertical:
@@ -284,53 +279,55 @@ class _ContactScreenState extends State<ContactScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            "assets/images/${contactList[index].imageAsset}",
-                            height:
-                                UIUtills().getProportionalHeight(height: 132),
-                            width: UIUtills().getProportionalWidth(width: 138),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: UIUtills()
-                                    .getProportionalHeight(height: 8)),
-                            child: SizedBox(
-                              height:
-                                  UIUtills().getProportionalHeight(height: 52),
-                              width:
-                                  UIUtills().getProportionalWidth(width: 104),
-                              child: Center(
-                                child: Text(
-                                  contactList[index].name,
-                                  textAlign: TextAlign.center,
-                                  style: OasisTextStyles.openSansSubHeading
-                                      .copyWith(color: Colors.white, fontSize: 16.sp),
+                          ClipOval(
+                            child: Container(
+                              height: 113.h,
+                              decoration: const BoxDecoration(
+                                  gradient: LinearGradient(colors: [
+                                Color.fromRGBO(209, 154, 8, 1),
+                                Color.fromRGBO(254, 212, 102, 1),
+                                Color.fromRGBO(227, 186, 79, 1),
+                                Color.fromRGBO(209, 154, 8, 1),
+                                Color.fromRGBO(209, 154, 8, 1),
+                              ])),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 1.w, vertical: 1.h),
+                                child: ClipOval(
+                                  child: Image.asset(
+                                    "assets/images/${contactList[index].imageAsset}",
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(
-                                top:
-                                    UIUtills().getProportionalHeight(height: 8),
-                                bottom: UIUtills()
-                                    .getProportionalHeight(height: 8)),
-                            child: SizedBox(
-                              height:
-                                  UIUtills().getProportionalHeight(height: 34),
-                              width:
-                                  UIUtills().getProportionalWidth(width: 142),
-                              child: Center(
-                                child: Text(
-                                  contactList[index].desc,
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.poppins(
-                                      textStyle: OasisTextStyles.openSansSubHeading.copyWith(
-                                        fontSize: 11.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: OasisColors.primaryYellow,
-                                      )),
-                                ),
+                            padding: EdgeInsets.only(top: 12.h),
+                            child: Center(
+                              child: Text(
+                                contactList[index].name,
+                                textAlign: TextAlign.center,
+                                style: OasisTextStyles.openSansSubHeading
+                                    .copyWith(
+                                        color: Colors.white, fontSize: 16.sp),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(top: 16.08.h, bottom: 20.35.h),
+                            child: Center(
+                              child: Text(
+                                contactList[index].desc,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.poppins(
+                                    textStyle: OasisTextStyles
+                                        .openSansSubHeading
+                                        .copyWith(
+                                  fontSize: 11.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: OasisColors.primaryYellow,
+                                )),
                               ),
                             ),
                           ),

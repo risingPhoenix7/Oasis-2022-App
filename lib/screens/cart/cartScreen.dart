@@ -1,6 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:oasis_2022/widgets/OasisSnackbar.dart';
-import '../food_stalls/view/food_stall_screen.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+
 import '/order/controller/cart_and_order_controller.dart';
 import '/screens/cart/repo/model/cart_screen_model.dart';
 import '/screens/cart/repo/model/post_order_response_model.dart';
@@ -10,16 +17,19 @@ import '/screens/wallet_screen/view_model/wallet_viewmodel.dart';
 import '/utils/error_messages.dart';
 import '/utils/ui_utils.dart';
 import '/widgets/error_dialogue.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import '../food_stalls/view/food_stall_screen.dart';
 
 class CartScreen extends StatefulWidget {
   CartScreen({super.key});
+
   @override
   State<CartScreen> createState() => CartScreenState();
+}
+
+enum _SupportState {
+  unknown,
+  supported,
+  unsupported,
 }
 
 class CartScreenState extends State<CartScreen> {
@@ -30,8 +40,53 @@ class CartScreenState extends State<CartScreen> {
   List<int> subTotallist = [];
   bool isPostingOrder = false;
 
+  // ignore: non_constant_identifier_names
+  final LocalAuthentication auth = LocalAuthentication();
+  _SupportState _supportState = _SupportState.unknown;
+  bool? _canCheckBiometrics;
+  List<BiometricType>? _availableBiometrics;
+  String _authorized = 'Not Authorized';
+  bool _isAuthenticating = false;
+  bool authenticated = true;
+
+  Future<void> _authenticate() async {
+    authenticated = false;
+    try {
+      setState(() {
+        _isAuthenticating = true;
+        _authorized = 'Authenticating';
+      });
+      authenticated = await auth.authenticate(
+        localizedReason: 'Please authenticate to view QR',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+        ),
+      );
+      setState(() {
+        _isAuthenticating = false;
+      });
+    } on PlatformException catch (e) {
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Error - ${e.message}';
+      });
+      return;
+    }
+    if (!mounted) {
+      return;
+    }
+
+    setState(
+        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+  }
+
   @override
   void initState() {
+    auth.isDeviceSupported().then(
+          (bool isSupported) => setState(() => _supportState = isSupported
+              ? _SupportState.supported
+              : _SupportState.unsupported),
+        );
     foodStallWithDetailsMap = CartScreenViewModel().getValuesForScreen();
     foodStallIdList = CartScreenViewModel().getIdList(foodStallWithDetailsMap);
     total = CartScreenViewModel().getTotalValue(foodStallWithDetailsMap);
@@ -104,7 +159,7 @@ class CartScreenState extends State<CartScreen> {
                         style: GoogleFonts.roboto(
                             textStyle: TextStyle(
                                 fontSize:
-                                    UIUtills().getProportionalWidth(width: 28),
+                                UIUtills().getProportionalWidth(width: 28),
                                 fontWeight: FontWeight.bold,
                                 color: const Color(0xFFB9B8B8))),
                       ),
@@ -124,17 +179,17 @@ class CartScreenState extends State<CartScreen> {
                           padding: const EdgeInsets.all(20.0),
                           sliver: SliverList(
                             delegate: SliverChildBuilderDelegate(
-                                (BuildContext context, int index) {
-                              return cartWidget(
-                                foodStallId: foodStallIdList[index],
-                                menuList: foodStallWithDetailsMap[
-                                        foodStallIdList[index]]!
-                                    .menuList,
-                                foodStallName: foodStallWithDetailsMap[
-                                        foodStallIdList[index]]!
-                                    .foodStall,
-                              );
-                            }, childCount: foodStallWithDetailsMap.length),
+                                    (BuildContext context, int index) {
+                                  return cartWidget(
+                                    foodStallId: foodStallIdList[index],
+                                    menuList: foodStallWithDetailsMap[
+                                    foodStallIdList[index]]!
+                                        .menuList,
+                                    foodStallName: foodStallWithDetailsMap[
+                                    foodStallIdList[index]]!
+                                        .foodStall,
+                                  );
+                                }, childCount: foodStallWithDetailsMap.length),
                           ),
                         ),
                       ],
@@ -145,62 +200,85 @@ class CartScreenState extends State<CartScreen> {
                       right: 0,
                       child: isPostingOrder
                           ? const Center(
-                              child: LinearProgressIndicator(
-                                color: Colors.yellow,
-                                backgroundColor: Colors.transparent,
-                              ),
-                            )
+                        child: LinearProgressIndicator(
+                          color: Colors.yellow,
+                          backgroundColor: Colors.transparent,
+                        ),
+                      )
                           : InkWell(
-                              onTap: () async {
-                                if (!isPostingOrder) {
-                                  setState(() {
-                                    isPostingOrder = true;
-                                  });
-                                  if (box.isNotEmpty) {
-                                    var orderdict = CartScreenViewModel()
-                                        .getPostRequestBody();
-                                    try {
-                                      await WalletViewModel().getBalance();
-                                      if (WalletViewModel.error != null) {
-                                        showDialog(
-                                            barrierDismissible: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return Align(
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                                child: ErrorDialog(
-                                                    errorMessage:
-                                                        WalletViewModel.error!),
-                                              );
-                                            });
-                                      } else {
-                                        if (WalletViewModel.balance >= total) {
-                                          OrderResult orderResult =
-                                              await CartScreenViewModel()
-                                                  .postOrder(orderdict);
-                                          if (CartScreenViewModel.error ==
-                                              null) {
-                                            if (orderResult.id != null) {
-                                              CartAndOrderController
-                                                  .newOrder.value = false;
-                                              CartAndOrderController.newOrder
-                                                  .notifyListeners();
-                                              var snackBar = CustomSnackBar()
-                                                  .oasisSnackBar(
-                                                      'Order placed successfully');
-                                              if (!mounted) {}
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(snackBar);
-                                              PersistentNavBarNavigator
-                                                  .pushNewScreenWithRouteSettings(
-                                                context,
-                                                settings: const RouteSettings(
-                                                    name: 'order'),
-                                                screen: const FoodStallScreen(),
-                                                withNavBar: true,
-                                              );
-                                              box.clear();
+                        onTap: () async {
+                                if (await auth.isDeviceSupported()) {
+                                  await _authenticate();
+                                }
+                                if (authenticated) {
+                                  if (!isPostingOrder) {
+                                    setState(() {
+                                      isPostingOrder = true;
+                                    });
+                                    if (box.isNotEmpty) {
+                                      var orderdict = CartScreenViewModel()
+                                          .getPostRequestBody();
+                                      try {
+                                        await WalletViewModel().getBalance();
+                                        if (WalletViewModel.error != null) {
+                                          showDialog(
+                                              barrierDismissible: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return Align(
+                                                  alignment:
+                                                      Alignment.bottomCenter,
+                                                  child: ErrorDialog(
+                                                      errorMessage:
+                                                          WalletViewModel
+                                                              .error!),
+                                                );
+                                              });
+                                        } else {
+                                          if (WalletViewModel.balance >=
+                                              total) {
+                                            OrderResult orderResult =
+                                                await CartScreenViewModel()
+                                                    .postOrder(orderdict);
+                                            if (CartScreenViewModel.error ==
+                                                null) {
+                                              if (orderResult.id != null) {
+                                                CartAndOrderController
+                                                    .newOrder.value = false;
+                                                CartAndOrderController.newOrder
+                                                    .notifyListeners();
+                                                var snackBar = CustomSnackBar()
+                                                    .oasisSnackBar(
+                                                        'Order placed successfully');
+                                                if (!mounted) {}
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(snackBar);
+                                                PersistentNavBarNavigator
+                                                    .pushNewScreenWithRouteSettings(
+                                                  context,
+                                                  settings: const RouteSettings(
+                                                      name: 'order'),
+                                                  screen:
+                                                      const FoodStallScreen(),
+                                                  withNavBar: true,
+                                                );
+                                                box.clear();
+                                              } else {
+                                                isPostingOrder = false;
+                                                setState(() {});
+                                                showDialog(
+                                                    barrierDismissible: false,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Align(
+                                                        alignment: Alignment
+                                                            .bottomCenter,
+                                                        child: ErrorDialog(
+                                                            errorMessage:
+                                                                'Order Invalid'),
+                                                      );
+                                                    });
+                                              }
                                             } else {
                                               isPostingOrder = false;
                                               setState(() {});
@@ -213,7 +291,8 @@ class CartScreenState extends State<CartScreen> {
                                                           .bottomCenter,
                                                       child: ErrorDialog(
                                                           errorMessage:
-                                                              'Order Invalid'),
+                                                              CartScreenViewModel
+                                                                  .error!),
                                                     );
                                                   });
                                             }
@@ -228,71 +307,51 @@ class CartScreenState extends State<CartScreen> {
                                                     alignment:
                                                         Alignment.bottomCenter,
                                                     child: ErrorDialog(
-                                                        errorMessage:
-                                                            CartScreenViewModel
-                                                                .error!),
+                                                        errorMessage: ErrorMessages
+                                                            .insufficientFunds),
                                                   );
                                                 });
                                           }
-                                        } else {
-                                          isPostingOrder = false;
-                                          setState(() {});
-                                          showDialog(
-                                              barrierDismissible: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return Align(
-                                                  alignment:
-                                                      Alignment.bottomCenter,
-                                                  child: ErrorDialog(
-                                                      errorMessage: ErrorMessages
-                                                          .insufficientFunds),
-                                                );
-                                              });
                                         }
+                                      } catch (e) {
+                                        print('goes into this');
+                                        isPostingOrder = false;
+                                        setState(() {});
+                                        showDialog(
+                                            barrierDismissible: false,
+                                            context: context,
+                                            builder: (context) {
+                                              return Align(
+                                                alignment:
+                                                    Alignment.bottomCenter,
+                                                child: ErrorDialog(
+                                                    errorMessage:
+                                                        WalletViewModel.error ??
+                                                            ErrorMessages
+                                                                .unknownError),
+                                              );
+                                            });
                                       }
-                                    } catch (e) {
-                                      print('goes into this');
+                                    } else {
                                       isPostingOrder = false;
                                       setState(() {});
-                                      showDialog(
+                                      return showDialog(
                                           barrierDismissible: false,
                                           context: context,
                                           builder: (context) {
                                             return Align(
                                               alignment: Alignment.bottomCenter,
                                               child: ErrorDialog(
-                                                  errorMessage:
-                                                      WalletViewModel.error ??
-                                                          ErrorMessages
-                                                              .unknownError),
+                                                  errorMessage: 'Cart empty'),
                                             );
                                           });
                                     }
-                                  } else {
-                                    isPostingOrder = false;
-                                    setState(() {});
-                                    return showDialog(
-                                        barrierDismissible: false,
-                                        context: context,
-                                        builder: (context) {
-                                          return Align(
-                                            alignment: Alignment.bottomCenter,
-                                            child: ErrorDialog(
-                                                errorMessage: 'Cart empty'),
-                                          );
-                                        });
                                   }
                                 }
                               },
-                              child: Container(
-                                width:
-                                    UIUtills().getProportionalWidth(width: 428),
-                                height: UIUtills()
-                                    .getProportionalHeight(height: 72.00),
-                                // margin: EdgeInsets.symmetric(
-                                //     horizontal: UIUtills()
-                                //         .getProportionalWidth(width: 20.00)),
+                        child: Container(
+                                width: 428.w,
+                                height: 72.h,
                                 decoration: BoxDecoration(
                                   gradient: const LinearGradient(colors: [
                                     Color.fromRGBO(209, 154, 8, 1),
@@ -304,43 +363,43 @@ class CartScreenState extends State<CartScreen> {
                                   borderRadius: BorderRadius.circular(
                                     15.r,
                                   ),
-                                ),
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 40.w),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'Pay Now',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w800,
-                                              color: Colors.black,
-                                              fontSize: 20.sp,
-                                            ),
-                                          ),
-                                        ],
+                          ),
+                          child: Padding(
+                            padding:
+                            EdgeInsets.symmetric(horizontal: 40.w),
+                            child: Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Pay Now',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w800,
+                                        color: Colors.black,
+                                        fontSize: 20.sp,
                                       ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            '₹ $total',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.black,
-                                              fontSize: 19.sp,
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '₹ $total',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.black,
+                                        fontSize: 19.sp,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
+                          ),
+                        ),
+                      ),
                     )
                   ],
                 ),

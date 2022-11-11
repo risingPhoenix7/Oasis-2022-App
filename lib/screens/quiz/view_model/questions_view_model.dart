@@ -1,11 +1,11 @@
+import 'package:dio/dio.dart';
+
 import '/screens/quiz/repo/model/get_questions_model.dart';
 import '/screens/quiz/repo/model/get_rules_model.dart';
 import '/screens/quiz/repo/model/post_answer_model.dart';
 import '/screens/quiz/repo/retrofit/get_leaderboard_retrofit.dart';
 import '/screens/quiz/repo/retrofit/get_progress_retrofit.dart';
 import '/screens/quiz/repo/retrofit/get_rules_retrofit.dart';
-import 'package:dio/dio.dart';
-
 import '../../../provider/user_details_viewmodel.dart';
 import '../repo/model/get_leaderboard_model.dart';
 import '../repo/model/get_progress_model.dart';
@@ -34,7 +34,7 @@ class QuizScreenViewModel {
 
   Future<void> postAnswers(int? question_id, List<int?> answer_ids) async {
     PostAnswers postAnswers =
-        PostAnswers(question_id: question_id, answer_ids: answer_ids);
+    PostAnswers(question_id: question_id, answer_ids: answer_ids);
     final dio = Dio();
     final client = PostAnswersRestClient(dio);
     String jwt = "JWT ${UserDetailsViewModel.userDetails.JWT}";
@@ -114,25 +114,25 @@ class QuizScreenViewModel {
     return optionMap;
   }
 
-  int? getQuestionTime(int questionNumber, Questions questions) {
-    int? time;
-    for (Question i in questions.active_questions!) {
-      if (i.question_no == questionNumber) {
-        time = i.time_given;
-      }
-    }
-    return time;
-  }
-
-  String? getQuestionImage(int questionNumber, Questions questions) {
-    String? link;
-    for (Question i in questions.active_questions!) {
-      if (i.question_no == questionNumber) {
-        link = i.image_link;
-      }
-    }
-    return link;
-  }
+  // int? getQuestionTime(int questionNumber, Questions questions) {
+  //   int? time;
+  //   for (Question i in questions.active_questions!) {
+  //     if (i.question_no == questionNumber) {
+  //       time = i.time_given;
+  //     }
+  //   }
+  //   return time;
+  // }
+  //
+  // String? getQuestionImage(int questionNumber, Questions questions) {
+  //   String? link;
+  //   for (Question i in questions.active_questions!) {
+  //     if (i.question_no == questionNumber) {
+  //       link = i.image_link;
+  //     }
+  //   }
+  //   return link;
+  // }
 
   Future<Questions> getQuestionslist() async {
     final dio = Dio();

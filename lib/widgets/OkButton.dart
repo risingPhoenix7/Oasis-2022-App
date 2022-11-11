@@ -1,6 +1,7 @@
-import '../utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../utils/ui_utils.dart';
 
 class OkButton extends StatelessWidget {
   const OkButton({Key? key}) : super(key: key);
@@ -21,15 +22,19 @@ class OkButton extends StatelessWidget {
           )
         ],
         borderRadius: BorderRadius.circular(15),
-        gradient: const LinearGradient(
-          colors: [Color.fromRGBO(0, 0, 0, 1), Color.fromRGBO(45, 45, 45, 1)],
-        ),
+        gradient: const LinearGradient(colors: [
+          Color.fromRGBO(209, 154, 8, 1),
+          Color.fromRGBO(254, 212, 102, 1),
+          Color.fromRGBO(227, 186, 79, 1),
+          Color.fromRGBO(209, 154, 8, 1),
+          Color.fromRGBO(209, 154, 8, 1),
+        ]),
       ),
       child: Center(
         child: Text(
           'Ok',
-          style: GoogleFonts.roboto(
-              color: Colors.white,
+          style: GoogleFonts.openSans(
+              color: Colors.black,
               fontSize: UIUtills().getProportionalWidth(width: 24.00),
               fontWeight: FontWeight.w800),
         ),

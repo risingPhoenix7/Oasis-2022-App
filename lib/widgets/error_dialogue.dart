@@ -23,19 +23,13 @@ class _ErrorDialogState extends State<ErrorDialog> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      clipBehavior: Clip.antiAlias,
+      color: Colors.black,
+      clipBehavior: Clip.hardEdge,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.black,
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.2),
-              offset: Offset(0, 2),
-              blurRadius: 3,
-            )
-          ],
         ),
         width: UIUtills().getProportionalWidth(width: 408),
         height: UIUtills().getProportionalHeight(
@@ -81,7 +75,7 @@ class _ErrorDialogState extends State<ErrorDialog> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: OkButton())
+                    child: const OkButton())
                 : Container()
           ],
         ),

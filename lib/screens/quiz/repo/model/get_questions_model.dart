@@ -16,22 +16,22 @@ class Questions {
 
 @JsonSerializable()
 class Question {
-  int? question_no, question_id, total_options, time_given;
+  int? question_no, question_id, total_options;
   List<int?> option_ids;
   List<String?> option_texts;
 
-  bool? quiz_closed;
+  // bool? quiz_closed;
 
-  String? category = '', question_text = '', image_link = '';
+  String? question_text = '';
 
   Question(
-      {required this.category,
+      { //required this.category,
       required this.question_id,
       required this.total_options,
-      required this.image_link,
-      required this.time_given,
+      // required this.image_link,
+      //required this.time_given,
       required this.question_no,
-      required this.quiz_closed,
+      //required this.quiz_closed,
       required this.question_text,
       required this.option_ids,
       required this.option_texts});

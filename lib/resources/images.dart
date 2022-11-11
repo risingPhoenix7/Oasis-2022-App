@@ -8,14 +8,15 @@ class ImageAssets {
   static const String bookMarkIcon = 'assets/icons/bookmark_icon.svg';
   static const String eventCardBg = 'assets/images/event_card_bg.png';
   static const String backgroundOrd = 'assets/images/backgroundOrd.png';
-  static const String eventBg = 'assets/images/events_bg.png';
+  static const String eventBg = 'assets/images/events_bg.svg';
 
   //TODO:remove old ones
   static const String pizza = "assets/images/pizza.png";
   static const String background_stalls_ellipse =
       "assets/images/background_stalls_ellipse.svg";
   static const String hamburgerIcon = 'assets/icons/menu.svg';
-  static const String add_money_background = 'assets/images/add_money_background.png';
+  static const String add_money_background =
+      'assets/images/add_money_background.png';
   static const String bookmarkIcon = 'assets/icons/bookmark_icon.svg';
   static const String versusIcon = 'assets/icons/versus_icon.png';
   static const String filtersIcon = 'assets/icons/filters.png';

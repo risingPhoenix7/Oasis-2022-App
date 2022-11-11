@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../../quiz/view/Quiz_ui.dart';
 import 'redirect_pages/contact_us_screen.dart';
 import 'redirect_pages/developer_screen.dart';
 import 'redirect_pages/epc_blog.dart';
@@ -44,7 +44,14 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
               SingleBlock(
                 assetName: 'assets/images/more_screen_icons/standup.svg',
                 name: 'Standup Soap Box',
-                action: () {},
+                action: () {
+                  {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => quizUIScreen()));
+                  }
+                },
               ),
               SingleBlock(
                   assetName: 'assets/images/more_screen_icons/blog.svg',

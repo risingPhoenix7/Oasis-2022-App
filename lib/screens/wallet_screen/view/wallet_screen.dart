@@ -518,13 +518,34 @@ class _WalletScreenState extends State<WalletScreen> {
                                                           height: 16),
                                                   fontWeight: FontWeight.w600),
                                             ),
-                                            Text(
-                                              '${WalletViewModel.kindpoints}',
-                                              style: GoogleFonts.openSans(
-                                                  color: Colors.white,
-                                                  fontSize: 20.sp,
-                                                  fontWeight: FontWeight.w700),
-                                            ),
+                                            ValueListenableBuilder(
+                                                valueListenable: isLoading,
+                                                builder: (context, bool value,
+                                                    child) {
+                                                  if (isLoading.value) {
+                                                    return SizedBox(
+                                                        width: 20,
+                                                        height: 20,
+                                                        child: Center(
+                                                            child: SpinKitWave(
+                                                          color: Colors.white
+                                                              .withOpacity(0.5),
+                                                          size: 15.r,
+                                                        )));
+                                                  } else {
+                                                    return Text(
+                                                      '${WalletViewModel.kindpoints}',
+                                                      style:
+                                                          GoogleFonts.openSans(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 20.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700),
+                                                    );
+                                                  }
+                                                }),
                                           ],
                                         ),
                                         Padding(

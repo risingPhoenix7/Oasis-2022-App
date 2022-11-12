@@ -18,13 +18,15 @@ class _UpdatedSendMoneyDialogBoxState extends State<UpdatedSendMoneyDialogBox> {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(
-          top: 37.h,
+          top: 32.h,
+          left: 30.w,
           right: 30.w,
           bottom: 235.h,
         ),
         child: Column(
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
@@ -45,16 +47,18 @@ class _UpdatedSendMoneyDialogBoxState extends State<UpdatedSendMoneyDialogBox> {
               ],
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(height: 248.h),
                 widget.isSuccessful
-                    ? Image.asset(
-                        'assets/images/MoneyAddedSuccess.png',
+                    ? SvgPicture.asset(
+                        'assets/images/moneyaddedsuccess.svg',
                         height: 177.h,
                         width: 222.w,
                       )
-                    : Image.asset(
-                        'assets/images/MoneyAddedFailure.png',
+                    : SvgPicture.asset(
+                        'assets/images/moneyaddedfailure.svg',
                         height: 177.h,
                         width: 222.w,
                       ),

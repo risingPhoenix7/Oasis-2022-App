@@ -109,7 +109,7 @@ class _ScanningViewState extends State<ScanningView> {
                               keyboardType: TextInputType.number,
                               style: GoogleFonts.poppins(
                                   textStyle: TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       fontSize: UIUtills()
                                           .getProportionalWidth(width: 20),
                                       fontWeight: FontWeight.w500)),

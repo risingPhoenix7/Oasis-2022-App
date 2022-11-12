@@ -9,8 +9,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:oasis_2022/screens/login/repository/model/gloginData.dart';
 import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 
-import '../../../main.dart';
 import '/widgets/error_dialogue.dart';
+import '../../../main.dart';
 import '../../../utils/error_messages.dart';
 import '../../../widgets/loader.dart';
 import '../repository/model/data.dart';
@@ -376,7 +376,7 @@ class _LoginScreenState extends State<LoginScreen>
                                           loginViewModel.authenticate(
                                               usernameController.text.trim(),
                                               passwordController.text.trim(),
-                                              true);
+                                              false);
                                       usernameController.clear();
                                       passwordController.clear();
                                     } else {

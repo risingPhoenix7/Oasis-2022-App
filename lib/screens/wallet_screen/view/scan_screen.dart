@@ -1,15 +1,15 @@
 import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:oasis_2022/screens/wallet_screen/view/send_money_screens/send_money.dart';
-
-import '/screens/wallet_screen/view/send_money_screens/send_money_screen.dart';
-import '/screens/wallet_screen/view_model/wallet_viewmodel.dart';
-import '/utils/ui_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oasis_2022/screens/wallet_screen/view/send_money_screens/send_money.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+
+import '/screens/wallet_screen/view_model/wallet_viewmodel.dart';
+import '/utils/ui_utils.dart';
 
 class ScanningView extends StatefulWidget {
   const ScanningView({Key? key}) : super(key: key);
@@ -272,7 +272,7 @@ class _ScanningViewState extends State<ScanningView> {
       if (!mounted) {}
       Navigator.pop(context);
       PersistentNavBarNavigator.pushNewScreen(context,
-          screen: SendMoneyScreen(userId: userId));
+          screen: SendMoneyScreen1(userId: userId));
     });
   }
 

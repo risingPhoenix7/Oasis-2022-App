@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '/utils/oasis_text_styles.dart';
 import '/utils/colors.dart';
+import '/utils/oasis_text_styles.dart';
 import 'misc_screen_controller.dart';
 
 class DayTab extends StatefulWidget {
@@ -37,16 +37,15 @@ class _DayTabState extends State<DayTab> {
         height: 96.h,
         decoration: isSelected
             ? BoxDecoration(
-                boxShadow: [
+          boxShadow: [
                   BoxShadow(
                       color: Color.fromRGBO(213, 192, 0, 0.15000000596046448),
                       offset: Offset(0, 4),
                       blurRadius: 8)
                 ],
-                gradient: OasisColors.goldenGradient,
+                gradient: OasisColors.oasisWebsiteGoldGradient,
                 borderRadius: BorderRadius.circular(20.r),
-
-        )
+              )
             : BoxDecoration(
                 color: Color.fromRGBO(0, 0, 0, 0.8),
             border: Border.all(color: Colors.white),

@@ -1,8 +1,8 @@
-import '/provider/user_details_viewmodel.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logger/logger.dart';
 
+import '/provider/user_details_viewmodel.dart';
 import '../repository/model/paytmAmountData.dart';
 import '../repository/model/paytmResult.dart';
 import '../repository/retrofit/getPaytm.dart';
@@ -21,7 +21,8 @@ class PaytmViewModel {
     PaytmAmountData paytmAmountData = PaytmAmountData(TXN_AMOUNT: amount);
     PaytmResult response =
         await client.getPaytm("JWT ${jwt}", paytmAmountData).then((it) {
-      logger.i(it.order_id);
+          logger.i(it.order_id);
+      print('jkbawdfkjabfkjfnf');
       return it;
     }).catchError((Object obj) {
       // non-200 error goes here.
@@ -30,6 +31,7 @@ class PaytmViewModel {
           // Here's the sample to get the failed response error code and message
           final res = (obj as DioError).response;
           logger.e("Got error : ${res?.statusCode} -> ${res?.statusMessage}");
+          print(res?.statusCode);
           if (res?.statusCode == 403) {
             throw Exception(res?.data["display_message"]);
           } else if (res?.statusCode == 500) {

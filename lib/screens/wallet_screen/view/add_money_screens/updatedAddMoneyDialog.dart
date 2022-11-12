@@ -54,14 +54,14 @@ class _UpdatedAddMoneyDialogBoxState extends State<UpdatedAddMoneyDialogBox> {
               children: [
                 SizedBox(height: 248.h),
                 widget.isSuccessful
-                    ? Image.asset(
-                        'assets/images/MoneyAddedSuccess.png',
+                    ? SvgPicture.asset(
+                        'assets/images/moneyaddedsuccess.svg',
                         height: 177.h,
                         width: 222.w,
                         alignment: Alignment.center,
                       )
-                    : Image.asset(
-                        'assets/images/MoneyAddedFailure.png',
+                    : SvgPicture.asset(
+                        'assets/images/MoneyAddedfailure.svg',
                         height: 177.h,
                         width: 222.w,
                         alignment: Alignment.center,

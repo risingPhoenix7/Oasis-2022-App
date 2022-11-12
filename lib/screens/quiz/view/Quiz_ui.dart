@@ -49,11 +49,28 @@ class _quizUIScreenState extends State<quizUIScreen> {
           } else {
             return questionList.active_questions!.isEmpty
                 ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(bottom: 30.h),
+                        padding: EdgeInsets.only(left: 300.w, top: 100.h),
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(5)),
+                            height: 36.h,
+                            width: 36.w,
+                            child: const Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 30.h, top: 150.h),
                         child: SvgPicture.asset(
                           "assets/images/no_poll.svg",
                           width: 388,

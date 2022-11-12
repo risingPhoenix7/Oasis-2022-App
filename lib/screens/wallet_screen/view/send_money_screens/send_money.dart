@@ -2,6 +2,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oasis_2022/screens/wallet_screen/view/send_money_screens/updatedSendMoneyDialog.dart';
 import 'package:oasis_2022/utils/colors.dart';
+import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 import 'dart:ui';
 import '../../../../resources/resources.dart';
 import '../../view_model/wallet_viewmodel.dart';
@@ -14,8 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 
 import '/../../../utils/ui_utils.dart';
-import '/../../../widgets/app_bar.dart';
-import 'send_money_dialog_widget.dart';
+
 
 class SendMoneyScreen1 extends StatefulWidget {
   SendMoneyScreen1({super.key, required this.userId});
@@ -31,8 +31,6 @@ class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
   bool isLoading = false;
   late int balance = 0;
   final LocalAuthentication auth = LocalAuthentication();
-  bool? _canCheckBiometrics;
-  List<BiometricType>? _availableBiometrics;
   String _authorized = 'Not Authorized';
   bool _isAuthenticating = false;
   bool authenticated = true;
@@ -92,8 +90,8 @@ class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        width: 1.sw,
+        height: 1.sh,
         child: Stack(children: [
           Positioned(
             bottom: 20,
@@ -111,25 +109,15 @@ class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
                 : InkWell(
                     onTap: () async {
                       if (textEditingController.text == "") {
-                        var snackBar = const SnackBar(
-                          duration: Duration(seconds: 2),
-                          content: SizedBox(
-                              height: 25,
-                              child: Center(child: Text("Enter a Value"))),
-                        );
+                        var snackBar =
+                            CustomSnackBar().oasisSnackBar("Enter A Value");
                         if (!mounted) {}
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
                       if (int.parse(textEditingController.text) == 0 ||
                           int.parse(textEditingController.text) < 0) {
-                        var snackBar = const SnackBar(
-                          duration: Duration(seconds: 2),
-                          content: SizedBox(
-                              height: 25,
-                              child: Center(
-                                  child:
-                                      Text("Enter a non zero postive value"))),
-                        );
+                        var snackBar = CustomSnackBar()
+                            .oasisSnackBar("Enter A Non Zero Positive Value");
                         if (!mounted) {}
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       } else {
@@ -200,7 +188,8 @@ class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
               top: UIUtills().getProportionalHeight(height: 72),
               child: Text(
                 'Send Money',
-                style: GoogleFonts.openSans(fontSize: 32.sp, color: Colors.white),
+                style:
+                    GoogleFonts.openSans(fontSize: 32.sp, color: Colors.white),
               )),
           Positioned(
               top: UIUtills().getProportionalHeight(height: 75),

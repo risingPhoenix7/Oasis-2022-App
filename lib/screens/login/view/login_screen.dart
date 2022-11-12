@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:oasis_2022/screens/login/repository/model/gloginData.dart';
 import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 
 import '/widgets/error_dialogue.dart';
@@ -384,6 +385,8 @@ class _LoginScreenState extends State<LoginScreen>
                                       });
                                     });
                                   } catch (error) {
+                                    print("***********");
+                                    print(error);
                                     Future.microtask(() => setState(() {
                                           isLoaderVisible = false;
                                         }));
@@ -434,7 +437,7 @@ class _LoginScreenState extends State<LoginScreen>
                     ),
                 ),
               )
-              : FutureBuilder<AuthResult>(
+              : FutureBuilder<GoogleAuthResult>(
                   future: authOrGoogleAuthResult,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {

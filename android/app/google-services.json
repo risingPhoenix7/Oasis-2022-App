@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "617111091762-ki07bhtdbhpju11u4ohoo5dkbtek0jpt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dvm.oasis2k22",
+            "certificate_hash": "ea4acb39be08b9f6d734b6fdcaf36a366638f42f"
+          }
+        },
+        {
           "client_id": "617111091762-qnobj1t50fob2e9lh8qn2kor7ip4p6mc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

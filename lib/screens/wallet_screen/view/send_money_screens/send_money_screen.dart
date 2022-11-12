@@ -12,7 +12,6 @@ import '/../../../utils/ui_utils.dart';
 import '/../../../widgets/app_bar.dart';
 import '../../view_model/wallet_viewmodel.dart';
 import '../wallet_screen_controller.dart';
-import 'send_money_dialog_widget.dart';
 
 class SendMoneyScreen extends StatefulWidget {
   SendMoneyScreen({super.key, required this.userId});

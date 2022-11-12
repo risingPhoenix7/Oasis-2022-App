@@ -61,7 +61,7 @@ class _UpdatedAddMoneyDialogBoxState extends State<UpdatedAddMoneyDialogBox> {
                         alignment: Alignment.center,
                       )
                     : SvgPicture.asset(
-                        'assets/images/MoneyAddedfailure.svg',
+                        'assets/images/moneyaddedfailure.svg',
                         height: 177.h,
                         width: 222.w,
                         alignment: Alignment.center,
@@ -74,7 +74,7 @@ class _UpdatedAddMoneyDialogBoxState extends State<UpdatedAddMoneyDialogBox> {
                         style: GoogleFonts.openSans(
                             fontWeight: FontWeight.w400,
                             fontSize: 18.sp,
-                            color: Color.fromRGBO(255, 255, 255, 0.8)),
+                            color: const Color.fromRGBO(255, 255, 255, 0.8)),
                       )
                     : Text(
                         'Something went wrong.',
@@ -82,7 +82,7 @@ class _UpdatedAddMoneyDialogBoxState extends State<UpdatedAddMoneyDialogBox> {
                         style: GoogleFonts.openSans(
                             fontWeight: FontWeight.w400,
                             fontSize: 18.sp,
-                            color: Color.fromRGBO(255, 255, 255, 0.8)),
+                            color: const Color.fromRGBO(255, 255, 255, 0.8)),
                       )
               ],
             )

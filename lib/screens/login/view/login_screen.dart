@@ -9,6 +9,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:oasis_2022/screens/login/repository/model/gloginData.dart';
 import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 
+import '../../../main.dart';
 import '/widgets/error_dialogue.dart';
 import '../../../utils/error_messages.dart';
 import '../../../widgets/loader.dart';
@@ -86,7 +87,8 @@ class _LoginScreenState extends State<LoginScreen>
         tween: Tween<Offset>(begin: const Offset(0.125, 0.0), end: Offset.zero),
         weight: 1),
     TweenSequenceItem(
-        tween: Tween<Offset>(begin: Offset.zero, end: const Offset(-0.0625, 0.0)),
+        tween:
+            Tween<Offset>(begin: Offset.zero, end: const Offset(-0.0625, 0.0)),
         weight: 1),
     TweenSequenceItem(
         tween:
@@ -132,13 +134,14 @@ class _LoginScreenState extends State<LoginScreen>
           backgroundColor: Colors.black,
           body: !isLoaderVisible
               ? SingleChildScrollView(
-                child: SizedBox(
-                  height: 1.sh,
-                  width: 1.sw,
-                  child: Stack(
+                  child: SizedBox(
+                    height: 1.sh,
+                    width: 1.sw,
+                    child: Stack(
                       children: [
                         ImageFiltered(
-                            imageFilter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+                            imageFilter:
+                                ImageFilter.blur(sigmaX: 30, sigmaY: 30),
                             child: RotationTransition(
                                 turns: _rotationAnimation,
                                 child: SvgPicture.asset(
@@ -201,9 +204,11 @@ class _LoginScreenState extends State<LoginScreen>
                                                         BorderRadius.circular(
                                                             10.7936.r),
                                                     borderSide: const BorderSide(
-                                                        color: Color(0xFFF8D848))),
+                                                        color:
+                                                            Color(0xFFF8D848))),
                                                 filled: true,
-                                                fillColor: const Color(0xFF1A1C1C),
+                                                fillColor:
+                                                    const Color(0xFF1A1C1C),
                                                 border: OutlineInputBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -233,50 +238,59 @@ class _LoginScreenState extends State<LoginScreen>
                                                   bottom: 19.h,
                                                   left: 24.w),
                                               suffixIcon: IconButton(
-                                                  focusColor: Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
                                                   highlightColor:
                                                       Colors.transparent,
-                                                  splashColor: Colors.transparent,
+                                                  splashColor:
+                                                      Colors.transparent,
                                                   onPressed: () {
                                                     bool blockTap = true;
-                                                    if (iconColorController.value !=
+                                                    if (iconColorController
+                                                                .value !=
                                                             1 ||
-                                                        iconColorController.value !=
+                                                        iconColorController
+                                                                .value !=
                                                             0) {
                                                       blockTap = true;
                                                     }
-                                                    if (iconColorController.value ==
+                                                    if (iconColorController
+                                                                .value ==
                                                             1 &&
                                                         blockTap) {
                                                       isHidden = !isHidden;
-                                                      iconColorController.reverse();
+                                                      iconColorController
+                                                          .reverse();
                                                     }
                                                     if (blockTap &&
-                                                        iconColorController.value ==
+                                                        iconColorController
+                                                                .value ==
                                                             0) {
                                                       isHidden = !isHidden;
-                                                      iconColorController.forward();
+                                                      iconColorController
+                                                          .forward();
                                                     }
                                                   },
-                                                  icon: Icon(Icons.visibility_outlined,
+                                                  icon: Icon(
+                                                      Icons.visibility_outlined,
                                                       color: animation?.value ??
                                                           const Color.fromRGBO(
                                                               255, 255, 255, 0.7))),
                                               focusedBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(
-                                                      10.7936),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.7936),
                                                   borderSide: const BorderSide(
-                                                      color: Color(0xFFF8D848))),
+                                                      color:
+                                                          Color(0xFFF8D848))),
                                               filled: true,
-                                              fillColor: const Color(0xFF1A1C1C),
+                                              fillColor:
+                                                  const Color(0xFF1A1C1C),
                                               border: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(
-                                                      10.7936)),
+                                                  borderRadius:
+                                                      BorderRadius.circular(10.7936)),
                                               hintText: "Enter your password",
-                                              hintStyle: GoogleFonts.openSans(
-                                                  fontSize: 16.sp,
-                                                  color: const Color.fromRGBO(
-                                                      255, 255, 255, 0.7))),
+                                              hintStyle: GoogleFonts.openSans(fontSize: 16.sp, color: const Color.fromRGBO(255, 255, 255, 0.7))),
                                         ),
                                       ),
                                     ],
@@ -284,49 +298,75 @@ class _LoginScreenState extends State<LoginScreen>
                                 ),
                               )),
                               Padding(
-                                padding: EdgeInsets.only(top: 51.h, bottom: 22.h),
+                                padding:
+                                    EdgeInsets.only(top: 51.h, bottom: 22.h),
                                 child: GestureDetector(
                                   onTap: () {
                                     bool tempBlock = true;
-                                    if ((passwordController.text.trim().isEmpty ||
-                                            passwordController.text.trim() == "") &&
-                                        (usernameController.text.trim().isEmpty ||
-                                            usernameController.text.trim() == "")) {
+                                    if ((passwordController.text
+                                                .trim()
+                                                .isEmpty ||
+                                            passwordController.text.trim() ==
+                                                "") &&
+                                        (usernameController.text
+                                                .trim()
+                                                .isEmpty ||
+                                            usernameController.text.trim() ==
+                                                "")) {
                                       passwordTextFieldShakeController.reset();
                                       usernameTextFieldShakeController.reset();
-                                      passwordTextFieldShakeController.forward();
-                                      usernameTextFieldShakeController.forward();
+                                      passwordTextFieldShakeController
+                                          .forward();
+                                      usernameTextFieldShakeController
+                                          .forward();
                                       tempBlock = false;
                                       ScaffoldMessenger.of(context).showSnackBar(
                                           CustomSnackBar().oasisSnackBar(
                                               'Enter the password and username'));
                                     } else if (tempBlock &&
-                                        (passwordController.text.trim().isEmpty ||
-                                            passwordController.text.trim() == "")) {
-                                      if (passwordTextFieldShakeController.value ==
+                                        (passwordController.text
+                                                .trim()
+                                                .isEmpty ||
+                                            passwordController.text.trim() ==
+                                                "")) {
+                                      if (passwordTextFieldShakeController
+                                              .value ==
                                           1) {
-                                        passwordTextFieldShakeController.reset();
+                                        passwordTextFieldShakeController
+                                            .reset();
                                       }
-                                      passwordTextFieldShakeController.forward();
+                                      passwordTextFieldShakeController
+                                          .forward();
                                       ScaffoldMessenger.of(context)
-                                          .showSnackBar(CustomSnackBar().oasisSnackBar('Enter the password'));
+                                          .showSnackBar(CustomSnackBar()
+                                              .oasisSnackBar(
+                                                  'Enter the password'));
                                     } else if (tempBlock &&
-                                        (usernameController.text.trim().isEmpty ||
-                                            usernameController.text.trim() == "")) {
-                                      if (usernameTextFieldShakeController.value ==
+                                        (usernameController.text
+                                                .trim()
+                                                .isEmpty ||
+                                            usernameController.text.trim() ==
+                                                "")) {
+                                      if (usernameTextFieldShakeController
+                                              .value ==
                                           1) {
-                                        usernameTextFieldShakeController.reset();
+                                        usernameTextFieldShakeController
+                                            .reset();
                                       }
-                                      usernameTextFieldShakeController.forward();
+                                      usernameTextFieldShakeController
+                                          .forward();
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(SnackBar(
-                                        duration: const Duration(milliseconds: 500),
+                                        duration:
+                                            const Duration(milliseconds: 500),
                                         content: SizedBox(
                                             height: 25.h,
                                             child: const Center(
-                                                child: Text("Enter the username"))),
+                                                child: Text(
+                                                    "Enter the username"))),
                                       ));
-                                    } else if (usernameController.text.isNotEmpty &&
+                                    } else if (usernameController
+                                            .text.isNotEmpty &&
                                         passwordController.text.isNotEmpty) {
                                       setState(() {
                                         isLoaderVisible = true;
@@ -359,7 +399,8 @@ class _LoginScreenState extends State<LoginScreen>
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
                                         color: const Color(0xFFF8D848),
-                                        borderRadius: BorderRadius.circular(16)),
+                                        borderRadius:
+                                            BorderRadius.circular(16)),
                                     child: Text(
                                       "Login",
                                       style: GoogleFonts.openSans(
@@ -412,8 +453,10 @@ class _LoginScreenState extends State<LoginScreen>
                                       border: const Border(
                                           top: BorderSide(color: Colors.white),
                                           left: BorderSide(color: Colors.white),
-                                          right: BorderSide(color: Colors.white),
-                                          bottom: BorderSide(color: Colors.white))),
+                                          right:
+                                              BorderSide(color: Colors.white),
+                                          bottom:
+                                              BorderSide(color: Colors.white))),
                                   child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
@@ -425,7 +468,8 @@ class _LoginScreenState extends State<LoginScreen>
                                         Text(
                                           "Login with BITS Mail",
                                           style: GoogleFonts.openSans(
-                                              fontSize: 16.sp, color: Colors.white),
+                                              fontSize: 16.sp,
+                                              color: Colors.white),
                                         )
                                       ]),
                                 ),
@@ -435,37 +479,74 @@ class _LoginScreenState extends State<LoginScreen>
                         )
                       ],
                     ),
-                ),
-              )
-              : FutureBuilder<GoogleAuthResult>(
-                  future: authOrGoogleAuthResult,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      if (snapshot.data?.error == null) {
-                        Future.microtask(() => Navigator.of(context,
-                                rootNavigator: true)
-                            .pushNamedAndRemoveUntil('home', (route) => true));
-                      } else {
-                        Future.microtask(() => setState(() {
-                              isLoaderVisible = false;
-                            }));
-                        Future.microtask(() => showDialog(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (context) {
-                              return Align(
-                                alignment: Alignment.bottomCenter,
-                                child: ErrorDialog(
-                                    errorMessage: ErrorMessages.invalidLogin),
-                              );
-                            }));
-                      }
-                    } else {
-                      return const Loader();
-                    }
-                    return Container();
-                  },
-                )),
+                  ),
+                )
+              : statusTypeGoogle
+                  ? FutureBuilder<GoogleAuthResult>(
+                      future: authOrGoogleAuthResult,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          if (snapshot.data?.error == null) {
+                            Future.microtask(() {
+                              RestartWidget.restartApp(context);
+                              Navigator.of(context, rootNavigator: true)
+                                  .pushNamedAndRemoveUntil(
+                                      'home', (route) => true);
+                            });
+                          } else {
+                            Future.microtask(() => setState(() {
+                                  isLoaderVisible = false;
+                                }));
+                            Future.microtask(() => showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (context) {
+                                  return Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: ErrorDialog(
+                                        errorMessage:
+                                            ErrorMessages.invalidLogin),
+                                  );
+                                }));
+                          }
+                        } else {
+                          return const Loader();
+                        }
+                        return Container();
+                      },
+                    )
+                  : FutureBuilder<AuthResult>(
+                      future: authOrGoogleAuthResult,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          if (snapshot.data?.error == null) {
+                            RestartWidget.restartApp(context);
+                            Future.microtask(() =>
+                                Navigator.of(context, rootNavigator: true)
+                                    .pushNamedAndRemoveUntil(
+                                        'home', (route) => true));
+                          } else {
+                            Future.microtask(() => setState(() {
+                                  isLoaderVisible = false;
+                                }));
+                            Future.microtask(() => showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (context) {
+                                  return Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: ErrorDialog(
+                                        errorMessage:
+                                            ErrorMessages.invalidLogin),
+                                  );
+                                }));
+                          }
+                        } else {
+                          return const Loader();
+                        }
+                        return Container();
+                      },
+                    )),
     );
   }
 }

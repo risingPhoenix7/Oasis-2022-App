@@ -100,6 +100,16 @@ class _LoginScreenState extends State<LoginScreen>
   ));
 
   @override
+  void dispose(){
+    passwordController.dispose();
+    usernameController.dispose();
+    iconColorController.dispose();
+    usernameTextFieldShakeController.dispose();
+    passwordTextFieldShakeController.dispose();
+    backgroundRotationController.dispose();
+    super.dispose();
+  }
+  @override
   void initState() {
     iconColorController = AnimationController(
       duration: const Duration(milliseconds: 200),
@@ -120,11 +130,6 @@ class _LoginScreenState extends State<LoginScreen>
   bool isLoaderVisible = false, statusTypeGoogle = false;
   ValueNotifier<bool> isPwdHidden = ValueNotifier(true);
 
-  @override
-  void dispose() {
-    passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -33,7 +33,7 @@ class PaytmViewModel {
           if (res?.statusCode == 403) {
             throw Exception(res?.data["display_message"]);
           } else if (res?.statusCode == 500) {
-            throw Exception(res?.data["error"]);
+            throw Exception(res?.data["error"].toString());
           }
           break;
         default:

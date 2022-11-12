@@ -32,7 +32,7 @@ class _CartAddButtonState extends State<CartAddButton> {
   Widget build(BuildContext context) {
     return Container(
       height: 34.h,
-      width: 90.w,
+      width: 100.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         gradient: const LinearGradient(colors: [
@@ -48,10 +48,15 @@ class _CartAddButtonState extends State<CartAddButton> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           InkWell(
-            child: const Icon(
-              Icons.remove,
-              color: Colors.black,
-              size: 18,
+            child: Container(
+              width: 25.w,
+              height: 30.h,
+              color: Colors.transparent,
+              child: const Icon(
+                Icons.remove,
+                color: Colors.black,
+                size: 18,
+              ),
             ),
             onTap: () {
               setState(() {
@@ -97,10 +102,15 @@ class _CartAddButtonState extends State<CartAddButton> {
             ),
           ),
           InkWell(
-            child: const Icon(
-              Icons.add,
-              size: 16,
-              color: Colors.black,
+            child: Container(
+              width: 25.w,
+              height: 30.h,
+              color: Colors.transparent,
+              child: const Icon(
+                Icons.add,
+                size: 16,
+                color: Colors.black,
+              ),
             ),
             onTap: () {
               setState(() {

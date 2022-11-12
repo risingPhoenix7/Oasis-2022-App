@@ -189,9 +189,9 @@ class _EventsScreenState extends State<EventsScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(
-                                    color: Color.fromRGBO(248, 216, 72, 0.45),
+                                    color: const Color.fromRGBO(248, 216, 72, 0.45),
                                     width: 0.5),
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                     begin: Alignment.centerLeft,
                                     end: Alignment.centerRight,
                                     colors: [
@@ -257,65 +257,67 @@ class _EventsScreenState extends State<EventsScreen> {
                             ),
                           ),
                         ),
-                        Container(
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(36.w, 27.h, 36.w, 0.h),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: List.generate(
-                                    5,
-                                    (index) => DayTab(
-                                          dayNumber: index + 19,
-                                        ))),
-                          ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(36.w, 27.h, 36.w, 0.h),
+                          child: Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                              children: List.generate(
+                                  5,
+                                  (index) => DayTab(
+                                        dayNumber: index + 19,
+                                      ))),
                         ),
-                        ScrollConfiguration(
-                          behavior: CustomScrollBehavior(),
-                          child: Container(
-                            //color: Colors.white,
-                            height: 475.h,
-                            child: ListView(
-                              children: <Widget>[
-                                Column(
-                                  children: emptyListHandler()
-                                      ? [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 58.0),
-                                            child: Text(
-                                              'No events of this day',
-                                              style: OasisTextStyles.openSans300
-                                                  .copyWith(
-                                                      color: Colors.white),
-                                            ),
-                                          )
-                                        ]
-                                      : List.generate(
-                                          requiredListHandler().length,
-                                          (index) {
-                                          return SingleMiscellaneousEvent(
-                                            time: requiredListHandler()[index]
-                                                    .time ??
-                                                'TBA',
-                                            eventName:
-                                                requiredListHandler()[index]
-                                                    .name,
-                                            eventDescription:
-                                                requiredListHandler()[index]
-                                                    .about,
-                                            eventConductor:
-                                                requiredListHandler()[index]
-                                                    .organiser,
-                                            eventLocation:
-                                                requiredListHandler()[index]
-                                                    .venue_name,
-                                          );
-                                        }),
-                                  // children: getMiscEventsList(
-                                  //     MiscScreenController.selectedTab.value),
-                                ),
-                              ],
+                        Padding(
+                          padding: EdgeInsets.only(top: 20.h),
+                          child: ScrollConfiguration(
+                            behavior: CustomScrollBehavior(),
+                            child: SizedBox(
+                              //color: Colors.white,
+                              height: 475.h,
+                              child: ListView(
+                                physics: const BouncingScrollPhysics(),
+                                children: <Widget>[
+                                  Column(
+                                    children: emptyListHandler()
+                                        ? [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 58.0),
+                                              child: Text(
+                                                'No events of this day',
+                                                style: OasisTextStyles.openSans300
+                                                    .copyWith(
+                                                        color: Colors.white),
+                                              ),
+                                            )
+                                          ]
+                                        : List.generate(
+                                            requiredListHandler().length,
+                                            (index) {
+                                            return SingleMiscellaneousEvent(
+                                              time: requiredListHandler()[index]
+                                                      .time ??
+                                                  'TBA',
+                                              eventName:
+                                                  requiredListHandler()[index]
+                                                      .name,
+                                              eventDescription:
+                                                  requiredListHandler()[index]
+                                                      .about,
+                                              eventConductor:
+                                                  requiredListHandler()[index]
+                                                      .organiser,
+                                              eventLocation:
+                                                  requiredListHandler()[index]
+                                                      .venue_name,
+                                            );
+                                          }),
+                                    // children: getMiscEventsList(
+                                    //     MiscScreenController.selectedTab.value),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

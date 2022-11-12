@@ -18,11 +18,11 @@ class _ProfShowState extends State<ProfShow> {
   @override
   void initState() {
     StoreController.itemNumber.addListener(() {
-      if(!mounted){}
+      if (!mounted) {}
       setState(() {});
     });
     StoreController.itemBoughtOrRefreshed.addListener(() {
-      if(!mounted){}
+      if (!mounted) {}
       setState(() {});
     });
     super.initState();
@@ -35,11 +35,11 @@ class _ProfShowState extends State<ProfShow> {
         Padding(
           padding: EdgeInsets.only(top: 43.h, left: 8.w),
           child: CachedNetworkImage(
-              imageUrl: (StoreController
-                          .carouselItems[StoreController.itemNumber.value]
-                      as StoreItemData)
-                  .image_url[1],
-              placeholder: (context, url) => const Loader()),
+            imageUrl: (StoreController.carouselItems[StoreController.itemNumber.value]
+                    as StoreItemData)
+                .image_url[1],
+            placeholder: (context, url) => const CircularProgressIndicator(color: Colors.black,),
+          ),
         ),
         Padding(
           padding: EdgeInsets.only(top: 350.h),
@@ -47,7 +47,7 @@ class _ProfShowState extends State<ProfShow> {
             height: 176.h,
             decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [Colors.black, Colors.black,Colors.transparent],
+                    colors: [Colors.black, Colors.black, Colors.transparent],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter)),
           ),

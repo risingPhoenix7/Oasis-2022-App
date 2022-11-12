@@ -63,9 +63,6 @@ class _BannerDetailsState extends State<BannerDetails> {
 
   @override
   Widget build(BuildContext context) {
-    print((StoreController.carouselItems[StoreController.itemNumber.value]
-            as StoreItemData)
-        .available!);
     return ListView(children: [
       SizedBox(
         width: 387.w,
@@ -79,7 +76,7 @@ class _BannerDetailsState extends State<BannerDetails> {
                 Color.fromRGBO(174, 186, 102, 1),
               ], transform: GradientRotation(161.5))
                   .createShader(
-                      Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                      Rect.fromLTWH(0, 0, bounds.width.w, bounds.height.h)),
               child: Text(
                 (StoreController.carouselItems[StoreController.itemNumber.value]
                         as StoreItemData)

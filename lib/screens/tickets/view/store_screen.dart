@@ -77,7 +77,8 @@ class _StoreScreenState extends State<StoreScreen>
             } else {
               return ScrollConfiguration(
                 behavior: CustomScrollBehavior(),
-                child: ListView(children: [
+                child:
+                    ListView(physics: const BouncingScrollPhysics(), children: [
                   StoreController.carouselItems.isEmpty
                       ? Center(
                           child: Text(

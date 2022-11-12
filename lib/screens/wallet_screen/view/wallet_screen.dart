@@ -6,11 +6,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:oasis_2022/screens/kindstore/view/kind_store_view.dart';
+import 'package:oasis_2022/screens/paytm/view/payment_cart_screen.dart';
 import 'package:oasis_2022/utils/colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '/provider/user_details_viewmodel.dart';
-import '/screens/paytm/view/payment_cart_screen.dart';
 import '/screens/paytm/view/refresh_wallet_controller.dart';
 import '/screens/wallet_screen/view/qr_code_popup.dart';
 import '/screens/wallet_screen/view/scan_screen.dart';
@@ -128,6 +128,7 @@ class _WalletScreenState extends State<WalletScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(UserDetailsViewModel.userDetails.isBitsian);
     return Scaffold(
       body: RefreshIndicator(
         backgroundColor: Colors.black,
@@ -167,38 +168,38 @@ class _WalletScreenState extends State<WalletScreen> {
                             Image.asset(
                               'assets/images/wallet.png',
                               height:
-                                  UIUtills().getProportionalHeight(height: 244),
+                              UIUtills().getProportionalHeight(height: 244),
                               width: MediaQuery.of(context).size.width,
                             ),
                             Container(
                               color: Colors.transparent,
                               height:
-                                  UIUtills().getProportionalHeight(height: 244),
+                              UIUtills().getProportionalHeight(height: 244),
                               width: MediaQuery.of(context).size.width,
                               child: Padding(
                                 padding:
-                                    EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 15.h),
+                                EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 15.h),
                                 child: Column(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     // SizedBox(height: 10 ,width: MediaQuery.of(context).size.width,),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         Column(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          MainAxisAlignment.start,
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               'User ID- ${UserDetailsViewModel.userDetails.userID ?? 'NA'}',
                                               style: GoogleFonts.openSans(
                                                   color:
-                                                      const Color(0xFFFFFFFF),
+                                                  const Color(0xFFFFFFFF),
                                                   fontSize: 14.sp,
                                                   fontWeight: FontWeight.w400),
                                             ),
@@ -206,13 +207,13 @@ class _WalletScreenState extends State<WalletScreen> {
                                               width: 250.w,
                                               child: Text(
                                                 UserDetailsViewModel
-                                                        .userDetails.username ??
+                                                    .userDetails.username ??
                                                     'NA',
                                                 style: GoogleFonts.openSans(
                                                     color: Colors.white,
                                                     fontSize: 20,
                                                     fontWeight:
-                                                        FontWeight.w700),
+                                                    FontWeight.w700),
                                               ),
                                             ),
                                           ],
@@ -225,10 +226,10 @@ class _WalletScreenState extends State<WalletScreen> {
                                             }
                                             if (authenticated) {
                                               if (UserDetailsViewModel
-                                                          .userDetails.userID ==
-                                                      null ||
+                                                  .userDetails.userID ==
+                                                  null ||
                                                   UserDetailsViewModel
-                                                          .userDetails.userID ==
+                                                      .userDetails.userID ==
                                                       '') {
                                                 showDialog(
                                                     barrierDismissible: false,
@@ -239,15 +240,15 @@ class _WalletScreenState extends State<WalletScreen> {
                                                             .bottomCenter,
                                                         child: ErrorDialog(
                                                             errorMessage:
-                                                                'User id not found'),
+                                                            'User id not found'),
                                                       );
                                                     });
                                               } else {
                                                 QRcode = await WalletViewModel()
                                                     .refreshQrCode(int.parse(
-                                                        UserDetailsViewModel
-                                                            .userDetails
-                                                            .userID!));
+                                                    UserDetailsViewModel
+                                                        .userDetails
+                                                        .userID!));
                                                 showDialog(
                                                     context: context,
                                                     builder: (context) {
@@ -255,9 +256,9 @@ class _WalletScreenState extends State<WalletScreen> {
                                                           alignment: Alignment
                                                               .bottomCenter,
                                                           child:
-                                                              QRCodeDialogBox(
-                                                                  qrCode:
-                                                                      QRcode));
+                                                          QRCodeDialogBox(
+                                                              qrCode:
+                                                              QRcode));
                                                     });
                                               }
                                             }
@@ -272,27 +273,27 @@ class _WalletScreenState extends State<WalletScreen> {
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.end,
+                                      CrossAxisAlignment.end,
                                       children: [
                                         Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               'Current Balance',
                                               style: GoogleFonts.openSans(
                                                   color:
-                                                      const Color(0xFFFFFFFF),
+                                                  const Color(0xFFFFFFFF),
                                                   fontSize: UIUtills()
                                                       .getProportionalHeight(
-                                                          height: 16),
+                                                      height: 16),
                                                   fontWeight: FontWeight.w600),
                                             ),
                                             Padding(
                                               padding:
-                                                  EdgeInsets.only(bottom: 20.h),
+                                              EdgeInsets.only(bottom: 20.h),
                                               child: ValueListenableBuilder(
                                                 valueListenable: isLoading,
                                                 builder: (context, bool value,
@@ -303,10 +304,10 @@ class _WalletScreenState extends State<WalletScreen> {
                                                         height: 20,
                                                         child: Center(
                                                             child: SpinKitWave(
-                                                          color: Colors.white
-                                                              .withOpacity(0.5),
-                                                          size: 15.r,
-                                                        )));
+                                                              color: Colors.white
+                                                                  .withOpacity(0.5),
+                                                              size: 15.r,
+                                                            )));
                                                   } else {
                                                     return Text(
                                                       'Rs. ${WalletViewModel.balance}',
@@ -315,9 +316,9 @@ class _WalletScreenState extends State<WalletScreen> {
                                                               0xFFFFFFFF),
                                                           fontSize: UIUtills()
                                                               .getProportionalHeight(
-                                                                  height: 24),
+                                                              height: 24),
                                                           fontWeight:
-                                                              FontWeight.w700),
+                                                          FontWeight.w700),
                                                     );
                                                   }
                                                 },
@@ -339,12 +340,12 @@ class _WalletScreenState extends State<WalletScreen> {
                             children: [
                               Container(
                                 width:
-                                    UIUtills().getProportionalWidth(width: 171),
+                                UIUtills().getProportionalWidth(width: 171),
                                 padding:
-                                    const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                                const EdgeInsets.fromLTRB(0, 15, 0, 15),
                                 decoration: BoxDecoration(
                                   gradient:
-                                      OasisColors.oasisWebsiteGoldGradient,
+                                  OasisColors.oasisWebsiteGoldGradient,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Column(
@@ -362,21 +363,21 @@ class _WalletScreenState extends State<WalletScreen> {
                                           padding: EdgeInsets.only(
                                               left: UIUtills()
                                                   .getProportionalWidth(
-                                                      width: 22)),
+                                                  width: 22)),
                                           child: SvgPicture.asset(
                                             'assets/images/send_money.svg',
                                             width: UIUtills()
                                                 .getProportionalWidth(
-                                                    width: 22),
+                                                width: 22),
                                             height: UIUtills()
                                                 .getProportionalHeight(
-                                                    height: 26),
+                                                height: 26),
                                           ),
                                         ),
                                         SizedBox(
                                           width: UIUtills()
                                               .getProportionalHeight(
-                                                  height: 13),
+                                              height: 13),
                                         ),
                                         Text(
                                           'Send Money',
@@ -384,7 +385,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                               color: const Color(0xFF1A1A1A),
                                               fontSize: UIUtills()
                                                   .getProportionalHeight(
-                                                      height: 16),
+                                                  height: 16),
                                               fontWeight: FontWeight.w600),
                                         ),
                                       ]),
@@ -394,13 +395,13 @@ class _WalletScreenState extends State<WalletScreen> {
                               ),
                               SizedBox(
                                 width:
-                                    UIUtills().getProportionalWidth(width: 20),
+                                UIUtills().getProportionalWidth(width: 20),
                               ),
                               Container(
                                 width:
-                                    UIUtills().getProportionalWidth(width: 171),
+                                UIUtills().getProportionalWidth(width: 171),
                                 padding:
-                                    const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                                const EdgeInsets.fromLTRB(0, 15, 0, 15),
                                 decoration: BoxDecoration(
                                   gradient: const LinearGradient(
                                     colors: [
@@ -421,13 +422,13 @@ class _WalletScreenState extends State<WalletScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const AddMoneyScreen()));
+                                              const AddMoneyScreen()));
                                     } else {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (builder) =>
-                                                  const PaymentCartScreen()));
+                                              const PaymentCartScreen()));
                                     }
                                   },
                                   child: Row(children: [
@@ -435,7 +436,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                         padding: EdgeInsets.only(
                                             left: UIUtills()
                                                 .getProportionalWidth(
-                                                    width: 20)),
+                                                width: 20)),
                                         child: SvgPicture.asset(
                                           'assets/images/addMoney.svg',
                                           height: 22,
@@ -461,145 +462,145 @@ class _WalletScreenState extends State<WalletScreen> {
                         ),
                         WalletViewModel.isKindActive
                             ? Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Container(
-                                  width: UIUtills()
-                                      .getProportionalWidth(width: 388),
-                                  decoration: BoxDecoration(
-                                      color:
-                                          const Color.fromRGBO(26, 28, 28, 1),
-                                      borderRadius:
-                                          BorderRadius.circular(10.79)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        16, 14, 16, 14),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                            height: UIUtills()
-                                                .getProportionalHeight(
-                                                    height: 46),
-                                            width: UIUtills()
-                                                .getProportionalWidth(
-                                                    width: 46),
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 3),
-                                              child: Center(
-                                                  child: SvgPicture.asset(
-                                                'assets/images/Kind_points.svg',
-                                                height: UIUtills()
-                                                    .getProportionalHeight(
-                                                        height: 23),
-                                                width: UIUtills()
-                                                    .getProportionalWidth(
-                                                        width: 26),
-                                                color: Colors.black,
-                                              )),
-                                            )),
-                                        SizedBox(
-                                          width: UIUtills()
-                                              .getProportionalWidth(width: 12),
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Kind Points',
-                                              style: GoogleFonts.openSans(
-                                                  color: Colors.white,
-                                                  fontSize: UIUtills()
-                                                      .getProportionalHeight(
-                                                          height: 16),
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            ValueListenableBuilder(
-                                                valueListenable: isLoading,
-                                                builder: (context, bool value,
-                                                    child) {
-                                                  if (isLoading.value) {
-                                                    return SizedBox(
-                                                        width: 20,
-                                                        height: 20,
-                                                        child: Center(
-                                                            child: SpinKitWave(
-                                                          color: Colors.white
-                                                              .withOpacity(0.5),
-                                                          size: 15.r,
-                                                        )));
-                                                  } else {
-                                                    return Text(
-                                                      '${WalletViewModel.kindpoints}',
-                                                      style:
-                                                          GoogleFonts.openSans(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 20.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
-                                                    );
-                                                  }
-                                                }),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: UIUtills()
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Container(
+                            width: UIUtills()
+                                .getProportionalWidth(width: 388),
+                            decoration: BoxDecoration(
+                                color:
+                                const Color.fromRGBO(26, 28, 28, 1),
+                                borderRadius:
+                                BorderRadius.circular(10.79)),
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  16, 14, 16, 14),
+                              child: Row(
+                                children: [
+                                  Container(
+                                      height: UIUtills()
+                                          .getProportionalHeight(
+                                          height: 46),
+                                      width: UIUtills()
+                                          .getProportionalWidth(
+                                          width: 46),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                          BorderRadius.circular(10)),
+                                      child: Padding(
+                                        padding:
+                                        const EdgeInsets.only(top: 3),
+                                        child: Center(
+                                            child: SvgPicture.asset(
+                                              'assets/images/Kind_points.svg',
+                                              height: UIUtills()
+                                                  .getProportionalHeight(
+                                                  height: 23),
+                                              width: UIUtills()
                                                   .getProportionalWidth(
-                                                      width: 80)),
-                                          child: Container(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                0, 8, 0, 8),
-                                            decoration: BoxDecoration(
-                                              gradient: OasisColors
-                                                  .oasisWebsiteGoldGradient,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            child: Row(children: [
-                                              Padding(
-                                                padding: EdgeInsets.fromLTRB(
-                                                    UIUtills()
-                                                        .getProportionalWidth(
-                                                            width: 24),
-                                                    0,
-                                                    0,
-                                                    0),
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (builder) =>
-                                                            KindStoreCatalog()),
-                                                  );
-                                                },
-                                                child: Text(
-                                                  'Claim now',
-                                                  style: GoogleFonts.openSans(
-                                                      color: Colors.black,
-                                                      fontSize: UIUtills()
-                                                          .getProportionalWidth(
-                                                              width: 14),
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                ),
-                                              ),
-                                              SizedBox(width: 24)
-                                            ]),
+                                                  width: 26),
+                                              color: Colors.black,
+                                            )),
+                                      )),
+                                  SizedBox(
+                                    width: UIUtills()
+                                        .getProportionalWidth(width: 12),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Kind Points',
+                                        style: GoogleFonts.openSans(
+                                            color: Colors.white,
+                                            fontSize: UIUtills()
+                                                .getProportionalHeight(
+                                                height: 16),
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      ValueListenableBuilder(
+                                          valueListenable: isLoading,
+                                          builder: (context, bool value,
+                                              child) {
+                                            if (isLoading.value) {
+                                              return SizedBox(
+                                                  width: 20,
+                                                  height: 20,
+                                                  child: Center(
+                                                      child: SpinKitWave(
+                                                        color: Colors.white
+                                                            .withOpacity(0.5),
+                                                        size: 15.r,
+                                                      )));
+                                            } else {
+                                              return Text(
+                                                '${WalletViewModel.kindpoints}',
+                                                style:
+                                                GoogleFonts.openSans(
+                                                    color:
+                                                    Colors.white,
+                                                    fontSize: 20.sp,
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w700),
+                                              );
+                                            }
+                                          }),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: UIUtills()
+                                            .getProportionalWidth(
+                                            width: 80)),
+                                    child: Container(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 8, 0, 8),
+                                      decoration: BoxDecoration(
+                                        gradient: OasisColors
+                                            .oasisWebsiteGoldGradient,
+                                        borderRadius:
+                                        BorderRadius.circular(10),
+                                      ),
+                                      child: Row(children: [
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              UIUtills()
+                                                  .getProportionalWidth(
+                                                  width: 24),
+                                              0,
+                                              0,
+                                              0),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (builder) =>
+                                                      KindStoreCatalog()),
+                                            );
+                                          },
+                                          child: Text(
+                                            'Claim now',
+                                            style: GoogleFonts.openSans(
+                                                color: Colors.black,
+                                                fontSize: UIUtills()
+                                                    .getProportionalWidth(
+                                                    width: 14),
+                                                fontWeight:
+                                                FontWeight.w600),
                                           ),
                                         ),
-                                      ],
+                                        SizedBox(width: 24)
+                                      ]),
                                     ),
                                   ),
-                                ),
-                              )
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
                             : Container()
                       ],
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 
@@ -35,6 +36,7 @@ class _AddButtonState extends State<AddButton> {
   Widget build(BuildContext context) {
     return (widget.is_available)
         ? Container(
+      width: 100.w,
             child: (widget.amount == 0)
                 ? InkWell(
                     onTap: () {
@@ -56,8 +58,8 @@ class _AddButtonState extends State<AddButton> {
                     },
                     splashColor: Colors.transparent,
                     child: Container(
-                      height: UIUtills().getProportionalHeight(height: 34),
-                      width: UIUtills().getProportionalWidth(width: 90),
+                      height: UIUtills().getProportionalHeight(height: 40),
+                      width: UIUtills().getProportionalWidth(width: 100),
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(colors: [
                           Color.fromRGBO(209, 154, 8, 1),
@@ -128,10 +130,15 @@ class _AddButtonState extends State<AddButton> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         InkWell(
-                          child: const Icon(
-                            Icons.remove,
-                            color: Colors.black,
-                            size: 18,
+                          child: Container(
+                            height: 30.h,
+                            width: 25.w,
+                            color: Colors.transparent,
+                            child: const Icon(
+                              Icons.remove,
+                              color: Colors.black,
+                              size: 18,
+                            ),
                           ),
                           onTap: () {
                             if (widget.is_available) {
@@ -180,10 +187,15 @@ class _AddButtonState extends State<AddButton> {
                           ),
                         ),
                         InkWell(
-                          child: const Icon(
-                            Icons.add,
-                            size: 16,
-                            color: Colors.black,
+                          child: Container(
+                            height: 30.h,
+                            width: 25.w,
+                            color: Colors.transparent,
+                            child: const Icon(
+                              Icons.add,
+                              size: 16,
+                              color: Colors.black,
+                            ),
                           ),
                           onTap: () {
                             if (widget.is_available) {

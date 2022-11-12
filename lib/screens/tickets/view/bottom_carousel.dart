@@ -49,6 +49,7 @@ class _BottomCarouselState extends State<BottomCarousel> {
             child: ScrollConfiguration(
               behavior: CustomScrollBehavior(),
               child: CustomScrollView(
+                physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 slivers: [
@@ -60,19 +61,19 @@ class _BottomCarouselState extends State<BottomCarousel> {
                         return Padding(
                           padding: EdgeInsets.only(left: 16.w),
                           child: GestureDetector(
-                            onTap: () {
-                              StoreController.itemNumber.value = index;
-                            },
-                            child: (StoreController
+                                    onTap: () {
+                                      StoreController.itemNumber.value = index;
+                                    },
+                                    child: (StoreController
                                         .carouselItems[index].runtimeType ==
-                                    MerchCarouselItem)
-                                ? Image.asset(
-                                    StoreController.carouselImage2[index])
-                                : Image.network(
-                                    StoreController.carouselImage2[index]),
-                          ),
-                        );
-                      }, childCount: StoreController.carouselItems.length)))
+                                        MerchCarouselItem)
+                                        ? Image.asset(
+                                        StoreController.carouselImage2[index])
+                                        : Image.network(
+                                        StoreController.carouselImage2[index]),
+                                  ),
+                                );
+                              }, childCount: StoreController.carouselItems.length)))
                 ],
               ),
             ),

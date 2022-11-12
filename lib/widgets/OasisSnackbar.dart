@@ -10,9 +10,10 @@ class CustomSnackBar {
         text ?? "Unknown Error",
         textAlign: TextAlign.center,
         style: GoogleFonts.openSans(
-            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16.sp),
+            color: Color.fromRGBO(204, 175, 45, 1), fontWeight: FontWeight.w300, fontSize: 14.sp,),
       ),
-      backgroundColor: Colors.amber.withOpacity(0.9),
+      backgroundColor: Color.fromRGBO(14, 16, 20, 1),
+
       behavior: SnackBarBehavior.floating,
     );
   }

@@ -56,30 +56,33 @@ class CartItemWidgetState extends State<CartItemWidget> {
                         SizedBox(
                           width: 20.w,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.menuItemName,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16.sp,
-                                color: const Color.fromRGBO(194, 194, 194, 1),
+                        Container(
+                          width: 180.w,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.menuItemName,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16.sp,
+                                  color: const Color.fromRGBO(194, 194, 194, 1),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 3.86.h,
-                            ),
-                            Text(
-                              '₹ ${widget.price}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14.sp,
-                                color: const Color.fromRGBO(194, 194, 194, 1),
+                              SizedBox(
+                                height: 3.86.h,
                               ),
-                              textAlign: TextAlign.left,
-                            ),
-                          ],
+                              Text(
+                                '₹ ${widget.price}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14.sp,
+                                  color: const Color.fromRGBO(194, 194, 194, 1),
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

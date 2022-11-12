@@ -338,57 +338,60 @@ class CartScreenState extends State<CartScreen> {
                                   }
                                 }
                               },
-                        child: Container(
-                                width: 428.w,
-                                height: 72.h,
-                                decoration: BoxDecoration(
-                                  gradient: const LinearGradient(colors: [
-                                    Color.fromRGBO(209, 154, 8, 1),
-                                    Color.fromRGBO(254, 212, 102, 1),
-                                    Color.fromRGBO(227, 186, 79, 1),
-                                    Color.fromRGBO(209, 154, 8, 1),
-                                    Color.fromRGBO(209, 154, 8, 1),
-                                  ]),
-                                  borderRadius: BorderRadius.circular(
-                                    15.r,
+                        child: Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 22.w),
+                          child: Container(
+                                  width: 428.w,
+                                  height: 72.h,
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(colors: [
+                                      Color.fromRGBO(209, 154, 8, 1),
+                                      Color.fromRGBO(254, 212, 102, 1),
+                                      Color.fromRGBO(227, 186, 79, 1),
+                                      Color.fromRGBO(209, 154, 8, 1),
+                                      Color.fromRGBO(209, 154, 8, 1),
+                                    ]),
+                                    borderRadius: BorderRadius.circular(
+                                      15.r,
+                                    ),
                                   ),
-                                ),
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 40.w),
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 40.w),
 
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'Pay Now',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w800,
-                                              color: Colors.black,
-                                              fontSize: 20.sp,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Pay Now',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w800,
+                                                color: Colors.black,
+                                                fontSize: 20.sp,
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            '₹ $total',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.black,
-                                              fontSize: 19.sp,
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              '₹ $total',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.black,
+                                                fontSize: 19.sp,
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
+                        ),
                             ),
                     )
                   ],

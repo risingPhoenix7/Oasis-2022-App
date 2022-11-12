@@ -111,18 +111,21 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                       height: 410.h,
                                       width: 1.sw,
                                       constraints: BoxConstraints(maxWidth: 1.sw, maxHeight: 410.h),
-                                      child: ListView.builder(
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount: orderCardList.length,
-                                          itemBuilder: (context, index) {
-                                            return Container(
-                                                constraints: BoxConstraints(maxWidth: 1.sw, maxHeight: 410.h),
-                                                child: OrderWidget(orderCardModel: orderCardList[index]));
-                                          }
-                                          // scrollDirection: Axis.horizontal,
-                                          // shrinkWrap: true,
-                                          ),
+                                      child: ScrollConfiguration(
+                                        behavior: CustomScrollBehavior(),
+                                        child: ListView.builder(
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: orderCardList.length,
+                                            itemBuilder: (context, index) {
+                                              return Container(
+                                                  constraints: BoxConstraints(maxWidth: 1.sw, maxHeight: 410.h),
+                                                  child: OrderWidget(orderCardModel: orderCardList[index]));
+                                            }
+                                            // scrollDirection: Axis.horizontal,
+                                            // shrinkWrap: true,
+                                            ),
+                                      ),
                                     ))) //),
                         //     ),
                       ],

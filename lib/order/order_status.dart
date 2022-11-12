@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oasis_2022/notificationservice/local_notification_service.dart';
 import 'package:oasis_2022/order/repo/model/order_card_model.dart';
+import 'package:oasis_2022/utils/scroll_remover.dart';
 import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 
 import '../resources/resources.dart';
@@ -209,90 +210,93 @@ class _OrderStatusState extends State<OrderStatus> {
                                         thickness: 2.w,
                                         trackVisibility: true,
                                         thumbVisibility: true,
-                                        child: ListView.builder(
-                                          padding: EdgeInsets.zero,
-                                          scrollDirection: Axis.vertical,
-                                          shrinkWrap: true,
-                                          itemCount: widget
-                                              .orderCardModel
-                                              .menuItemInOrdersScreenList
-                                              .length,
-                                          itemBuilder: (context, index) {
-                                            return Padding(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 8.h),
-                                              child: Padding(
+                                        child: ScrollConfiguration(
+                                          behavior: CustomScrollBehavior(),
+                                          child: ListView.builder(
+                                            padding: EdgeInsets.zero,
+                                            scrollDirection: Axis.vertical,
+                                            shrinkWrap: true,
+                                            itemCount: widget
+                                                .orderCardModel
+                                                .menuItemInOrdersScreenList
+                                                .length,
+                                            itemBuilder: (context, index) {
+                                              return Padding(
                                                 padding:
-                                                    EdgeInsets.only(left: 32.w),
-                                                child: Row(
-                                                  children: [
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            SizedBox(
-                                                              width: 220.w,
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .min,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Flexible(
-                                                                    child: Text(
-                                                                      widget
-                                                                          .orderCardModel
-                                                                          .menuItemInOrdersScreenList[
-                                                                              index]
-                                                                          .name,
-                                                                      style: GoogleFonts.openSans(
-                                                                          fontWeight: FontWeight
-                                                                              .w500,
-                                                                          color:
-                                                                              Colors.white),
+                                                    EdgeInsets.only(bottom: 8.h),
+                                                child: Padding(
+                                                  padding:
+                                                      EdgeInsets.only(left: 32.w),
+                                                  child: Row(
+                                                    children: [
+                                                      Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              SizedBox(
+                                                                width: 220.w,
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .min,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Flexible(
+                                                                      child: Text(
+                                                                        widget
+                                                                            .orderCardModel
+                                                                            .menuItemInOrdersScreenList[
+                                                                                index]
+                                                                            .name,
+                                                                        style: GoogleFonts.openSans(
+                                                                            fontWeight: FontWeight
+                                                                                .w500,
+                                                                            color:
+                                                                                Colors.white),
+                                                                      ),
                                                                     ),
-                                                                  ),
-                                                                ],
+                                                                  ],
+                                                                ),
                                                               ),
-                                                            ),
-                                                            Text(
-                                                              '₹ ${widget.orderCardModel.menuItemInOrdersScreenList[index].price} x ${widget.orderCardModel.menuItemInOrdersScreenList[index].quantity}',
-                                                              style: GoogleFonts.roboto(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  color: const Color
-                                                                          .fromRGBO(
-                                                                      100,
-                                                                      100,
-                                                                      100,
-                                                                      1)),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      width: 20.w,
-                                                    ),
-                                                  ],
+                                                              Text(
+                                                                '₹ ${widget.orderCardModel.menuItemInOrdersScreenList[index].price} x ${widget.orderCardModel.menuItemInOrdersScreenList[index].quantity}',
+                                                                style: GoogleFonts.roboto(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    color: const Color
+                                                                            .fromRGBO(
+                                                                        100,
+                                                                        100,
+                                                                        100,
+                                                                        1)),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        width: 20.w,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            );
-                                          },
+                                              );
+                                            },
+                                          ),
                                         ),
                                       ),
                                     ),

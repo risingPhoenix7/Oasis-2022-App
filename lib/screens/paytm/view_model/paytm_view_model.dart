@@ -1,3 +1,4 @@
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logger/logger.dart';
@@ -14,12 +15,15 @@ class PaytmViewModel {
   Future<PaytmResult> getPaytmResponse(String amount) async {
     print('goes here');
     final dio = Dio(); // Provide a dio instance
+    dio.interceptors.add(ChuckerDioInterceptor());
     final client = PaytmRestClient(dio);
     String? jwt = UserDetailsViewModel.userDetails.JWT;
     print(jwt);
     // print(amount);
     // print(jwt);
     PaytmAmountData paytmAmountData = PaytmAmountData(TXN_AMOUNT: amount);
+    print('efigwehjfgbesihfgbhfibgf');
+    print(paytmAmountData.TXN_AMOUNT.runtimeType);
     PaytmResult response =
         await client.getPaytm("JWT ${jwt}", paytmAmountData).then((it) {
       logger.i(it.order_id);

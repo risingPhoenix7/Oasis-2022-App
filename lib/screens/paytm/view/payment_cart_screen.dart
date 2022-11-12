@@ -50,7 +50,6 @@ class _PaymentCartScreenState extends State<PaymentCartScreen> {
   late int balance = 0;
   bool isLoading = false;
   String letter = '';
-  TextEditingController textEditingController = TextEditingController();
 
   getFirstLetterOfName(String name) {
     name.trim();
@@ -100,8 +99,11 @@ class _PaymentCartScreenState extends State<PaymentCartScreen> {
   Future<void> _paytmInitialResponse() async {
     // paytmViewModel.getPaytmResponse(amountController.text);
     isApiCallInprogress = true;
-    _paytmApiResponse =
-        await PaytmViewModel().getPaytmResponse(amountController.text.toString());
+    print('eakfjbewfkhbsdfkhbfs');
+    print(amountController.text);
+    _paytmApiResponse = await PaytmViewModel()
+        .getPaytmResponse(amountController.text.toString());
+
     mid = _paytmApiResponse.mid;
     orderId = _paytmApiResponse.order_id;
     txnToken = _paytmApiResponse.txntoken;
@@ -201,20 +203,21 @@ class _PaymentCartScreenState extends State<PaymentCartScreen> {
                     )
                   : InkWell(
                       onTap: () async {
-                        if (textEditingController.text == "") {
+                        if (amountController.text == "") {
                           var snackBar =
                               CustomSnackBar().oasisSnackBar("Enter a value");
                           if (!mounted) {}
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
-                        if (int.parse(textEditingController.text) == 0 ||
-                            int.parse(textEditingController.text) < 0) {
+                        if (int.parse(amountController.text) == 0 ||
+                            int.parse(amountController.text) < 0) {
                           var snackBar = CustomSnackBar()
                               .oasisSnackBar("Enter A Non Zero Positive Value");
                           if (!mounted) {}
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         } else {
-                          amountToAdd = int.parse(textEditingController.text);
+                          amountToAdd =
+                              int.parse(amountController.text.toString());
                           if (await auth.isDeviceSupported()) {
                             await _authenticate();
                           }
@@ -389,7 +392,7 @@ class _PaymentCartScreenState extends State<PaymentCartScreen> {
                             ),
                             Flexible(
                               child: TextField(
-                                controller: textEditingController,
+                                controller: amountController,
                                 cursorColor: Colors.white,
                                 textAlign: TextAlign.right,
                                 inputFormatters: [

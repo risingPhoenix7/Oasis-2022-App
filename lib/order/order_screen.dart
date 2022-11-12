@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:oasis_2022/order/order_widget.dart';
 import 'package:oasis_2022/order/repo/model/get_orders_model.dart';
 import 'package:oasis_2022/order/repo/model/order_card_model.dart';
+import 'package:oasis_2022/utils/scroll_remover.dart';
 
 import '../widgets/error_dialogue.dart';
 import '../widgets/loader.dart';
@@ -112,23 +113,30 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                 padding: EdgeInsets.only(top: 58.h),
                                 child: SizedBox(
                                     height: 410.h,
-                                    child: CustomScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      shrinkWrap: true,
-                                      slivers: [
-                                        SliverPadding(
-                                          padding: const EdgeInsets.all(10),
-                                          sliver: SliverList(
-                                              delegate:
-                                                  SliverChildBuilderDelegate(
-                                                      (BuildContext context,
-                                                          int index) {
-                                            return OrderWidget(
-                                                orderCardModel:
-                                                    orderCardList[index]);
-                                          }, childCount: orderCardList.length)),
-                                        )
-                                      ],
+                                    child: ScrollConfiguration(
+                                      behavior: CustomScrollBehavior(),
+                                      child: CustomScrollView(
+                                        physics: BouncingScrollPhysics(),
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        slivers: [
+                                          SliverPadding(
+                                            padding: const EdgeInsets.all(10),
+                                            sliver: SliverList(
+                                                delegate:
+                                                    SliverChildBuilderDelegate(
+                                                        (BuildContext context,
+                                                            int index) {
+                                              return OrderWidget(
+                                                  orderCardModel:
+                                                      orderCardList[index]);
+                                            },
+                                                        childCount:
+                                                            orderCardList
+                                                                .length)),
+                                          )
+                                        ],
+                                      ),
                                     )),
                               ),
                       ],

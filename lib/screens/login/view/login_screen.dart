@@ -520,11 +520,12 @@ class _LoginScreenState extends State<LoginScreen>
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           if (snapshot.data?.error == null) {
-                            RestartWidget.restartApp(context);
-                            Future.microtask(() =>
-                                Navigator.of(context, rootNavigator: true)
-                                    .pushNamedAndRemoveUntil(
-                                        'home', (route) => true));
+                            Future.microtask(() {
+                              RestartWidget.restartApp(context);
+                              Navigator.of(context, rootNavigator: true)
+                                  .pushNamedAndRemoveUntil(
+                                  'home', (route) => true);
+                            });
                           } else {
                             Future.microtask(() => setState(() {
                                   isLoaderVisible = false;

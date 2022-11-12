@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:oasis_2022/screens/paytm/view/refresh_wallet_controller.dart';
 import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -247,6 +248,9 @@ class CartScreenState extends State<CartScreen> {
                                                       const FoodStallScreen(),
                                                   withNavBar: true,
                                                 );
+                                                RefreshWalletController
+                                                    .toRefresh
+                                                    .notifyListeners();
                                                 box.clear();
                                               } else {
                                                 isPostingOrder = false;

@@ -16,12 +16,13 @@ class PaytmViewModel {
     final dio = Dio(); // Provide a dio instance
     final client = PaytmRestClient(dio);
     String? jwt = UserDetailsViewModel.userDetails.JWT;
+    print(jwt);
     // print(amount);
     // print(jwt);
     PaytmAmountData paytmAmountData = PaytmAmountData(TXN_AMOUNT: amount);
     PaytmResult response =
         await client.getPaytm("JWT ${jwt}", paytmAmountData).then((it) {
-          logger.i(it.order_id);
+      logger.i(it.order_id);
       print('jkbawdfkjabfkjfnf');
       return it;
     }).catchError((Object obj) {

@@ -80,11 +80,15 @@ class _StoreScreenState extends State<StoreScreen>
                 child:
                     ListView(physics: const BouncingScrollPhysics(), children: [
                   StoreController.carouselItems.isEmpty
-                      ? Center(
-                          child: Text(
-                            "Store is empty right now",
-                            style: GoogleFonts.openSans(
-                                color: Colors.white, fontSize: 25.sp),
+                      ? SizedBox(
+                          height: 1.sh,
+                          width: 1.sw,
+                          child: Center(
+                            child: Text(
+                              "Store is empty right now",
+                              style: GoogleFonts.openSans(
+                                  color: Colors.white, fontSize: 25.sp),
+                            ),
                           ),
                         )
                       : SizedBox(

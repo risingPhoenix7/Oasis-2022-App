@@ -47,10 +47,10 @@ class QuizScreenViewModel {
           throw Exception("no net");
         } else {
           print(e.response!.data);
-          throw Exception(res.statusCode);
+          throw Exception(e.response!.data["display_message"]);
         }
       }
-      throw Exception("server error");
+      throw Exception("Unknown Error Occurred");
     }
     return;
   }

@@ -81,9 +81,13 @@ class _quizUIScreenState extends State<quizUIScreen> {
                                   fontSize: 28.sp,
                                   fontWeight: FontWeight.w500),
                             ),
-                            GestureDetector(onTap: () {print('object');
-                              Navigator.pop(context);},
-                                child: SvgPicture.asset('assets/images/exit_button.svg'))
+                            GestureDetector(
+                                onTap: () {
+                                  print('object');
+                                  Navigator.pop(context);
+                                },
+                                child: SvgPicture.asset(
+                                    'assets/images/exit_button.svg'))
                           ],
                         ),
                         SizedBox(
@@ -452,17 +456,20 @@ class _quizUIScreenState extends State<quizUIScreen> {
                               try {
                                 await QuizScreenViewModel()
                                     .postAnswers(1, optionSelected());
+                                var snackbar = CustomSnackBar()
+                                    .oasisSnackBar("Thanks For Answering");
+                                if (!mounted) {}
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackbar);
                               } catch (e) {
-                                if (e.runtimeType == DioError) {
-                                  var snackbar = CustomSnackBar().oasisSnackBar(
-                                      (e as DioError)
-                                              .response
-                                              ?.data["display_message"] ??
-                                          "Some Error Occurred");
+                                try {
+                                  var snackbar = CustomSnackBar()
+                                      .oasisSnackBar(e.toString());
                                   if (!mounted) {}
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackbar);
-                                } else {
+                                } catch (e) {
+                                  print(e);
                                   var snackbar = CustomSnackBar()
                                       .oasisSnackBar("Some Error Occurred");
                                   if (!mounted) {}

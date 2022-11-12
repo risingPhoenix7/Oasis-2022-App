@@ -36,6 +36,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
   String letter = '';
   TextEditingController textEditingController = TextEditingController();
 
+
   getFirstLetterOfName(String name) {
     name.trim();
     letter = name[0];
@@ -142,6 +143,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                             try {
                               await WalletViewModel()
                                   .sendMoney(id, amountToSend);
+
                               isSuccess = true;
                             } catch (e) {
                               isSuccess = false;

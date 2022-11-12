@@ -21,41 +21,51 @@ class OrderStatus extends StatefulWidget {
 
 class _OrderStatusState extends State<OrderStatus> {
   String otp = 'Get OTP';
-  int? newstatus = 0;
+  // int? newstatus = 0;
   ValueNotifier<bool> isLoading = ValueNotifier(true);
+  Stream<DocumentSnapshot>? collectionStream;
+  // late int? localstatus;
+
+  String? OrderId;
+
+  //Future<void> listenForStatus() async {
+
+    // FirebaseFirestore.instance
+    //     .collection('orders')
+    //     .doc(OrderId)
+    //     .snapshots()
+    //     .listen((event) async {
+    //   DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+    //       .collection('orders') // suppose you have a collection named "Users"
+    //       .doc(OrderId)
+    //       .get();
+    //
+    //   newstatus = await documentSnapshot['status'];
+    //   print(newstatus);
+    //   if (newstatus == 1) {
+    //     LocalNotificationService.shownotification(
+    //         'Your Order number #$OrderId', 'Your Order has been accepted!');
+    //     localstatus = newstatus;
+    //   } else if (newstatus == 2) {
+    //     LocalNotificationService.shownotification(
+    //         'Your Order number  #$OrderId', 'Your Order is ready!');
+    //   }
+    // });
+
+ // }
+
   @override
+  void initState() {
+    OrderId = widget.orderCardModel.orderId.toString();
+    //listenForStatus();
+    super.initState();
+  }
   Widget build(BuildContext context) {
-    var OrderId = widget.orderCardModel.orderId.toString();
-
-    Future<void> demo() async {
-      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-          .collection('orders') // suppose you have a collection named "Users"
-          .doc(OrderId)
-          .get();
-
-      newstatus = await documentSnapshot['status'];
-    }
-
     Stream<DocumentSnapshot> collectionStream = FirebaseFirestore.instance
         .collection('orders')
         .doc(OrderId)
         .snapshots();
     isLoading.value = false;
-    FirebaseFirestore.instance
-        .collection('orders')
-        .doc(OrderId)
-        .snapshots()
-        .listen((event) async {
-      await demo();
-      print(newstatus);
-      if (newstatus == 1) {
-        LocalNotificationService.shownotification(
-            'Your Order number #$OrderId', 'Your Order has been accepted!');
-      } else if (newstatus == 2) {
-        LocalNotificationService.shownotification(
-            'Your Order number  #$OrderId', 'Your Order is ready!');
-      }
-    });
     return ValueListenableBuilder(
       valueListenable: isLoading,
       builder: (context, bool value, child) {
@@ -333,18 +343,18 @@ class _OrderStatusState extends State<OrderStatus> {
                                     child: GestureDetector(
                                         onTap: () async {
                                           print('tapped');
-                                          if (snapshot.data!
+                                          if ((snapshot.data!
                                                   .data()
                                                   .toString()
                                                   .contains("status")
                                               ? snapshot.data?.get('status')
-                                              : 0 >= 2) {
-                                            if (snapshot.data!
+                                              : 0) >= 2) {
+                                            if ((snapshot.data!
                                                     .data()
                                                     .toString()
                                                     .contains("status")
                                                 ? snapshot.data?.get('status')
-                                                : 0 == 2) {
+                                                : 0) == 2) {
                                               otp = widget.orderCardModel.otp
                                                   .toString();
                                               await OrderScreenViewModel()

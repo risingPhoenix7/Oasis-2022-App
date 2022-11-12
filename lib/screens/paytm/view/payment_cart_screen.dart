@@ -16,7 +16,8 @@ import '../view_model/paytm_response_view_model.dart';
 import '../view_model/paytm_view_model.dart';
 
 class PaymentCartScreen extends StatefulWidget {
-  const PaymentCartScreen({Key? key}) : super(key: key);
+  const
+  PaymentCartScreen({Key? key}) : super(key: key);
 
   @override
   State<PaymentCartScreen> createState() => _PaymentCartScreenState();

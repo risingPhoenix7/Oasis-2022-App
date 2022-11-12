@@ -133,7 +133,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                                             .contains('status')
                                         ? snapshot.data?.get('status')
                                         : 0),
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w600,
                                     fontSize: 11.sp,
                                   ),
                                 )
@@ -186,7 +186,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 39),
+                                  padding:  EdgeInsets.only(right: 27.w),
                                   child: Container(
                                     height: 33.h,
                                     width: 1.5,

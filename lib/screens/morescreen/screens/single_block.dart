@@ -21,7 +21,7 @@ class SingleBlock extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(left: 35.w),
-                child: SvgPicture.asset(assetName, width: 17.w, height: 14.h),
+                child: SvgPicture.asset(assetName, width: 23.w, height: 23.h),
               ),
               SizedBox(width: 24.41.w),
               Text(
@@ -38,7 +38,7 @@ class SingleBlock extends StatelessWidget {
               width: 320.w,
               child: Divider(
                 height: 1,
-                thickness: 1,
+                thickness: 0.2.h,
                 color: Color(0xFFB6B6B6).withOpacity(0.8),
               ),
             ),

@@ -48,7 +48,7 @@ class _DayTabState extends State<DayTab> {
               )
             : BoxDecoration(
                 color: Color.fromRGBO(0, 0, 0, 0.8),
-            border: Border.all(color: Colors.white),
+            border: Border.all(color: Colors.white,width: 0.3.w),
                 borderRadius: BorderRadius.circular(20.r)),
         child: Column(
           children: <Widget>[

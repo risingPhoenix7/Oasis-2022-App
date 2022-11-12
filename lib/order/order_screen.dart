@@ -113,10 +113,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                 padding: EdgeInsets.only(top: 58.h),
                                 child: SizedBox(
                                     height: 410.h,
+                                    width: 1.sw,
                                     child: ScrollConfiguration(
                                       behavior: CustomScrollBehavior(),
                                       child: CustomScrollView(
-                                        physics: BouncingScrollPhysics(),
+
                                         scrollDirection: Axis.horizontal,
                                         shrinkWrap: true,
                                         slivers: [

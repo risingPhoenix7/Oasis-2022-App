@@ -181,7 +181,7 @@ class CartScreenState extends State<CartScreen> {
                       ],
                     ),
                     Positioned(
-                      bottom: 0,
+                      bottom: 40.h,
                       left: 0,
                       right: 0,
                       child: isPostingOrder
@@ -356,6 +356,7 @@ class CartScreenState extends State<CartScreen> {
                                 child: Padding(
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 40.w),
+
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,

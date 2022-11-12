@@ -16,7 +16,7 @@ import '/utils/error_messages.dart';
 
 class WalletViewModel {
   static int balance = 0;
-  static bool isKindActive = true;
+  static bool isKindActive = false;
   static int? kindpoints = 0;
   String? jwt = UserDetailsViewModel.userDetails.JWT;
   static String? error;

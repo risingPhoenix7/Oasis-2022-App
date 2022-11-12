@@ -13,7 +13,7 @@ class LocalNotificationService {
       requestAlertPermission: false,
     );
     InitializationSettings initializationSettings = InitializationSettings(
-        android: AndroidInitializationSettings("@mipmap/ic_launcher"),
+        android: const AndroidInitializationSettings("@mipmap/launcher_icon"),
         iOS: iOSSettings);
 
     enableIOSNotifications() async {

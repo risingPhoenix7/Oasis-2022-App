@@ -60,7 +60,7 @@ class DevelopersScreen2 extends StatelessWidget {
                             mainAxisSpacing: 16,
                             crossAxisCount: 2,
                             childAspectRatio: 0.57),
-                    children: [
+                    children: const [
                       SingleCard(
                           iconsMap: {
                             "github": 'shashvat1965',

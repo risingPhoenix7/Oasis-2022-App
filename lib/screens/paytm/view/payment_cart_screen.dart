@@ -101,7 +101,7 @@ class _PaymentCartScreenState extends State<PaymentCartScreen> {
     // paytmViewModel.getPaytmResponse(amountController.text);
     isApiCallInprogress = true;
     _paytmApiResponse =
-        await PaytmViewModel().getPaytmResponse(amountController.text);
+        await PaytmViewModel().getPaytmResponse(amountController.text.toString());
     mid = _paytmApiResponse.mid;
     orderId = _paytmApiResponse.order_id;
     txnToken = _paytmApiResponse.txntoken;

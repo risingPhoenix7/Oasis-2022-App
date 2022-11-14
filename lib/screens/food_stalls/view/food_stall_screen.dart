@@ -28,12 +28,14 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
   bool isStallsClosed = false;
 
   Future<void> updateFoodStallResult() async {
-    cachedFoodStallEventsViewModel.retrieveFoodStallNetworkResult();
+    await cachedFoodStallEventsViewModel.retrieveFoodStallNetworkResult();
     checkFoodStallResult();
   }
 
   void checkFoodStallResult() {
+    print('aefkjaebfkhbef');
     if (FoodStallViewModel.error == null) {
+      print('no error');
       if (mounted) {
         setState(() {
           foodStall = CachedFoodStallsViewModel.listFoodStalls;
@@ -41,6 +43,7 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
         });
       }
     } else {
+      print('error in food stalls');
       //return MiscEventResult.error;
       setState(() {
         isLoading = false;
@@ -49,6 +52,7 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
           barrierDismissible: false,
           context: context,
           builder: (context) {
+            print('should go here');
             return Align(
               alignment: Alignment.bottomCenter,
               child: ErrorDialog(errorMessage: FoodStallViewModel.error!),

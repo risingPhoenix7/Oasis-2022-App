@@ -14,27 +14,48 @@ class FoodStallViewModel {
     final client = FoodStallRestClient(dio);
     List<FoodStall> foodStalls = [];
     error = null;
+    //   foodStalls = await client.getStalls().catchError((Object obj) {
+    //     try {
+    //       final res = (obj as DioError).response;
+    //       error = res?.statusCode.toString();
+    //       if (res?.statusCode == null || res == null) {
+    //         error = ErrorMessages.noInternet;
+    //       } else {
+    //         // error = MiscEventsViewModel.matchesErrorResponse(
+    //         //     res.statusCode, res.statusMessage);
+    //         error = ErrorMessages.unknownError;
+    //       }
+    //     } catch (e) {
+    //       print(e);
+    //       error = ErrorMessages.unknownError;
+    //     }
+    //
+    //     return foodStalls;
+    //   });
+    //   return foodStalls;
+    // }
 
-    foodStalls = await client.getStalls().catchError((Object obj) {
+    foodStalls = await client.getStalls().then((it) {
+      return it;
+    }).catchError((Object obj) {
+      print('aefkjbesfkhbef');
       try {
         final res = (obj as DioError).response;
         error = res?.statusCode.toString();
-        if (res?.statusCode == null || res == null) {
+        if (res?.statusCode == null || res != null || res!.data == null) {
+          print('efbhefkef');
           error = ErrorMessages.noInternet;
         } else {
-          // error = MiscEventsViewModel.matchesErrorResponse(
-          //     res.statusCode, res.statusMessage);
+          print('akdjbakjdbnw');
           error = ErrorMessages.unknownError;
         }
       } catch (e) {
+        print('akhefbefskb');
         error = ErrorMessages.unknownError;
       }
-      if (foodStalls.isEmpty && error == null) {
-        print('getting assigned here');
-        error = ErrorMessages.stallsAreCurrentlyClosed;
-      }
-      return foodStalls;
+      return foodStalls ?? <FoodStall>[];
     });
+    print(error);
     return foodStalls;
   }
 }

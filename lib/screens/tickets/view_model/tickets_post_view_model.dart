@@ -1,9 +1,9 @@
-import '/provider/user_details_viewmodel.dart';
-import '/utils/error_messages.dart';
 import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+import '/provider/user_details_viewmodel.dart';
+import '/utils/error_messages.dart';
 import '../repository/model/ticketPostBody.dart';
 import '../repository/retrofit/postTicket.dart';
 
@@ -23,6 +23,9 @@ class TicketPostViewModel {
       await client.postTicket("JWT $jwt", ticketPostBody);
     } catch(e){
       if (e.runtimeType == DioError) {
+        if ((e as DioError).response == null) {
+          throw Exception(ErrorMessages.noInternet);
+        }
         var code = (e as DioError).response?.statusCode;
         var message = (e).response?.statusMessage;
         throw Exception(e.response!.data["display_message"]);

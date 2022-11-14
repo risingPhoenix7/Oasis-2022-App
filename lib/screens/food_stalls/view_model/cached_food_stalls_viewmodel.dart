@@ -25,12 +25,12 @@ class CachedFoodStallsViewModel {
 
     if (listFoodStallNetwork.isNotEmpty) {
       listFoodStalls = listFoodStallNetwork;
-      statusInt=2;
+      statusInt = 2;
       status.notifyListeners();
       print('storing');
       storeInBox();
     } else {
-      statusInt=4;
+      statusInt = 4;
       status.notifyListeners();
     }
     print('goes out of network');
@@ -53,7 +53,7 @@ class CachedFoodStallsViewModel {
       return false;
     }
 
-    statusInt=1;
+    statusInt = 1;
     status.notifyListeners();
     print('goes out of local');
     return true;

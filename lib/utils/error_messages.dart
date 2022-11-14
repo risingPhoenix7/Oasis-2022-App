@@ -1,7 +1,8 @@
 class ErrorMessages {
   static const String defaultError =
       "An error occured, please check your network connetion or try again after some time, if the problem persists please contact a DVM Official";
-  static const String unknownError = 'Unknown error occured';
+  static const String unknownError =
+      'Unknown error occured. Please contact a DVM Official';
   static const String invalidLogin = 'Your details could not be verified';
   static const String timeOutError =
       'Server taking too long to respond. Please try again later';
@@ -23,9 +24,8 @@ class ErrorMessages {
       'User profile does not exist for this JWT. The user exists but does not have a profile';
   static const String noInternet =
       'Please check your connectivity and try again';
-  static const String stallsAreCurrentlyClosed =
-      'Stalls are currently closed. Please try again later.';
-  static const String googleLoginFailed = 'Google sign in failed';
+  static const String googleLoginFailed =
+      'Google sign in failed. Please contact a DVM Official';
   static const String emptyUsernamePassword =
       'Please enter your username and password'; //backend response : Missing key in request: 'username
 }

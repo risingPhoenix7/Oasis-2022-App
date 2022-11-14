@@ -382,8 +382,8 @@ class _LoginScreenState extends State<LoginScreen>
                                               usernameController.text.trim(),
                                               passwordController.text.trim(),
                                               false);
-                                      usernameController.clear();
-                                      passwordController.clear();
+                                      // usernameController.clear();
+                                      // passwordController.clear();
                                     } else {
                                       showDialog(
                                           barrierDismissible: false,
@@ -425,6 +425,7 @@ class _LoginScreenState extends State<LoginScreen>
                                           isLoaderVisible = true;
                                           statusTypeGoogle = true;
                                         });
+                                        print(googleKey.idToken);
                                         authOrGoogleAuthResult =
                                             googleLoginViewModel.authenticate(
                                                 googleKey.idToken, true);

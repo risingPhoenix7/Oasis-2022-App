@@ -29,7 +29,8 @@ class CachedMiscEventsViewModel {
         await MiscEventsViewModel().retrieveMiscEventResult();
     int indexPosition = 0;
     for (MiscEventCategory miscEventCategory in miscEventCategoryList) {
-      if (miscEventCategory.events != null) {
+      if (miscEventCategory.events != null &&
+          miscEventCategory.category_name != 'visitors') {
         for (MiscEventData miscevent in miscEventCategory.events!) {
           String a = miscevent.date_time ?? '2022-11-23T19:42:24z';
 

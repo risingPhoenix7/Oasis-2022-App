@@ -7,6 +7,7 @@ import 'package:oasis_2022/screens/tickets/view/bottom_carousel.dart';
 import 'package:oasis_2022/screens/tickets/view/merch.dart';
 import 'package:oasis_2022/screens/tickets/view/prof_show.dart';
 import 'package:oasis_2022/utils/scroll_remover.dart';
+import 'package:oasis_2022/widgets/error_dialogue.dart';
 import 'package:oasis_2022/widgets/loader.dart';
 
 class StoreScreen extends StatefulWidget {
@@ -56,24 +57,43 @@ class _StoreScreenState extends State<StoreScreen>
         onRefresh: () async {
           isLoading.value = true;
           await StoreController().initialCall();
-          StoreController.itemBoughtOrRefreshed.value =
-              !StoreController.itemBoughtOrRefreshed.value;
-          for (int i = 0; i < StoreController.carouselItems.length; i++) {
-            if (StoreController.carouselItems[i].runtimeType == StoreItemData) {
-              print((StoreController.carouselItems[i] as StoreItemData).name);
+          if (StoreController.error != null) {
+            isLoading.value = false;
+            showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (context) {
+                  return Align(
+                    alignment: Alignment.bottomCenter,
+                    child: ErrorDialog(errorMessage: StoreController.error!),
+                  );
+                });
+          } else {
+            StoreController.itemBoughtOrRefreshed.value =
+                !StoreController.itemBoughtOrRefreshed.value;
+            for (int i = 0; i < StoreController.carouselItems.length; i++) {
+              if (StoreController.carouselItems[i].runtimeType ==
+                  StoreItemData) {
+                print((StoreController.carouselItems[i] as StoreItemData).name);
+              }
             }
+            print("********************");
+            print(StoreController.carouselImage2);
+            isLoading.value = false;
           }
-          print("********************");
-          print(StoreController.carouselImage2);
-          isLoading.value = false;
         },
         child: ValueListenableBuilder(
           valueListenable: isLoading,
           builder: (BuildContext context, bool value, Widget? child) {
             if (value) {
-              return const Center(
-                child: Loader(),
-              );
+              return SingleChildScrollView(
+                  child: Center(
+                child: SizedBox(
+                  height: 1.sh,
+                  width: 1.sw,
+                  child: Loader(),
+                ),
+              ));
             } else {
               return ScrollConfiguration(
                 behavior: CustomScrollBehavior(),
@@ -85,7 +105,7 @@ class _StoreScreenState extends State<StoreScreen>
                           width: 1.sw,
                           child: Center(
                             child: Text(
-                              "Store is empty right now",
+                              "Failed to get data. Recheck your network connection",
                               style: GoogleFonts.openSans(
                                   color: Colors.white, fontSize: 25.sp),
                             ),

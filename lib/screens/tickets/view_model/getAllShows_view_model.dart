@@ -1,15 +1,14 @@
-import 'package:flutter/cupertino.dart';
+import 'package:dio/dio.dart';
 import 'package:oasis_2022/screens/tickets/controller/store_controller.dart';
 
 import '/provider/user_details_viewmodel.dart';
 import '/utils/error_messages.dart';
-import 'package:chucker_flutter/chucker_flutter.dart';
-import 'package:dio/dio.dart';
-
 import '../repository/model/showsData.dart';
 import '../repository/retrofit/getAllShows.dart';
 
 class GetShowsViewModel {
+  static String? error;
+
   Future<AllShowsData> retrieveAllShowData() async {
     String? jwt = UserDetailsViewModel.userDetails.JWT;
     String? auth = "JWT $jwt";
@@ -20,6 +19,9 @@ class GetShowsViewModel {
       allShowsData = await client.getAllShows(auth);
     } catch (e) {
       if (e.runtimeType == DioError) {
+        if ((e as DioError).response == null) {
+          throw Exception(ErrorMessages.noInternet);
+        }
         var code = (e as DioError).response?.statusCode;
         var message = (e).response?.statusMessage;
         throw Exception(message);

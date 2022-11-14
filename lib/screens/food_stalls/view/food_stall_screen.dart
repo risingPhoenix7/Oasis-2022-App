@@ -103,9 +103,12 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
                   ? ListView(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(top: 200.h),
-                          child:
-                              SvgPicture.asset('assets/images/no_stalls.svg'),
+                          padding: EdgeInsets.only(top: 186.h),
+                          child: SvgPicture.asset(
+                            'assets/images/no_stalls.svg',
+                            width: 324.h,
+                            height: 324.h,
+                          ),
                         )
                       ],
                     )

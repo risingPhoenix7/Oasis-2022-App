@@ -34,6 +34,7 @@ class ImageAssets {
   static const String proBrosTicketImage = 'assets/images/pro.png';
   static const String sendMoneyBack = 'assets/images/sendMoneyback.png';
   static const String gradient_order = 'assets/images/gradient_order.png';
+  static const String wallet = 'assets/images/wallet.png';
   static const String noUpcomingEventsImage =
       'assets/images/no_events_image.png';
   static const String noEventsImage = 'assets/images/no_events.png';

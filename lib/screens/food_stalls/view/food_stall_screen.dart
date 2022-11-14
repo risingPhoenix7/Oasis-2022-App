@@ -120,7 +120,7 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
                             Padding(
                               padding: EdgeInsets.only(
                                   top: UIUtills()
-                                      .getProportionalHeight(height: 80),
+                                      .getProportionalHeight(height: 72),
                                   left: UIUtills()
                                       .getProportionalWidth(width: 28),
                                   right: UIUtills()
@@ -146,10 +146,7 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
                                                   builder: (context) =>
                                                       CartScreen()));
                                         },
-                                        child: const Icon(
-                                          Icons.shopping_cart,
-                                          color: Colors.white,
-                                        ),
+                                        child: SvgPicture.asset('assets/images/cart.svg')
                                       )
                                     ],
                                   )

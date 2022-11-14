@@ -243,101 +243,104 @@ class _MenuScreenState extends State<MenuScreen> {
                   builder: (context, Box box, child) {
                     menuItemsAmount = MenuScreenViewModel()
                         .populateListFromHive(menuItemsFiltered);
-                    return ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: menuItemsFiltered.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: EdgeInsets.only(bottom: 16.h),
-                          child: Column(
-                            children: [
-                              (index != 0)
-                                  ? Divider(
-                                      color: const Color.fromRGBO(
-                                          255, 255, 255, 1),
-                                      indent: 47.w,
-                                      endIndent: 47.w,
-                                    )
-                                  : Container(),
-                              Padding(
-                                padding: EdgeInsets.only(top: 8.h),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                37, 0, 20.1, 0),
-                                            child: Center(
-                                                child: SvgPicture.asset(
-                                              "assets/images/Non-Veg.svg",
-                                              color: menuItemsFiltered[index]
-                                                      .is_veg
-                                                  ? Colors.green
-                                                  : Colors.red,
-                                            )),
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  menuItemsFiltered[index].name,
-                                                  style: GoogleFonts.openSans(
-                                                      color: Colors.white,
-                                                      fontSize: 18.h,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                                Text(
-                                                  "₹${menuItemsFiltered[index].price}",
-                                                  style: GoogleFonts.openSans(
-                                                      fontSize: 16.h,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color:
-                                                          const Color.fromRGBO(
-                                                              100,
-                                                              100,
-                                                              100,
-                                                              1)),
-                                                )
-                                              ],
+                    return Padding(
+                      padding:  EdgeInsets.only(bottom: 60.h),
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: menuItemsFiltered.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: EdgeInsets.only(bottom: 16.h),
+                            child: Column(
+                              children: [
+                                (index != 0)
+                                    ? Divider(
+                                        color: const Color.fromRGBO(
+                                            255, 255, 255, 1),
+                                        indent: 47.w,
+                                        endIndent: 47.w,
+                                      )
+                                    : Container(),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 8.h),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.fromLTRB(
+                                                  37, 0, 20.1, 0),
+                                              child: Center(
+                                                  child: SvgPicture.asset(
+                                                "assets/images/Non-Veg.svg",
+                                                color: menuItemsFiltered[index]
+                                                        .is_veg
+                                                    ? Colors.green
+                                                    : Colors.red,
+                                              )),
                                             ),
-                                          ),
-                                        ],
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    menuItemsFiltered[index].name,
+                                                    style: GoogleFonts.openSans(
+                                                        color: Colors.white,
+                                                        fontSize: 18.h,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                  Text(
+                                                    "₹${menuItemsFiltered[index].price}",
+                                                    style: GoogleFonts.openSans(
+                                                        fontSize: 16.h,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color:
+                                                            const Color.fromRGBO(
+                                                                100,
+                                                                100,
+                                                                100,
+                                                                1)),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 37.w),
-                                      child: AddButton(
-                                        is_available: menuItemsFiltered[index]
-                                            .is_available,
-                                        isVeg: menuItemsFiltered[index].is_veg,
-                                        menuItemName:
-                                            menuItemsFiltered[index].name,
-                                        amount: menuItemsAmount[
-                                            menuItemsFiltered[index].id]!,
-                                        foodStallId: widget.foodStallId,
-                                        price: menuItemsFiltered[index].price,
-                                        menuItemId: menuItemsFiltered[index].id,
-                                        foodStallName: widget.foodStallName,
-                                      ),
-                                    )
-                                  ],
+                                      Padding(
+                                        padding: EdgeInsets.only(right: 37.w),
+                                        child: AddButton(
+                                          is_available: menuItemsFiltered[index]
+                                              .is_available,
+                                          isVeg: menuItemsFiltered[index].is_veg,
+                                          menuItemName:
+                                              menuItemsFiltered[index].name,
+                                          amount: menuItemsAmount[
+                                              menuItemsFiltered[index].id]!,
+                                          foodStallId: widget.foodStallId,
+                                          price: menuItemsFiltered[index].price,
+                                          menuItemId: menuItemsFiltered[index].id,
+                                          foodStallName: widget.foodStallName,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     );
                   },
                 ),

@@ -94,7 +94,7 @@ class _OrderStatusState extends State<OrderStatus> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Padding(
-                              padding: EdgeInsets.fromLTRB(21.w, 0, 23.w, 0),
+                              padding: EdgeInsets.fromLTRB(23.w, 0, 23.w, 0),
                               child: Column(
                                 children: [
                                   Padding(
@@ -226,73 +226,62 @@ class _OrderStatusState extends State<OrderStatus> {
                                                     EdgeInsets.only(bottom: 8.h),
                                                 child: Padding(
                                                   padding:
-                                                      EdgeInsets.only(left: 32.w),
-                                                  child: Row(
-                                                    children: [
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
+                                                      EdgeInsets.only(left: 20.w,right: 20.w),
+                                                  child:
+                                                      Row(
+                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
                                                                 .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
+
                                                         children: [
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              SizedBox(
-                                                                width: 220.w,
-                                                                child: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .min,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Flexible(
-                                                                      child: Text(
-                                                                        widget
-                                                                            .orderCardModel
-                                                                            .menuItemInOrdersScreenList[
-                                                                                index]
-                                                                            .name,
-                                                                        style: GoogleFonts.openSans(
-                                                                            fontWeight: FontWeight
-                                                                                .w500,
-                                                                            color:
-                                                                                Colors.white),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                '₹ ${widget.orderCardModel.menuItemInOrdersScreenList[index].price} x ${widget.orderCardModel.menuItemInOrdersScreenList[index].quantity}',
-                                                                style: GoogleFonts.roboto(
-                                                                    fontWeight:
-                                                                        FontWeight
+                                                          SizedBox(
+                                                            width: 180.w,
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Flexible(
+                                                                  child: Text(
+                                                                    widget
+                                                                        .orderCardModel
+                                                                        .menuItemInOrdersScreenList[
+                                                                            index]
+                                                                        .name,
+                                                                    style: GoogleFonts.openSans(
+                                                                        fontWeight: FontWeight
                                                                             .w500,
-                                                                    color: const Color
-                                                                            .fromRGBO(
-                                                                        100,
-                                                                        100,
-                                                                        100,
-                                                                        1)),
-                                                              ),
-                                                            ],
+                                                                        color:
+                                                                            Colors.white),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            '₹ ${widget.orderCardModel.menuItemInOrdersScreenList[index].price} x ${widget.orderCardModel.menuItemInOrdersScreenList[index].quantity}',
+
+                                                            style: GoogleFonts.roboto(
+
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+
+                                                                color: const Color
+                                                                        .fromRGBO(
+                                                                    100,
+                                                                    100,
+                                                                    100,
+                                                                    1)),
                                                           ),
                                                         ],
                                                       ),
-                                                      SizedBox(
-                                                        width: 20.w,
-                                                      ),
-                                                    ],
-                                                  ),
+
+
                                                 ),
                                               );
                                             },
@@ -331,7 +320,6 @@ class _OrderStatusState extends State<OrderStatus> {
                                               30.w, 0, 0, 0),
                                           child: Text(
                                             '₹ ${widget.orderCardModel.subtotal.round()}',
-                                            //'₹ ${widget.orderCardModel.menuItemInOrdersScreenList[index].price} x ${widget.orderCardModel.menuItemInOrdersScreenList[index].quantity}',
                                             style: GoogleFonts.openSans(
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 20.sp,

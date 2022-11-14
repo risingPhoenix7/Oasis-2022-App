@@ -33,6 +33,7 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: EdgeInsets.only(top: 108.h, left: 24.w),
@@ -43,12 +44,12 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 200.w, top: 108.h),
+                    padding: EdgeInsets.only(right: 30.w, top: 108.h),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: SvgPicture.asset('assets/images/exit_button.svg'),
+                      child: SvgPicture.asset('assets/images/exit_button.svg',height: 32.h,width: 32.w,),
                     ),
                   ),
                 ],

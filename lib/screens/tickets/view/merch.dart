@@ -92,9 +92,12 @@ class _MerchState extends State<Merch> {
                                       Color.fromRGBO(209, 154, 8, 1),
                                     ]),
                                     borderRadius:
-                                        BorderRadius.circular(22.17.r)),
+                                        BorderRadius.circular(22.17.r),
+
+                                ),
+
                                 child: Padding(
-                                  padding: const EdgeInsets.all(1),
+                                  padding:  EdgeInsets.all(0.4.w),
                                   child: Container(
                                     decoration: BoxDecoration(
                                         color: Colors.black,
@@ -106,7 +109,7 @@ class _MerchState extends State<Merch> {
                                       children: [
                                         Padding(
                                           padding: EdgeInsets.only(
-                                              top: 10.h, left: 16.08.w),
+                                              top: 14.h, left: 16.08.w),
                                           child: SizedBox(
                                               height: 203.h,
                                               width: 170.w,

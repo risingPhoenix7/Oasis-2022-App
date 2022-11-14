@@ -227,8 +227,7 @@ class SingleCard extends StatelessWidget {
   }
 
   Future<void> _launchDribble(String dribbleUser) async {
-    final Uri _profileUrl =
-        Uri.parse('https://www.linkedin.com/in/$dribbleUser');
+    final Uri _profileUrl = Uri.parse('https://dribbble.com/$dribbleUser');
     await launchUrl(_profileUrl);
   }
 
@@ -266,13 +265,13 @@ class SingleCard extends StatelessWidget {
             'assets/images/twitterIcon.svg', _launchTwitter, handleurl);
       case 'behance':
         return otherOne(
-            'assets/images/githubIcon.svg', _launchBehance, handleurl);
+            'assets/images/behanceIcon.svg', _launchBehance, handleurl);
       case 'dribble':
         return otherOne(
-            'assets/images/githubIcon.svg', _launchDribble, handleurl);
+            'assets/images/dribbleIcon.svg', _launchDribble, handleurl);
       case 'instagram':
         return otherOne(
-            'assets/images/githubIcon.svg', _launchInstagram, handleurl);
+            'assets/images/instagramIcon.svg', _launchInstagram, handleurl);
       default:
         {
           print('idk whats this');
@@ -291,65 +290,6 @@ class SingleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   decoration: BoxDecoration(
-    //       image: const DecorationImage(
-    //           image: AssetImage(ImageAssets.eventCardBg), fit: BoxFit.fill),
-    //       borderRadius: BorderRadius.circular(20.r)),
-    //   width: UIUtills().getProportionalWidth(width: 170),
-    //   child: Padding(
-    //     padding: EdgeInsets.symmetric(
-    //         vertical: UIUtills().getProportionalHeight(height: 16)),
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.center,
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: [
-    //         Image.asset(
-    //           image,
-    //           height: UIUtills().getProportionalHeight(height: 132),
-    //           width: UIUtills().getProportionalWidth(width: 138),
-    //         ),
-    //         Padding(
-    //           padding: EdgeInsets.only(
-    //               top: UIUtills().getProportionalHeight(height: 8)),
-    //           child: SizedBox(
-    //             height: UIUtills().getProportionalHeight(height: 50),
-    //             width: UIUtills().getProportionalWidth(width: 104),
-    //             child: Center(
-    //               child: Text(name,
-    //                   textAlign: TextAlign.center,
-    //                   style: OasisTextStyles.openSansSubHeading
-    //                       .copyWith(color: Colors.white, fontSize: 16.sp)),
-    //             ),
-    //           ),
-    //         ),
-    //         Padding(
-    //             padding: EdgeInsets.only(
-    //                 top: UIUtills().getProportionalHeight(height: 4),
-    //                 bottom: UIUtills().getProportionalHeight(height: 8)),
-    //             child: SizedBox(
-    //               height: UIUtills().getProportionalHeight(height: 34),
-    //               width: UIUtills().getProportionalWidth(width: 142),
-    //               child: Center(
-    //                 child: Text(
-    //                   job,
-    //                   textAlign: TextAlign.center,
-    //                   style: OasisTextStyles.openSansSubHeading.copyWith(
-    //                     fontSize: 11.sp,
-    //                     fontWeight: FontWeight.w500,
-    //                     color: OasisColors.primaryYellow,
-    //                   ),
-    //                 ),
-    //               ),
-    //             )),
-    //         Center(
-    //             child: Row(
-    //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    //                 children: getListFromMap()))
-    //       ],
-    //     ),
-    //   ),
-    // );
     return Container(
       decoration: BoxDecoration(
           color: const Color(0xFF17181C),

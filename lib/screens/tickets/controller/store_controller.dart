@@ -8,7 +8,7 @@ import '../view_model/get_signedtickets_view_model.dart';
 class StoreController {
   static ValueNotifier<int> itemNumber = ValueNotifier(0);
   static ValueNotifier<bool> itemBoughtOrRefreshed = ValueNotifier(true);
-
+  static String? error = null;
   static SignedTickets signedTickets = SignedTickets();
 
   static List<StoreItemData> storeItem = [];
@@ -20,10 +20,16 @@ class StoreController {
   static List<dynamic> carouselItems = [];
 
   Future<void> initialCall() async {
-    AllShowsData allShowsData = await GetShowsViewModel().retrieveAllShowData();
-    GetShowsViewModel().fillController(allShowsData);
-    signedTickets = SignedTickets();
-    signedTickets = await GetSignedTicketsViewModel().retrieveSignedShows();
+    error = null;
+    try {
+      AllShowsData allShowsData =
+          await GetShowsViewModel().retrieveAllShowData();
+      GetShowsViewModel().fillController(allShowsData);
+      signedTickets = SignedTickets();
+      signedTickets = await GetSignedTicketsViewModel().retrieveSignedShows();
+    } catch (e) {
+      error = e.toString().split(':')[1];
+    }
   }
 
   int getId(int? merchIndex) {

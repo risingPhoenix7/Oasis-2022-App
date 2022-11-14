@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:oasis_2022/screens/kindstore/view_model/kind_store_catalog_view_model.dart';
-import '/utils/ui_utils.dart';
-import '../../../widgets/error_dialogue.dart';
-import '/widgets/loader.dart';
 import 'package:gradient_borders/gradient_borders.dart';
+import 'package:oasis_2022/screens/kindstore/view_model/kind_store_catalog_view_model.dart';
+
+import '/utils/ui_utils.dart';
+import '/widgets/loader.dart';
+import '../../../widgets/error_dialogue.dart';
 
 class KindStoreCatalog extends StatefulWidget {
   const KindStoreCatalog({super.key});
@@ -62,8 +63,7 @@ class _KindStoreCatalogState extends State<KindStoreCatalog> {
                       ? Center(
                           child: ErrorDialog(
                             errorMessage:
-                                'Check your connectivity and restart the app to view Kind Store Catalog',
-                            isFatalError: true,
+                                'Kind Store Catalog will be updated soon',
                           ),
                         )
                       : Column(

@@ -10,6 +10,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:oasis_2022/screens/events/repository/model/miscEventResult.dart';
 import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
 import 'package:oasis_2022/screens/onboarding/overboarding_page.dart';
+
 import '../home.dart';
 import '../provider/user_details_viewmodel.dart';
 import '../screens/food_stalls/repo/model/hive_model/hive_menu_entry.dart';

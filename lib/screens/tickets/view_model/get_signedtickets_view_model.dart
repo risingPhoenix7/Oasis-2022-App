@@ -1,11 +1,8 @@
-import 'package:oasis_2022/screens/tickets/repository/model/showsData.dart';
-
-import '../controller/store_controller.dart';
-import '/provider/user_details_viewmodel.dart';
-import '/utils/error_messages.dart';
-import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
 
+import '/provider/user_details_viewmodel.dart';
+import '/utils/error_messages.dart';
+import '../controller/store_controller.dart';
 import '../repository/model/signedTicketsData.dart';
 import '../repository/retrofit/getSignedTickets.dart';
 
@@ -20,6 +17,9 @@ class GetSignedTicketsViewModel {
       signedTickets = await client.getCurrentTickets(auth);
     } catch (e) {
       if (e.runtimeType == DioError) {
+        if ((e as DioError).response == null) {
+          throw Exception(ErrorMessages.noInternet);
+        }
         var code = (e as DioError).response?.statusCode;
         var message = (e).response?.statusMessage;
         if (e.response!.statusCode == 412) {

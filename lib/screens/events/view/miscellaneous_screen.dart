@@ -156,7 +156,7 @@ class _EventsScreenState extends State<EventsScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(top: 90.h, left: 28.w),
+                              padding: EdgeInsets.only(top: 72.h, left: 28.w),
                               child: Text(
                                 'Events',
                                 style: OasisTextStyles.inter500,
@@ -164,7 +164,7 @@ class _EventsScreenState extends State<EventsScreen> {
                             ),
                             Padding(
                                 padding:
-                                    EdgeInsets.only(top: 90.h, right: 28.w),
+                                    EdgeInsets.only(top: 72.h, right: 15.w),
                                 child: IconButton(
                                     onPressed: () {
                                       Navigator.push(
@@ -174,7 +174,8 @@ class _EventsScreenState extends State<EventsScreen> {
                                                   MoreInfoScreen()));
                                     },
                                     icon: SvgPicture.asset(
-                                        'assets/images/3gole.svg'))),
+                                        'assets/images/3gole.svg',
+                                    ))),
                           ],
                         ),
                         Padding(
@@ -190,7 +191,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(
                                     color: const Color.fromRGBO(248, 216, 72, 0.45),
-                                    width: 0.5),
+                                    width: 0.2),
                                 gradient: const LinearGradient(
                                     begin: Alignment.centerLeft,
                                     end: Alignment.centerRight,

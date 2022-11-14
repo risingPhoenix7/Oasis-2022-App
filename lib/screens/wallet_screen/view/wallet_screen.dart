@@ -5,11 +5,13 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:oasis_2022/resources/resources.dart';
 import 'package:oasis_2022/screens/kindstore/view/kind_store_view.dart';
 import 'package:oasis_2022/screens/paytm/view/payment_cart_screen.dart';
 import 'package:oasis_2022/utils/colors.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../../morescreen/screens/more_info.dart';
 import '/provider/user_details_viewmodel.dart';
 import '/screens/paytm/view/refresh_wallet_controller.dart';
 import '/screens/wallet_screen/view/qr_code_popup.dart';
@@ -35,6 +37,8 @@ class WalletScreen extends StatefulWidget {
 }
 
 class _WalletScreenState extends State<WalletScreen> {
+
+
   int? amountToAdd;
   int? userid;
   int? amountToSend;
@@ -50,6 +54,18 @@ class _WalletScreenState extends State<WalletScreen> {
   String _authorized = 'Not Authorized';
   bool _isAuthenticating = false;
   bool authenticated = true;
+
+  String capitalizeAllWord(String value) {
+    var result = value[0].toUpperCase();
+    for (int i = 1; i < value.length; i++) {
+      if (value[i - 1] == " ") {
+        result = result + value[i].toUpperCase();
+      } else {
+        result = result + value[i];
+      }
+    }
+    return result;
+  }
 
   @override
   void initState() {
@@ -138,23 +154,19 @@ class _WalletScreenState extends State<WalletScreen> {
           behavior: CustomScrollBehavior(),
           child: ListView(
             children: [
-              Stack(children: [
-                Container(
-                  height: MediaQuery.of(context).size.height,
-                  color: Colors.black,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 34, 20, 0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(
-                              UIUtills().getProportionalWidth(width: 8),
-                              0,
-                              0,
-                              UIUtills().getProportionalHeight(height: 28)),
-                          child: Text(
+              Container(
+                height: MediaQuery.of(context).size.height,
+                color: Colors.black,
+                child: Padding(
+                  padding:  EdgeInsets.fromLTRB(20.w, 34.h, 20.w, 0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
                             'Wallet',
                             style: GoogleFonts.openSans(
                                 color: const Color(0xFFFFFFFF),
@@ -162,371 +174,158 @@ class _WalletScreenState extends State<WalletScreen> {
                                     .getProportionalHeight(height: 28),
                                 fontWeight: FontWeight.w500),
                           ),
+                          IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            MoreInfoScreen()));
+                              },
+                              icon: SvgPicture.asset(
+                                  'assets/images/3gole.svg'))
+                        ],
+                      ),
+
+                      Container(
+                        decoration: const BoxDecoration(
+
+
+                          image: DecorationImage(
+                            image: AssetImage(ImageAssets.wallet),
+                              fit: BoxFit.fill
+                          )
                         ),
-                        Stack(
-                          children: [
-                            Image.asset(
-                              'assets/images/wallet.png',
-                              height:
-                              UIUtills().getProportionalHeight(height: 244),
-                              width: MediaQuery.of(context).size.width,
-                            ),
-                            Container(
-                              color: Colors.transparent,
-                              height:
-                              UIUtills().getProportionalHeight(height: 244),
-                              width: MediaQuery.of(context).size.width,
-                              child: Padding(
-                                padding:
-                                EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 15.h),
-                                child: Column(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // SizedBox(height: 10 ,width: MediaQuery.of(context).size.width,),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'User ID- ${UserDetailsViewModel.userDetails.userID ?? 'NA'}',
-                                              style: GoogleFonts.openSans(
-                                                  color:
-                                                  const Color(0xFFFFFFFF),
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            Container(
-                                              width: 250.w,
-                                              child: Text(
-                                                UserDetailsViewModel
-                                                    .userDetails.username ??
-                                                    'NA',
-                                                style: GoogleFonts.openSans(
-                                                    color: Colors.white,
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                    FontWeight.w700),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        InkWell(
-                                          onTap: () async {
-                                            if (await auth
-                                                .isDeviceSupported()) {
-                                              await _authenticate();
-                                            }
-                                            if (authenticated) {
-                                              if (UserDetailsViewModel
-                                                  .userDetails.userID ==
-                                                  null ||
-                                                  UserDetailsViewModel
-                                                      .userDetails.userID ==
-                                                      '') {
-                                                showDialog(
-                                                    barrierDismissible: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return Align(
-                                                        alignment: Alignment
-                                                            .bottomCenter,
-                                                        child: ErrorDialog(
-                                                            errorMessage:
-                                                            'User id not found'),
-                                                      );
-                                                    });
-                                              } else {
-                                                QRcode = await WalletViewModel()
-                                                    .refreshQrCode(int.parse(
-                                                    UserDetailsViewModel
-                                                        .userDetails
-                                                        .userID!));
-                                                showDialog(
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return Align(
-                                                          alignment: Alignment
-                                                              .bottomCenter,
-                                                          child:
-                                                          QRCodeDialogBox(
-                                                              qrCode:
-                                                              QRcode));
-                                                    });
-                                              }
-                                            }
-                                          },
-                                          child: SvgPicture.asset(
-                                            'assets/images/qr.svg',
-                                            height: 31,
-                                            width: 31,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.end,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Current Balance',
-                                              style: GoogleFonts.openSans(
-                                                  color:
-                                                  const Color(0xFFFFFFFF),
-                                                  fontSize: UIUtills()
-                                                      .getProportionalHeight(
-                                                      height: 16),
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            Padding(
-                                              padding:
-                                              EdgeInsets.only(bottom: 20.h),
-                                              child: ValueListenableBuilder(
-                                                valueListenable: isLoading,
-                                                builder: (context, bool value,
-                                                    child) {
-                                                  if (isLoading.value) {
-                                                    return SizedBox(
-                                                        width: 20,
-                                                        height: 20,
-                                                        child: Center(
-                                                            child: SpinKitWave(
-                                                              color: Colors.white
-                                                                  .withOpacity(0.5),
-                                                              size: 15.r,
-                                                            )));
-                                                  } else {
-                                                    return Text(
-                                                      'Rs. ${WalletViewModel.balance}',
-                                                      style: GoogleFonts.openSans(
-                                                          color: const Color(
-                                                              0xFFFFFFFF),
-                                                          fontSize: UIUtills()
-                                                              .getProportionalHeight(
-                                                              height: 24),
-                                                          fontWeight:
-                                                          FontWeight.w700),
-                                                    );
-                                                  }
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 13.w, top: 15.h),
-                          child: Row(
+                        width: 388.w,
+                        height: 238.h,
+                        child: Padding(
+                          padding:
+                          EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 15.h),
+                          child: Column(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                width:
-                                UIUtills().getProportionalWidth(width: 171),
-                                padding:
-                                const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                                decoration: BoxDecoration(
-                                  gradient:
-                                  OasisColors.oasisWebsiteGoldGradient,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  children: [
-                                    InkWell(
-                                      onTap: () async {
-                                        if (!mounted) {}
-                                        PersistentNavBarNavigator.pushNewScreen(
-                                            context,
-                                            screen: const ScanningView(),
-                                            withNavBar: false);
-                                      },
-                                      child: Row(children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: UIUtills()
-                                                  .getProportionalWidth(
-                                                  width: 22)),
-                                          child: SvgPicture.asset(
-                                            'assets/images/send_money.svg',
-                                            width: UIUtills()
-                                                .getProportionalWidth(
-                                                width: 22),
-                                            height: UIUtills()
-                                                .getProportionalHeight(
-                                                height: 26),
+                              // SizedBox(height: 10 ,width: MediaQuery.of(context).size.width,),
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'User ID- ${UserDetailsViewModel.userDetails.userID ?? 'NA'}',
+                                        style: GoogleFonts.openSans(
+                                            color:
+                                            const Color(0xFFFFFFFF),
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                      Container(
+                                        width: 250.w,
+                                        child: Text(
+                                          capitalizeAllWord(
+                                              UserDetailsViewModel
+                                              .userDetails.username?.toLowerCase() ??
+                                              'NA'
                                           ),
-                                        ),
-                                        SizedBox(
-                                          width: UIUtills()
-                                              .getProportionalHeight(
-                                              height: 13),
-                                        ),
-                                        Text(
-                                          'Send Money',
                                           style: GoogleFonts.openSans(
-                                              color: const Color(0xFF1A1A1A),
-                                              fontSize: UIUtills()
-                                                  .getProportionalHeight(
-                                                  height: 16),
-                                              fontWeight: FontWeight.w600),
+                                              color: Colors.white,
+                                              fontSize: 20.sp,
+                                              fontWeight:
+                                              FontWeight.w700),
                                         ),
-                                      ]),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width:
-                                UIUtills().getProportionalWidth(width: 20),
-                              ),
-                              Container(
-                                width:
-                                UIUtills().getProportionalWidth(width: 171),
-                                padding:
-                                const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                                decoration: BoxDecoration(
-                                  gradient: const LinearGradient(
-                                    colors: [
-                                      Color.fromRGBO(209, 154, 8, 1),
-                                      Color.fromRGBO(254, 212, 102, 1),
-                                      Color.fromRGBO(227, 186, 79, 1),
-                                      Color.fromRGBO(209, 154, 8, 1),
-                                      Color.fromRGBO(209, 154, 8, 1),
+                                      ),
                                     ],
                                   ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    if (UserDetailsViewModel
-                                        .userDetails.isBitsian!) {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                              const AddMoneyScreen()));
-                                    } else {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (builder) =>
-                                              const PaymentCartScreen()));
-                                    }
-                                  },
-                                  child: Row(children: [
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            left: UIUtills()
-                                                .getProportionalWidth(
-                                                width: 20)),
-                                        child: SvgPicture.asset(
-                                          'assets/images/addMoney.svg',
-                                          height: 22,
-                                          width: 26,
-                                        )),
-                                    SizedBox(
-                                      width: UIUtills()
-                                          .getProportionalWidth(width: 14.00),
+                                  InkWell(
+                                    onTap: () async {
+                                      if (await auth
+                                          .isDeviceSupported()) {
+                                        await _authenticate();
+                                      }
+                                      if (authenticated) {
+                                        if (UserDetailsViewModel
+                                            .userDetails.userID ==
+                                            null ||
+                                            UserDetailsViewModel
+                                                .userDetails.userID ==
+                                                '') {
+                                          showDialog(
+                                              barrierDismissible: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return Align(
+                                                  alignment: Alignment
+                                                      .bottomCenter,
+                                                  child: ErrorDialog(
+                                                      errorMessage:
+                                                      'User id not found'),
+                                                );
+                                              });
+                                        } else {
+                                          QRcode = await WalletViewModel()
+                                              .refreshQrCode(int.parse(
+                                              UserDetailsViewModel
+                                                  .userDetails
+                                                  .userID!));
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return Align(
+                                                    alignment: Alignment
+                                                        .bottomCenter,
+                                                    child:
+                                                    QRCodeDialogBox(
+                                                        qrCode:
+                                                        QRcode));
+                                              });
+                                        }
+                                      }
+                                    },
+                                    child: SvgPicture.asset(
+                                      'assets/images/qr.svg',
+                                      height: 31.h,
+                                      width: 31.w,
                                     ),
-                                    Text(
-                                      'Add Money',
-                                      style: GoogleFonts.openSans(
-                                          color: Colors.black,
-                                          fontSize: UIUtills()
-                                              .getProportionalWidth(width: 16),
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ]),
-                                ),
+                                  )
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                        WalletViewModel.isKindActive
-                            ? Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Container(
-                            width: UIUtills()
-                                .getProportionalWidth(width: 388),
-                            decoration: BoxDecoration(
-                                color:
-                                const Color.fromRGBO(26, 28, 28, 1),
-                                borderRadius:
-                                BorderRadius.circular(10.79)),
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  16, 14, 16, 14),
-                              child: Row(
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment:
+                                CrossAxisAlignment.end,
                                 children: [
-                                  Container(
-                                      height: UIUtills()
-                                          .getProportionalHeight(
-                                          height: 46),
-                                      width: UIUtills()
-                                          .getProportionalWidth(
-                                          width: 46),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                          BorderRadius.circular(10)),
-                                      child: Padding(
-                                        padding:
-                                        const EdgeInsets.only(top: 3),
-                                        child: Center(
-                                            child: SvgPicture.asset(
-                                              'assets/images/Kind_points.svg',
-                                              height: UIUtills()
-                                                  .getProportionalHeight(
-                                                  height: 23),
-                                              width: UIUtills()
-                                                  .getProportionalWidth(
-                                                  width: 26),
-                                              color: Colors.black,
-                                            )),
-                                      )),
-                                  SizedBox(
-                                    width: UIUtills()
-                                        .getProportionalWidth(width: 12),
-                                  ),
                                   Column(
                                     crossAxisAlignment:
                                     CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Kind Points',
+                                        'Current Balance',
                                         style: GoogleFonts.openSans(
-                                            color: Colors.white,
+                                            color:
+                                            const Color(0xFFFFFFFF),
                                             fontSize: UIUtills()
                                                 .getProportionalHeight(
                                                 height: 16),
                                             fontWeight: FontWeight.w600),
                                       ),
-                                      ValueListenableBuilder(
+                                      Padding(
+                                        padding:
+                                        EdgeInsets.only(bottom: 20.h),
+                                        child: ValueListenableBuilder(
                                           valueListenable: isLoading,
                                           builder: (context, bool value,
                                               child) {
                                             if (isLoading.value) {
                                               return SizedBox(
-                                                  width: 20,
-                                                  height: 20,
+                                                  width: 20.w,
+                                                  height: 20.h,
                                                   child: Center(
                                                       child: SpinKitWave(
                                                         color: Colors.white
@@ -535,78 +334,298 @@ class _WalletScreenState extends State<WalletScreen> {
                                                       )));
                                             } else {
                                               return Text(
-                                                '${WalletViewModel.kindpoints}',
-                                                style:
-                                                GoogleFonts.openSans(
-                                                    color:
-                                                    Colors.white,
-                                                    fontSize: 20.sp,
+                                                'Rs. ${WalletViewModel.balance}',
+                                                style: GoogleFonts.openSans(
+                                                    color: const Color(
+                                                        0xFFFFFFFF),
+                                                    fontSize: UIUtills()
+                                                        .getProportionalHeight(
+                                                        height: 24),
                                                     fontWeight:
-                                                    FontWeight
-                                                        .w700),
+                                                    FontWeight.w700),
                                               );
                                             }
-                                          }),
+                                          },
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: UIUtills()
-                                            .getProportionalWidth(
-                                            width: 80)),
-                                    child: Container(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          0, 8, 0, 8),
-                                      decoration: BoxDecoration(
-                                        gradient: OasisColors
-                                            .oasisWebsiteGoldGradient,
-                                        borderRadius:
-                                        BorderRadius.circular(10),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 13.w, top: 20.h),
+                        child: Row(
+                          children: [
+                            Container(
+                              width:
+                              171.w,
+                              height: 52.h,
+                              padding:
+                               EdgeInsets.fromLTRB(0, 12.h, 0, 12.h),
+                              decoration: BoxDecoration(
+                                gradient:
+                                OasisColors.oasisWebsiteGoldGradient,
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              child: Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () async {
+                                      if (!mounted) {}
+                                      PersistentNavBarNavigator.pushNewScreen(
+                                          context,
+                                          screen: const ScanningView(),
+                                          withNavBar: false);
+                                    },
+                                    child: Row(children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: UIUtills()
+                                                .getProportionalWidth(
+                                                width: 22)),
+                                        child: SvgPicture.asset(
+                                          'assets/images/send_money.svg',
+                                          width: UIUtills()
+                                              .getProportionalWidth(
+                                              width: 22),
+                                          height: UIUtills()
+                                              .getProportionalHeight(
+                                              height: 24),
+                                        ),
                                       ),
-                                      child: Row(children: [
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              UIUtills()
-                                                  .getProportionalWidth(
-                                                  width: 24),
-                                              0,
-                                              0,
-                                              0),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (builder) =>
-                                                      KindStoreCatalog()),
-                                            );
-                                          },
-                                          child: Text(
-                                            'Claim now',
-                                            style: GoogleFonts.openSans(
-                                                color: Colors.black,
-                                                fontSize: UIUtills()
-                                                    .getProportionalWidth(
-                                                    width: 14),
-                                                fontWeight:
-                                                FontWeight.w600),
-                                          ),
-                                        ),
-                                        SizedBox(width: 24)
-                                      ]),
-                                    ),
+                                      SizedBox(
+                                        width: UIUtills()
+                                            .getProportionalHeight(
+                                            height: 13),
+                                      ),
+                                      Text(
+                                        'Send Money',
+                                        style: GoogleFonts.openSans(
+                                            color: const Color(0xFF1A1A1A),
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ]),
                                   ),
                                 ],
                               ),
                             ),
+                            SizedBox(
+                              width:
+                              UIUtills().getProportionalWidth(width: 20),
+                            ),
+                            Container(
+                              width:
+                              171.w,
+                              padding:
+                               EdgeInsets.fromLTRB(0, 12.h, 0, 12.h),
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromRGBO(209, 154, 8, 1),
+                                    Color.fromRGBO(254, 212, 102, 1),
+                                    Color.fromRGBO(227, 186, 79, 1),
+                                    Color.fromRGBO(209, 154, 8, 1),
+                                    Color.fromRGBO(209, 154, 8, 1),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              child: InkWell(
+                                onTap: () {
+                                  if (UserDetailsViewModel
+                                      .userDetails.isBitsian!) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                            const AddMoneyScreen()));
+                                  } else {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (builder) =>
+                                            const PaymentCartScreen()));
+                                  }
+                                },
+                                child: Row(children: [
+                                  Padding(
+                                      padding: EdgeInsets.only(
+                                          left: UIUtills()
+                                              .getProportionalWidth(
+                                              width: 20)),
+                                      child: SvgPicture.asset(
+                                        'assets/images/addMoney.svg',
+                                        height: 22.h,
+                                        width: 25.w,
+                                      )),
+                                  SizedBox(
+                                    width: UIUtills()
+                                        .getProportionalWidth(width: 14.00),
+                                  ),
+                                  Text(
+                                    'Add Money',
+                                    style: GoogleFonts.openSans(
+                                        color: Colors.black,
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ]),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      WalletViewModel.isKindActive
+                          ? Padding(
+                        padding:  EdgeInsets.only(top: 20.h),
+                        child: Container(
+                          width: UIUtills()
+                              .getProportionalWidth(width: 388),
+                          decoration: BoxDecoration(
+                              color:
+                              const Color.fromRGBO(26, 28, 28, 1),
+                              borderRadius:
+                              BorderRadius.circular(10.79.r)),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                                16, 14, 16, 14),
+                            child: Row(
+                              children: [
+                                Container(
+                                    height: UIUtills()
+                                        .getProportionalHeight(
+                                        height: 46),
+                                    width: UIUtills()
+                                        .getProportionalWidth(
+                                        width: 46),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                        BorderRadius.circular(10)),
+                                    child: Padding(
+                                      padding:
+                                      const EdgeInsets.only(top: 3),
+                                      child: Center(
+                                          child: SvgPicture.asset(
+                                            'assets/images/Kind_points.svg',
+                                            height: UIUtills()
+                                                .getProportionalHeight(
+                                                height: 23),
+                                            width: UIUtills()
+                                                .getProportionalWidth(
+                                                width: 26),
+                                            color: Colors.black,
+                                          )),
+                                    )),
+                                SizedBox(
+                                  width: UIUtills()
+                                      .getProportionalWidth(width: 12),
+                                ),
+                                Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Kind Points',
+                                      style: GoogleFonts.openSans(
+                                          color: Colors.white,
+                                          fontSize: UIUtills()
+                                              .getProportionalHeight(
+                                              height: 16),
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    ValueListenableBuilder(
+                                        valueListenable: isLoading,
+                                        builder: (context, bool value,
+                                            child) {
+                                          if (isLoading.value) {
+                                            return SizedBox(
+                                                width: 20.w,
+                                                height: 20.h,
+                                                child: Center(
+                                                    child: SpinKitWave(
+                                                      color: Colors.white
+                                                          .withOpacity(0.5),
+                                                      size: 15.r,
+                                                    )));
+                                          } else {
+                                            return Text(
+                                              '${WalletViewModel.kindpoints}',
+                                              style:
+                                              GoogleFonts.openSans(
+                                                  color:
+                                                  Colors.white,
+                                                  fontSize: 20.sp,
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .w700),
+                                            );
+                                          }
+                                        }),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: UIUtills()
+                                          .getProportionalWidth(
+                                          width: 80)),
+                                  child: Container(
+                                    padding:  EdgeInsets.fromLTRB(
+                                        0, 8.h, 0, 8.h),
+                                    decoration: BoxDecoration(
+                                      gradient: OasisColors
+                                          .oasisWebsiteGoldGradient,
+                                      borderRadius:
+                                      BorderRadius.circular(10.r),
+                                    ),
+                                    child: Row(children: [
+                                      Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            UIUtills()
+                                                .getProportionalWidth(
+                                                width: 24),
+                                            0,
+                                            0,
+                                            0),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (builder) =>
+                                                    KindStoreCatalog()),
+                                          );
+                                        },
+                                        child: Text(
+                                          'Claim now',
+                                          style: GoogleFonts.openSans(
+                                              color: Colors.black,
+                                              fontSize: UIUtills()
+                                                  .getProportionalWidth(
+                                                  width: 14),
+                                              fontWeight:
+                                              FontWeight.w600),
+                                        ),
+                                      ),
+                                      SizedBox(width: 24.w)
+                                    ]),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        )
-                            : Container()
-                      ],
-                    ),
+                        ),
+                      )
+                          : Container()
+                    ],
                   ),
                 ),
-              ]),
+              ),
             ],
           ),
         ),

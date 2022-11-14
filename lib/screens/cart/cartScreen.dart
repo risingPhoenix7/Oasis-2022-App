@@ -115,14 +115,14 @@ class CartScreenState extends State<CartScreen> {
                   Navigator.pop(context);
                 },
                 child: Container(
-                  height: 30.h,
-                  width: 30.w,
+                  height: 32.h,
+                  width: 32.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6.r),
                       color: const Color.fromRGBO(22, 25, 31, 1)),
                   child: Icon(
                     Icons.close,
-                    size: 16.r,
+                    size: 20.r,
                     color: const Color.fromRGBO(244, 244, 244, 1),
                   ),
                 ),

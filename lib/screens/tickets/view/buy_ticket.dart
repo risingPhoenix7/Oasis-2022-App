@@ -91,12 +91,12 @@ class _BuyTicketState extends State<BuyTicket> {
     return Center(
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.r)),
-        height: 545.h,
+        height: 580.h,
         width: 388.w,
         child: Stack(children: [
           Image.asset(
             "assets/images/buy_tickets_bg.png",
-            height: 545.h,
+            height: 580.h,
             width: 388.w,
           ),
           Column(
@@ -201,7 +201,7 @@ class _BuyTicketState extends State<BuyTicket> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 30.h),
+                padding: EdgeInsets.only(top: 30.h,bottom: 40.h),
                 child: GestureDetector(
                   onTap: () async {
                     if (await auth.isDeviceSupported()) {

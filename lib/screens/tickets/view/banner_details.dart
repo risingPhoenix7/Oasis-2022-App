@@ -109,7 +109,7 @@ class _BannerDetailsState extends State<BannerDetails> {
                     Row(
                       children: [
                         Text(
-                          "Tickets Used : ${GetSignedTicketsViewModel().getUsedTickets(StoreController().getId(null))}",
+                          "Tickets\nScanned : ${GetSignedTicketsViewModel().getUsedTickets(StoreController().getId(null))}",
                           textScaleFactor: 1.0,
                           textAlign: TextAlign.start,
                           style: GoogleFonts.openSans(
@@ -118,7 +118,7 @@ class _BannerDetailsState extends State<BannerDetails> {
                         Padding(
                           padding: EdgeInsets.only(left: 21.w),
                           child: Text(
-                            "Tickets Left : ${GetSignedTicketsViewModel().getUnusedTickets(StoreController().getId(null))}",
+                            "Tickets\nUnscanned : ${GetSignedTicketsViewModel().getUnusedTickets(StoreController().getId(null))}",
                             textScaleFactor: 1.0,
                             textAlign: TextAlign.start,
                             style: GoogleFonts.openSans(

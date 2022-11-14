@@ -9,6 +9,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:oasis_2022/screens/login/repository/model/gloginData.dart';
 import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 
+import '../../../utils/colors.dart';
 import '/widgets/error_dialogue.dart';
 import '../../../main.dart';
 import '../../../utils/error_messages.dart';
@@ -403,7 +404,7 @@ class _LoginScreenState extends State<LoginScreen>
                                     width: 287.w,
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
-                                        color: const Color(0xFFF8D848),
+                                        gradient: OasisColors.oasisWebsiteGoldGradient,
                                         borderRadius:
                                             BorderRadius.circular(16)),
                                     child: Text(

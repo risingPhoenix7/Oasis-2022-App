@@ -7,6 +7,7 @@ import 'package:oasis_2022/order/repo/model/get_orders_model.dart';
 import 'package:oasis_2022/order/repo/model/order_card_model.dart';
 import 'package:oasis_2022/utils/scroll_remover.dart';
 
+import '../screens/morescreen/screens/more_info.dart';
 import '../widgets/error_dialogue.dart';
 import '../widgets/loader.dart';
 import 'controller/cart_and_order_controller.dart';
@@ -88,6 +89,16 @@ class _OrdersScreenState extends State<OrdersScreen> {
                               'Orders',
                               style: GoogleFonts.openSans(fontSize: 28.sp, color: Colors.white, fontWeight: FontWeight.w500),
                             ),
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              MoreInfoScreen()));
+                                },
+                                icon: SvgPicture.asset(
+                                    'assets/images/3gole.svg')),
                           ],
                         ),
                         Padding(

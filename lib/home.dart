@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oasis_2022/screens/events/view/miscellaneous_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -59,31 +60,31 @@ class _HomeScreenState extends State<HomeScreen> {
         icon: Image.asset("assets/images/navbar_icons/stalls_active.png"),
         inactiveIcon:
             SvgPicture.asset("assets/images/navbar_icons/stall_inactive.svg"),
-        iconSize: 25,
+        iconSize: 22.r,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset("assets/images/navbar_icons/order_active.svg"),
         inactiveIcon:
             SvgPicture.asset("assets/images/navbar_icons/order_inactive.svg"),
-        iconSize: 25,
+        iconSize: 22.r,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset("assets/images/navbar_icons/events_active.svg"),
         inactiveIcon:
             SvgPicture.asset("assets/images/navbar_icons/events_inactive.svg"),
-        iconSize: 25,
+        iconSize: 22.r,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset("assets/images/navbar_icons/shows_active.svg"),
         inactiveIcon:
             SvgPicture.asset("assets/images/navbar_icons/shows_inactive.svg"),
-        iconSize: 25,
+        iconSize: 22.r,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset("assets/images/navbar_icons/wallet_active.svg"),
         inactiveIcon:
             SvgPicture.asset("assets/images/navbar_icons/wallet_inactive.svg"),
-        iconSize: 25,
+        iconSize: 22.r,
       ),
     ];
   }

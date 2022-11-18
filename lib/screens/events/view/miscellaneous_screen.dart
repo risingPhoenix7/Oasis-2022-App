@@ -156,15 +156,16 @@ class _EventsScreenState extends State<EventsScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(top: 90.h, left: 28.w),
+                                padding: EdgeInsets.only(top: 54.h, left: 28.w),
                                 child: Text(
                                   'Events',
-                                  style: OasisTextStyles.inter500,
+                                  style: OasisTextStyles.inter500
+                                      .copyWith(fontWeight: FontWeight.bold),
                                 ),
                               ),
                               Padding(
                                   padding:
-                                      EdgeInsets.only(top: 90.h, right: 28.w),
+                                      EdgeInsets.only(top: 54.h, right: 28.w),
                                   child: IconButton(
                                       onPressed: () {
                                         Navigator.push(

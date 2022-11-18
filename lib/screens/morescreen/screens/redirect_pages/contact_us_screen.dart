@@ -20,7 +20,7 @@ class _ContactScreenState extends State<ContactScreen> {
   List<Contact> contactList = [
     Contact(
       name: "Anshal Shukla",
-      desc: "Website, App and Payments",
+      desc: "Website, App and \nPayments",
       email: "webmaster@bits-oasis.org",
       imageAsset: "anshal_shukla.png",
       phoneNumber: "8058088802",
@@ -43,7 +43,7 @@ class _ContactScreenState extends State<ContactScreen> {
     ),
     Contact(
       name: "Madhav Gupta",
-      desc: "Publications and Correspondence",
+      desc: "Publications and \nCorrespondence",
       email: "pcr@bits-oasis.org",
       imageAsset: "madhav_gupta.png",
       phoneNumber: "8130127878",
@@ -66,7 +66,7 @@ class _ContactScreenState extends State<ContactScreen> {
     ),
     Contact(
       name: "Angel Maria Baby",
-      desc: "Reception and Accomodation",
+      desc: "Reception and \nAccomodation",
       email: "recnacc@bits-oasis.org",
       imageAsset: "angel_maria_baby.png",
       phoneNumber: "8921977221",
@@ -89,7 +89,7 @@ class _ContactScreenState extends State<ContactScreen> {
     ),
     Contact(
       name: "Karishma K",
-      desc: "Sponsorship and Marketing",
+      desc: "Sponsorship and \nMarketing",
       email: "sponsorship@bits-oasis.org",
       imageAsset: "karishma.png",
       phoneNumber: "9902819428",

@@ -1,6 +1,10 @@
+
+
 import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
 
+import '../Repo/model/Transactions_model.dart';
+import '../Repo/retrofit/transactions_retrofit.dart';
 import '/provider/user_details_viewmodel.dart';
 import '/screens/wallet_screen/Repo/model/add_swd_model.dart';
 import '/screens/wallet_screen/Repo/model/balance_model.dart';
@@ -20,6 +24,7 @@ class WalletViewModel {
   static int? kindpoints = 0;
   String? jwt = UserDetailsViewModel.userDetails.JWT;
   static String? error;
+
 
   Future<String> refreshQrCode(int id) async {
     final dio = Dio();
@@ -52,6 +57,14 @@ class WalletViewModel {
       throw Exception(e.response?.statusCode);
     }
     return id;
+  }
+  Future<TransactionsModel> getTransactions() async {
+    final dio = Dio();
+    final client = TransactionsRestClient(dio);
+    String? jwt = UserDetailsViewModel.userDetails.JWT;
+    String auth = "JWT $jwt";
+    TransactionsModel transactions = await client.getTransactions(auth);
+    return transactions;
   }
 
   Future<void> getBalance() async {
@@ -156,4 +169,72 @@ class WalletViewModel {
     }
     return;
   }
+
+  int getdate(TransactionsModel transactions,int i) {
+    List day = [];
+    int? date;
+
+    day.addAll([transactions.txns[i].time![8], transactions.txns[i].time![9]]);
+    date = int.parse(day.join().toString());
+    return date;
+  }
+  int getTime(TransactionsModel transactions,int i) {
+    List time = [];
+    int? timestamp;
+    time.addAll([
+      transactions.txns[i].time![11],
+      transactions.txns[i].time![12],
+      transactions.txns[i].time![14],
+      transactions.txns[i].time![15],
+      transactions.txns[i].time![17],
+      transactions.txns[i].time![18],
+    ]);
+    timestamp = int.parse(time.join().toString());
+    return timestamp;
+  }
+
+  List<TransactionsData> getGroupTransactions(TransactionsModel transactions)  {
+    List<TransactionsData> groupedtransactions = [];
+   int? date1,date2;
+   int? timestamp1,timestamp2;
+    int count = 1;
+   for(int i = 0;i <= transactions.txns.length-1;i++) {
+
+     if(i != transactions.txns.length-1) {
+       date1 = getdate(transactions, i);
+       date2 = getdate(transactions, i+1);
+       timestamp1 = getTime(transactions, i);
+       timestamp2 = getTime(transactions, i+1);
+       if(transactions.txns[i].name == transactions.txns[i+1].name &&  date1 == date2 && timestamp1 - timestamp2 <= 5) {
+         count++;
+
+       }
+       else {
+         print(count);
+         transactions.txns[i].price = ((transactions.txns[i].price ?? 0) * count);
+         print(transactions.txns[i].name);
+          print(transactions.txns[i].price);
+         groupedtransactions.add(transactions.txns[i]);
+        // print(groupedtransactions[i].name);
+         //print(groupedtransactions[i].price);
+         count = 1;
+
+        }
+      }
+     else {
+       print(count);
+       transactions.txns[i].price = ((transactions.txns[i].price ?? 0) * count);
+        print(transactions.txns[i].name);
+        print(transactions.txns[i].price);
+       groupedtransactions.add(transactions.txns[i]);
+      // print(groupedtransactions[i].name);
+       //print(groupedtransactions[i].price);
+     }
+   }
+
+
+
+    return groupedtransactions;
+  }
+
 }

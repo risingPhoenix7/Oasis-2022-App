@@ -35,13 +35,12 @@ class _ProfShowState extends State<ProfShow> {
         Padding(
           padding: EdgeInsets.only(top: 43.h, left: 8.w),
           child: CachedNetworkImage(
-            imageUrl:
-                (StoreController.carouselItems[StoreController.itemNumber.value]
-                        as StoreItemData)
-                    .image_url[1],
-            placeholder: (context, url) => const CircularProgressIndicator(
-              color: Colors.black,
-            ),
+            imageUrl: (StoreController.carouselItems[StoreController.itemNumber.value]
+                    as StoreItemData)
+                .image_url[1],
+            placeholder: (context, url) => const CircularProgressIndicator(color: Colors.black,),
+            height: 436.h,
+            width: 1.sw,
           ),
         ),
         Padding(

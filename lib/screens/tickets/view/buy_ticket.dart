@@ -90,31 +90,30 @@ class _BuyTicketState extends State<BuyTicket> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.r)),
-        height: 580.h,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.r)),
+        height: 560.h,
         width: 388.w,
         child: Stack(children: [
           Image.asset(
             "assets/images/buy_tickets_bg.png",
-            height: 580.h,
+            fit: BoxFit.fill,
+            height: 560.h,
             width: 388.w,
           ),
           Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 27.h, left: 70.w),
-                    child: Text(
+              Padding(
+                padding: EdgeInsets.only(left: 70.w,top: 27.h,right: 30.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
                       "Select Number of Tickets",
                       style: GoogleFonts.openSans(
                           fontSize: 20.sp, color: Colors.white),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 27.h, left: 30.w),
-                    child: GestureDetector(
+                    GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
                       },
@@ -123,13 +122,13 @@ class _BuyTicketState extends State<BuyTicket> {
                         color: Colors.white,
                         size: 28.r,
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 87.h),
-                child: SvgPicture.asset("assets/images/ticket.svg"),
+                child: SvgPicture.asset("assets/images/ticket.svg",width: 245.w,height: 149.h,),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 51.74.h),

@@ -9,7 +9,7 @@ import 'package:oasis_2022/utils/ui_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DevelopersScreen2 extends StatelessWidget {
-  const DevelopersScreen2({Key? key}) : super(key: key);
+  DevelopersScreen2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class DevelopersScreen2 extends StatelessWidget {
                 child: ScrollConfiguration(
                   behavior: CustomScrollBehavior(),
                   child: GridView(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisSpacing: 16,
@@ -206,39 +206,38 @@ class SingleCard extends StatelessWidget {
   final Map<String, String> iconsMap;
 
   Future<void> _launchGithub(String gituser) async {
-    final Uri _profileUrl = Uri.parse('https://github.com/$gituser');
-    await launchUrl(_profileUrl);
+    final Uri profileUrl = Uri.parse('https://github.com/$gituser');
+    await launchUrl(profileUrl);
   }
 
   Future<void> _launchLinkedin(String linkedinUser) async {
-    final Uri _profileUrl =
+    final Uri profileUrl =
         Uri.parse('https://www.linkedin.com/in/$linkedinUser');
-    await launchUrl(_profileUrl);
+    await launchUrl(profileUrl);
   }
 
   Future<void> _launchTwitter(String twitterUser) async {
-    final Uri _profileUrl = Uri.parse('https://twitter.com/$twitterUser');
-    await launchUrl(_profileUrl);
+    final Uri profileUrl = Uri.parse('https://twitter.com/$twitterUser');
+    await launchUrl(profileUrl);
   }
 
   Future<void> _launchBehance(String behanceUser) async {
-    final Uri _profileUrl = Uri.parse('https://www.behance.net/$behanceUser');
-    await launchUrl(_profileUrl);
+    final Uri profileUrl = Uri.parse('https://www.behance.net/$behanceUser');
+    await launchUrl(profileUrl);
   }
 
   Future<void> _launchDribble(String dribbleUser) async {
-    final Uri _profileUrl = Uri.parse('https://dribbble.com/$dribbleUser');
-    await launchUrl(_profileUrl);
+    final Uri profileUrl = Uri.parse('https://dribbble.com/$dribbleUser');
+    await launchUrl(profileUrl);
   }
 
   Future<void> _launchInstagram(String instagramUser) async {
-    final Uri _profileUrl =
+    final Uri profileUrl =
         Uri.parse('https://www.instagram.com/$instagramUser');
-    await launchUrl(_profileUrl);
+    await launchUrl(profileUrl);
   }
 
   otherOne(String iconLocation, Function a, String handleurl) {
-    print('wshjfbwefbhjewf');
     return GestureDetector(
       onTap: () async {
         await a(handleurl);
@@ -274,7 +273,6 @@ class SingleCard extends StatelessWidget {
             'assets/images/instagramIcon.svg', _launchInstagram, handleurl);
       default:
         {
-          print('idk whats this');
           return Container();
         }
     }

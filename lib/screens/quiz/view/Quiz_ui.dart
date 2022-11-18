@@ -70,16 +70,17 @@ class _quizUIScreenState extends State<quizUIScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(bottom: 30.h, top: 150.h),
+                        padding: EdgeInsets.only(bottom: 30.h, top: 150.h,left: 20.w,right: 20.w),
                         child: SvgPicture.asset(
                           "assets/images/no_poll.svg",
-                          width: 388,
+                          width: 388.w,
+                          height: 244.w,
                         ),
                       ),
                       Text(
-                        "No More Poll Active Right Now",
+                        "No Poll Active Right Now",
                         style: GoogleFonts.openSans(
-                            color: Colors.white, fontSize: 20.sp),
+                            color: Colors.white, fontSize: 18.sp,fontWeight: FontWeight.w400),
                       )
                     ],
                   )

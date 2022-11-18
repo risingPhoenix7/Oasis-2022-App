@@ -242,7 +242,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                                       color: Color(0xFFC0C0C0),
                                                       fontSize: 16.sp),
                                               suffixIcon: searchController.text.isEmpty ?
-                                              Container() :
+                                              Icon(Icons.close,color: Colors.transparent,) :
                                               IconButton(
 
                                                   onPressed: () {

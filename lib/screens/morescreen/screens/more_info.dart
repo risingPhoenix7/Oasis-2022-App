@@ -108,7 +108,7 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
                 name: 'Developers',
                 action: () {
                   PersistentNavBarNavigator.pushNewScreen(context,
-                      screen: const DevelopersScreen2());
+                      screen: DevelopersScreen2());
                 },
               ),
               SingleBlock(

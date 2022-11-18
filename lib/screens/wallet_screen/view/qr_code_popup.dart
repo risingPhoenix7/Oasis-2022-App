@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:oasis_2022/utils/colors.dart';
 
 import '../../../resources/resources.dart';
@@ -34,15 +36,13 @@ class _QRCodeDialogBoxState extends State<QRCodeDialogBox> {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
-
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Container(
-
           decoration: BoxDecoration(
-           image: DecorationImage(
-           image:  AssetImage(ImageAssets.add_money_background), fit: BoxFit.fill),
-
+            image: const DecorationImage(
+                image: AssetImage(ImageAssets.add_money_background),
+                fit: BoxFit.fill),
             boxShadow: const [
               BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.15),
@@ -58,23 +58,22 @@ class _QRCodeDialogBoxState extends State<QRCodeDialogBox> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: UIUtills().getProportionalHeight(height: 52.00)),
-
-
               ValueListenableBuilder(
                 valueListenable: isLoadingQrCode,
                 builder: (context, bool value, child) {
                   if (isLoadingQrCode.value) {
-                    return SizedBox(
+                    return Container(
+                        color: Colors.transparent,
                         height: UIUtills().getProportionalWidth(width: 268),
                         width: UIUtills().getProportionalWidth(width: 268),
-                        child: Loader());
+                        child: const SpinKitSpinningLines(
+                          color: Colors.amber,
+                        ));
                   } else {
                     return Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
-                        borderRadius: BorderRadius.circular(15)
-                      ),
-
+                          borderRadius: BorderRadius.circular(15)),
                       height: UIUtills().getProportionalHeight(height: 316),
                       width: UIUtills().getProportionalWidth(width: 316),
                       child: Center(
@@ -88,8 +87,6 @@ class _QRCodeDialogBoxState extends State<QRCodeDialogBox> {
                 },
               ),
               SizedBox(height: UIUtills().getProportionalHeight(height: 18.00)),
-
-
               SizedBox(
                 width: UIUtills().getProportionalWidth(width: 322.00),
                 child: Text(
@@ -135,7 +132,8 @@ class _QRCodeDialogBoxState extends State<QRCodeDialogBox> {
                       'Refresh',
                       style: GoogleFonts.openSans(
                           color: Colors.black,
-                          fontSize: UIUtills().getProportionalWidth(width: 20.00),
+                          fontSize:
+                              UIUtills().getProportionalWidth(width: 20.00),
                           fontWeight: FontWeight.w600),
                     ),
                   ),

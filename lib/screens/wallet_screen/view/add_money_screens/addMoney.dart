@@ -1,20 +1,21 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:oasis_2022/screens/wallet_screen/view/add_money_screens/updatedAddMoneyDialog.dart';
-import 'package:oasis_2022/utils/colors.dart';
-import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 import 'dart:ui';
-import '../../../../resources/resources.dart';
-import '../../view_model/wallet_viewmodel.dart';
-import '../wallet_screen_controller.dart';
-import '/provider/user_details_viewmodel.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:oasis_2022/screens/wallet_screen/view/add_money_screens/updatedAddMoneyDialog.dart';
+import 'package:oasis_2022/utils/colors.dart';
+import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 
 import '/../../../utils/ui_utils.dart';
+import '/provider/user_details_viewmodel.dart';
+import '../../../../resources/resources.dart';
+import '../../view_model/wallet_viewmodel.dart';
+import '../wallet_screen_controller.dart';
 
 class AddMoneyScreen extends StatefulWidget {
   const AddMoneyScreen({super.key});
@@ -82,7 +83,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
     }
 
     setState(
-        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+            () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
   }
 
   @override
@@ -103,98 +104,98 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
               left: 20,
               child: isLoading
                   ? SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: const Center(
-                        child: LinearProgressIndicator(
-                          color: Colors.black,
-                          backgroundColor: Colors.transparent,
-                        ),
-                      ),
-                    )
+                width: MediaQuery.of(context).size.width,
+                child: const Center(
+                  child: LinearProgressIndicator(
+                    color: Colors.black,
+                    backgroundColor: Colors.transparent,
+                  ),
+                ),
+              )
                   : InkWell(
-                      onTap: () async {
-                        if (textEditingController.text == "") {
-                          var snackBar =
-                              CustomSnackBar().oasisSnackBar("Enter a value");
-                          if (!mounted) {}
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }
-                        if (int.parse(textEditingController.text) == 0 ||
-                            int.parse(textEditingController.text) < 0) {
-                          var snackBar = CustomSnackBar()
-                              .oasisSnackBar("Enter A Non Zero Positive Value");
-                          if (!mounted) {}
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        } else {
-                          amountToAdd = int.parse(textEditingController.text);
-                          if (await auth.isDeviceSupported()) {
-                            await _authenticate();
-                          }
-                          if (authenticated) {
-                            setState(() {
-                              isLoading = true;
+                onTap: () async {
+                  if (textEditingController.text == "") {
+                    var snackBar =
+                    CustomSnackBar().oasisSnackBar("Enter a value");
+                    if (!mounted) {}
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }
+                  if (int.parse(textEditingController.text) == 0 ||
+                      int.parse(textEditingController.text) < 0) {
+                    var snackBar = CustomSnackBar()
+                        .oasisSnackBar("Enter A Non Zero Positive Value");
+                    if (!mounted) {}
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  } else {
+                    amountToAdd = int.parse(textEditingController.text);
+                    if (await auth.isDeviceSupported()) {
+                      await _authenticate();
+                    }
+                    if (authenticated) {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      bool isSuccess = false;
+                      try {
+                        await WalletViewModel().addMoney(amountToAdd);
+                        isSuccess = true;
+                      } catch (e) {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Align(
+                                alignment: Alignment.bottomCenter,
+                                child: UpdatedAddMoneyDialogBox(
+                                  isSuccessful: isSuccess,
+                                ),
+                              );
                             });
-                            bool isSuccess = false;
-                            try {
-                              await WalletViewModel().addMoney(amountToAdd);
-                              isSuccess = true;
-                            } catch (e) {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: UpdatedAddMoneyDialogBox(
-                                        isSuccessful: isSuccess,
-                                      ),
-                                    );
-                                  });
-                            }
-                            if (isSuccess) {
-                              WalletScreenController.isSuccess.value = true;
-                            }
-                            if (!mounted) {}
-                            showDialog(
-                                barrierDismissible: false,
-                                context: context,
-                                builder: (context) {
-                                  return Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: UpdatedAddMoneyDialogBox(
-                                      isSuccessful: isSuccess,
-                                    ),
-                                  );
-                                });
-                          }
-                        }
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        // alignment: Alignment.bottomCenter,
-                        width: UIUtills().getProportionalWidth(width: 388),
-                        height: UIUtills().getProportionalHeight(height: 72.00),
-                        decoration: BoxDecoration(
-                          gradient: OasisColors.oasisWebsiteGoldGradient,
-                          borderRadius: BorderRadius.circular(
-                            UIUtills().getProportionalWidth(width: 15.00),
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Add Money',
-                              style: GoogleFonts.openSans(
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black,
-                                fontSize: UIUtills()
-                                    .getProportionalWidth(width: 18.00),
+                      }
+                      if (isSuccess) {
+                        WalletScreenController.isSuccess.value = true;
+                      }
+                      if (!mounted) {}
+                      showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) {
+                            return Align(
+                              alignment: Alignment.bottomCenter,
+                              child: UpdatedAddMoneyDialogBox(
+                                isSuccessful: isSuccess,
                               ),
-                            ),
-                          ],
+                            );
+                          });
+                    }
+                  }
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  // alignment: Alignment.bottomCenter,
+                  width: UIUtills().getProportionalWidth(width: 388),
+                  height: UIUtills().getProportionalHeight(height: 72.00),
+                  decoration: BoxDecoration(
+                    gradient: OasisColors.oasisWebsiteGoldGradient,
+                    borderRadius: BorderRadius.circular(
+                      UIUtills().getProportionalWidth(width: 15.00),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Add Money',
+                        style: GoogleFonts.openSans(
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black,
+                          fontSize: UIUtills()
+                              .getProportionalWidth(width: 18.00),
                         ),
                       ),
-                    ),
+                    ],
+                  ),
+                ),
+              ),
             ),
             Positioned(
                 left: UIUtills().getProportionalWidth(width: 24),
@@ -202,7 +203,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                 child: Text(
                   'Add Money',
                   style:
-                      GoogleFonts.openSans(fontSize: 32, color: Colors.white),
+                  GoogleFonts.openSans(fontSize: 32, color: Colors.white),
                 )),
             Positioned(
                 top: UIUtills().getProportionalHeight(height: 75),
@@ -251,39 +252,39 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                     children: [
                       SizedBox(
                           height:
-                              UIUtills().getProportionalHeight(height: 21.00)),
+                          UIUtills().getProportionalHeight(height: 21.00)),
                       SizedBox(
                           height:
-                              UIUtills().getProportionalHeight(height: 14.00)),
+                          UIUtills().getProportionalHeight(height: 14.00)),
                       Text(
                         'User : ${UserDetailsViewModel.userDetails.userID}',
                         style: GoogleFonts.openSans(
                             color: Colors.white,
                             fontSize:
-                                UIUtills().getProportionalWidth(width: 16.00),
+                            UIUtills().getProportionalWidth(width: 16.00),
                             fontWeight: FontWeight.w600,
                             letterSpacing:
-                                UIUtills().getProportionalWidth(width: -0.41)),
+                            UIUtills().getProportionalWidth(width: -0.41)),
                       ),
                       SizedBox(
                           height:
-                              UIUtills().getProportionalHeight(height: 12.00)),
+                          UIUtills().getProportionalHeight(height: 12.00)),
                       Text(
                         '${UserDetailsViewModel.userDetails.username}',
                         style: GoogleFonts.openSans(
                             color: Colors.white,
                             fontSize:
-                                UIUtills().getProportionalWidth(width: 16.00),
+                            UIUtills().getProportionalWidth(width: 16.00),
                             fontWeight: FontWeight.w600,
                             letterSpacing:
-                                UIUtills().getProportionalWidth(width: -0.41)),
+                            UIUtills().getProportionalWidth(width: -0.41)),
                       ),
                       SizedBox(
                           height:
-                              UIUtills().getProportionalHeight(height: 32.00)),
+                          UIUtills().getProportionalHeight(height: 32.00)),
                       Container(
                         alignment: Alignment.center,
-                        width: UIUtills().getProportionalWidth(width: 82),
+                        width: UIUtills().getProportionalWidth(width: 90),
                         height: UIUtills().getProportionalHeight(height: 40.00),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -308,8 +309,8 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                                   LengthLimitingTextInputFormatter(4)
                                 ],
                                 keyboardType:
-                                    const TextInputType.numberWithOptions(
-                                        decimal: false, signed: false),
+                                const TextInputType.numberWithOptions(
+                                    decimal: false, signed: false),
                                 style: GoogleFonts.openSans(
                                     color: Colors.white,
                                     fontSize: UIUtills()
@@ -334,7 +335,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                       ),
                       SizedBox(
                           height:
-                              UIUtills().getProportionalHeight(height: 30.00)),
+                          UIUtills().getProportionalHeight(height: 30.00)),
                     ],
                   ),
                 ),
@@ -366,7 +367,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                         fontSize: UIUtills().getProportionalWidth(width: 32.00),
                         fontWeight: FontWeight.w600,
                         letterSpacing:
-                            UIUtills().getProportionalWidth(width: -0.41)),
+                        UIUtills().getProportionalWidth(width: -0.41)),
                   ),
                 ],
               ),

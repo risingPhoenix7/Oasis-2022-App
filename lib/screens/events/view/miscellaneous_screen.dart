@@ -241,7 +241,10 @@ class _EventsScreenState extends State<EventsScreen> {
                                                           FontWeight.w400,
                                                       color: Color(0xFFC0C0C0),
                                                       fontSize: 16.sp),
-                                              suffixIcon: IconButton(
+                                              suffixIcon: searchController.text.isEmpty ?
+                                              Container() :
+                                              IconButton(
+
                                                   onPressed: () {
                                                     searchController.clear();
 

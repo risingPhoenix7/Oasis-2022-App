@@ -64,7 +64,7 @@ class _SingleMiscellaneousEventState extends State<SingleMiscellaneousEvent> {
                   image: AssetImage(ImageAssets.eventCardBg), fit: BoxFit.fill),
               borderRadius: BorderRadius.circular(20.r)),
           child: Padding(
-            padding: EdgeInsets.fromLTRB(21.w, 26.h, 0.w, 27.h),
+            padding: EdgeInsets.fromLTRB(21.w, 26.h, 25.w, 27.h),
             child: Container(
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,15 +73,18 @@ class _SingleMiscellaneousEventState extends State<SingleMiscellaneousEvent> {
                     style: OasisTextStyles.openSansSubHeading
                         .copyWith(color: Colors.white)),
                 SizedBox(height: 12.h),
+              (widget.eventConductor != '') ?
                 Text(widget.eventConductor ?? 'DEPARTMENT',
                     style: OasisTextStyles.openSansSubHeading.copyWith(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
-                        color: OasisColors.primaryYellow)),
+                        color: OasisColors.primaryYellow))
+                : Container(height: 30,color: Colors.red,)
+                ,
                 SizedBox(height: 13.h),
                 !isLong
                     ? Padding(
-                        padding: EdgeInsets.only(right: 25.w),
+                        padding: EdgeInsets.only(right: 10.w),
                         child: Text(
                           widget.eventDescription ??
                               'More details will be added later',
@@ -92,7 +95,7 @@ class _SingleMiscellaneousEventState extends State<SingleMiscellaneousEvent> {
                     : isExpanded
                         ? widget.eventDescription!.length < 756
                             ? Padding(
-                                padding: EdgeInsets.only(right: 25.w),
+                                padding: EdgeInsets.only(right: 0.w),
                                 child: Text(
                                   widget.eventDescription!,
                                   style: OasisTextStyles.openSans300.copyWith(
@@ -144,7 +147,6 @@ class _SingleMiscellaneousEventState extends State<SingleMiscellaneousEvent> {
                                               color: Colors.white),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
-                                          print('wfkjwnf');
                                           setState(() {
                                             isExpanded = true;
                                           });
@@ -153,22 +155,36 @@ class _SingleMiscellaneousEventState extends State<SingleMiscellaneousEvent> {
                               ),
                             ),
                           ),
-                SizedBox(height: 19.h),
+                SizedBox(height: 10.h),
+                const Divider(color: Color.fromRGBO(255, 255, 255, 0.2),),
+                SizedBox(height: 10.h,),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SvgPicture.asset(ImageAssets.locationIcon,
-                        color: Colors.white),
-                    SizedBox(width: 8.23.w),
-                    Text(widget.eventLocation ?? 'TBA',
-                        style: OasisTextStyles.openSans300
-                            .copyWith(fontSize: 12.sp, color: Colors.white)),
-                    SizedBox(width: 90.w),
-                    SvgPicture.asset(ImageAssets.timeicon, color: Colors.white),
-                    SizedBox(width: 8.23.w),
-                    Text(widget.time ?? 'TBA',
-                        style: OasisTextStyles.openSans300
-                            .copyWith(fontSize: 12.sp, color: Colors.white)),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SvgPicture.asset(ImageAssets.locationIcon,
+                            color: Colors.white),
+                        SizedBox(width: 8.23.w),
+                        Text(widget.eventLocation ?? 'TBA',
+                            style: OasisTextStyles.openSans300
+                                .copyWith(fontSize: 12.sp, color: Colors.white,fontWeight: FontWeight.w900)),
+                      ],
+                    ),
+
+
+                    Row(
+                      children: [
+                        SvgPicture.asset(ImageAssets.timeicon, color: Colors.white),
+                        SizedBox(width: 8.23.w),
+                        Text(widget.time ?? 'TBA',
+                            style: OasisTextStyles.openSans300
+                                .copyWith(fontSize: 12.sp, color: Colors.white,fontWeight: FontWeight.w900)),
+                      ],
+                    ),
+
                   ],
                 )
               ],

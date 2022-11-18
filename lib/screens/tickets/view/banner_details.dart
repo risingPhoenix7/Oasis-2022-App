@@ -109,21 +109,22 @@ class _BannerDetailsState extends State<BannerDetails> {
                     Row(
                       children: [
                         Text(
-                          "Tickets\nScanned : ${GetSignedTicketsViewModel().getUsedTickets(StoreController().getId(null))}",
+                          "Used: ${GetSignedTicketsViewModel().getUsedTickets(StoreController().getId(null))}",
                           textScaleFactor: 1.0,
                           textAlign: TextAlign.start,
+
                           style: GoogleFonts.openSans(
-                              fontSize: 15.sp, color: const Color(0xFFD3D3D3)),
+                              fontSize: 15.sp, color: Colors.grey ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 21.w),
                           child: Text(
-                            "Tickets\nUnscanned : ${GetSignedTicketsViewModel().getUnusedTickets(StoreController().getId(null))}",
+                            "Unused: ${GetSignedTicketsViewModel().getUnusedTickets(StoreController().getId(null))}",
                             textScaleFactor: 1.0,
                             textAlign: TextAlign.start,
                             style: GoogleFonts.openSans(
                                 fontSize: 15.sp,
-                                color: const Color(0xFFD3D3D3)),
+                                color: Colors.amberAccent),
                           ),
                         )
                       ],

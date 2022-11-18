@@ -253,12 +253,14 @@ class _BuyMerchState extends State<BuyMerch> {
                                 Color.fromRGBO(209, 154, 8, 1),
                               ])
                             : const LinearGradient(colors: [
-                                Color.fromRGBO(148, 145, 137, 1),
-                                Color.fromRGBO(146, 143, 135, 1),
-                                Color.fromRGBO(152, 150, 143, 1),
-                                Color.fromRGBO(149, 146, 138, 1),
-                                Color.fromRGBO(131, 125, 110, 1),
-                                Color.fromRGBO(126, 126, 125, 1)
+                                Color.fromRGBO(209, 154, 8, 0.5),
+                                Color.fromRGBO(235, 187, 62, 0.5),
+                                Color.fromRGBO(254, 212, 102, 0.5),
+                                Color.fromRGBO(227, 186, 79, 0.5),
+                                Color.fromRGBO(209, 154, 8, 0.5),
+                                Color.fromRGBO(209, 154, 8, 0.5)
+
+
                               ]),
                         borderRadius: BorderRadius.circular(10.r)),
                     child: Center(

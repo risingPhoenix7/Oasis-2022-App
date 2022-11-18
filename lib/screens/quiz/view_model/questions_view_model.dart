@@ -102,7 +102,6 @@ class QuizScreenViewModel {
     return questionText;
   }
 
-
   Map<int, String> getQuestionOption(int questionNumber, Questions questions) {
     Map<int, String> optionMap = {};
     for (Question i in questions.active_questions!) {

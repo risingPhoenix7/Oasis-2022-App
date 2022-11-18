@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OasisTextStyles {
-
   static TextStyle openSans600 = GoogleFonts.openSans(
       textStyle: TextStyle(
           color: Colors.black,
@@ -27,6 +26,4 @@ class OasisTextStyles {
     textStyle: TextStyle(
         color: Colors.black, fontSize: 20.sp, fontWeight: FontWeight.w700),
   );
-
-
 }

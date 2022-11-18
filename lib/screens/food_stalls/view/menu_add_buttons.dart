@@ -36,7 +36,7 @@ class _AddButtonState extends State<AddButton> {
   Widget build(BuildContext context) {
     return (widget.is_available)
         ? Container(
-      width: 100.w,
+            width: 100.w,
             child: (widget.amount == 0)
                 ? InkWell(
                     onTap: () {

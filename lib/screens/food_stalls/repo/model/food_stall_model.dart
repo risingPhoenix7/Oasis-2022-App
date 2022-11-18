@@ -52,6 +52,7 @@ class FoodStall {
 
   Map<String, dynamic> toJson() => _$FoodStallToJson(this);
 }
+
 @HiveType(typeId: 6)
 @JsonSerializable()
 class MenuItem {

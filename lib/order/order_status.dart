@@ -31,29 +31,29 @@ class _OrderStatusState extends State<OrderStatus> {
 
   //Future<void> listenForStatus() async {
 
-    // FirebaseFirestore.instance
-    //     .collection('orders')
-    //     .doc(OrderId)
-    //     .snapshots()
-    //     .listen((event) async {
-    //   DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-    //       .collection('orders') // suppose you have a collection named "Users"
-    //       .doc(OrderId)
-    //       .get();
-    //
-    //   newstatus = await documentSnapshot['status'];
-    //   print(newstatus);
-    //   if (newstatus == 1) {
-    //     LocalNotificationService.shownotification(
-    //         'Your Order number #$OrderId', 'Your Order has been accepted!');
-    //     localstatus = newstatus;
-    //   } else if (newstatus == 2) {
-    //     LocalNotificationService.shownotification(
-    //         'Your Order number  #$OrderId', 'Your Order is ready!');
-    //   }
-    // });
+  // FirebaseFirestore.instance
+  //     .collection('orders')
+  //     .doc(OrderId)
+  //     .snapshots()
+  //     .listen((event) async {
+  //   DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+  //       .collection('orders') // suppose you have a collection named "Users"
+  //       .doc(OrderId)
+  //       .get();
+  //
+  //   newstatus = await documentSnapshot['status'];
+  //   print(newstatus);
+  //   if (newstatus == 1) {
+  //     LocalNotificationService.shownotification(
+  //         'Your Order number #$OrderId', 'Your Order has been accepted!');
+  //     localstatus = newstatus;
+  //   } else if (newstatus == 2) {
+  //     LocalNotificationService.shownotification(
+  //         'Your Order number  #$OrderId', 'Your Order is ready!');
+  //   }
+  // });
 
- // }
+  // }
 
   @override
   void initState() {
@@ -61,6 +61,7 @@ class _OrderStatusState extends State<OrderStatus> {
     //listenForStatus();
     super.initState();
   }
+
   Widget build(BuildContext context) {
     Stream<DocumentSnapshot> collectionStream = FirebaseFirestore.instance
         .collection('orders')
@@ -222,66 +223,60 @@ class _OrderStatusState extends State<OrderStatus> {
                                                 .length,
                                             itemBuilder: (context, index) {
                                               return Padding(
-                                                padding:
-                                                    EdgeInsets.only(bottom: 8.h),
+                                                padding: EdgeInsets.only(
+                                                    bottom: 8.h),
                                                 child: Padding(
-                                                  padding:
-                                                      EdgeInsets.only(left: 20.w,right: 20.w),
-                                                  child:
-                                                      Row(
-                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 180.w,
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .min,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Flexible(
-                                                                  child: Text(
-                                                                    widget
-                                                                        .orderCardModel
-                                                                        .menuItemInOrdersScreenList[
-                                                                            index]
-                                                                        .name,
-                                                                    style: GoogleFonts.openSans(
-                                                                        fontWeight: FontWeight
+                                                  padding: EdgeInsets.only(
+                                                      left: 20.w, right: 20.w),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 180.w,
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Flexible(
+                                                              child: Text(
+                                                                widget
+                                                                    .orderCardModel
+                                                                    .menuItemInOrdersScreenList[
+                                                                        index]
+                                                                    .name,
+                                                                style: GoogleFonts.openSans(
+                                                                    fontWeight:
+                                                                        FontWeight
                                                                             .w500,
-                                                                        color:
-                                                                            Colors.white),
-                                                                  ),
-                                                                ),
-                                                              ],
+                                                                    color: Colors
+                                                                        .white),
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            '₹ ${widget.orderCardModel.menuItemInOrdersScreenList[index].price} x ${widget.orderCardModel.menuItemInOrdersScreenList[index].quantity}',
-
-                                                            style: GoogleFonts.roboto(
-
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
-
-                                                                color: const Color
-                                                                        .fromRGBO(
-                                                                    100,
-                                                                    100,
-                                                                    100,
-                                                                    1)),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
-
-
+                                                      Text(
+                                                        '₹ ${widget.orderCardModel.menuItemInOrdersScreenList[index].price} x ${widget.orderCardModel.menuItemInOrdersScreenList[index].quantity}',
+                                                        style: GoogleFonts.roboto(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: const Color
+                                                                    .fromRGBO(
+                                                                100,
+                                                                100,
+                                                                100,
+                                                                1)),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               );
                                             },
@@ -336,17 +331,20 @@ class _OrderStatusState extends State<OrderStatus> {
                                         onTap: () async {
                                           print('tapped');
                                           if ((snapshot.data!
-                                                  .data()
-                                                  .toString()
-                                                  .contains("status")
-                                              ? snapshot.data?.get('status')
-                                              : 0) >= 2) {
+                                                      .data()
+                                                      .toString()
+                                                      .contains("status")
+                                                  ? snapshot.data?.get('status')
+                                                  : 0) >=
+                                              2) {
                                             if ((snapshot.data!
-                                                    .data()
-                                                    .toString()
-                                                    .contains("status")
-                                                ? snapshot.data?.get('status')
-                                                : 0) == 2) {
+                                                        .data()
+                                                        .toString()
+                                                        .contains("status")
+                                                    ? snapshot.data
+                                                        ?.get('status')
+                                                    : 0) ==
+                                                2) {
                                               otp = widget.orderCardModel.otp
                                                   .toString();
                                               await OrderScreenViewModel()

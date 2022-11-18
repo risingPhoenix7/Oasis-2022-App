@@ -96,7 +96,7 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
       backgroundColor: Colors.black,
       body: !isLoading
           ? RefreshIndicator(
-        color: Colors.amber,
+              color: Colors.amber,
               backgroundColor: Colors.black,
               onRefresh: updateFoodStallResult,
               child: isStallsClosed
@@ -139,15 +139,15 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
                                   Row(
                                     children: [
                                       GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      CartScreen()));
-                                        },
-                                        child: SvgPicture.asset('assets/images/cart.svg')
-                                      )
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        CartScreen()));
+                                          },
+                                          child: SvgPicture.asset(
+                                              'assets/images/cart.svg'))
                                     ],
                                   )
                                 ],

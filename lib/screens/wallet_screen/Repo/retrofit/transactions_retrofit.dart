@@ -7,8 +7,10 @@ part 'transactions_retrofit.g.dart';
 
 @RestApi(baseUrl: kBaseUrl)
 abstract class TransactionsRestClient {
-  factory TransactionsRestClient(Dio dio, {String baseUrl}) = _TransactionsRestClient;
+  factory TransactionsRestClient(Dio dio, {String baseUrl}) =
+      _TransactionsRestClient;
 
   @GET("/wallet/monetary/txns")
-  Future<TransactionsModel> getTransactions(@Header("Authorization") String jwt);
+  Future<TransactionsModel> getTransactions(
+      @Header("Authorization") String jwt);
 }

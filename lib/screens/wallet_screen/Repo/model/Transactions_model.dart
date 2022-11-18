@@ -18,18 +18,17 @@ class TransactionsModel {
 
 @JsonSerializable()
 class TransactionsData {
-  TransactionsData(
-      {required this.txn_type,
-        required this.name,
-        required this.price,
-        required this.time,
-        });
+  TransactionsData({
+    required this.txn_type,
+    required this.name,
+    required this.price,
+    required this.time,
+  });
 
   String? txn_type;
   String? name;
   int? price;
   String? transfers, time;
-
 
   factory TransactionsData.fromJson(Map<String, dynamic> json) =>
       _$TransactionsDataFromJson(json);

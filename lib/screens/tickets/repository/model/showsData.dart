@@ -21,7 +21,11 @@ class StoreItemData {
   String? venue;
   List<String> image_url;
   String? timestamp;
-  bool? allow_bitsians, allow_participants, tickets_available, is_merch, available;
+  bool? allow_bitsians,
+      allow_participants,
+      tickets_available,
+      is_merch,
+      available;
 
   StoreItemData({
     this.id,

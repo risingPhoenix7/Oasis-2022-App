@@ -32,7 +32,6 @@ class CartItemWidget extends StatefulWidget {
 class CartItemWidgetState extends State<CartItemWidget> {
   bool isVeg = false;
 
-
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -49,9 +48,7 @@ class CartItemWidgetState extends State<CartItemWidget> {
                       children: [
                         SvgPicture.asset(
                           'assets/images/Non-Veg.svg',
-                          color: widget.isVeg
-                              ? Colors.green
-                              : Colors.red,
+                          color: widget.isVeg ? Colors.green : Colors.red,
                         ),
                         SizedBox(
                           width: 20.w,

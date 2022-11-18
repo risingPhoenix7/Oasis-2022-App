@@ -2,8 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'signedTicketsData.g.dart';
 
-
-
 @JsonSerializable()
 class SignedTickets {
   SignedTickets({this.shows, this.combos});

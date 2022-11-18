@@ -5,8 +5,6 @@ import '../repo/model/get_questions_model.dart';
 import '../repo/retrofit/get_questions_retrofit.dart';
 
 class Quizviewmodel {
-
-
   Future<Questions> getQuestionslist() async {
     final dio = Dio();
     String auth = "JWT ${UserDetailsViewModel.userDetails.JWT}";
@@ -14,7 +12,8 @@ class Quizviewmodel {
     Questions listOfQuestion = await questionsclient.getAllQuestions(auth);
     return listOfQuestion;
   }
-  String? getQuestionText( Questions questions) {
+
+  String? getQuestionText(Questions questions) {
     String? questionText;
     for (Question i in questions.active_questions!) {
       if (i.question_no == 1) {
@@ -33,6 +32,4 @@ class Quizviewmodel {
     }
     return optiontexts;
   }
-
-
 }

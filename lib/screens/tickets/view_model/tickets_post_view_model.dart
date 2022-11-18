@@ -21,7 +21,7 @@ class TicketPostViewModel {
     final client = PostTicketRestClient(dio);
     try {
       await client.postTicket("JWT $jwt", ticketPostBody);
-    } catch(e){
+    } catch (e) {
       if (e.runtimeType == DioError) {
         if ((e as DioError).response == null) {
           throw Exception(ErrorMessages.noInternet);

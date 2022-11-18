@@ -16,7 +16,6 @@ import 'package:local_auth/local_auth.dart';
 
 import '/../../../utils/ui_utils.dart';
 
-
 class SendMoneyScreen1 extends StatefulWidget {
   SendMoneyScreen1({super.key, required this.userId});
 
@@ -208,7 +207,7 @@ class _SendMoneyScreen1State extends State<SendMoneyScreen1> {
                 width: UIUtills().getProportionalWidth(width: 388.00),
                 height: UIUtills().getProportionalHeight(height: 220.00),
                 decoration: BoxDecoration(
-                  image: DecorationImage(
+                  image: const DecorationImage(
                       image: AssetImage(ImageAssets.sendMoneyBack),
                       fit: BoxFit.fill),
                   //color: const Color(0xFFFFFFFF),

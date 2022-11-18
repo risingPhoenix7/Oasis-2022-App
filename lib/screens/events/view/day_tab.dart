@@ -37,7 +37,7 @@ class _DayTabState extends State<DayTab> {
         height: 96.h,
         decoration: isSelected
             ? BoxDecoration(
-          boxShadow: [
+                boxShadow: [
                   BoxShadow(
                       color: Color.fromRGBO(213, 192, 0, 0.15000000596046448),
                       offset: Offset(0, 4),
@@ -48,7 +48,7 @@ class _DayTabState extends State<DayTab> {
               )
             : BoxDecoration(
                 color: Color.fromRGBO(0, 0, 0, 0.8),
-            border: Border.all(color: Colors.white,width: 0.3.w),
+                border: Border.all(color: Colors.white, width: 0.3.w),
                 borderRadius: BorderRadius.circular(20.r)),
         child: Column(
           children: <Widget>[

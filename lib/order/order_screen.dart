@@ -87,7 +87,10 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           children: [
                             Text(
                               'Orders',
-                              style: GoogleFonts.openSans(fontSize: 28.sp, color: Colors.white, fontWeight: FontWeight.w500),
+                              style: GoogleFonts.openSans(
+                                  fontSize: 28.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
                             ),
                             IconButton(
                                 onPressed: () {
@@ -105,13 +108,17 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           padding: EdgeInsets.only(top: 23.h),
                           child: Text(
                             'Keep track of your orders. Click on view details to know more',
-                            style: GoogleFonts.openSans(color: Color.fromRGBO(255, 255, 255, 0.75), fontWeight: FontWeight.w500, fontSize: 18.sp),
+                            style: GoogleFonts.openSans(
+                                color: Color.fromRGBO(255, 255, 255, 0.75),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18.sp),
                           ),
                         ),
                         orderCardList.isEmpty
                             ? Padding(
                                 padding: EdgeInsets.only(top: 80.h),
-                                child: SvgPicture.asset('assets/images/no_orders.svg'),
+                                child: SvgPicture.asset(
+                                    'assets/images/no_orders.svg'),
                               )
                             : Padding(
                                 padding: EdgeInsets.only(top: 58.h),
@@ -121,7 +128,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                     child: Container(
                                       height: 410.h,
                                       width: 1.sw,
-                                      constraints: BoxConstraints(maxWidth: 1.sw, maxHeight: 410.h),
+                                      constraints: BoxConstraints(
+                                          maxWidth: 1.sw, maxHeight: 410.h),
                                       child: ScrollConfiguration(
                                         behavior: CustomScrollBehavior(),
                                         child: ListView.builder(
@@ -130,8 +138,13 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                             itemCount: orderCardList.length,
                                             itemBuilder: (context, index) {
                                               return Container(
-                                                  constraints: BoxConstraints(maxWidth: 1.sw, maxHeight: 410.h),
-                                                  child: OrderWidget(orderCardModel: orderCardList[index]));
+                                                  constraints: BoxConstraints(
+                                                      maxWidth: 1.sw,
+                                                      maxHeight: 410.h),
+                                                  child: OrderWidget(
+                                                      orderCardModel:
+                                                          orderCardList[
+                                                              index]));
                                             }
                                             // scrollDirection: Axis.horizontal,
                                             // shrinkWrap: true,

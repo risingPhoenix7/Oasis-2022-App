@@ -133,8 +133,7 @@ class _KindStoreCatalogState extends State<KindStoreCatalog> {
                                           gradient: const LinearGradient(
                                             colors: [
                                               Color.fromRGBO(209, 154, 8, 1),
-                                              Color.fromRGBO(
-                                                  254, 212, 102, 1),
+                                              Color.fromRGBO(254, 212, 102, 1),
                                               Color.fromRGBO(227, 186, 79, 1),
                                               Color.fromRGBO(209, 154, 8, 1),
                                               Color.fromRGBO(209, 154, 8, 1),
@@ -204,8 +203,7 @@ class _KindStoreCatalogState extends State<KindStoreCatalog> {
                                                   fontSize: 12.91.sp,
                                                   color: const Color.fromRGBO(
                                                       250, 250, 250, 1),
-                                                  fontWeight:
-                                                      FontWeight.w600),
+                                                  fontWeight: FontWeight.w600),
                                             )
                                           ],
                                         ),

@@ -68,7 +68,9 @@ class _MerchState extends State<Merch> {
                               maxHeight: double.infinity,
                               maxWidth: double.infinity,
                               child: SvgPicture.asset(
-                                  "assets/images/merch_bg.svg"),
+                                "assets/images/merch_bg.svg",
+                                height: 276.18.h,
+                              ),
                             ),
                           ),
                         ),
@@ -87,17 +89,14 @@ class _MerchState extends State<Merch> {
                                 height: 300.h,
                                 width: 200.w,
                                 decoration: BoxDecoration(
-                                    gradient: const LinearGradient(colors: [
-                                      Color.fromRGBO(254, 219, 126, 1),
-                                      Color.fromRGBO(209, 154, 8, 1),
-                                    ]),
-                                    borderRadius:
-                                        BorderRadius.circular(22.17.r),
-
+                                  gradient: const LinearGradient(colors: [
+                                    Color.fromRGBO(254, 219, 126, 1),
+                                    Color.fromRGBO(209, 154, 8, 1),
+                                  ]),
+                                  borderRadius: BorderRadius.circular(22.17.r),
                                 ),
-
                                 child: Padding(
-                                  padding:  EdgeInsets.all(0.4.w),
+                                  padding: EdgeInsets.all(0.4.w),
                                   child: Container(
                                     decoration: BoxDecoration(
                                         color: Colors.black,

@@ -45,8 +45,7 @@ class LocalNotificationService {
       },
     );
 
-        _notificationsPlugin.initialize(initializationSettings);
-
+    _notificationsPlugin.initialize(initializationSettings);
   }
 
   static void createanddisplaynotification(RemoteMessage message) async {
@@ -72,6 +71,7 @@ class LocalNotificationService {
       print(e);
     }
   }
+
   static void shownotification(String title, String body) async {
     try {
       final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;

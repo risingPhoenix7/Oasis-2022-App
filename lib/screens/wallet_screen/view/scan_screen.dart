@@ -55,7 +55,6 @@ class _ScanningViewState extends State<ScanningView> {
         child: Stack(
           children: [
             qrCodeScanner(),
-
             Positioned(
                 top: UIUtills().getProportionalHeight(height: 54),
                 right: UIUtills().getProportionalWidth(width: 24),
@@ -63,7 +62,11 @@ class _ScanningViewState extends State<ScanningView> {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: SvgPicture.asset('assets/images/cross1.svg',height: 32.h,width: 32.w,),
+                  child: SvgPicture.asset(
+                    'assets/images/cross1.svg',
+                    height: 32.h,
+                    width: 32.w,
+                  ),
                 )),
             Positioned(
               bottom:
@@ -87,7 +90,6 @@ class _ScanningViewState extends State<ScanningView> {
                         width: UIUtills().getProportionalWidth(width: 388),
                         decoration: BoxDecoration(
                             boxShadow: const [
-                              
                               BoxShadow(
                                 color: Color.fromRGBO(0, 0, 0, 0.2),
                                 offset: Offset(0, 2),
@@ -120,7 +122,7 @@ class _ScanningViewState extends State<ScanningView> {
                                   fillColor: Color.fromRGBO(26, 28, 28, 1),
                                   hintStyle: GoogleFonts.poppins(
                                       textStyle: TextStyle(
-                                    color:  Colors.white,
+                                    color: Colors.white,
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w400,
                                   )),
@@ -176,7 +178,7 @@ class _ScanningViewState extends State<ScanningView> {
                               ),
                             ],
                             borderRadius: BorderRadius.circular(
-                             15.r,
+                              15.r,
                             ),
                           ),
                           child: Row(
@@ -203,10 +205,12 @@ class _ScanningViewState extends State<ScanningView> {
                   ],
                 ),
               ),
-            ),    
+            ),
             Padding(
-              padding:  EdgeInsets.only(
-                  top: UIUtills().getProportionalHeight(height: 500 * 0.725), left: UIUtills().getProportionalWidth(width: (50 - 40) * 0.5)),
+              padding: EdgeInsets.only(
+                  top: UIUtills().getProportionalHeight(height: 500 * 0.725),
+                  left:
+                      UIUtills().getProportionalWidth(width: (50 - 40) * 0.5)),
               child: InkResponse(
                 onTap: () async {
                   try {

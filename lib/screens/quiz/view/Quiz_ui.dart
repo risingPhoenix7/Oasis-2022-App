@@ -53,7 +53,7 @@ class _quizUIScreenState extends State<quizUIScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 300.w, top: 100.h),
                         child: GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             Navigator.pop(context);
                           },
                           child: Container(
@@ -70,7 +70,8 @@ class _quizUIScreenState extends State<quizUIScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(bottom: 30.h, top: 150.h,left: 20.w,right: 20.w),
+                        padding: EdgeInsets.only(
+                            bottom: 30.h, top: 150.h, left: 20.w, right: 20.w),
                         child: SvgPicture.asset(
                           "assets/images/no_poll.svg",
                           width: 388.w,
@@ -80,7 +81,9 @@ class _quizUIScreenState extends State<quizUIScreen> {
                       Text(
                         "No Poll Active Right Now",
                         style: GoogleFonts.openSans(
-                            color: Colors.white, fontSize: 18.sp,fontWeight: FontWeight.w400),
+                            color: Colors.white,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w400),
                       )
                     ],
                   )

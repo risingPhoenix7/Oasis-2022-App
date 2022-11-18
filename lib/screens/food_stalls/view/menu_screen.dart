@@ -244,7 +244,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     menuItemsAmount = MenuScreenViewModel()
                         .populateListFromHive(menuItemsFiltered);
                     return Padding(
-                      padding:  EdgeInsets.only(bottom: 60.h),
+                      padding: EdgeInsets.only(bottom: 60.h),
                       child: ListView.builder(
                         scrollDirection: Axis.vertical,
                         itemCount: menuItemsFiltered.length,
@@ -264,7 +264,8 @@ class _MenuScreenState extends State<MenuScreen> {
                                 Padding(
                                   padding: EdgeInsets.only(top: 8.h),
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Expanded(
@@ -272,8 +273,9 @@ class _MenuScreenState extends State<MenuScreen> {
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.fromLTRB(
-                                                  37, 0, 20.1, 0),
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      37, 0, 20.1, 0),
                                               child: Center(
                                                   child: SvgPicture.asset(
                                                 "assets/images/Non-Veg.svg",
@@ -291,7 +293,8 @@ class _MenuScreenState extends State<MenuScreen> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    menuItemsFiltered[index].name,
+                                                    menuItemsFiltered[index]
+                                                        .name,
                                                     style: GoogleFonts.openSans(
                                                         color: Colors.white,
                                                         fontSize: 18.h,
@@ -304,12 +307,9 @@ class _MenuScreenState extends State<MenuScreen> {
                                                         fontSize: 16.h,
                                                         fontWeight:
                                                             FontWeight.w600,
-                                                        color:
-                                                            const Color.fromRGBO(
-                                                                100,
-                                                                100,
-                                                                100,
-                                                                1)),
+                                                        color: const Color
+                                                                .fromRGBO(
+                                                            100, 100, 100, 1)),
                                                   )
                                                 ],
                                               ),
@@ -322,14 +322,16 @@ class _MenuScreenState extends State<MenuScreen> {
                                         child: AddButton(
                                           is_available: menuItemsFiltered[index]
                                               .is_available,
-                                          isVeg: menuItemsFiltered[index].is_veg,
+                                          isVeg:
+                                              menuItemsFiltered[index].is_veg,
                                           menuItemName:
                                               menuItemsFiltered[index].name,
                                           amount: menuItemsAmount[
                                               menuItemsFiltered[index].id]!,
                                           foodStallId: widget.foodStallId,
                                           price: menuItemsFiltered[index].price,
-                                          menuItemId: menuItemsFiltered[index].id,
+                                          menuItemId:
+                                              menuItemsFiltered[index].id,
                                           foodStallName: widget.foodStallName,
                                         ),
                                       )

@@ -144,7 +144,7 @@ class _OasisFestAppState extends State<OasisFestApp> {
                   } else if (data == false) {
                     Future.microtask(
                         () => Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
+                              MaterialPageRoute(
                                   builder: (builder) => const OnBoardingPage()),
                               (route) => false,
                             ));

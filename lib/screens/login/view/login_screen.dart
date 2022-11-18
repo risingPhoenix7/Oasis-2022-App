@@ -150,7 +150,10 @@ class _LoginScreenState extends State<LoginScreen>
                             child: RotationTransition(
                                 turns: _rotationAnimation,
                                 child: SvgPicture.asset(
-                                    "assets/images/loginBackground.svg"))),
+                                  "assets/images/loginBackground.svg",
+                                  height: 1.sh,
+                                  width: 1.sw,
+                                ))),
                         Positioned(
                           bottom: 39.h,
                           left: 0,

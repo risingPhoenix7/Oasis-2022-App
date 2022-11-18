@@ -90,8 +90,7 @@ class _BuyTicketState extends State<BuyTicket> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.r)),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.r)),
         height: 560.h,
         width: 388.w,
         child: Stack(children: [
@@ -104,7 +103,7 @@ class _BuyTicketState extends State<BuyTicket> {
           Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 70.w,top: 27.h,right: 30.w),
+                padding: EdgeInsets.only(left: 70.w, top: 27.h, right: 30.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -128,7 +127,11 @@ class _BuyTicketState extends State<BuyTicket> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: 87.h),
-                child: SvgPicture.asset("assets/images/ticket.svg",width: 245.w,height: 149.h,),
+                child: SvgPicture.asset(
+                  "assets/images/ticket.svg",
+                  width: 245.w,
+                  height: 149.h,
+                ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 51.74.h),
@@ -200,7 +203,7 @@ class _BuyTicketState extends State<BuyTicket> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 30.h,bottom: 40.h),
+                padding: EdgeInsets.only(top: 30.h, bottom: 40.h),
                 child: GestureDetector(
                   onTap: () async {
                     if (await auth.isDeviceSupported()) {

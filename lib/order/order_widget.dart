@@ -69,13 +69,14 @@ class _OrderWidgetState extends State<OrderWidget> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(16, 12, 11, 0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     '${DateFormat.yMMMMd().format(DateTime.parse(widget.orderCardModel.timeStamp)).toString()}',
                                     style: GoogleFonts.openSans(
-                                      color:
-                                          const Color.fromRGBO(148, 148, 148, 1),
+                                      color: const Color.fromRGBO(
+                                          148, 148, 148, 1),
                                       fontWeight: FontWeight.w400,
                                       fontSize: 11.sp,
                                     ),
@@ -83,8 +84,8 @@ class _OrderWidgetState extends State<OrderWidget> {
                                   Text(
                                     '${DateFormat.jms().format(DateTime.parse(widget.orderCardModel.timeStamp)).toString()}',
                                     style: GoogleFonts.openSans(
-                                      color:
-                                          const Color.fromRGBO(148, 148, 148, 1),
+                                      color: const Color.fromRGBO(
+                                          148, 148, 148, 1),
                                       fontWeight: FontWeight.w400,
                                       fontSize: 11.sp,
                                     ),
@@ -115,8 +116,8 @@ class _OrderWidgetState extends State<OrderWidget> {
                                   Text(
                                     'Status : ',
                                     style: GoogleFonts.openSans(
-                                      color:
-                                          const Color.fromRGBO(225, 225, 225, 1),
+                                      color: const Color.fromRGBO(
+                                          225, 225, 225, 1),
                                       fontWeight: FontWeight.w400,
                                       fontSize: 11.sp,
                                     ),
@@ -188,7 +189,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding:  EdgeInsets.only(right: 27.w),
+                                    padding: EdgeInsets.only(right: 27.w),
                                     child: Container(
                                       height: 33.h,
                                       width: 1.5,
@@ -231,7 +232,8 @@ class _OrderWidgetState extends State<OrderWidget> {
                                       return Align(
                                           alignment: Alignment.bottomCenter,
                                           child: OrderStatus(
-                                            orderCardModel: widget.orderCardModel,
+                                            orderCardModel:
+                                                widget.orderCardModel,
                                           ));
                                     });
                               },

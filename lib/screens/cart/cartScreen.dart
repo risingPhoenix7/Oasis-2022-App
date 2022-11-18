@@ -192,7 +192,7 @@ class CartScreenState extends State<CartScreen> {
                               ),
                             )
                           : InkWell(
-                        onTap: () async {
+                              onTap: () async {
                                 if (await auth.isDeviceSupported()) {
                                   await _authenticate();
                                 }
@@ -338,9 +338,9 @@ class CartScreenState extends State<CartScreen> {
                                   }
                                 }
                               },
-                        child: Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 22.w),
-                          child: Container(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 22.w),
+                                child: Container(
                                   width: 428.w,
                                   height: 72.h,
                                   decoration: BoxDecoration(
@@ -358,7 +358,6 @@ class CartScreenState extends State<CartScreen> {
                                   child: Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 40.w),
-
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -391,7 +390,7 @@ class CartScreenState extends State<CartScreen> {
                                     ),
                                   ),
                                 ),
-                        ),
+                              ),
                             ),
                     )
                   ],

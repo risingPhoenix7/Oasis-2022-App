@@ -4,7 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oasis_2022/utils/oasis_text_styles.dart';
 
 class SingleBlock extends StatelessWidget {
-  const SingleBlock({Key? key, required this.assetName, required this.name,required this.action})
+  const SingleBlock(
+      {Key? key,
+      required this.assetName,
+      required this.name,
+      required this.action})
       : super(key: key);
   final String assetName;
   final String name;
@@ -13,7 +17,7 @@ class SingleBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:action,
+      onTap: action,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

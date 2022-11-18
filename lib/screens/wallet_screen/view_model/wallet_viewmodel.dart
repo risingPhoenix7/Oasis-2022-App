@@ -1,5 +1,3 @@
-
-
 import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
 
@@ -24,7 +22,6 @@ class WalletViewModel {
   static int? kindpoints = 0;
   String? jwt = UserDetailsViewModel.userDetails.JWT;
   static String? error;
-
 
   Future<String> refreshQrCode(int id) async {
     final dio = Dio();
@@ -58,6 +55,7 @@ class WalletViewModel {
     }
     return id;
   }
+
   Future<TransactionsModel> getTransactions() async {
     final dio = Dio();
     final client = TransactionsRestClient(dio);
@@ -75,7 +73,12 @@ class WalletViewModel {
     final balanceRestClient = BalanceRestClient(dio);
     BalanceModel response = BalanceModel(
         data: BalanceData(
-            cash: 0, pg: 0, swd: 0, transfers: 0, kind_active: false, kind_points: 0));
+            cash: 0,
+            pg: 0,
+            swd: 0,
+            transfers: 0,
+            kind_active: false,
+            kind_points: 0));
     response = await balanceRestClient.getBalance(auth).then((it) {
       return it;
     }).catchError((Object obj) {
@@ -170,7 +173,7 @@ class WalletViewModel {
     return;
   }
 
-  int getdate(TransactionsModel transactions,int i) {
+  int getdate(TransactionsModel transactions, int i) {
     List day = [];
     int? date;
 
@@ -178,7 +181,8 @@ class WalletViewModel {
     date = int.parse(day.join().toString());
     return date;
   }
-  int getTime(TransactionsModel transactions,int i) {
+
+  int getTime(TransactionsModel transactions, int i) {
     List time = [];
     int? timestamp;
     time.addAll([
@@ -193,48 +197,44 @@ class WalletViewModel {
     return timestamp;
   }
 
-  List<TransactionsData> getGroupTransactions(TransactionsModel transactions)  {
+  List<TransactionsData> getGroupTransactions(TransactionsModel transactions) {
     List<TransactionsData> groupedtransactions = [];
-   int? date1,date2;
-   int? timestamp1,timestamp2;
+    int? date1, date2;
+    int? timestamp1, timestamp2;
     int count = 1;
-   for(int i = 0;i <= transactions.txns.length-1;i++) {
-
-     if(i != transactions.txns.length-1) {
-       date1 = getdate(transactions, i);
-       date2 = getdate(transactions, i+1);
-       timestamp1 = getTime(transactions, i);
-       timestamp2 = getTime(transactions, i+1);
-       if(transactions.txns[i].name == transactions.txns[i+1].name &&  date1 == date2 && timestamp1 - timestamp2 <= 5) {
-         count++;
-
-       }
-       else {
-         print(count);
-         transactions.txns[i].price = ((transactions.txns[i].price ?? 0) * count);
-         print(transactions.txns[i].name);
+    for (int i = 0; i <= transactions.txns.length - 1; i++) {
+      if (i != transactions.txns.length - 1) {
+        date1 = getdate(transactions, i);
+        date2 = getdate(transactions, i + 1);
+        timestamp1 = getTime(transactions, i);
+        timestamp2 = getTime(transactions, i + 1);
+        if (transactions.txns[i].name == transactions.txns[i + 1].name &&
+            date1 == date2 &&
+            timestamp1 - timestamp2 <= 5) {
+          count++;
+        } else {
+          print(count);
+          transactions.txns[i].price =
+              ((transactions.txns[i].price ?? 0) * count);
+          print(transactions.txns[i].name);
           print(transactions.txns[i].price);
-         groupedtransactions.add(transactions.txns[i]);
-        // print(groupedtransactions[i].name);
-         //print(groupedtransactions[i].price);
-         count = 1;
-
+          groupedtransactions.add(transactions.txns[i]);
+          // print(groupedtransactions[i].name);
+          //print(groupedtransactions[i].price);
+          count = 1;
         }
-      }
-     else {
-       print(count);
-       transactions.txns[i].price = ((transactions.txns[i].price ?? 0) * count);
+      } else {
+        print(count);
+        transactions.txns[i].price =
+            ((transactions.txns[i].price ?? 0) * count);
         print(transactions.txns[i].name);
         print(transactions.txns[i].price);
-       groupedtransactions.add(transactions.txns[i]);
-      // print(groupedtransactions[i].name);
-       //print(groupedtransactions[i].price);
-     }
-   }
-
-
+        groupedtransactions.add(transactions.txns[i]);
+        // print(groupedtransactions[i].name);
+        //print(groupedtransactions[i].price);
+      }
+    }
 
     return groupedtransactions;
   }
-
 }

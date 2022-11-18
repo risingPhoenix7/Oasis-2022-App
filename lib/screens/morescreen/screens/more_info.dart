@@ -49,7 +49,11 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: SvgPicture.asset('assets/images/exit_button.svg',height: 32.h,width: 32.w,),
+                      child: SvgPicture.asset(
+                        'assets/images/exit_button.svg',
+                        height: 32.h,
+                        width: 32.w,
+                      ),
                     ),
                   ),
                 ],

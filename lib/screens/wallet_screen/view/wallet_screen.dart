@@ -228,8 +228,8 @@ class _WalletScreenState extends State<WalletScreen> {
                                                 Text(
                                                   'User ID- ${UserDetailsViewModel.userDetails.userID ?? 'NA'}',
                                                   style: GoogleFonts.openSans(
-                                                      color:
-                                                          const Color(0xFFFFFFFF),
+                                                      color: const Color(
+                                                          0xFFFFFFFF),
                                                       fontSize: 14.sp,
                                                       fontWeight:
                                                           FontWeight.w400),
@@ -268,7 +268,8 @@ class _WalletScreenState extends State<WalletScreen> {
                                                               .userID ==
                                                           '') {
                                                     showDialog(
-                                                        barrierDismissible: false,
+                                                        barrierDismissible:
+                                                            false,
                                                         context: context,
                                                         builder: (context) {
                                                           return Align(
@@ -291,10 +292,9 @@ class _WalletScreenState extends State<WalletScreen> {
                                                           return Align(
                                                               alignment: Alignment
                                                                   .bottomCenter,
-                                                              child:
-                                                                  QRCodeDialogBox(
-                                                                      qrCode:
-                                                                          QRcode));
+                                                              child: QRCodeDialogBox(
+                                                                  qrCode:
+                                                                      QRcode));
                                                         });
                                                   }
                                                 }
@@ -320,8 +320,8 @@ class _WalletScreenState extends State<WalletScreen> {
                                                 Text(
                                                   'Current Balance',
                                                   style: GoogleFonts.openSans(
-                                                      color:
-                                                          const Color(0xFFFFFFFF),
+                                                      color: const Color(
+                                                          0xFFFFFFFF),
                                                       fontSize: UIUtills()
                                                           .getProportionalHeight(
                                                               height: 16),
@@ -333,8 +333,8 @@ class _WalletScreenState extends State<WalletScreen> {
                                                       bottom: 20.h),
                                                   child: ValueListenableBuilder(
                                                     valueListenable: isLoading,
-                                                    builder: (context, bool value,
-                                                        child) {
+                                                    builder: (context,
+                                                        bool value, child) {
                                                       if (isLoading.value) {
                                                         return SizedBox(
                                                             width: 20.w,
@@ -342,7 +342,8 @@ class _WalletScreenState extends State<WalletScreen> {
                                                             child: Center(
                                                                 child:
                                                                     SpinKitWave(
-                                                              color: Colors.white
+                                                              color: Colors
+                                                                  .white
                                                                   .withOpacity(
                                                                       0.5),
                                                               size: 15.r,
@@ -355,7 +356,8 @@ class _WalletScreenState extends State<WalletScreen> {
                                                                   0xFFFFFFFF),
                                                               fontSize: UIUtills()
                                                                   .getProportionalHeight(
-                                                                      height: 24),
+                                                                      height:
+                                                                          24),
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w700),

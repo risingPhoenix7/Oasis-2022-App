@@ -1,5 +1,3 @@
-
-
 class CommonFunctions {
   static DateTime? timeStampConverter(String? timeStamp) {
     DateTime? date = (timeStamp == null ? null : DateTime.parse(timeStamp));

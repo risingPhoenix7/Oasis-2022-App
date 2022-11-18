@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:oasis_2022/widgets/app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-
 class HpcBlog extends StatefulWidget {
   const HpcBlog({Key? key}) : super(key: key);
 

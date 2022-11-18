@@ -75,7 +75,7 @@ class _ErrorDialogState extends State<ErrorDialog> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: const OkButton())
+                    child: OkButton())
                 : Container()
           ],
         ),

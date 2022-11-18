@@ -1,17 +1,17 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:oasis_2022/screens/login/repository/model/gloginData.dart';
+import 'package:oasis_2022/screens/login/view/forgot_password_dialog.dart';
 import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 
-import '../../../utils/colors.dart';
 import '/widgets/error_dialogue.dart';
 import '../../../main.dart';
+import '../../../utils/colors.dart';
 import '../../../utils/error_messages.dart';
 import '../../../widgets/loader.dart';
 import '../repository/model/data.dart';
@@ -200,7 +200,9 @@ class _LoginScreenState extends State<LoginScreen>
                                             cursorColor: const Color.fromRGBO(
                                                 255, 255, 255, 0.7),
                                             controller: usernameController,
-                                            validator: (value) {},
+                                            validator: (value) {
+                                              return null;
+                                            },
                                             style: GoogleFonts.openSans(
                                                 fontSize: 16.sp,
                                                 color: const Color.fromRGBO(
@@ -308,9 +310,35 @@ class _LoginScreenState extends State<LoginScreen>
                                   ),
                                 ),
                               )),
+                              GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                      barrierDismissible: true,
+                                      context: context,
+                                      builder: (context) {
+                                        return Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: ForgotPasswordDialog(),
+                                        );
+                                      });
+                                },
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 250.w, top: 5.h),
+                                  child: Text('Forgot Password?',
+                                      style: GoogleFonts.openSans(
+                                          textStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.w600,
+                                      ).copyWith(
+                                              decoration:
+                                                  TextDecoration.underline))),
+                                ),
+                              ),
                               Padding(
                                 padding:
-                                    EdgeInsets.only(top: 51.h, bottom: 22.h),
+                                    EdgeInsets.only(top: 36.h, bottom: 22.h),
                                 child: GestureDetector(
                                   onTap: () {
                                     bool tempBlock = true;

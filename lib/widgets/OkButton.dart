@@ -4,7 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../utils/ui_utils.dart';
 
 class OkButton extends StatelessWidget {
-  const OkButton({Key? key}) : super(key: key);
+  OkButton({Key? key, this.buttonText}) : super(key: key);
+  String? buttonText;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class OkButton extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          'Ok',
+          buttonText ?? 'Ok',
           style: GoogleFonts.openSans(
               color: Colors.black,
               fontSize: UIUtills().getProportionalWidth(width: 24.00),

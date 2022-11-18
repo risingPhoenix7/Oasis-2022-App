@@ -317,7 +317,7 @@ class _LoginScreenState extends State<LoginScreen>
                                       context: context,
                                       builder: (context) {
                                         return Align(
-                                          alignment: Alignment.bottomCenter,
+                                          alignment: Alignment(0.5, 0.45),
                                           child: ForgotPasswordDialog(),
                                         );
                                       });

@@ -37,7 +37,8 @@ class OkButton extends StatelessWidget {
           style: GoogleFonts.openSans(
               color: Colors.black,
               fontSize: UIUtills().getProportionalWidth(width: 24.00),
-              fontWeight: FontWeight.w800),
+              fontWeight:
+                  buttonText == null ? FontWeight.w800 : FontWeight.w700),
         ),
       ),
     );

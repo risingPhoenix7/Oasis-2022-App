@@ -21,6 +21,7 @@ class _ErrorDialogState extends State<ForgotPasswordDialog> {
 
   @override
   Widget build(BuildContext context) {
+    bool isPressed = false;
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Card(
@@ -33,14 +34,14 @@ class _ErrorDialogState extends State<ForgotPasswordDialog> {
             color: Colors.black,
           ),
           width: UIUtills().getProportionalWidth(width: 408),
-          height: UIUtills().getProportionalHeight(height: 500),
+          height: UIUtills().getProportionalHeight(height: 250),
           child: Column(
             children: [
               SizedBox(
                 height: 40.h,
               ),
               Padding(
-                padding: EdgeInsets.only(bottom: 13.h, left: 32.w, right: 32.w),
+                padding: EdgeInsets.only(left: 32.w, right: 32.w),
                 child: TextFormField(
                   // cursorColor: const Color.fromRGBO(255, 255, 255, 0.7),
                   controller: emailController,
@@ -48,7 +49,9 @@ class _ErrorDialogState extends State<ForgotPasswordDialog> {
                   style: GoogleFonts.openSans(
                       fontSize: 16.sp,
                       color: const Color.fromRGBO(255, 255, 255, 0.7)),
+
                   decoration: InputDecoration(
+                      fillColor: const Color(0xFF1A1C1C),
                       contentPadding:
                           EdgeInsets.only(top: 19.h, bottom: 19.h, left: 24.w),
                       border: OutlineInputBorder(
@@ -76,24 +79,44 @@ class _ErrorDialogState extends State<ForgotPasswordDialog> {
               ),
               TextButton(
                   onPressed: () async {
-                    if (emailController.text.isNotEmpty) {
-                      ForgotPasswordResponse forgotPasswordResponse =
-                          await ForgotPasswordViewModel()
-                              .forgotPassword(emailController.text);
-                      if (forgotPasswordResponse.display_message == null) {
-                        Navigator.of(context).pop();
-                        showDialog(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (context) {
-                              return Align(
-                                alignment: Alignment.bottomCenter,
-                                child: ErrorDialog(
-                                    errorMessage:
-                                        'Login with the credentials sent on your email'),
-                              );
-                            });
+                    if (isPressed) {
+                    } else {
+                      isPressed = true;
+                      if (emailController.text.isNotEmpty) {
+                        ForgotPasswordResponse forgotPasswordResponse =
+                            await ForgotPasswordViewModel()
+                                .forgotPassword(emailController.text);
+                        isPressed = false;
+                        if (forgotPasswordResponse.display_message == null) {
+                          Navigator.pop(context);
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (context) {
+                                return Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: ErrorDialog(
+                                      isSuccesspopup: true,
+                                      errorMessage:
+                                          'Login with the credentials sent on your email'),
+                                );
+                              });
+                        } else {
+                          isPressed = false;
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (context) {
+                                return Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: ErrorDialog(
+                                      errorMessage: forgotPasswordResponse
+                                          .display_message),
+                                );
+                              });
+                        }
                       } else {
+                        isPressed = false;
                         showDialog(
                             barrierDismissible: false,
                             context: context,
@@ -101,27 +124,15 @@ class _ErrorDialogState extends State<ForgotPasswordDialog> {
                               return Align(
                                 alignment: Alignment.bottomCenter,
                                 child: ErrorDialog(
-                                    errorMessage:
-                                        forgotPasswordResponse.display_message),
+                                    errorMessage: 'Enter an email id'),
                               );
                             });
                       }
-                    } else {
-                      showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (context) {
-                            return Align(
-                              alignment: Alignment.bottomCenter,
-                              child: ErrorDialog(
-                                  errorMessage: 'Enter an email id'),
-                            );
-                          });
                     }
                   },
                   child: OkButton(
                     buttonText: 'Send email',
-                  ))
+                  )),
             ],
           ),
         ),

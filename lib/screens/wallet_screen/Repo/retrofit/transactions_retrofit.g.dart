@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'get_progress_retrofit.dart';
+part of 'transactions_retrofit.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'get_progress_retrofit.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _ProgressRestClient implements ProgressRestClient {
-  _ProgressRestClient(
+class _TransactionsRestClient implements TransactionsRestClient {
+  _TransactionsRestClient(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,26 +21,26 @@ class _ProgressRestClient implements ProgressRestClient {
   String? baseUrl;
 
   @override
-  Future<Progress> getProgress(JWT) async {
+  Future<TransactionsModel> getTransactions(jwt) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': JWT};
+    final _headers = <String, dynamic>{r'Authorization': jwt};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Progress>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<TransactionsModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/quiz/get-user-progress',
+              '/wallet/monetary/txns',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Progress.fromJson(_result.data!);
+    final value = TransactionsModel.fromJson(_result.data!);
     return value;
   }
 

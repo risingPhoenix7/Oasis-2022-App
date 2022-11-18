@@ -45,18 +45,23 @@ class _ProfShowState extends State<ProfShow> {
         ),
         Padding(
           padding: EdgeInsets.only(top: 350.h),
-          child: Container(
-            height: 176.h,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.black, Colors.black, Colors.transparent],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter)),
+          child: Stack(
+            children: [
+              Container(
+                height: 176.h,
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                  Colors.black,
+                  Colors.black,
+                  Colors.transparent
+                ], begin: Alignment.bottomCenter, end: Alignment.topCenter)),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 88.h, left: 20.w),
+                child: const BannerDetails(),
+              )
+            ],
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 438.h, left: 20.w),
-          child: const BannerDetails(),
         ),
       ],
     );

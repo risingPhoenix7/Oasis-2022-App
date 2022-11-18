@@ -182,7 +182,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                         color: const Color(0xFFFFFFFF),
                                         fontSize: UIUtills()
                                             .getProportionalHeight(height: 28),
-                                        fontWeight: FontWeight.w500),
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   IconButton(
                                       onPressed: () {

@@ -62,7 +62,7 @@ class _MerchState extends State<Merch> {
                         child: Align(
                           alignment: Alignment.center,
                           child: SizedBox(
-                            width: 500.w,
+                            width: 520.w,
                             child: OverflowBox(
                               alignment: const Alignment(-1, -1),
                               maxHeight: double.infinity,
@@ -80,157 +80,165 @@ class _MerchState extends State<Merch> {
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: (index % 2 == 0)
-                                  ? EdgeInsets.only(
-                                      top: 174.h, left: 20.w, bottom: 87.w)
-                                  : EdgeInsets.only(top: 260.67.h, left: 21.h),
-                              child: Container(
-                                height: 300.h,
-                                width: 200.w,
-                                decoration: BoxDecoration(
-                                  gradient: const LinearGradient(colors: [
-                                    Color.fromRGBO(254, 219, 126, 1),
-                                    Color.fromRGBO(209, 154, 8, 1),
-                                  ]),
-                                  borderRadius: BorderRadius.circular(22.17.r),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.all(0.4.w),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius:
-                                            BorderRadius.circular(22.17.r)),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 14.h, left: 16.08.w),
-                                          child: SizedBox(
-                                              height: 203.h,
-                                              width: 170.w,
-                                              child: Stack(children: [
-                                                CachedNetworkImage(
-                                                    imageUrl: (StoreController
-                                                                    .carouselItems[
-                                                                StoreController
-                                                                    .itemNumber
-                                                                    .value]
-                                                            as MerchCarouselItem)
-                                                        .merch![index]
-                                                        .image_url[0]),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 160.h,
-                                                      left: 27.73.w),
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      print(StoreController
-                                                              .carouselItems[
-                                                          StoreController
-                                                              .itemNumber
-                                                              .value]);
-                                                      showDialog(
-                                                          context: context,
-                                                          builder:
-                                                              (context) =>
-                                                                  BuyMerch(
-                                                                    id: (StoreController.carouselItems[StoreController.itemNumber.value]
-                                                                            as MerchCarouselItem)
-                                                                        .merch![
-                                                                            index]
-                                                                        .id!,
-                                                                    price: (StoreController.carouselItems[StoreController.itemNumber.value]
-                                                                            as MerchCarouselItem)
-                                                                        .merch![
-                                                                            index]
-                                                                        .price!,
-                                                                    imageUrl: (StoreController.carouselItems[StoreController.itemNumber.value]
-                                                                            as MerchCarouselItem)
-                                                                        .merch![
-                                                                            index]
-                                                                        .image_url[1],
-                                                                    amountPurchased:
-                                                                        GetSignedTicketsViewModel()
-                                                                            .getUnusedTickets(
-                                                                      StoreController()
-                                                                          .getId(
-                                                                              index),
-                                                                    ),
-                                                                    name: (StoreController.carouselItems[StoreController.itemNumber.value]
-                                                                            as MerchCarouselItem)
-                                                                        .merch![
-                                                                            index]
-                                                                        .name!,
-                                                                    available: (StoreController.carouselItems[StoreController.itemNumber.value]
-                                                                            as MerchCarouselItem)
-                                                                        .merch![
-                                                                            index]
-                                                                        .tickets_available!,
-                                                                  ));
-                                                    },
-                                                    child: Container(
-                                                      height: 35.56.h,
-                                                      width: 114.54.w,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.r),
-                                                          color: Colors.black),
-                                                      child: Center(
-                                                        child: Text(
-                                                          "BUY",
-                                                          style: GoogleFonts.openSans(
-                                                              color: const Color(
-                                                                  0xFFE9E9E9),
-                                                              fontSize: 13.3.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
+                            return Row(children: [
+                              Padding(
+                                padding: (index % 2 == 0)
+                                    ? EdgeInsets.only(
+                                        top: 174.h, left: 20.w, bottom: 87.w)
+                                    : EdgeInsets.only(
+                                        top: 260.67.h, left: 21.h),
+                                child: Container(
+                                  height: 300.h,
+                                  width: 200.w,
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(colors: [
+                                      Color.fromRGBO(254, 219, 126, 1),
+                                      Color.fromRGBO(209, 154, 8, 1),
+                                    ]),
+                                    borderRadius:
+                                        BorderRadius.circular(22.17.r),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(0.4.w),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.black,
+                                          borderRadius:
+                                              BorderRadius.circular(22.17.r)),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 14.h, left: 16.08.w),
+                                            child: SizedBox(
+                                                height: 203.h,
+                                                width: 170.w,
+                                                child: Stack(children: [
+                                                  CachedNetworkImage(
+                                                      imageUrl: (StoreController
+                                                                      .carouselItems[
+                                                                  StoreController
+                                                                      .itemNumber
+                                                                      .value]
+                                                              as MerchCarouselItem)
+                                                          .merch![index]
+                                                          .image_url[0]),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: 160.h,
+                                                        left: 27.73.w),
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        print(StoreController
+                                                                .carouselItems[
+                                                            StoreController
+                                                                .itemNumber
+                                                                .value]);
+                                                        showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (context) =>
+                                                                    BuyMerch(
+                                                                      id: (StoreController.carouselItems[StoreController.itemNumber.value]
+                                                                              as MerchCarouselItem)
+                                                                          .merch![
+                                                                              index]
+                                                                          .id!,
+                                                                      price: (StoreController.carouselItems[StoreController.itemNumber.value]
+                                                                              as MerchCarouselItem)
+                                                                          .merch![
+                                                                              index]
+                                                                          .price!,
+                                                                      imageUrl: (StoreController.carouselItems[StoreController.itemNumber.value]
+                                                                              as MerchCarouselItem)
+                                                                          .merch![
+                                                                              index]
+                                                                          .image_url[1],
+                                                                      amountPurchased:
+                                                                          GetSignedTicketsViewModel()
+                                                                              .getUnusedTickets(
+                                                                        StoreController()
+                                                                            .getId(index),
+                                                                      ),
+                                                                      name: (StoreController.carouselItems[StoreController.itemNumber.value]
+                                                                              as MerchCarouselItem)
+                                                                          .merch![
+                                                                              index]
+                                                                          .name!,
+                                                                      available: (StoreController.carouselItems[StoreController.itemNumber.value]
+                                                                              as MerchCarouselItem)
+                                                                          .merch![
+                                                                              index]
+                                                                          .tickets_available!,
+                                                                    ));
+                                                      },
+                                                      child: Container(
+                                                        height: 35.56.h,
+                                                        width: 114.54.w,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.r),
+                                                            color:
+                                                                Colors.black),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "BUY",
+                                                            style: GoogleFonts.openSans(
+                                                                color: const Color(
+                                                                    0xFFE9E9E9),
+                                                                fontSize:
+                                                                    13.3.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                )
-                                              ])),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 17.h, left: 16.w),
-                                          child: Text(
-                                            (StoreController.carouselItems[
-                                                        StoreController
-                                                            .itemNumber.value]
-                                                    as MerchCarouselItem)
-                                                .merch![index]
-                                                .name!,
-                                            style: GoogleFonts.openSans(
-                                                color: const Color(0xFFEFEFEF),
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18.sp),
+                                                  )
+                                                ])),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 5.h, left: 16.w),
-                                          child: Text(
-                                            "₹ ${(StoreController.carouselItems[StoreController.itemNumber.value] as MerchCarouselItem).merch![index].price}",
-                                            style: GoogleFonts.openSans(
-                                                color: const Color(0xFFEFEFEF),
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 16.sp),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 17.h, left: 16.w),
+                                            child: Text(
+                                              (StoreController.carouselItems[
+                                                          StoreController
+                                                              .itemNumber.value]
+                                                      as MerchCarouselItem)
+                                                  .merch![index]
+                                                  .name!,
+                                              style: GoogleFonts.openSans(
+                                                  color:
+                                                      const Color(0xFFEFEFEF),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18.sp),
+                                            ),
                                           ),
-                                        )
-                                      ],
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 5.h, left: 16.w),
+                                            child: Text(
+                                              "₹ ${(StoreController.carouselItems[StoreController.itemNumber.value] as MerchCarouselItem).merch![index].price}",
+                                              style: GoogleFonts.openSans(
+                                                  color:
+                                                      const Color(0xFFEFEFEF),
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 16.sp),
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            );
+                              SizedBox(width: 20.w,)
+                            ]);
                           },
                           itemCount: (StoreController.carouselItems[
                                       StoreController.itemNumber.value]

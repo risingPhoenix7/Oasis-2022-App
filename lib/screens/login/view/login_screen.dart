@@ -19,7 +19,6 @@ import '../view_model/glogin_view_model.dart';
 import '../view_model/login_view_model.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
-  hostedDomain: "pilani.bits-pilani.ac.in",
   scopes: <String>[
     'email',
   ],
@@ -101,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen>
   ));
 
   @override
-  void dispose(){
+  void dispose() {
     passwordController.dispose();
     usernameController.dispose();
     iconColorController.dispose();
@@ -110,6 +109,7 @@ class _LoginScreenState extends State<LoginScreen>
     backgroundRotationController.dispose();
     super.dispose();
   }
+
   @override
   void initState() {
     iconColorController = AnimationController(
@@ -130,7 +130,6 @@ class _LoginScreenState extends State<LoginScreen>
   var authOrGoogleAuthResult;
   bool isLoaderVisible = false, statusTypeGoogle = false;
   ValueNotifier<bool> isPwdHidden = ValueNotifier(true);
-
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +175,10 @@ class _LoginScreenState extends State<LoginScreen>
                               Padding(
                                 padding: EdgeInsets.only(top: 151.h),
                                 child: SvgPicture.asset(
-                                    "assets/images/login_screen_logo.svg"),
+                                  "assets/images/login_screen_logo.svg",
+                                  height: 273.h,
+                                  width: 175.w,
+                                ),
                               ),
                               Form(
                                   child: Padding(
@@ -404,7 +406,8 @@ class _LoginScreenState extends State<LoginScreen>
                                     width: 287.w,
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
-                                        gradient: OasisColors.oasisWebsiteGoldGradient,
+                                        gradient: OasisColors
+                                            .oasisWebsiteGoldGradient,
                                         borderRadius:
                                             BorderRadius.circular(16)),
                                     child: Text(
@@ -433,8 +436,6 @@ class _LoginScreenState extends State<LoginScreen>
                                       });
                                     });
                                   } catch (error) {
-                                    print("***********");
-                                    print(error);
                                     Future.microtask(() => setState(() {
                                           isLoaderVisible = false;
                                         }));
@@ -501,6 +502,7 @@ class _LoginScreenState extends State<LoginScreen>
                                       'home', (route) => true);
                             });
                           } else {
+                            _googleSignIn.disconnect();
                             Future.microtask(() => setState(() {
                                   isLoaderVisible = false;
                                 }));
@@ -531,7 +533,7 @@ class _LoginScreenState extends State<LoginScreen>
                               RestartWidget.restartApp(context);
                               Navigator.of(context, rootNavigator: true)
                                   .pushNamedAndRemoveUntil(
-                                  'home', (route) => true);
+                                      'home', (route) => true);
                             });
                           } else {
                             Future.microtask(() => setState(() {

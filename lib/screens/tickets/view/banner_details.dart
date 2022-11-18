@@ -63,7 +63,7 @@ class _BannerDetailsState extends State<BannerDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
+    return ListView(physics: const NeverScrollableScrollPhysics(), children: [
       SizedBox(
         width: 387.w,
         child: Column(

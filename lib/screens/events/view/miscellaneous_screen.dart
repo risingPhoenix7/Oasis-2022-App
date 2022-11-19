@@ -162,6 +162,19 @@ class _EventsScreenState extends State<EventsScreen> {
                                   style: OasisTextStyles.inter500,
                                 ),
                               ),
+                              Padding(
+                                  padding:
+                                      EdgeInsets.only(top: 54.h, right: 28.w),
+                                  child: IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MoreInfoScreen()));
+                                      },
+                                      icon: SvgPicture.asset(
+                                          'assets/images/3gole.svg'))),
 
                             ],
                           ),
@@ -179,7 +192,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                   border: Border.all(
                                       color: const Color.fromRGBO(
                                           248, 216, 72, 0.45),
-                                      width: 0.0),
+                                      width: 0.5),
                                   gradient: const LinearGradient(
                                       begin: Alignment.centerLeft,
                                       end: Alignment.centerRight,

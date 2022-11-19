@@ -134,7 +134,7 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
                                     style: GoogleFonts.openSans(
                                         fontSize: 28,
                                         color: Colors.white,
-                                        fontWeight: FontWeight.w600),
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   Row(
                                     children: [

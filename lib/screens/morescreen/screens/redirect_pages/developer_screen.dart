@@ -111,7 +111,7 @@ class DevelopersScreen2 extends StatelessWidget {
                             'instagram': 'shivang0305'
                           },
                           image: "assets/images/ShivangRai.png",
-                          name: 'Shivang\nRai',
+                          name: 'Shivang Rai',
                           job: 'UI/UX Design'),
                       SingleCard(
                           iconsMap: {
@@ -120,7 +120,7 @@ class DevelopersScreen2 extends StatelessWidget {
                             'twitter': 'AnAvUser?t=3zMTVg6rAofnDcwFSdsATQ&s=09'
                           },
                           image: "assets/images/AdityaPatil.png",
-                          name: 'Aditya\nPatil',
+                          name: 'Aditya Patil',
                           job: 'UI/UX Design'),
                       SingleCard(
                           iconsMap: {
@@ -129,7 +129,7 @@ class DevelopersScreen2 extends StatelessWidget {
                             'twitter': 'swahapati'
                           },
                           image: "assets/images/SwahaPati.png",
-                          name: 'Swaha\nPati',
+                          name: 'Swaha Pati',
                           job: 'UI/UX Design'),
                       SingleCard(
                           iconsMap: {

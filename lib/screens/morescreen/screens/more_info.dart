@@ -2,9 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:oasis_2022/provider/user_details_viewmodel.dart';
+import 'package:oasis_2022/screens/login/view/login_screen.dart';
 import 'package:oasis_2022/screens/morescreen/screens/redirect_pages/CampusMap.dart';
+import 'package:oasis_2022/screens/onboarding/overboarding_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../widgets/OasisSnackbar.dart';
@@ -28,10 +33,11 @@ class MoreInfoScreen extends StatefulWidget {
 
 class _MoreInfoScreenState extends State<MoreInfoScreen> {
   Future<void> _launchGame() async {
-    final Uri _callurl = Uri.parse('https://drive.google.com/file/d/17cu9b_bGWCOCnyMhy0DLzwLlqo_gF2lu/view?usp=sharing');
+    final Uri _callurl = Uri.parse(
+        'https://drive.google.com/file/d/17cu9b_bGWCOCnyMhy0DLzwLlqo_gF2lu/view?usp=sharing');
     await launchUrl(_callurl);
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +75,6 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
                 ],
               ),
               SizedBox(height: 40.h),
-
               Container(
                 height: 650.h,
                 child: ListView(
@@ -102,7 +107,8 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
                               screen: const HpcBlog());
                         }),
                     SingleBlock(
-                        assetName: 'assets/images/more_screen_icons/sponsors.svg',
+                        assetName:
+                            'assets/images/more_screen_icons/sponsors.svg',
                         name: 'Sponsors',
                         action: () {
                           PersistentNavBarNavigator.pushNewScreen(context,
@@ -131,7 +137,8 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
                       },
                     ),
                     SingleBlock(
-                      assetName: 'assets/images/more_screen_icons/developers.svg',
+                      assetName:
+                          'assets/images/more_screen_icons/developers.svg',
                       name: 'Developers',
                       action: () {
                         PersistentNavBarNavigator.pushNewScreen(context,
@@ -139,7 +146,8 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
                       },
                     ),
                     SingleBlock(
-                        assetName: 'assets/images/more_screen_icons/generalinfo.svg',
+                        assetName:
+                            'assets/images/more_screen_icons/generalinfo.svg',
                         name: 'General Info',
                         action: () {
                           PersistentNavBarNavigator.pushNewScreen(context,
@@ -148,31 +156,39 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
                     GestureDetector(
                       onTap: () {
                         if (Platform.isAndroid) {
-                          //lite
-
+                          _launchGame();
                         } else {
-                          var snackBar =
-                          CustomSnackBar().oasisSnackBar("Game is not available on IOS");
+                          var snackBar = CustomSnackBar()
+                              .oasisSnackBar("Game is not available on IOS");
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           if (!mounted) {}
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       },
                       child: SingleBlock(
-                          assetName:
-                          'assets/images/more_screen_icons/game.svg',
+                          assetName: 'assets/images/more_screen_icons/game.svg',
                           name: 'Battle BITS',
                           action: () {
-                           try {
-                             _launchGame();
-                           }
-                           catch (e) {print(e);}
+                            try {} catch (e) {
+                              print(e);
+                            }
                           }),
                     ),
+                    SingleBlock(
+                        assetName:
+                            'assets/images/more_screen_icons/generalinfo.svg',
+                        name: 'Logout',
+                        action: () {
+                          UserDetailsViewModel().removeUser();
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (builder) => const OnBoardingPage()),
+                            (route) => false,
+                          );
+                        }),
                   ],
                 ),
               ),
-
             ],
           )
         ],

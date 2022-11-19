@@ -38,6 +38,7 @@ Future<void> main() async {
   Hive.registerAdapter(FoodStallListAdapter());
   await Hive.openBox<MiscEventList>('miscEventListBox');
   await Hive.openBox('subscribeBox');
+  await Hive.openBox('firstRun');
   await Hive.openBox('cartBox');
   await Hive.openBox<FoodStallList>('foodStallBox');
   print('initialised hive');

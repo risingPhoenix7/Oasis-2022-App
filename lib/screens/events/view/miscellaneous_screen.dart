@@ -98,9 +98,7 @@ class _EventsScreenState extends State<EventsScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       cachedMiscEventsViewModel.mergedRetriveMiscResult();
-      if(MiscEventsViewModel.error == "403"){
-
-      }
+      if (MiscEventsViewModel.error == "403") {}
     });
     CachedMiscEventsViewModel.status.addListener(() {
       if (CachedMiscEventsViewModel.statusInt == 2) {
@@ -162,11 +160,23 @@ class _EventsScreenState extends State<EventsScreen> {
                                 padding: EdgeInsets.only(top: 90.h, left: 28.w),
                                 child: Text(
                                   'Events',
-                                  style: OasisTextStyles.inter500.copyWith(fontWeight: FontWeight.bold),
+                                  style: OasisTextStyles.inter500
+                                      .copyWith(fontWeight: FontWeight.bold),
                                 ),
                               ),
-
-
+                              Padding(
+                                padding: EdgeInsets.only(top: 90.h, left: 28.w),
+                                child: IconButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MoreInfoScreen()));
+                                    },
+                                    icon: SvgPicture.asset(
+                                        'assets/images/3gole.svg')),
+                              )
                             ],
                           ),
                           Padding(
@@ -233,18 +243,23 @@ class _EventsScreenState extends State<EventsScreen> {
                                                           FontWeight.w400,
                                                       color: Color(0xFFC0C0C0),
                                                       fontSize: 16.sp),
-                                              suffixIcon: searchController.text.isEmpty ?
-                                              Icon(Icons.close,color: Colors.transparent,) :
-                                              IconButton(
+                                              suffixIcon: searchController
+                                                      .text.isEmpty
+                                                  ? Icon(
+                                                      Icons.close,
+                                                      color: Colors.transparent,
+                                                    )
+                                                  : IconButton(
+                                                      onPressed: () {
+                                                        searchController
+                                                            .clear();
 
-                                                  onPressed: () {
-                                                    searchController.clear();
-
-                                                    focusNode.unfocus();
-                                                    setState(() {});
-                                                  },
-                                                  icon: SvgPicture.asset(
-                                                      ImageAssets.crossIcon)),
+                                                        focusNode.unfocus();
+                                                        setState(() {});
+                                                      },
+                                                      icon: SvgPicture.asset(
+                                                          ImageAssets
+                                                              .crossIcon)),
                                             ),
                                           ),
                                         ),

@@ -185,17 +185,6 @@ class _WalletScreenState extends State<WalletScreen> {
                                             .getProportionalHeight(height: 28),
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  IconButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MoreInfoScreen()));
-                                      },
-                                      icon: SvgPicture.asset(
-                                          'assets/images/3gole.svg'))
-
                                 ],
                               ),
                               Padding(

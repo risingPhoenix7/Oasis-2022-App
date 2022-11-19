@@ -43,7 +43,7 @@ Future<void> main() async {
   print('initialised hive');
   print('initialising firebase');
   await Firebase.initializeApp(
-      name: 'com.dvm.oasis2k22',
+      name: 'oasis',
       options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.subscribeToTopic('all');
   print('initialising firebase');
@@ -134,20 +134,20 @@ class _OasisFestAppState extends State<OasisFestApp> {
               future: userDetailsViewModel.userCheck(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  final data = snapshot.data;
-                  if (data == true) {
+                  if(Hive.box('firstRun').isEmpty){
+                    Future.microtask(
+                            () => Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (builder) => const OnBoardingPage()),
+                              (route) => false,
+                        ));
+                  }
+                  else{
                     Future.microtask(() =>
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(builder: (builder) => HomeScreen()),
-                          (route) => false,
-                        ));
-                  } else if (data == false) {
-                    Future.microtask(
-                        () => Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (builder) => const OnBoardingPage()),
                               (route) => false,
-                            ));
+                        ));
                   }
                 }
                 return Container(

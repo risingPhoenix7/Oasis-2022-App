@@ -98,6 +98,9 @@ class _EventsScreenState extends State<EventsScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       cachedMiscEventsViewModel.mergedRetriveMiscResult();
+      if(MiscEventsViewModel.error == "403"){
+
+      }
     });
     CachedMiscEventsViewModel.status.addListener(() {
       if (CachedMiscEventsViewModel.statusInt == 2) {

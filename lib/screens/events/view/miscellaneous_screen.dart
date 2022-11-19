@@ -162,19 +162,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                   style: OasisTextStyles.inter500,
                                 ),
                               ),
-                              Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 54.h, right: 28.w),
-                                  child: IconButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MoreInfoScreen()));
-                                      },
-                                      icon: SvgPicture.asset(
-                                          'assets/images/3gole.svg'))),
+
 
                             ],
                           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oasis_2022/screens/morescreen/screens/redirect_pages/CampusMap.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../quiz/view/Quiz_ui.dart';
@@ -94,10 +95,17 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
                   }),
               SingleBlock(
                   assetName: 'assets/images/more_screen_icons/map.svg',
-                  name: 'Map',
+                  name: 'Google Map',
                   action: () {
                     PersistentNavBarNavigator.pushNewScreen(context,
                         screen: const EpcMap());
+                  }),
+              SingleBlock(
+                  assetName: 'assets/images/more_screen_icons/map.svg',
+                  name: 'Campus Building Map',
+                  action: () {
+                    PersistentNavBarNavigator.pushNewScreen(context,
+                        screen: const CampusMap());
                   }),
               SingleBlock(
                 assetName: 'assets/images/more_screen_icons/contact.svg',

@@ -9,6 +9,8 @@ import 'package:oasis_2022/screens/login/repository/model/gloginData.dart';
 import 'package:oasis_2022/screens/login/view/forgot_password_dialog.dart';
 import 'package:oasis_2022/widgets/OasisSnackbar.dart';
 
+import '../../../provider/user_details_viewmodel.dart';
+import '../../events/view/miscellaneous_screen.dart';
 import '/widgets/error_dialogue.dart';
 import '../../../main.dart';
 import '../../../utils/colors.dart';
@@ -562,9 +564,18 @@ class _LoginScreenState extends State<LoginScreen>
                           if (snapshot.data?.error == null) {
                             Future.microtask(() {
                               RestartWidget.restartApp(context);
-                              Navigator.of(context, rootNavigator: true)
-                                  .pushNamedAndRemoveUntil(
-                                      'home', (route) => true);
+                              if (UserDetailsViewModel.userDetails.userID ==
+                                  "7644") {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        const EventsScreen()));
+                              } else {
+                                Navigator.of(context, rootNavigator: true)
+                                    .pushNamedAndRemoveUntil(
+                                    'home', (route) => true);
+                              }
                             });
                           } else {
                             Future.microtask(() => setState(() {

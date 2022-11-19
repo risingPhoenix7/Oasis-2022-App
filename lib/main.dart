@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:oasis_2022/screens/events/repository/model/miscEventResult.dart';
+import 'package:oasis_2022/screens/events/view/miscellaneous_screen.dart';
 import 'package:oasis_2022/screens/food_stalls/view/food_stall_screen.dart';
 import 'package:oasis_2022/screens/onboarding/overboarding_page.dart';
 
@@ -44,8 +45,7 @@ Future<void> main() async {
   print('initialised hive');
   print('initialising firebase');
   await Firebase.initializeApp(
-      name: 'oasis',
-      options: DefaultFirebaseOptions.currentPlatform);
+      name: 'oasis', options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.subscribeToTopic('all');
   print('initialising firebase');
   print('crashylitics');
@@ -135,20 +135,28 @@ class _OasisFestAppState extends State<OasisFestApp> {
               future: userDetailsViewModel.userCheck(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  if(Hive.box('firstRun').isEmpty){
+                  if (Hive.box('firstRun').isEmpty) {
                     Future.microtask(
-                            () => Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (builder) => const OnBoardingPage()),
+                        () => Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (builder) => (UserDetailsViewModel
+                                              .userDetails.userID ==
+                                          "7644")
+                                      ? const LoginScreen()
+                                      : const OnBoardingPage()),
                               (route) => false,
-                        ));
-                  }
-                  else{
-                    Future.microtask(() =>
-                        Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (builder) => HomeScreen()),
+                            ));
+                  } else {
+                    Future.microtask(
+                        () => Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (builder) => (UserDetailsViewModel
+                                              .userDetails.userID ==
+                                          "7644")
+                                      ? const EventsScreen()
+                                      : const HomeScreen()),
                               (route) => false,
-                        ));
+                            ));
                   }
                 }
                 return Container(

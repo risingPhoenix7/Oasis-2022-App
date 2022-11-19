@@ -50,23 +50,23 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB8-lk_k_Jg-nwlxQGyNJMW8gWNjrMHIQQ',
-    appId: '1:321628263634:android:a331c21d049593e1f9c90b',
-    messagingSenderId: '321628263634',
-    projectId: 'bosm-22',
-    storageBucket: 'bosm-22.appspot.com',
+    apiKey: 'AIzaSyDTX-JOWiXoQGBrzqcGus4y5K9tt7tdnX4',
+    appId: '1:617111091762:android:c462ae2054339bc2e15a2b',
+    messagingSenderId: '617111091762',
+    projectId: 'oasis-2022',
+    databaseURL: 'https://oasis-2022-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'oasis-2022.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBtITEq6j2xE_ynlMSn65huMEMwYELa7wc',
-    appId: '1:321628263634:ios:a8d30494141597f7f9c90b',
-    messagingSenderId: '321628263634',
-    projectId: 'bosm-22',
-    storageBucket: 'bosm-22.appspot.com',
-    androidClientId:
-        '321628263634-vuo0i7jtp0apmqd3kap5tkav5una03ns.apps.googleusercontent.com',
-    iosClientId:
-        '321628263634-4fjbde0ogmp83tl3q0pjg747mldsoqv1.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBxyP15L1sFbicCEDx1MrQm--uukPEHaDI',
+    appId: '1:617111091762:ios:060dcc2be733db89e15a2b',
+    messagingSenderId: '617111091762',
+    projectId: 'oasis-2022',
+    databaseURL: 'https://oasis-2022-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'oasis-2022.appspot.com',
+    androidClientId: '617111091762-4h9n6l6b2cfi55s5c9dhjnn7neeqgkem.apps.googleusercontent.com',
+    iosClientId: '617111091762-i5g99feu9ilb9u72s37ik00krq3723kl.apps.googleusercontent.com',
     iosBundleId: 'com.dvm.oasis2k22',
   );
 }

@@ -96,13 +96,22 @@ class _BannerDetailsState extends State<BannerDetails> {
                   children: [
                     Padding(padding: EdgeInsets.only(top: 5.h)),
                     Text(
-                      "${Time((StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).timestamp!)} | ${(StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).venue}\n${Date((StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).timestamp!)} Nov",
+                      "${(StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).venue}",
                       textScaleFactor: 1.0,
                       style: GoogleFonts.openSans(
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.bold,
                           fontSize: 18.sp,
                           color: Colors.white),
                     ),
+                    Text(
+                      "${Date((StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).timestamp!)} Nov, ${Time((StoreController.carouselItems[StoreController.itemNumber.value] as StoreItemData).timestamp!)}",
+                      textScaleFactor: 1.0,
+                      style: GoogleFonts.openSans(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16.sp,
+                          color: Color.fromRGBO(255, 255, 255, 0.5)),
+                    ),
+
                     SizedBox(
                       height: 12.h,
                     ),

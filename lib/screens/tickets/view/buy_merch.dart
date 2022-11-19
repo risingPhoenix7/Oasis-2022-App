@@ -119,7 +119,7 @@ class _BuyMerchState extends State<BuyMerch> {
                   Padding(
                     padding: EdgeInsets.only(top: 27.h, left: 75.w),
                     child: Text(
-                      "Number of ${widget.name}",
+                      "Buy ${widget.name}",
                       style: GoogleFonts.openSans(
                           fontSize: 24.sp, color: Colors.white),
                     ),

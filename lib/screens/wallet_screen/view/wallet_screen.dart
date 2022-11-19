@@ -175,6 +175,7 @@ class _WalletScreenState extends State<WalletScreen> {
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
+
                                 children: [
                                   Text(
                                     'Wallet',
@@ -190,10 +191,11 @@ class _WalletScreenState extends State<WalletScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const MoreInfoScreen()));
+                                                    MoreInfoScreen()));
                                       },
                                       icon: SvgPicture.asset(
                                           'assets/images/3gole.svg'))
+
                                 ],
                               ),
                               Padding(
@@ -207,7 +209,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                   height: 238.h,
                                   child: Padding(
                                     padding: EdgeInsets.fromLTRB(
-                                        20.w, 30.h, 20.w, 15.h),
+                                        20.w, 23.h, 20.w, 15.h),
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -218,6 +220,7 @@ class _WalletScreenState extends State<WalletScreen> {
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Column(
                                               mainAxisAlignment:
@@ -226,28 +229,28 @@ class _WalletScreenState extends State<WalletScreen> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'User ID- ${UserDetailsViewModel.userDetails.userID ?? 'NA'}',
+                                                  capitalizeAllWord(
+                                                      UserDetailsViewModel
+                                                              .userDetails
+                                                              .username
+                                                              ?.toLowerCase() ??
+                                                          'NA'),
                                                   style: GoogleFonts.openSans(
-                                                      color: const Color(
-                                                          0xFFFFFFFF),
-                                                      fontSize: 14.sp,
+                                                      color: Colors.white,
+                                                      fontSize: 20.sp,
                                                       fontWeight:
-                                                          FontWeight.w400),
+                                                          FontWeight.w700),
                                                 ),
                                                 SizedBox(
                                                   width: 250.w,
                                                   child: Text(
-                                                    capitalizeAllWord(
-                                                        UserDetailsViewModel
-                                                                .userDetails
-                                                                .username
-                                                                ?.toLowerCase() ??
-                                                            'NA'),
+                                                    '${IsBitsian(UserDetailsViewModel.userDetails.isBitsian)}',
                                                     style: GoogleFonts.openSans(
-                                                        color: Colors.white,
-                                                        fontSize: 20.sp,
+                                                        color: Color.fromRGBO(
+                                                            250, 250, 250, 0.6),
+                                                        fontSize: 12.sp,
                                                         fontWeight:
-                                                            FontWeight.w700),
+                                                            FontWeight.w600),
                                                   ),
                                                 ),
                                               ],
@@ -299,10 +302,31 @@ class _WalletScreenState extends State<WalletScreen> {
                                                   }
                                                 }
                                               },
-                                              child: SvgPicture.asset(
-                                                'assets/images/qr.svg',
-                                                height: 31.h,
-                                                width: 31.w,
+                                              child: Column(
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    'assets/images/qr.svg',
+                                                    height: 43.h,
+                                                    width: 43.w,
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: 6.h),
+                                                    child: Text(
+                                                      'ID: ${UserDetailsViewModel.userDetails.userID}',
+                                                      style:
+                                                          GoogleFonts.openSans(
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      250,
+                                                                      250,
+                                                                      250,
+                                                                      0.6),
+                                                          fontSize: 12.sp,
+                                                          fontWeight: FontWeight.w600),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             )
                                           ],
@@ -316,55 +340,52 @@ class _WalletScreenState extends State<WalletScreen> {
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
-                                              children: [
+                                              children: [ValueListenableBuilder(
+                                                valueListenable: isLoading,
+                                                builder: (context,
+                                                    bool value, child) {
+                                                  if (isLoading.value) {
+                                                    return SizedBox(
+                                                        width: 20.w,
+                                                        height: 20.h,
+                                                        child: Center(
+                                                            child:
+                                                            SpinKitWave(
+                                                              color: Colors
+                                                                  .white
+                                                                  .withOpacity(
+                                                                  0.5),
+                                                              size: 15.r,
+                                                            )));
+                                                  } else {
+                                                    return Text(
+                                                      '₹ ${WalletViewModel.balance}',
+                                                      style: GoogleFonts.openSans(
+                                                          color: const Color(
+                                                              0xFFFFFFFF),
+                                                          fontSize: UIUtills()
+                                                              .getProportionalHeight(
+                                                              height:
+                                                              24),
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w700),
+                                                    );
+                                                  }
+                                                },
+                                              ),
                                                 Text(
-                                                  'Current Balance',
+                                                  'Wallet Balance',
                                                   style: GoogleFonts.openSans(
-                                                      color: const Color(
-                                                          0xFFFFFFFF),
-                                                      fontSize: UIUtills()
-                                                          .getProportionalHeight(
-                                                              height: 16),
+                                                      color: Color.fromRGBO(250, 250, 250, 0.6),
+                                                      fontSize: 12.sp,
                                                       fontWeight:
                                                           FontWeight.w600),
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsets.only(
                                                       bottom: 20.h),
-                                                  child: ValueListenableBuilder(
-                                                    valueListenable: isLoading,
-                                                    builder: (context,
-                                                        bool value, child) {
-                                                      if (isLoading.value) {
-                                                        return SizedBox(
-                                                            width: 20.w,
-                                                            height: 20.h,
-                                                            child: Center(
-                                                                child:
-                                                                    SpinKitWave(
-                                                              color: Colors
-                                                                  .white
-                                                                  .withOpacity(
-                                                                      0.5),
-                                                              size: 15.r,
-                                                            )));
-                                                      } else {
-                                                        return Text(
-                                                          'Rs. ${WalletViewModel.balance}',
-                                                          style: GoogleFonts.openSans(
-                                                              color: const Color(
-                                                                  0xFFFFFFFF),
-                                                              fontSize: UIUtills()
-                                                                  .getProportionalHeight(
-                                                                      height:
-                                                                          24),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
-                                                        );
-                                                      }
-                                                    },
-                                                  ),
+
                                                 ),
                                               ],
                                             ),
@@ -828,5 +849,12 @@ class _WalletScreenState extends State<WalletScreen> {
     String formattedString = "$date $time";
     DateTime indianCorrectTime = DateTime.parse(formattedString).toLocal();
     return indianCorrectTime.toString().split(".")[0];
+  }
+
+  String IsBitsian(bool? bits) {
+    if (bits ?? true)
+      return 'BITSian';
+    else
+      return 'Outstation Participant';
   }
 }

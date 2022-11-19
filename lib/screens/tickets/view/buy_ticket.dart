@@ -103,15 +103,25 @@ class _BuyTicketState extends State<BuyTicket> {
           Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 27.h),
+                padding: EdgeInsets.only(top: 27.h,left: 135.w,right: 30.w),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "Buy Tickets",
                       style: GoogleFonts.openSans(
                           fontSize: 20.sp, color: Colors.white,fontWeight: FontWeight.bold),
                     ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: 28.r,
+                      ),
+                    )
 
                   ],
                 ),

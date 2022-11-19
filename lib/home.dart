@@ -57,9 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: Image.asset("assets/images/navbar_icons/stalls_active.png"),
+        icon: SvgPicture.asset("assets/images/navbar_icons/burger_active.svg"),
         inactiveIcon:
-            SvgPicture.asset("assets/images/navbar_icons/stall_inactive.svg"),
+        SvgPicture.asset("assets/images/navbar_icons/burger_inactive.svg"),
         iconSize: 22.r,
       ),
       PersistentBottomNavBarItem(
@@ -75,9 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
         iconSize: 22.r,
       ),
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset("assets/images/navbar_icons/shows_active.svg"),
+        icon: Image.asset("assets/images/navbar_icons/stalls_active.png"),
         inactiveIcon:
-            SvgPicture.asset("assets/images/navbar_icons/shows_inactive.svg"),
+            SvgPicture.asset("assets/images/navbar_icons/stall_inactive.svg"),
         iconSize: 22.r,
       ),
       PersistentBottomNavBarItem(

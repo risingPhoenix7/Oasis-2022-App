@@ -12,7 +12,7 @@ class CustomSnackBar {
         style: GoogleFonts.openSans(
           color: Color.fromRGBO(204, 175, 45, 1),
           fontWeight: FontWeight.w300,
-          fontSize: 14.sp,
+          fontSize: 15.sp,
         ),
       ),
       backgroundColor: Color.fromRGBO(14, 16, 20, 1),

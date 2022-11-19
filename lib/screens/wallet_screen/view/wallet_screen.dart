@@ -814,6 +814,19 @@ class _WalletScreenState extends State<WalletScreen> {
                                                         fontWeight:
                                                             FontWeight.w700),
                                                   )
+                                                else if (groupedTransactions[
+                                                  index]
+                                                      .txn_type ==
+                                                      'Add from payment gateway')
+                                                    Text(
+                                                      '+ ₹${groupedTransactions[index].price!.toString()}',
+                                                      style: GoogleFonts.openSans(
+                                                          color: Colors.green,
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                          FontWeight.w700),
+                                                    )
+
                                                 else
                                                   Text(
                                                     '- ₹${groupedTransactions[index].price!.toString()}',

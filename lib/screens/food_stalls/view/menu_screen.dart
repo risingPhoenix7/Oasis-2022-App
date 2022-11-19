@@ -115,6 +115,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   RichText(
                                       text: TextSpan(children: [
                                     TextSpan(
+
                                         text: widget.foodStallName,
                                         style: GoogleFonts.openSans(
                                             fontSize: 28.sp,

@@ -184,18 +184,20 @@ class _OrderStatusState extends State<OrderStatus> {
                                       child: SvgPicture.asset(
                                           "assets/images/three.svg"),
                                     )
-                                  else if (snapshot.data!
-                                          .data()
-                                          .toString()
-                                          .contains("status")
-                                      ? snapshot.data?.get('status')
-                                      : 0 == 3 ||
-                                              snapshot.data!
+                                  else if ((snapshot.data!
                                                   .data()
                                                   .toString()
                                                   .contains("status")
-                                          ? snapshot.data?.get('status')
-                                          : 0 == 4)
+                                              ? snapshot.data?.get('status')
+                                              : 0) ==
+                                          3 ||
+                                      (snapshot.data!
+                                                  .data()
+                                                  .toString()
+                                                  .contains("status")
+                                              ? snapshot.data?.get('status')
+                                              : 0) ==
+                                          4)
                                     Container(),
                                   Padding(
                                     padding: EdgeInsets.only(top: 41.h),

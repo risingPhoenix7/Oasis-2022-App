@@ -80,7 +80,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   width: MediaQuery.of(context).size.width,
                   color: Colors.black,
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(28.w, 54.h, 30.w, 0),
+                    padding: EdgeInsets.fromLTRB(28.w, 84.h, 30.w, 0),
                     child: Column(
                       children: [
                         Row(
@@ -93,16 +93,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
-                            IconButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              MoreInfoScreen()));
-                                },
-                                icon: SvgPicture.asset(
-                                    'assets/images/3gole.svg')),
+
                           ],
                         ),
                         Padding(

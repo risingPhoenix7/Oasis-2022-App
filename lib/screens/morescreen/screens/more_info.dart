@@ -95,7 +95,7 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
                   }),
               SingleBlock(
                   assetName: 'assets/images/more_screen_icons/map.svg',
-                  name: 'Google Map',
+                  name: 'Map',
                   action: () {
                     PersistentNavBarNavigator.pushNewScreen(context,
                         screen: const EpcMap());

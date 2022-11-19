@@ -159,7 +159,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                 padding: EdgeInsets.only(top: 90.h, left: 28.w),
                                 child: Text(
                                   'Events',
-                                  style: OasisTextStyles.inter500,
+                                  style: OasisTextStyles.inter500.copyWith(fontWeight: FontWeight.bold),
                                 ),
                               ),
 
@@ -180,7 +180,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                   border: Border.all(
                                       color: const Color.fromRGBO(
                                           248, 216, 72, 0.45),
-                                      width: 0.5),
+                                      width: 0.0),
                                   gradient: const LinearGradient(
                                       begin: Alignment.centerLeft,
                                       end: Alignment.centerRight,

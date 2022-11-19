@@ -284,7 +284,7 @@ class _AddMoneyScreenState extends State<AddMoneyScreen> {
                           UIUtills().getProportionalHeight(height: 32.00)),
                       Container(
                         alignment: Alignment.center,
-                        width: UIUtills().getProportionalWidth(width: 90),
+                        width: UIUtills().getProportionalWidth(width: 110),
                         height: UIUtills().getProportionalHeight(height: 40.00),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

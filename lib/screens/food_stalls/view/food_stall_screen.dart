@@ -181,16 +181,19 @@ class _FoodStallScreenState extends State<FoodStallScreen> {
                                                         foodStall[index].menu,
                                                     foodStallName:
                                                         foodStall[index].name,
+
                                                     image: foodStall[index]
                                                             .menu_image_url ??
                                                         '',
                                                     foodStallId:
                                                         foodStall[index].id,
+
                                                   )));
                                     },
                                     child: FoodStallTile(
                                       foodStallName: foodStall[index].name,
                                       image: foodStall[index].image_url,
+                                      location: foodStall[index].description,
                                     ),
                                   );
                                 },

@@ -5,11 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 import '/utils/ui_utils.dart';
 
 class FoodStallTile extends StatelessWidget {
-  FoodStallTile({Key? key, required this.image, required this.foodStallName})
+  FoodStallTile({Key? key, required this.image, required this.foodStallName,required this.location})
       : super(key: key);
   String image;
   String foodStallName;
-
+  String location;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -63,7 +63,7 @@ class FoodStallTile extends StatelessWidget {
                     color: Colors.white),
               ),
               Text(
-                "S Lawns",
+                location,
                 style: GoogleFonts.openSans(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,

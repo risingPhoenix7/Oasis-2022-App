@@ -51,6 +51,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
     isLoading.value = false;
   }
 
+  @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       bool gotError = await checkConnection();

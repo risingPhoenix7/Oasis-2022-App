@@ -38,7 +38,7 @@ enum _SupportState {
 }
 
 class _BuyMerchState extends State<BuyMerch> {
-  int selectedIndex = 0;
+  int amount = 1;
 
   // ignore: non_constant_identifier_names
   final LocalAuthentication auth = LocalAuthentication();
@@ -148,62 +148,99 @@ class _BuyMerchState extends State<BuyMerch> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 23.h),
+                padding: EdgeInsets.only(top: 5.h, left: 50.w, right: 50.w),
                 child: SizedBox(
-                  height: 28.h,
+                  height: 34.h,
                   child: Center(
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            selectedIndex = index;
-                            setState(() {});
-                          },
-                          child: Padding(
-                            padding:
-                                EdgeInsets.only(left: (index == 0) ? 0 : 8.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Amount",
+                        style: GoogleFonts.openSans(
+                            color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16.sp),
+                      ),
+                    Container(
+                      height: 34.h,
+                      width: 100.w,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        gradient: const LinearGradient(colors: [
+                          Color.fromRGBO(209, 154, 8, 1),
+                          Color.fromRGBO(254, 212, 102, 1),
+                          Color.fromRGBO(227, 186, 79, 1),
+                          Color.fromRGBO(209, 154, 8, 1),
+                          Color.fromRGBO(209, 154, 8, 1),
+                        ]),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          GestureDetector(
                             child: Container(
-                              width: 28.h,
-                              decoration: BoxDecoration(
-                                  color: (selectedIndex == index)
-                                      ? Colors.yellow
-                                      : Colors.transparent,
-                                  shape: BoxShape.circle),
-                              child: Center(
-                                child: ShaderMask(
-                                  blendMode: BlendMode.srcIn,
-                                  shaderCallback: (bounds) {
-                                    return (selectedIndex == index)
-                                        ? const LinearGradient(colors: [
-                                            Colors.black,
-                                            Colors.black
-                                          ]).createShader(Rect.fromLTWH(
-                                            0, 0, bounds.width, bounds.height))
-                                        : const LinearGradient(colors: [
-                                            Color.fromRGBO(209, 154, 8, 1),
-                                            Color.fromRGBO(254, 212, 102, 1),
-                                            Color.fromRGBO(227, 186, 79, 1),
-                                            Color.fromRGBO(209, 154, 8, 1),
-                                            Color.fromRGBO(209, 154, 8, 1),
-                                          ]).createShader(Rect.fromLTWH(
-                                            0, 0, bounds.width, bounds.height));
-                                  },
-                                  child: Text(
-                                    "${index + 1}",
-                                    style:
-                                        GoogleFonts.openSans(fontSize: 20.sp),
-                                  ),
+                              width: 25.w,
+                              height: 30.h,
+                              color: Colors.transparent,
+                              child: const Icon(
+                                Icons.remove,
+                                color: Colors.black,
+                                size: 18,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                if(amount > 1){
+                                  amount--;
+                                }
+                              });
+                            },
+                          ),
+                          Container(
+                            height: 32.h,
+                            width: 38.w,
+                            color: Colors.black,
+                            child: Center(
+                              child: ShaderMask(
+                                blendMode: BlendMode.srcIn,
+                                shaderCallback: (bounds) => const LinearGradient(colors: [
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                  Color.fromRGBO(254, 212, 102, 1),
+                                  Color.fromRGBO(227, 186, 79, 1),
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                  Color.fromRGBO(209, 154, 8, 1),
+                                ]).createShader(
+                                    Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                                child: Text(
+                                  "$amount",
+                                  style:
+                                  GoogleFonts.roboto(color: Colors.white, fontSize: 16.sp),
                                 ),
                               ),
                             ),
                           ),
-                        );
-                      },
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: 5,
-                    ),
-                  ),
+                          GestureDetector(
+                            child: Container(
+                              width: 25.w,
+                              height: 30.h,
+                              color: Colors.transparent,
+                              child: const Icon(
+                                Icons.add,
+                                size: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                amount++;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    )
+                    ],
+                  )),
                 ),
               ),
               Padding(
@@ -218,7 +255,7 @@ class _BuyMerchState extends State<BuyMerch> {
                         TicketPostBody ticketPostBody =
                             TicketPostBody(individual: {}, combos: {});
                         ticketPostBody.individual![widget.id.toString()] =
-                            (selectedIndex + 1);
+                            amount;
                         try {
                           await TicketPostViewModel()
                               .postOrders(ticketPostBody);
@@ -259,8 +296,6 @@ class _BuyMerchState extends State<BuyMerch> {
                                 Color.fromRGBO(227, 186, 79, 0.5),
                                 Color.fromRGBO(209, 154, 8, 0.5),
                                 Color.fromRGBO(209, 154, 8, 0.5)
-
-
                               ]),
                         borderRadius: BorderRadius.circular(10.r)),
                     child: Center(

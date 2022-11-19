@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../utils/ui_utils.dart';
@@ -10,8 +11,8 @@ class OkButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: UIUtills().getProportionalWidth(width: 258.00),
-      height: UIUtills().getProportionalHeight(height: 59.00),
+      width: buttonText == null ? 258.w : 200.w,
+      height: buttonText == null ? 59.h : 50.h,
       //padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: const Color(0xFFFFFFFF),

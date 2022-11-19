@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:hive/hive.dart';
+import 'package:oasis_2022/utils/error_messages.dart';
 
 import '../order/repo/model/get_orders_model.dart';
 import '../order/repo/model/make_otp_seen_model.dart';
@@ -8,6 +10,7 @@ import '../order/repo/retrofit/make_otp_seen_retrofit.dart';
 import '../provider/user_details_viewmodel.dart';
 
 class OrderScreenViewModel {
+  static String? error;
   Future<void> makeOtpSeen(int orderid) async {
     MakeOtpSeenData makeOtpSeenData = MakeOtpSeenData(order_id: orderid);
     final dio = Dio();
@@ -21,7 +24,20 @@ class OrderScreenViewModel {
     final dio = Dio();
     String auth = "JWT ${UserDetailsViewModel.userDetails.JWT}";
     final client = OrdersRestClient(dio);
-    List<GetOrderResult> listOfOrderResult = await client.getOrders(auth);
+    List<GetOrderResult> listOfOrderResult = [];
+    try{
+      listOfOrderResult = await client.getOrders(auth);
+    } catch (e){
+      if(e.runtimeType == DioErrorType){
+        if((e as DioError).response?.statusCode.toString() == "401"){
+          Hive.box('firstRun').clear();
+          error = ErrorMessages.unauthError;
+        } else {
+          error = ErrorMessages.unknownError;
+        }
+      }
+      error = ErrorMessages.unknownError;
+    }
 
     return listOfOrderResult;
   }

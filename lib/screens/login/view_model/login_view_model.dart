@@ -1,3 +1,5 @@
+import 'package:hive/hive.dart';
+
 import '/provider/user_details_viewmodel.dart';
 import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
@@ -32,6 +34,7 @@ class LoginViewModel {
       await storage.write(key: 'isBitsian', value: isBitsian.toString());
       await storage.write(key: 'qrcode', value: it.qr_code);
       await storage.write(key: 'doesUserExist', value: 'true');
+      Hive.box('firstRun').put(1, true);
       UserDetailsViewModel.userDetails.username = it.name;
       UserDetailsViewModel.userDetails.JWT = it.JWT;
       UserDetailsViewModel.userDetails.userID = it.user_id.toString();

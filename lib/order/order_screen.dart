@@ -49,6 +49,17 @@ class _OrdersScreenState extends State<OrdersScreen> {
     orderResultList = await OrderScreenViewModel().getOrders();
     orderCardList = OrderScreenViewModel().changeDataModel(orderResultList);
     isLoading.value = false;
+    if (OrderScreenViewModel.error != null) {
+      showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (context) {
+            return Align(
+              alignment: Alignment.bottomCenter,
+              child: ErrorDialog(errorMessage: OrderScreenViewModel.error,),
+            );
+          });
+    }
   }
 
   @override

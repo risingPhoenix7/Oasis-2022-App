@@ -39,13 +39,6 @@ class UserDetailsViewModel {
     userDetails.qrCode = null;
     userDetails.doesUserExist = null;
     userDetails.isBitsian = null;
-    await storage.write(key: 'jwt', value: "");
-    await storage.write(key: 'username', value: "");
-    await storage.write(key: 'userid', value: "");
-    await storage.write(key: 'referralcode', value: "");
-    await storage.write(key: 'isBitsian', value: "");
-    await storage.write(key: 'qrcode', value: "");
-    await storage.write(key: 'doesUserExist', value: "");
     await storage.deleteAll();
     //await CartDatabaseHelper.instance.clearTable();
     // notifyListeners();

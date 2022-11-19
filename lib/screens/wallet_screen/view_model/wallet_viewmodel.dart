@@ -1,5 +1,6 @@
 import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
+import 'package:hive/hive.dart';
 
 import '../Repo/model/Transactions_model.dart';
 import '../Repo/retrofit/transactions_retrofit.dart';
@@ -90,8 +91,12 @@ class WalletViewModel {
         if (res?.statusCode == null || res == null) {
           error = ErrorMessages.noInternet;
         } else {
-          print('goes here error in wallet');
           error = ErrorMessages.unknownError;
+          if(res?.statusCode.toString() == "401"){
+            Hive.box("firstRun").clear();
+            error = ErrorMessages.unauthError;
+          }
+          print('goes here error in wallet');
           //TODO: make a handler
         }
       } catch (e) {

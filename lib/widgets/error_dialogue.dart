@@ -20,6 +20,9 @@ class ErrorDialog extends StatefulWidget {
 }
 
 class _ErrorDialogState extends State<ErrorDialog> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Card(

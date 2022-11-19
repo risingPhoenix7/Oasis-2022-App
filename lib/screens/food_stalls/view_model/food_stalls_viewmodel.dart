@@ -1,5 +1,6 @@
 import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
+import 'package:hive/hive.dart';
 import 'package:oasis_2022/utils/error_messages.dart';
 
 import '/screens/food_stalls/repo/model/food_stall_model.dart';
@@ -45,7 +46,11 @@ class FoodStallViewModel {
         if (res?.statusCode == null || res != null || res!.data == null) {
           print('efbhefkef');
           error = ErrorMessages.noInternet;
-        } else {
+        } if(res?.statusCode.toString() == "401"){
+          Hive.box('firstRun').clear();
+          error = ErrorMessages.unauthError;
+        }
+        else {
           print('akdjbakjdbnw');
           error = ErrorMessages.unknownError;
         }

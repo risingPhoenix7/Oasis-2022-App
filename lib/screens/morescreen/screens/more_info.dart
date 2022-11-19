@@ -174,18 +174,6 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
                             }
                           }),
                     ),
-                    SingleBlock(
-                        assetName:
-                            'assets/images/more_screen_icons/generalinfo.svg',
-                        name: 'Logout',
-                        action: () {
-                          UserDetailsViewModel().removeUser();
-                          Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (builder) => const OnBoardingPage()),
-                            (route) => false,
-                          );
-                        }),
                   ],
                 ),
               ),

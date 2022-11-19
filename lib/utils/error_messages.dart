@@ -1,4 +1,5 @@
 class ErrorMessages {
+  static const String unauthError = "Unauthorized; Please Restart Your App";
   static const String defaultError =
       "An error occured, please check your network connetion or try again after some time, if the problem persists please contact a DVM Official";
   static const String unknownError =

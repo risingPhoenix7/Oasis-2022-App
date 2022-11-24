@@ -34,7 +34,7 @@ class MoreInfoScreen extends StatefulWidget {
 class _MoreInfoScreenState extends State<MoreInfoScreen> {
   Future<void> _launchGame() async {
     final Uri _callurl = Uri.parse(
-        'https://drive.google.com/file/d/17cu9b_bGWCOCnyMhy0DLzwLlqo_gF2lu/view?usp=sharing');
+        'https://drive.google.com/drive/folders/1BVsSZqaZleB1a9Bs4OZ_6QuV7xezuIEs');
     await launchUrl(_callurl);
   }
 
@@ -169,7 +169,17 @@ class _MoreInfoScreenState extends State<MoreInfoScreen> {
                           assetName: 'assets/images/more_screen_icons/game.svg',
                           name: 'Battle BITS',
                           action: () {
-                            try {} catch (e) {
+                            try {
+                              if (Platform.isAndroid) {
+                                _launchGame();
+                              } else {
+                                var snackBar = CustomSnackBar()
+                                    .oasisSnackBar("Game is not available on IOS");
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                if (!mounted) {}
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              }
+                            } catch (e) {
                               print(e);
                             }
                           }),

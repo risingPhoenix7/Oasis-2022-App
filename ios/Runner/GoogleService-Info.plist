@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>617111091762-i5g99feu9ilb9u72s37ik00krq3723kl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.617111091762-i5g99feu9ilb9u72s37ik00krq3723kl</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>617111091762-4h9n6l6b2cfi55s5c9dhjnn7neeqgkem.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBxyP15L1sFbicCEDx1MrQm--uukPEHaDI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>617111091762</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.dvm.oasis2k22</string>
+	<key>PROJECT_ID</key>
+	<string>oasis-2022</string>
+	<key>STORAGE_BUCKET</key>
+	<string>oasis-2022.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:617111091762:ios:060dcc2be733db89e15a2b</string>
+	<key>DATABASE_URL</key>
+	<string>https://oasis-2022-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>

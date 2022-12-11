@@ -1,6 +1,6 @@
-package com.dvm.oasis_2022
+package com.dvm.oasis2k22
 
-import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.android.FlutterFragmentActivity
 
-class MainActivity: FlutterActivity() {
+class MainActivity: FlutterFragmentActivity() {
 }

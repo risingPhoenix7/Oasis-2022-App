@@ -1,6 +1,6 @@
 # Oasis App
 
-Welcome to Oasis App, the one-stop app for all your live concert needs! With this app, you can buy tickets to concerts, purchase food from stalls, buy official merchandise, and check the event timings, all from the comfort of your phone.
+Welcome to Oasis App, the one-stop app for all your fest needs! With this app, you can buy tickets to concerts, purchase food from stalls, buy official merchandise, and check the event timings, all from the comfort of your phone.
 
 ## Features
 - Buy concert tickets
@@ -19,13 +19,7 @@ Welcome to Oasis App, the one-stop app for all your live concert needs! With thi
 
 We hope you enjoy using Oasis App and have a great concert experience!
 
-<iframe
-    width="640"
-    height="480"
-    src="https://www.youtube.com/embed/UmX4kyB2wfg"
-    frameborder="0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen
->
-</iframe>
+
+
+https://user-images.githubusercontent.com/68941739/216757277-ecc2b028-5f83-4bed-a5fb-48755856f2cc.mp4
 

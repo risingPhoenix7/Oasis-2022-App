@@ -1,12 +1,13 @@
 # Oasis App
 
-Welcome to Oasis App, the one-stop app for all your fest needs! With this app, you can buy tickets to concerts, purchase food from stalls, buy official merchandise, and check the event timings, all from the comfort of your phone.
+Welcome to Oasis App, the one-stop app for all your fest needs! With this app, you can buy tickets to concerts, purchase food from stalls, buy official merchandise, and check the event details, all from the comfort of your phone.
 
 ## Features
-- Buy concert tickets
-- Purchase food and merchandise from stalls
-- Check event timings
-- In-app wallet for transactions
+- Sign up for concerts directly through the app and gain access with the refreshable QR code in the wallet page
+- Purchase food and view live status of the order.
+- Purchase festival merchandise directly from the app and redeem it at the stall with your QR code 
+- Check detailed information about each event, including timings, rules, and prizes.
+- In-app wallet for transactions 
 - Add money to wallet via PayTm or college account (only for students of BITS Pilani)
 
 ## How to use

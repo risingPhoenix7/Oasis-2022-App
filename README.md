@@ -10,9 +10,9 @@ Welcome to Oasis App, the one-stop app for all your fest needs! With this app, y
 - Add money to wallet via PayTm or college account (only for students of BITS Pilani)
 
 ## How to use
-1. Download and install the Oasis App on your phone.
+1. Download and install the Oasis App on your phone. [Android](https://play.google.com/store/apps/details?id=com.dvm.oasis2k22&pli=1)     [iOS](https://apps.apple.com/us/app/oasis-2022/id6444257566?platform=iphone)
 2. Create an account or sign in to your existing account.
-3. If you're a student of BITS Pilani, add money to your in-app wallet using your        college account. Otherwise, add money using PayTm.
+3. If you're a student of BITS Pilani, add money to your in-app wallet using your college account. Otherwise, add money using PayTm.
 4. Browse and purchase tickets to concerts of your choice.
 5. During the event, use your in-app wallet to purchase food and merchandise from stalls.
 6. Check the event timings to plan your day.
